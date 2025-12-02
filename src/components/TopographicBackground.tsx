@@ -34,8 +34,8 @@ export function TopographicBackground() {
     function drawContours() {
       if (!ctx) return;
       
-      // Clear with cream background
-      ctx.fillStyle = "#f7f5f2";
+      // Clear with cream background - slightly more subtle
+      ctx.fillStyle = "#faf9f7";
       ctx.fillRect(0, 0, width, height);
 
       const gridSize = 4;
@@ -51,9 +51,9 @@ export function TopographicBackground() {
         }
       }
 
-      // Draw contour lines using marching squares
-      ctx.strokeStyle = "rgba(227, 102, 79, 0.4)";
-      ctx.lineWidth = 1;
+      // Draw contour lines using marching squares - softer for premium feel
+      ctx.strokeStyle = "rgba(227, 102, 79, 0.25)";
+      ctx.lineWidth = 0.8;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 

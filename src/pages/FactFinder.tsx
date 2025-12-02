@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
-import { GlassCard } from "@/components/GlassCard";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { ChevronRight } from "lucide-react";
 
@@ -51,6 +50,31 @@ const steps: StepConfig[] = [
     type: "single-select",
   },
 ];
+
+// Orange accent motif component
+function OrangeAccent() {
+  return (
+    <div className="flex items-center gap-2 mt-8">
+      <div className="flex gap-1.5">
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 rounded-full bg-primary"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.3 }}
+          />
+        ))}
+      </div>
+      <motion.div
+        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+      />
+    </div>
+  );
+}
 
 export default function FactFinder() {
   const navigate = useNavigate();
@@ -121,12 +145,15 @@ export default function FactFinder() {
     switch (currentStep.type) {
       case "date":
         return (
-          <div className="space-y-4">
-            <Input
-              type="date"
-              value={tradingDate}
-              onChange={(e) => setTradingDate(e.target.value)}
-            />
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <Input
+                type="date"
+                value={tradingDate}
+                onChange={(e) => setTradingDate(e.target.value)}
+                className="border-0 shadow-none focus:ring-0 bg-transparent"
+              />
+            </div>
             <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
               Continue
             </Button>
@@ -135,26 +162,30 @@ export default function FactFinder() {
       
       case "dual-input":
         return (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-3">
-              <Input
-                label="Month"
-                type="number"
-                min="1"
-                max="12"
-                placeholder="1-12"
-                value={monthEstablished}
-                onChange={(e) => setMonthEstablished(e.target.value)}
-              />
-              <Input
-                label="Year"
-                type="number"
-                min="1900"
-                max={new Date().getFullYear()}
-                placeholder={new Date().getFullYear().toString()}
-                value={yearEstablished}
-                onChange={(e) => setYearEstablished(e.target.value)}
-              />
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="Month"
+                  type="number"
+                  min="1"
+                  max="12"
+                  placeholder="1-12"
+                  value={monthEstablished}
+                  onChange={(e) => setMonthEstablished(e.target.value)}
+                  className="border-border/50"
+                />
+                <Input
+                  label="Year"
+                  type="number"
+                  min="1900"
+                  max={new Date().getFullYear()}
+                  placeholder={new Date().getFullYear().toString()}
+                  value={yearEstablished}
+                  onChange={(e) => setYearEstablished(e.target.value)}
+                  className="border-border/50"
+                />
+              </div>
             </div>
             <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
               Continue
@@ -165,21 +196,24 @@ export default function FactFinder() {
       case "multi-select":
         return (
           <div className="space-y-3">
-            {generationOptions.map((option) => (
-              <button
+            {generationOptions.map((option, index) => (
+              <motion.button
                 key={option}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
                 onClick={() => toggleGeneration(option)}
-                className={`w-full p-4 rounded-xl border text-left font-medium transition-all flex items-center justify-between ${
+                className={`w-full p-4 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                   businessGeneration.includes(option)
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-white/80 text-foreground hover:border-primary/50"
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                    : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                 }`}
               >
                 <span>{option}</span>
-                <ChevronRight className="w-5 h-5 opacity-50" />
-              </button>
+                <ChevronRight className={`w-5 h-5 transition-transform ${businessGeneration.includes(option) ? "text-primary-foreground" : "text-muted-foreground"}`} />
+              </motion.button>
             ))}
-            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth className="mt-4">
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth className="mt-6">
               Continue
             </Button>
           </div>
@@ -187,14 +221,17 @@ export default function FactFinder() {
       
       case "number":
         return (
-          <div className="space-y-4">
-            <Input
-              type="number"
-              min="0"
-              placeholder="Enter number of leads"
-              value={monthlyLeads}
-              onChange={(e) => setMonthlyLeads(e.target.value)}
-            />
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <Input
+                type="number"
+                min="0"
+                placeholder="Enter number of leads"
+                value={monthlyLeads}
+                onChange={(e) => setMonthlyLeads(e.target.value)}
+                className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+              />
+            </div>
             <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
               Continue
             </Button>
@@ -203,20 +240,23 @@ export default function FactFinder() {
       
       case "single-select":
         return (
-          <div className="space-y-3">
-            {["Yes", "No"].map((option) => (
-              <button
+          <div className="space-y-4">
+            {["Yes", "No"].map((option, index) => (
+              <motion.button
                 key={option}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => handleOptionSelect(option)}
-                className={`w-full p-4 rounded-xl border text-left font-medium transition-all flex items-center justify-between ${
+                className={`w-full p-5 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                   hasGMB === option
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-white/80 text-foreground hover:border-primary/50"
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                    : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                 }`}
               >
-                <span>{option}</span>
-                <ChevronRight className="w-5 h-5 opacity-50" />
-              </button>
+                <span className="text-lg">{option}</span>
+                <ChevronRight className={`w-5 h-5 transition-transform ${hasGMB === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
+              </motion.button>
             ))}
           </div>
         );
@@ -227,7 +267,7 @@ export default function FactFinder() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -239,12 +279,18 @@ export default function FactFinder() {
         />
 
         {/* Content Area - Split Layout */}
-        <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
-          <div className="w-full max-w-6xl h-[calc(100vh-140px)]">
-            <GlassCard className="p-0 overflow-hidden rounded-3xl h-full">
-              <div className="grid md:grid-cols-2 h-full">
-                {/* Left Side - Question */}
-                <div className="bg-white p-10 md:p-16 flex items-center justify-center rounded-l-3xl">
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow, sitting above background */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            >
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Question Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -252,30 +298,19 @@ export default function FactFinder() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="w-full"
                     >
-                      <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight">
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
                         {currentStep.question}
                       </h2>
                       
-                      {/* Decorative Element */}
-                      <div className="mt-8 flex gap-1.5">
-                        {Array.from({ length: 8 }).map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="w-1.5 bg-primary rounded-full"
-                            initial={{ height: 0 }}
-                            animate={{ height: 12 + Math.random() * 24 }}
-                            transition={{ delay: i * 0.05, duration: 0.3 }}
-                          />
-                        ))}
-                      </div>
+                      {/* Orange Accent Motif */}
+                      <OrangeAccent />
                     </motion.div>
                   </AnimatePresence>
                 </div>
 
-                {/* Right Side - Options */}
-                <div className="p-10 md:p-16 flex items-center justify-center bg-white/50 rounded-r-3xl">
+                {/* Right Side - Form Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -286,35 +321,38 @@ export default function FactFinder() {
                       className="w-full"
                     >
                       {/* Step Indicator */}
-                      <div className="mb-8">
-                        <p className="text-xl font-medium text-foreground">
-                          Step {step + 1} — {totalSteps}
-                        </p>
-                        <p className="text-base text-muted-foreground mt-2">
+                      <div className="mb-10">
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Step</span>
+                          <span className="text-2xl font-bold text-foreground">{step + 1}</span>
+                          <span className="text-muted-foreground text-lg">—</span>
+                          <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
+                        </div>
+                        <p className="text-base text-muted-foreground mt-3">
                           {currentStep.subtitle}
                         </p>
                       </div>
 
                       {/* Options/Inputs */}
-                      <div className="max-h-[400px] overflow-y-auto pr-2">
+                      <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin">
                         {renderRightContent()}
                       </div>
 
-                      {/* Cancel Button */}
+                      {/* Back Button */}
                       <button
                         onClick={handleBack}
-                        className="mt-8 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3"
+                        className="mt-10 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                       >
-                        {step > 0 ? "BACK" : "CANCEL"}
-                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                          <ChevronRight className="w-5 h-5 text-primary-foreground rotate-180" />
+                        <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                          <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
                         </div>
+                        <span className="uppercase tracking-wider">{step > 0 ? "Back" : "Cancel"}</span>
                       </button>
                     </motion.div>
                   </AnimatePresence>
                 </div>
               </div>
-            </GlassCard>
+            </motion.div>
           </div>
         </div>
       </div>
