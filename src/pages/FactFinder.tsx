@@ -239,12 +239,12 @@ export default function FactFinder() {
         />
 
         {/* Content Area - Split Layout */}
-        <div className="flex-1 pt-[73px] px-6 flex items-center justify-center">
-          <div className="w-full max-w-5xl">
-            <GlassCard className="p-0 overflow-hidden">
-              <div className="grid md:grid-cols-2 min-h-[450px]">
+        <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
+          <div className="w-full max-w-6xl h-[calc(100vh-140px)]">
+            <GlassCard className="p-0 overflow-hidden rounded-3xl h-full">
+              <div className="grid md:grid-cols-2 h-full">
                 {/* Left Side - Question */}
-                <div className="bg-white p-8 md:p-12 flex flex-col justify-center">
+                <div className="bg-white p-10 md:p-16 flex flex-col justify-center rounded-l-3xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -253,18 +253,18 @@ export default function FactFinder() {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight">
+                      <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight">
                         {currentStep.question}
                       </h2>
                       
                       {/* Decorative Element */}
-                      <div className="mt-6 flex gap-1">
+                      <div className="mt-8 flex gap-1.5">
                         {Array.from({ length: 8 }).map((_, i) => (
                           <motion.div
                             key={i}
-                            className="w-1 bg-primary rounded-full"
+                            className="w-1.5 bg-primary rounded-full"
                             initial={{ height: 0 }}
-                            animate={{ height: 8 + Math.random() * 16 }}
+                            animate={{ height: 12 + Math.random() * 24 }}
                             transition={{ delay: i * 0.05, duration: 0.3 }}
                           />
                         ))}
@@ -274,7 +274,7 @@ export default function FactFinder() {
                 </div>
 
                 {/* Right Side - Options */}
-                <div className="p-8 md:p-12 flex flex-col justify-center bg-white/50">
+                <div className="p-10 md:p-16 flex flex-col justify-center bg-white/50 rounded-r-3xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -284,28 +284,28 @@ export default function FactFinder() {
                       transition={{ duration: 0.3 }}
                     >
                       {/* Step Indicator */}
-                      <div className="mb-6">
-                        <p className="text-lg font-medium text-foreground">
+                      <div className="mb-8">
+                        <p className="text-xl font-medium text-foreground">
                           Step {step + 1} — {totalSteps}
                         </p>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-base text-muted-foreground mt-2">
                           {currentStep.subtitle}
                         </p>
                       </div>
 
                       {/* Options/Inputs */}
-                      <div className="max-h-[300px] overflow-y-auto pr-2">
+                      <div className="max-h-[400px] overflow-y-auto pr-2">
                         {renderRightContent()}
                       </div>
 
                       {/* Cancel Button */}
                       <button
                         onClick={handleBack}
-                        className="mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                        className="mt-8 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3"
                       >
                         {step > 0 ? "BACK" : "CANCEL"}
-                        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-                          <ChevronRight className="w-4 h-4 text-primary-foreground rotate-180" />
+                        <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+                          <ChevronRight className="w-5 h-5 text-primary-foreground rotate-180" />
                         </div>
                       </button>
                     </motion.div>
