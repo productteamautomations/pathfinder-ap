@@ -244,7 +244,7 @@ export default function FactFinder() {
             <GlassCard className="p-0 overflow-hidden">
               <div className="grid md:grid-cols-2 min-h-[450px]">
                 {/* Left Side - Question */}
-                <div className="bg-foreground/95 p-8 md:p-12 flex flex-col justify-center">
+                <div className="bg-white p-8 md:p-12 flex flex-col justify-center">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -253,7 +253,7 @@ export default function FactFinder() {
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <h2 className="text-3xl md:text-4xl font-bold text-background leading-tight">
+                      <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight">
                         {currentStep.question}
                       </h2>
                       
