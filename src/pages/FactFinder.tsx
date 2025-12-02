@@ -252,14 +252,14 @@ export default function FactFinder() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
-                      className="w-full"
+                      className="w-full text-center"
                     >
                       <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight">
                         {currentStep.question}
                       </h2>
                       
                       {/* Decorative Element */}
-                      <div className="mt-8 flex gap-1.5">
+                      <div className="mt-8 flex gap-1.5 justify-center">
                         {Array.from({ length: 8 }).map((_, i) => (
                           <motion.div
                             key={i}
