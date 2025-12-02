@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
+import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
+import { ChevronRight } from "lucide-react";
 
 const generationOptions = [
   "None",
@@ -15,10 +17,44 @@ const generationOptions = [
   "Recurring",
 ];
 
+interface StepConfig {
+  question: string;
+  subtitle: string;
+  type: "date" | "dual-input" | "multi-select" | "number" | "single-select";
+}
+
+const steps: StepConfig[] = [
+  {
+    question: "When did you start trading?",
+    subtitle: "Please enter your trading date",
+    type: "date",
+  },
+  {
+    question: "When was your business established?",
+    subtitle: "Please enter month and year",
+    type: "dual-input",
+  },
+  {
+    question: "How do you generate business?",
+    subtitle: "Select all that apply",
+    type: "multi-select",
+  },
+  {
+    question: "How many leads do you get monthly?",
+    subtitle: "Please enter a number",
+    type: "number",
+  },
+  {
+    question: "Do you have a GMB account?",
+    subtitle: "Please select one option",
+    type: "single-select",
+  },
+];
+
 // Orange accent motif component
 function OrangeAccent() {
   return (
-    <div className="flex items-center gap-2 mt-4">
+    <div className="flex items-center gap-2 mt-8">
       <div className="flex gap-1.5">
         {[...Array(4)].map((_, i) => (
           <motion.div
@@ -40,33 +76,11 @@ function OrangeAccent() {
   );
 }
 
-// Form field component
-function FormField({
-  label,
-  required,
-  children,
-  className = "",
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <div className={className}>
-      <label className="block text-sm font-semibold text-[#173340] mb-2">
-        {label}
-        {required && <span className="text-primary ml-0.5">*</span>}
-      </label>
-      {children}
-    </div>
-  );
-}
-
 export default function FactFinder() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [step, setStep] = useState(0);
+  
   const [tradingDate, setTradingDate] = useState("");
   const [monthEstablished, setMonthEstablished] = useState("");
   const [yearEstablished, setYearEstablished] = useState("");
@@ -74,26 +88,31 @@ export default function FactFinder() {
   const [monthlyLeads, setMonthlyLeads] = useState("");
   const [hasGMB, setHasGMB] = useState<string>("");
 
+  const totalSteps = steps.length;
+  const currentStep = steps[step];
+
   const toggleGeneration = (option: string) => {
     setBusinessGeneration((prev) =>
       prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]
     );
   };
 
-  const isFormValid = () => {
-    return (
-      tradingDate &&
-      monthEstablished &&
-      yearEstablished &&
-      businessGeneration.length > 0 &&
-      monthlyLeads &&
-      hasGMB
-    );
+  const isStepValid = () => {
+    switch (step) {
+      case 0: return !!tradingDate;
+      case 1: return !!monthEstablished && !!yearEstablished;
+      case 2: return businessGeneration.length > 0;
+      case 3: return !!monthlyLeads;
+      case 4: return !!hasGMB;
+      default: return false;
+    }
   };
 
-  const handleSubmit = () => {
-    if (isFormValid()) {
-      navigate("/funnel-diagnostic", {
+  const handleNext = () => {
+    if (step < totalSteps - 1) {
+      setStep(step + 1);
+    } else {
+      navigate("/business-details", {
         state: {
           ...location.state,
           tradingDate,
@@ -107,8 +126,145 @@ export default function FactFinder() {
     }
   };
 
-  const inputStyles =
-    "w-full px-4 py-3.5 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
+  const handleBack = () => {
+    if (step > 0) {
+      setStep(step - 1);
+    } else {
+      navigate(-1);
+    }
+  };
+
+  const handleOptionSelect = (value: string) => {
+    setHasGMB(value);
+    setTimeout(() => {
+      handleNext();
+    }, 300);
+  };
+
+  const renderRightContent = () => {
+    switch (currentStep.type) {
+      case "date":
+        return (
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <Input
+                type="date"
+                value={tradingDate}
+                onChange={(e) => setTradingDate(e.target.value)}
+                className="border-0 shadow-none focus:ring-0 bg-transparent"
+              />
+            </div>
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
+          </div>
+        );
+      
+      case "dual-input":
+        return (
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <div className="grid grid-cols-2 gap-4">
+                <Input
+                  label="Month"
+                  type="number"
+                  min="1"
+                  max="12"
+                  placeholder="1-12"
+                  value={monthEstablished}
+                  onChange={(e) => setMonthEstablished(e.target.value)}
+                  className="border-border/50"
+                />
+                <Input
+                  label="Year"
+                  type="number"
+                  min="1900"
+                  max={new Date().getFullYear()}
+                  placeholder={new Date().getFullYear().toString()}
+                  value={yearEstablished}
+                  onChange={(e) => setYearEstablished(e.target.value)}
+                  className="border-border/50"
+                />
+              </div>
+            </div>
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
+          </div>
+        );
+      
+      case "multi-select":
+        return (
+          <div className="space-y-3">
+            {generationOptions.map((option, index) => (
+              <motion.button
+                key={option}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                onClick={() => toggleGeneration(option)}
+                className={`w-full p-4 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                  businessGeneration.includes(option)
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                    : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
+                }`}
+              >
+                <span>{option}</span>
+                <ChevronRight className={`w-5 h-5 transition-transform ${businessGeneration.includes(option) ? "text-primary-foreground" : "text-muted-foreground"}`} />
+              </motion.button>
+            ))}
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth className="mt-6">
+              Continue
+            </Button>
+          </div>
+        );
+      
+      case "number":
+        return (
+          <div className="space-y-6">
+            <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+              <Input
+                type="number"
+                min="0"
+                placeholder="Enter number of leads"
+                value={monthlyLeads}
+                onChange={(e) => setMonthlyLeads(e.target.value)}
+                className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+              />
+            </div>
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
+          </div>
+        );
+      
+      case "single-select":
+        return (
+          <div className="space-y-4">
+            {["Yes", "No"].map((option, index) => (
+              <motion.button
+                key={option}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                onClick={() => handleOptionSelect(option)}
+                className={`w-full p-5 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                  hasGMB === option
+                    ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                    : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
+                }`}
+              >
+                <span className="text-lg">{option}</span>
+                <ChevronRight className={`w-5 h-5 transition-transform ${hasGMB === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
+              </motion.button>
+            ))}
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
@@ -116,159 +272,84 @@ export default function FactFinder() {
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <PageHeader
-          onBack={() => navigate(-1)}
+          onBack={handleBack}
           currentStep={2}
-          totalSteps={10}
+          totalSteps={11}
           showProgress
         />
 
-        {/* Content Area */}
-        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center py-8">
-          <div className="w-full max-w-3xl">
-            {/* Main Card */}
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow, sitting above background */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-8 md:p-12"
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             >
-              {/* Header */}
-              <div className="mb-8">
-                <motion.span
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  className="inline-block text-xs font-semibold tracking-widest text-primary uppercase mb-3"
-                >
-                  Step 2 of 10
-                </motion.span>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                  Business Information
-                </h2>
-                <p className="text-muted-foreground mt-2 text-sm">
-                  Help us understand your business better
-                </p>
-                <OrangeAccent />
-              </div>
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Question Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={step}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                        {currentStep.question}
+                      </h2>
+                      
+                      {/* Orange Accent Motif */}
+                      <OrangeAccent />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-              {/* Form Grid */}
-              <div className="space-y-8">
-                {/* Section 1: Timeline */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">1</span>
-                    Timeline
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-5 pl-8">
-                    <FormField label="When did you start trading?" required>
-                      <input
-                        type="date"
-                        value={tradingDate}
-                        onChange={(e) => setTradingDate(e.target.value)}
-                        className={inputStyles}
-                      />
-                    </FormField>
-
-                    <FormField label="Business established" required>
-                      <div className="grid grid-cols-2 gap-3">
-                        <input
-                          type="number"
-                          min="1"
-                          max="12"
-                          placeholder="Month"
-                          value={monthEstablished}
-                          onChange={(e) => setMonthEstablished(e.target.value)}
-                          className={inputStyles}
-                        />
-                        <input
-                          type="number"
-                          min="1900"
-                          max={new Date().getFullYear()}
-                          placeholder="Year"
-                          value={yearEstablished}
-                          onChange={(e) => setYearEstablished(e.target.value)}
-                          className={inputStyles}
-                        />
+                {/* Right Side - Form Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={step}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      {/* Step Indicator */}
+                      <div className="mb-10">
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Step</span>
+                          <span className="text-2xl font-bold text-foreground">{step + 1}</span>
+                          <span className="text-muted-foreground text-lg">—</span>
+                          <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
+                        </div>
+                        <p className="text-base text-muted-foreground mt-3">
+                          {currentStep.subtitle}
+                        </p>
                       </div>
-                    </FormField>
-                  </div>
-                </div>
 
-                {/* Section 2: Lead Generation */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">2</span>
-                    Lead Generation
-                  </h3>
-                  <div className="grid md:grid-cols-2 gap-5 pl-8">
-                    <FormField label="Monthly leads" required>
-                      <input
-                        type="number"
-                        min="0"
-                        placeholder="Enter number"
-                        value={monthlyLeads}
-                        onChange={(e) => setMonthlyLeads(e.target.value)}
-                        className={inputStyles}
-                      />
-                    </FormField>
-
-                    <FormField label="Do you have a GMB account?" required>
-                      <div className="flex gap-3">
-                        {["Yes", "No"].map((option) => (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => setHasGMB(option)}
-                            className={`flex-1 px-4 py-3.5 rounded-xl border-2 font-medium transition-all duration-200 ${
-                              hasGMB === option
-                                ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                                : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                            }`}
-                          >
-                            {option}
-                          </button>
-                        ))}
+                      {/* Options/Inputs */}
+                      <div className="max-h-[400px] overflow-y-auto pr-2 scrollbar-thin">
+                        {renderRightContent()}
                       </div>
-                    </FormField>
-                  </div>
-                </div>
 
-                {/* Section 3: Business Channels */}
-                <div className="space-y-4">
-                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">3</span>
-                    Business Channels
-                  </h3>
-                  <FormField label="How do you generate business?" required className="pl-8">
-                    <div className="flex flex-wrap gap-2.5">
-                      {generationOptions.map((option) => (
-                        <motion.button
-                          key={option}
-                          type="button"
-                          onClick={() => toggleGeneration(option)}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                          className={`px-4 py-2.5 rounded-full border-2 text-sm font-medium transition-all duration-200 ${
-                            businessGeneration.includes(option)
-                              ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                              : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                          }`}
-                        >
-                          {option}
-                        </motion.button>
-                      ))}
-                    </div>
-                  </FormField>
-                </div>
-
-                {/* Submit Button */}
-                <div className="flex justify-end pt-6 border-t border-border/20">
-                  <Button
-                    onClick={handleSubmit}
-                    disabled={!isFormValid()}
-                    className="px-10"
-                  >
-                    Continue
-                  </Button>
+                      {/* Back Button */}
+                      <button
+                        onClick={handleBack}
+                        className="mt-10 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                          <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                        </div>
+                        <span className="uppercase tracking-wider">{step > 0 ? "Back" : "Cancel"}</span>
+                      </button>
+                    </motion.div>
+                  </AnimatePresence>
                 </div>
               </div>
             </motion.div>

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import FactFinder from "./pages/FactFinder";
+import BusinessDetails from "./pages/BusinessDetails";
 import FunnelDiagnostic from "./pages/FunnelDiagnostic";
 import FunnelHealth from "./pages/FunnelHealth";
 import ProductRecommendation from "./pages/ProductRecommendation";
@@ -24,6 +25,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/fact-finder" element={<FactFinder />} />
+          <Route path="/business-details" element={<BusinessDetails />} />
           <Route path="/funnel-diagnostic" element={<FunnelDiagnostic />} />
           <Route path="/funnel-health" element={<FunnelHealth />} />
           <Route path="/product-recommendation" element={<ProductRecommendation />} />

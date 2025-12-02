@@ -2,90 +2,60 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { Check, MapPin, TrendingUp, Users, Star } from "lucide-react";
+import { TopographicBackground } from "@/components/TopographicBackground";
+import { Check, ChevronRight } from "lucide-react";
 
-const benefits = [
-  "Appear in the top 3 Google Map Pack results",
-  "Attract customers actively searching in your area",
-  "80% higher conversion rates than general searches",
-  "Stay ahead of competitors in local rankings",
-];
-
-// Illustration component with text content
-function LocalSEOIllustration() {
+// Orange accent motif component
+function OrangeAccent() {
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="flex items-center gap-2 mt-6">
+      <div className="flex gap-1.5">
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 rounded-full bg-primary"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.3 }}
+          />
+        ))}
+      </div>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.5 }}
-        className="space-y-4"
-      >
-        {/* Card 1 - Map Rankings */}
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <MapPin className="w-6 h-6 text-primary" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-foreground">Google Map Pack</h4>
-              <p className="text-sm text-muted-foreground">Top 3 local results visibility</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 2 - Growth Stats */}
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-8">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-green-500" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-foreground">+80% Conversions</h4>
-              <p className="text-sm text-muted-foreground">Higher than general searches</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Card 3 - Local Customers */}
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-4">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Users className="w-6 h-6 text-blue-500" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-semibold text-foreground">Local Customers</h4>
-              <p className="text-sm text-muted-foreground">Target people searching nearby</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating badge */}
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-2 -right-2 w-16 h-16 rounded-full bg-primary shadow-lg flex items-center justify-center"
-        >
-          <Star className="w-8 h-8 text-white" fill="white" />
-        </motion.div>
-      </motion.div>
+        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+      />
     </div>
   );
 }
+
+const benefits = [
+  {
+    title: "Increased Visibility",
+    description: "Appear in the top 3 Google Map Pack results when customers search for services like yours",
+  },
+  {
+    title: "More Quality Leads",
+    description: "Attract customers who are actively searching for your services in your local area",
+  },
+  {
+    title: "Higher Conversion Rates",
+    description: "Local searches have 80% higher conversion rates than general searches",
+  },
+  {
+    title: "Competitive Advantage",
+    description: "Stay ahead of competitors who aren't optimizing their local presence",
+  },
+];
 
 export default function ProductRecommendation() {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/10">
-      {/* Decorative background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-0 w-64 h-64 bg-green-500/5 rounded-full blur-3xl" />
-      </div>
+    <div className="min-h-screen relative overflow-hidden bg-background">
+      <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <PageHeader
@@ -95,74 +65,98 @@ export default function ProductRecommendation() {
           showProgress
         />
 
-        <div className="flex-1 pt-[73px] flex flex-col px-6 md:px-12 lg:px-20 py-8">
-          {/* Page Title */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
-              Local SEO
-            </h1>
-            <p className="text-lg text-muted-foreground mt-2">
-              Why Local SEO is the Right Fit
-            </p>
-          </motion.div>
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            >
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Title Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                      Recommendation
+                    </span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                      Why Local SEO is the Right Fit
+                    </h2>
+                    
+                    {/* Orange Accent Motif */}
+                    <OrangeAccent />
 
-          {/* Main Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="flex-1 bg-card rounded-[2rem] p-8 md:p-12 shadow-xl border border-border/30 max-w-6xl mx-auto w-full"
-          >
-            <div className="grid md:grid-cols-2 gap-12 items-center h-full">
-              {/* Left - Content */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Dominate Local Search Results
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  Get found by customers in your area when they search for services like yours. 
-                  With Local SEO, you'll appear in Google Maps and local search results right when 
-                  potential customers need you most.
-                </p>
-
-                {/* Benefits List */}
-                <div className="space-y-4 mb-10">
-                  {benefits.map((benefit, index) => (
-                    <motion.div
-                      key={benefit}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-foreground">{benefit}</span>
-                    </motion.div>
-                  ))}
+                    <p className="text-lg text-muted-foreground mt-8 leading-relaxed">
+                      Based on your business profile and goals, Local SEO will help you dominate your local market.
+                    </p>
+                  </motion.div>
                 </div>
 
-                {/* CTA Button */}
-                <Button
-                  onClick={() => navigate("/business-cycle", { state: location.state })}
-                  className="px-8"
-                >
-                  Learn About Our Process
-                </Button>
-              </div>
+                {/* Right Side - Benefits */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full"
+                  >
+                    {/* Benefits List */}
+                    <div className="space-y-4 mb-8">
+                      {benefits.map((benefit, index) => (
+                        <motion.div
+                          key={benefit.title}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className="bg-white rounded-2xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                        >
+                          <div className="flex items-start gap-4">
+                            <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                              <Check className="w-5 h-5 text-primary" />
+                            </div>
+                            <div>
+                              <h3 className="text-base font-bold text-foreground mb-1">
+                                {benefit.title}
+                              </h3>
+                              <p className="text-sm text-muted-foreground leading-relaxed">
+                                {benefit.description}
+                              </p>
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
 
-              {/* Right - Illustration */}
-              <div className="hidden md:block">
-                <LocalSEOIllustration />
+                    {/* Continue Button */}
+                    <Button
+                      onClick={() => navigate("/business-cycle", { state: location.state })}
+                      fullWidth
+                    >
+                      Learn About Our Process
+                    </Button>
+
+                    {/* Back Button */}
+                    <button
+                      onClick={() => navigate(-1)}
+                      className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                      </div>
+                      <span className="uppercase tracking-wider">Back</span>
+                    </button>
+                  </motion.div>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
