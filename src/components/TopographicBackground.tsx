@@ -38,8 +38,8 @@ export function TopographicBackground() {
       ctx.fillStyle = "#faf9f7";
       ctx.fillRect(0, 0, width, height);
 
-      const gridSize = 4;
-      const levels = 12;
+      const gridSize = 12;
+      const levels = 6;
       const time = timeRef.current;
 
       // Create height map
