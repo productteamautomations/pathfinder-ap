@@ -55,7 +55,7 @@ export function TopographicBackground() {
 
       // Draw contour lines using marching squares - softer for premium feel
       ctx.strokeStyle = "rgba(227, 102, 79, 0.25)";
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 5;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
