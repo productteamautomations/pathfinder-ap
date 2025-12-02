@@ -81,7 +81,7 @@ export default function Welcome() {
       draw(ctx: CanvasRenderingContext2D) {
         const thicknessVariation = Math.sin(timeRef.current * 0.5 + this.thicknessOffset) * 0.4;
         const thickness = this.baseThickness + thicknessVariation;
-        let opacity = 0.85;
+        let opacity = 1;
         let offsetX = 0;
         let offsetY = 0;
         let scaleY = 1;
@@ -122,8 +122,8 @@ export default function Welcome() {
           ctx.lineTo(-50, height + 50);
           ctx.closePath();
           const gradient = ctx.createLinearGradient(0, this.baseY, 0, height);
-          gradient.addColorStop(0, "rgba(227, 102, 79, 0.3)");
-          gradient.addColorStop(1, "rgba(227, 102, 79, 0.1)");
+          gradient.addColorStop(0, "rgb(227, 102, 79)");
+          gradient.addColorStop(1, "rgb(227, 102, 79)");
           ctx.fillStyle = gradient;
           ctx.fill();
         }
