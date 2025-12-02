@@ -16,11 +16,11 @@ export function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen relative bg-background">
+    <div className="min-h-screen relative bg-background overflow-hidden">
       {/* Persistent background across all pages */}
       <TopographicBackground />
       
-      <div className="relative z-10">
+      <div className="relative z-10 overflow-hidden">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageTransition><Welcome /></PageTransition>} />
