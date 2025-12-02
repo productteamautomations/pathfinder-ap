@@ -50,9 +50,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
       update() {
         for (let i = 0; i < this.points.length; i++) {
           const point = this.points[i];
-          const wave =
-            Math.sin(point.x * waveFrequency + timeRef.current + this.index * 0.25) *
-            waveAmplitude;
+          const wave = Math.sin(point.x * waveFrequency + timeRef.current + this.index * 0.25) * waveAmplitude;
           point.y = point.baseY + wave;
         }
       }
@@ -97,7 +95,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
         const last = this.points[this.points.length - 1];
         ctx.lineTo(last.x + 50, last.y);
         ctx.strokeStyle = "rgba(227, 102, 79, 0.6)";
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
@@ -116,7 +114,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
         l.update();
         l.draw(ctx, idx === numLines - 1);
       });
-      timeRef.current += 0.008;
+      timeRef.current += 0.004;
       animationRef.current = requestAnimationFrame(animate);
     }
     animate();
