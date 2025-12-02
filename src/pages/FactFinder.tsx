@@ -244,7 +244,7 @@ export default function FactFinder() {
             <GlassCard className="p-0 overflow-hidden rounded-3xl h-full">
               <div className="grid md:grid-cols-2 h-full">
                 {/* Left Side - Question */}
-                <div className="bg-white p-10 md:p-16 flex items-center justify-center rounded-l-3xl shadow-[4px_0_20px_rgba(0,0,0,0.06)] relative z-10">
+                <div className="bg-white p-10 md:p-16 flex items-center justify-center rounded-l-3xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
