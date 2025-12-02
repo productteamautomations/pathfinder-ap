@@ -2,15 +2,14 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
-import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
+import { GlassCard } from "@/components/GlassCard";
+import { WaveBackground } from "@/components/WaveBackground";
 
 interface Question {
   id: string;
   section: string;
   question: string;
   options: string[];
-  hasImage?: boolean;
 }
 
 const questions: Question[] = [
@@ -19,7 +18,6 @@ const questions: Question[] = [
     section: "Traffic",
     question: "Average CTR (30 days)",
     options: ["≥5%", "3–5%", "<2%", "Unsure"],
-    hasImage: true,
   },
   {
     id: "trackingConversions",
@@ -109,68 +107,72 @@ export default function FunnelDiagnostic() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <PageHeader
-        onBack={handleBack}
-        currentStep={4}
-        totalSteps={11}
-        showProgress
-      />
+    <div className="min-h-screen relative overflow-hidden">
+      <WaveBackground />
 
-      {/* Content Area - Full height without fixed title */}
-      <div className="flex-1 pt-[73px] px-6 overflow-y-auto flex items-center justify-center">
-        <div className="w-full max-w-6xl py-12">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <AnimatePresence mode="wait">
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <PageHeader
+          onBack={handleBack}
+          currentStep={4}
+          totalSteps={11}
+          showProgress
+        />
+
+        {/* Content Area */}
+        <div className="flex-1 pt-[73px] px-6 flex items-center justify-center">
+          <div className="w-full max-w-5xl py-8">
+            <div className="grid lg:grid-cols-2 gap-8 items-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentQuestion}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 20 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <GlassCard className="p-8">
+                    <div className="mb-6">
+                      <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                        {question.section}
+                      </span>
+                      <h2 className="text-2xl font-bold text-foreground mt-2 mb-3">
+                        {question.question}
+                      </h2>
+                      <p className="text-sm text-muted-foreground">
+                        Question {currentQuestion + 1} of {questions.length}
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      {question.options.map((option) => (
+                        <button
+                          key={option}
+                          onClick={() => handleAnswer(option)}
+                          className={`w-full p-4 rounded-xl border text-left font-medium transition-all hover:border-primary hover:bg-primary/5 ${
+                            answers[question.id] === option
+                              ? "border-primary bg-primary/10"
+                              : "border-border bg-white/50"
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </GlassCard>
+                </motion.div>
+              </AnimatePresence>
+
               <motion.div
-                key={currentQuestion}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                transition={{ duration: 0.4 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6 }}
+                className="hidden lg:flex items-center justify-center"
               >
-                <Card className="p-8">
-                  <div className="mb-6">
-                    <span className="text-sm font-semibold text-primary uppercase tracking-wide">
-                      {question.section}
-                    </span>
-                    <h2 className="text-3xl font-bold text-foreground mt-2 mb-4">
-                      {question.question}
-                    </h2>
-                    <p className="text-sm text-muted-foreground">
-                      Question {currentQuestion + 1} of {questions.length}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3">
-                    {question.options.map((option) => (
-                      <button
-                        key={option}
-                        onClick={() => handleAnswer(option)}
-                        className={`w-full p-4 rounded-xl border-2 text-left font-medium transition-all hover:border-primary hover:bg-primary/5 ${
-                          answers[question.id] === option
-                            ? "border-primary bg-primary/10"
-                            : "border-border bg-card"
-                        }`}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </Card>
+                <GlassCard className="w-full h-80 flex items-center justify-center">
+                  <p className="text-muted-foreground">Image Placeholder</p>
+                </GlassCard>
               </motion.div>
-            </AnimatePresence>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              className="hidden lg:flex items-center justify-center"
-            >
-              <div className="w-full h-96 bg-muted/30 rounded-2xl flex items-center justify-center border-2 border-dashed border-border">
-                <p className="text-muted-foreground">Image Placeholder</p>
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
