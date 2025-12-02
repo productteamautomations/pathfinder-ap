@@ -242,7 +242,7 @@ export default function BusinessCycle() {
                       </div>
 
                       {/* Content */}
-                      <div className="max-h-[300px] overflow-y-auto pr-2 mb-8">
+                      <div className="mb-8">
                         {slide.timeline ? (
                           <div className="space-y-6">
                             {slide.timeline.map((item, idx) => (
