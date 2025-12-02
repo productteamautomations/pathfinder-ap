@@ -144,7 +144,7 @@ export default function BusinessCycle() {
   const isLastSlide = currentSlide === slides.length - 1;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <PageHeader
         onBack={() => navigate(-1)}
         currentStep={7}
@@ -152,8 +152,9 @@ export default function BusinessCycle() {
         showProgress
       />
 
-      <div className="pt-24 pb-12 px-6 flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-4xl">
+      {/* Content Area */}
+      <div className="flex-1 pt-[73px] px-6 overflow-y-auto flex items-center justify-center">
+        <div className="w-full max-w-4xl py-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -172,7 +173,7 @@ export default function BusinessCycle() {
                   </div>
                 </div>
 
-                <div className="min-h-[400px] mb-8">
+                <div className="min-h-[350px] mb-8">
                   {slide.timeline ? (
                     <div className="space-y-8">
                       {slide.timeline.map((item, idx) => (

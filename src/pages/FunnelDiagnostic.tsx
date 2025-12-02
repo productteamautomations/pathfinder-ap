@@ -109,7 +109,7 @@ export default function FunnelDiagnostic() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <PageHeader
         onBack={handleBack}
         currentStep={4}
@@ -117,8 +117,9 @@ export default function FunnelDiagnostic() {
         showProgress
       />
 
-      <div className="pt-24 pb-12 px-6 flex items-center justify-center min-h-screen">
-        <div className="w-full max-w-6xl">
+      {/* Content Area - Full height without fixed title */}
+      <div className="flex-1 pt-[73px] px-6 overflow-y-auto flex items-center justify-center">
+        <div className="w-full max-w-6xl py-12">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <AnimatePresence mode="wait">
               <motion.div

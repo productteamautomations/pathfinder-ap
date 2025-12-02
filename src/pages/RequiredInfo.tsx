@@ -33,7 +33,7 @@ export default function RequiredInfo() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <PageHeader
         onBack={() => navigate(-1)}
         currentStep={11}
@@ -41,20 +41,32 @@ export default function RequiredInfo() {
         showProgress
       />
 
-      <div className="pt-24 pb-12 px-6">
+      {/* Fixed Title Section */}
+      <div className="fixed top-[73px] left-0 right-0 bg-background z-40 border-b border-border/50 px-6 py-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <h1 className="text-3xl font-bold text-foreground">
+              Required Information
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Final step! Please provide the following details to complete your setup
+            </p>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Content Area */}
+      <div className="flex-1 pt-[145px] pb-[88px] px-6 overflow-y-auto">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h1 className="text-4xl font-bold text-foreground mb-3">
-              Required Information
-            </h1>
-            <p className="text-muted-foreground mb-8">
-              Final step! Please provide the following details to complete your setup
-            </p>
-
             <div className="grid md:grid-cols-2 gap-6">
               {/* Form 1: Client Details */}
               <motion.div
@@ -149,25 +161,23 @@ export default function RequiredInfo() {
                 </Card>
               </motion.div>
             </div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="mt-8 text-center"
-            >
-              <Button
-                onClick={handleSubmit}
-                disabled={!allValid}
-                className="px-16"
-              >
-                Complete Setup
-              </Button>
-              <p className="text-xs text-muted-foreground mt-3">
-                All information is securely stored and encrypted
-              </p>
-            </motion.div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* Fixed Button Section */}
+      <div className="fixed bottom-0 left-0 right-0 bg-background z-40 border-t border-border/50 px-6 py-5">
+        <div className="max-w-4xl mx-auto text-center">
+          <Button
+            onClick={handleSubmit}
+            disabled={!allValid}
+            className="px-16"
+          >
+            Complete Setup
+          </Button>
+          <p className="text-xs text-muted-foreground mt-2">
+            All information is securely stored and encrypted
+          </p>
         </div>
       </div>
     </div>
