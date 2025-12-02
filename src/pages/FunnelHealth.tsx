@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
-import { ChevronRight } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, ArrowRight } from "lucide-react";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -31,6 +31,148 @@ function OrangeAccent() {
   );
 }
 
+// Score card component
+function ScoreCard({ 
+  label, 
+  score, 
+  delay = 0 
+}: { 
+  label: string; 
+  score: number; 
+  delay?: number;
+}) {
+  const getHealthColor = (score: number) => {
+    if (score >= 70) return "text-green-600";
+    if (score >= 40) return "text-accent-yellow";
+    return "text-secondary";
+  };
+
+  const getTrendIcon = (score: number) => {
+    if (score >= 70) return <TrendingUp className="w-4 h-4 text-green-600" />;
+    if (score >= 40) return <Minus className="w-4 h-4 text-accent-yellow" />;
+    return <TrendingDown className="w-4 h-4 text-secondary" />;
+  };
+
+  const getStatusLabel = (score: number) => {
+    if (score >= 70) return "Strong";
+    if (score >= 40) return "Moderate";
+    return "Weak";
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.4 }}
+      className="relative p-5 bg-white rounded-2xl border border-border/30 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
+    >
+      <div className="flex items-start justify-between mb-3">
+        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+          {label}
+        </span>
+        {getTrendIcon(score)}
+      </div>
+      <div className={`text-4xl font-bold ${getHealthColor(score)} mb-1`}>
+        {score}%
+      </div>
+      <div className="flex items-center gap-2">
+        <div className="flex-1 h-1.5 bg-muted/50 rounded-full overflow-hidden">
+          <motion.div
+            className={`h-full rounded-full ${score >= 70 ? 'bg-green-500' : score >= 40 ? 'bg-accent-yellow' : 'bg-secondary'}`}
+            initial={{ width: 0 }}
+            animate={{ width: `${score}%` }}
+            transition={{ delay: delay + 0.3, duration: 0.6, ease: "easeOut" }}
+          />
+        </div>
+        <span className={`text-xs font-medium ${getHealthColor(score)}`}>
+          {getStatusLabel(score)}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+// Overall score ring component
+function OverallScoreRing({ score }: { score: number }) {
+  const getHealthColor = (score: number) => {
+    if (score >= 70) return "#22c55e";
+    if (score >= 40) return "#eab308";
+    return "#E3664F";
+  };
+
+  const getHealthLabel = (score: number) => {
+    if (score >= 70) return "Excellent";
+    if (score >= 40) return "Good";
+    return "Needs Improvement";
+  };
+
+  const circumference = 2 * Math.PI * 45;
+  const strokeDashoffset = circumference - (score / 100) * circumference;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative flex flex-col items-center"
+    >
+      <div className="relative w-36 h-36">
+        <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+          {/* Background circle */}
+          <circle
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="8"
+            className="text-muted/30"
+          />
+          {/* Progress circle */}
+          <motion.circle
+            cx="50"
+            cy="50"
+            r="45"
+            fill="none"
+            stroke={getHealthColor(score)}
+            strokeWidth="8"
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset }}
+            transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
+          />
+        </svg>
+        {/* Center content */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <motion.span
+            className="text-4xl font-bold text-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            {score}%
+          </motion.span>
+        </div>
+      </div>
+      <motion.div
+        className="text-center mt-3"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+      >
+        <p
+          className="text-lg font-semibold"
+          style={{ color: getHealthColor(score) }}
+        >
+          {getHealthLabel(score)}
+        </p>
+        <p className="text-sm text-muted-foreground">Overall Health</p>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function FunnelHealth() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -39,18 +181,6 @@ export default function FunnelHealth() {
   const conversionScore = 60;
   const leadScore = 45;
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
-
-  const getHealthColor = (score: number) => {
-    if (score >= 70) return "text-green-600";
-    if (score >= 40) return "text-accent-yellow";
-    return "text-secondary";
-  };
-
-  const getHealthLabel = (score: number) => {
-    if (score >= 70) return "Excellent";
-    if (score >= 40) return "Good";
-    return "Needs Improvement";
-  };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-background">
@@ -76,7 +206,7 @@ export default function FunnelHealth() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Results Overview */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -85,7 +215,7 @@ export default function FunnelHealth() {
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                       Results
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                       Your Funnel Health Overview
                     </h2>
                     
@@ -93,75 +223,60 @@ export default function FunnelHealth() {
                     <OrangeAccent />
 
                     {/* Score Cards */}
-                    <div className="grid grid-cols-3 gap-4 mt-10">
-                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
-                        <div className={`text-3xl font-bold ${getHealthColor(trafficScore)}`}>
-                          {trafficScore}%
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">Traffic</p>
-                      </div>
-                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
-                        <div className={`text-3xl font-bold ${getHealthColor(conversionScore)}`}>
-                          {conversionScore}%
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">Conversion</p>
-                      </div>
-                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
-                        <div className={`text-3xl font-bold ${getHealthColor(leadScore)}`}>
-                          {leadScore}%
-                        </div>
-                        <p className="text-xs text-muted-foreground mt-1">Leads</p>
-                      </div>
+                    <div className="grid gap-4 mt-8">
+                      <ScoreCard label="Traffic" score={trafficScore} delay={0.2} />
+                      <ScoreCard label="Conversion" score={conversionScore} delay={0.3} />
+                      <ScoreCard label="Leads" score={leadScore} delay={0.4} />
                     </div>
                   </motion.div>
                 </div>
 
                 {/* Right Side - Visualization */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full"
+                    className="w-full flex flex-col items-center"
                   >
-                    {/* Overall Score */}
-                    <div className="mb-8 text-center">
-                      <div className={`text-6xl font-bold ${getHealthColor(overallScore)}`}>
-                        {overallScore}%
-                      </div>
-                      <p className={`text-lg font-medium mt-2 ${getHealthColor(overallScore)}`}>
-                        {getHealthLabel(overallScore)}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">Overall Health Score</p>
-                    </div>
+                    {/* Overall Score Ring */}
+                    <OverallScoreRing score={overallScore} />
 
                     {/* Funnel Visualization */}
-                    <div className="h-48 mb-8">
+                    <motion.div
+                      className="w-full h-40 mt-8 mb-8"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                    >
                       <FunnelVisualization
                         trafficScore={trafficScore}
                         conversionScore={conversionScore}
                         leadScore={leadScore}
                       />
-                    </div>
+                    </motion.div>
 
                     {/* Continue Button */}
                     <Button
                       onClick={() => navigate("/product-recommendation", { state: location.state })}
                       fullWidth
+                      className="group"
                     >
-                      See Recommendations
+                      <span className="flex items-center justify-center gap-2">
+                        See Recommendations
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
                     </Button>
 
-                    {/* Back Button */}
-                    <button
-                      onClick={() => navigate(-1)}
-                      className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    {/* Insight text */}
+                    <motion.p
+                      className="text-sm text-muted-foreground text-center mt-6 max-w-xs"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 1.2 }}
                     >
-                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
-                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
-                      </div>
-                      <span className="uppercase tracking-wider">Back</span>
-                    </button>
+                      Based on your responses, we've identified key areas to optimize your sales funnel.
+                    </motion.p>
                   </motion.div>
                 </div>
               </div>
