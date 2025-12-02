@@ -27,7 +27,7 @@ export function TopographicBackground() {
           Math.sin(x * scale * frequency + t * 0.5) *
           Math.cos(y * scale * frequency + t * 0.3) *
           Math.sin((x + y) * scale * frequency * 0.5 + t * 0.2);
-        amplitude *= 0.5;
+        amplitude *= 0.2;
         frequency *= 2;
       }
       return value;
@@ -54,7 +54,7 @@ export function TopographicBackground() {
       }
 
       // Draw contour lines using marching squares - softer for premium feel
-      ctx.strokeStyle = "rgba(227, 102, 79, 0.25)";
+      ctx.strokeStyle = "rgba(227, 102, 79, 0.60)";
       ctx.lineWidth = 5;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
