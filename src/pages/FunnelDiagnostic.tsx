@@ -2,8 +2,33 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
-import { GlassCard } from "@/components/GlassCard";
 import { TopographicBackground } from "@/components/TopographicBackground";
+import { ChevronRight } from "lucide-react";
+
+// Orange accent motif component
+function OrangeAccent() {
+  return (
+    <div className="flex items-center gap-2 mt-8">
+      <div className="flex gap-1.5">
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 rounded-full bg-primary"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.3 }}
+          />
+        ))}
+      </div>
+      <motion.div
+        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+      />
+    </div>
+  );
+}
 
 interface Question {
   id: string;
@@ -16,7 +41,7 @@ const questions: Question[] = [
   {
     id: "avgCTR",
     section: "Traffic",
-    question: "Average CTR (30 days)",
+    question: "What's your average CTR over the last 30 days?",
     options: ["≥5%", "3–5%", "<2%", "Unsure"],
   },
   {
@@ -28,43 +53,43 @@ const questions: Question[] = [
   {
     id: "avgCPC",
     section: "Traffic",
-    question: "Average CPC (last 30 days)",
+    question: "What's your average CPC?",
     options: ["<£0.50", "£0.50–£3.00", "≥£3.00", "Unsure"],
   },
   {
     id: "costPerAcquisition",
     section: "Conversion",
-    question: "Average cost-per-acquisition",
+    question: "What's your average cost-per-acquisition?",
     options: ["<£10", "£10–£50", "≥£50", "Unsure"],
   },
   {
     id: "conversionRate",
     section: "Conversion",
-    question: "Average website conversion rate",
+    question: "What's your website conversion rate?",
     options: ["≥5%", "2–5%", "1–2%", "<1%"],
   },
   {
     id: "ctaVisibility",
     section: "Conversion",
-    question: "Primary call-to-action visibility",
+    question: "Is your CTA visible on all devices?",
     options: ["Yes – both mobile & desktop", "Yes – desktop only", "Yes – mobile only", "No"],
   },
   {
     id: "servicePages",
     section: "Conversion",
-    question: "Dedicated service pages?",
+    question: "Do you have dedicated service pages?",
     options: ["Yes – all services", "Yes – some", "No"],
   },
   {
     id: "leadManagementSystem",
     section: "Lead Management",
-    question: "Lead management system",
+    question: "How do you manage your leads?",
     options: ["Dedicated admin/assistant", "Answer every call", "Organised chaos"],
   },
   {
     id: "responseTime",
     section: "Lead Management",
-    question: "Average response time",
+    question: "What's your average response time?",
     options: ["Same hour", "Same day", "Same week", "When I get a chance"],
   },
 ];
@@ -77,6 +102,7 @@ export default function FunnelDiagnostic() {
 
   const question = questions[currentQuestion];
   const isLastQuestion = currentQuestion === questions.length - 1;
+  const totalSteps = questions.length;
 
   const handleAnswer = (answer: string) => {
     const newAnswers = { ...answers, [question.id]: answer };
@@ -107,7 +133,7 @@ export default function FunnelDiagnostic() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -118,61 +144,100 @@ export default function FunnelDiagnostic() {
           showProgress
         />
 
-        {/* Content Area */}
-        <div className="flex-1 pt-[73px] px-6 flex items-center justify-center">
-          <div className="w-full max-w-5xl py-8">
-            <div className="grid lg:grid-cols-2 gap-8 items-center">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentQuestion}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 20 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  <GlassCard className="p-8">
-                    <div className="mb-6">
-                      <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            >
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Question Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentQuestion}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                         {question.section}
                       </span>
-                      <h2 className="text-2xl font-bold text-foreground mt-2 mb-3">
+                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
                         {question.question}
                       </h2>
-                      <p className="text-sm text-muted-foreground">
-                        Question {currentQuestion + 1} of {questions.length}
-                      </p>
-                    </div>
+                      
+                      {/* Orange Accent Motif */}
+                      <OrangeAccent />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-                    <div className="space-y-3">
-                      {question.options.map((option) => (
-                        <button
-                          key={option}
-                          onClick={() => handleAnswer(option)}
-                          className={`w-full p-4 rounded-xl border text-left font-medium transition-all hover:border-primary hover:bg-primary/5 ${
-                            answers[question.id] === option
-                              ? "border-primary bg-primary/10"
-                              : "border-border bg-white/50"
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </GlassCard>
-                </motion.div>
-              </AnimatePresence>
+                {/* Right Side - Options Area */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentQuestion}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      {/* Step Indicator */}
+                      <div className="mb-10">
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
+                          <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
+                          <span className="text-muted-foreground text-lg">—</span>
+                          <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
+                        </div>
+                        <p className="text-base text-muted-foreground mt-3">
+                          Select one option
+                        </p>
+                      </div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6 }}
-                className="hidden lg:flex items-center justify-center"
-              >
-                <GlassCard className="w-full h-80 flex items-center justify-center">
-                  <p className="text-muted-foreground">Image Placeholder</p>
-                </GlassCard>
-              </motion.div>
-            </div>
+                      {/* Options */}
+                      <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
+                        {question.options.map((option, index) => (
+                          <motion.button
+                            key={option}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            onClick={() => handleAnswer(option)}
+                            className={`w-full p-4 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                              answers[question.id] === option
+                                ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                                : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
+                            }`}
+                          >
+                            <span>{option}</span>
+                            <ChevronRight className={`w-5 h-5 transition-transform ${answers[question.id] === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                          </motion.button>
+                        ))}
+                      </div>
+
+                      {/* Back Button */}
+                      <button
+                        onClick={handleBack}
+                        className="mt-10 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                      >
+                        <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                          <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                        </div>
+                        <span className="uppercase tracking-wider">{currentQuestion > 0 ? "Back" : "Cancel"}</span>
+                      </button>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>

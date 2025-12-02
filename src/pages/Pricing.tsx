@@ -3,9 +3,33 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { GlassCard } from "@/components/GlassCard";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
+
+// Orange accent motif component
+function OrangeAccent() {
+  return (
+    <div className="flex items-center gap-2 mt-6">
+      <div className="flex gap-1.5">
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 rounded-full bg-primary"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.3 }}
+          />
+        ))}
+      </div>
+      <motion.div
+        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+      />
+    </div>
+  );
+}
 
 export default function Pricing() {
   const navigate = useNavigate();
@@ -27,7 +51,7 @@ export default function Pricing() {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -38,177 +62,150 @@ export default function Pricing() {
           showProgress
         />
 
-        {/* Fixed Title Section */}
-        <div className="fixed top-[73px] left-0 right-0 z-40 px-6 py-4">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <h1 className="text-3xl font-bold text-primary">Your Recommended Path</h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Based on your business, goals, and eligibility
-              </p>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1 pt-[140px] pb-[100px] px-6 overflow-y-auto">
-          <div className="max-w-5xl mx-auto">
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             >
-              <div className="grid lg:grid-cols-2 gap-6">
-                {/* Left Column: Primary Recommendation */}
-                <motion.div
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <GlassCard className="p-6 border-2 border-primary h-full">
-                    <div className="mb-5">
-                      <span className="text-xs font-bold text-primary uppercase tracking-wide">
-                        PRIMARY RECOMMENDATION
-                      </span>
-                      <h2 className="text-2xl font-bold text-foreground mt-2">
-                        Local SEO & SmartSite
-                      </h2>
-                      <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                        Combine a dominant local presence on Google Maps with a powerful website
-                        designed to convert local searchers into loyal customers.
-                      </p>
-                    </div>
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Recommendation */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                      Primary Recommendation
+                    </span>
+                    <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                      Local SEO & SmartSite
+                    </h2>
+                    
+                    {/* Orange Accent Motif */}
+                    <OrangeAccent />
 
-                    <div className="mb-5">
-                      <h3 className="text-base font-bold text-foreground mb-3">Key Deliverables:</h3>
-                      <ul className="space-y-2">
-                        {features.map((item, index) => (
-                          <motion.li
-                            key={item}
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                            className="flex items-start gap-3"
-                          >
-                            <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0 mt-0.5">
-                              <Check className="w-3 h-3 text-primary-foreground" />
-                            </div>
-                            <span className="text-sm text-foreground">{item}</span>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
+                    <p className="text-base text-muted-foreground mt-8 leading-relaxed">
+                      Combine a dominant local presence on Google Maps with a powerful website
+                      designed to convert local searchers into loyal customers.
+                    </p>
 
-                    <div className="bg-primary/5 p-4 rounded-xl border border-primary/20">
-                      <h3 className="text-sm font-bold text-foreground mb-1">Why this path for you?</h3>
-                      <p className="text-xs text-muted-foreground leading-relaxed">
-                        Combining a dominant local SEO strategy with a new high-performance
-                        SmartSite will maximize your visibility and conversions.
-                      </p>
-                    </div>
-                  </GlassCard>
-                </motion.div>
-
-                {/* Right Column: Pricing */}
-                <motion.div
-                  initial={{ opacity: 0, x: 30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <GlassCard className="p-6 h-full">
-                    <div className="mb-5">
-                      <h2 className="text-xl font-bold text-primary mb-2">
-                        Local SEO & SmartSite
-                      </h2>
-                      <ul className="space-y-1 text-xs text-muted-foreground">
-                        <li>• You have strong signals for appearing in the Google Map Pack</li>
-                        <li>• A new SmartSite is required for optimal performance</li>
-                      </ul>
-                    </div>
-
-                    <div className="mb-5">
-                      <h3 className="text-base font-bold text-foreground mb-3">Transparent Pricing</h3>
-
-                      <div className="grid grid-cols-2 gap-2 mb-3">
-                        <button
-                          onClick={() => setSelectedPlan("6")}
-                          className={`py-2.5 px-4 rounded-lg font-semibold text-sm transition-all ${
-                            selectedPlan === "6"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-white/50 text-foreground hover:bg-white/70"
-                          }`}
+                    {/* Features */}
+                    <div className="mt-8 space-y-3">
+                      {features.map((item, index) => (
+                        <motion.div
+                          key={item}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
+                          className="flex items-center gap-3"
                         >
-                          6 Months
-                        </button>
-                        <button
-                          onClick={() => setSelectedPlan("12")}
-                          className={`py-2.5 px-4 rounded-lg font-semibold text-sm transition-all ${
-                            selectedPlan === "12"
-                              ? "bg-primary text-primary-foreground"
-                              : "bg-white/50 text-foreground hover:bg-white/70"
-                          }`}
-                        >
-                          12 Months
-                        </button>
-                      </div>
+                          <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3.5 h-3.5 text-primary-foreground" />
+                          </div>
+                          <span className="text-sm text-foreground">{item}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
 
-                      {selectedPlan === "12" && (
-                        <div className="bg-accent/20 p-3 rounded-lg mb-4 text-center">
-                          <p className="text-xs font-semibold text-foreground">
-                            You save £{savings.toFixed(2)} with a 12-month plan!
-                          </p>
-                        </div>
-                      )}
+                {/* Right Side - Pricing */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full"
+                  >
+                    <h3 className="text-xl font-bold text-foreground mb-6">Transparent Pricing</h3>
 
-                      <div className="space-y-2 mb-4">
-                        <div className="flex justify-between items-center py-2 border-b border-border/50">
-                          <span className="text-sm text-foreground">Setup Fee</span>
-                          <span className="font-bold text-sm text-foreground">£{setupFee.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between items-center py-2 border-b border-border/50">
-                          <span className="text-sm text-foreground">Monthly Fee</span>
-                          <span className="font-bold text-sm text-foreground">£{monthlyFee.toFixed(2)}</span>
-                        </div>
-                        <div className="flex justify-between items-center py-2 border-b border-border/50">
-                          <span className="text-sm text-foreground">VAT</span>
-                          <span className="font-bold text-sm text-foreground">£{vat.toFixed(2)}</span>
-                        </div>
-                      </div>
+                    {/* Plan Toggle */}
+                    <div className="grid grid-cols-2 gap-2 mb-6">
+                      <button
+                        onClick={() => setSelectedPlan("6")}
+                        className={`py-3 px-4 rounded-2xl font-semibold text-sm transition-all ${
+                          selectedPlan === "6"
+                            ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                            : "bg-white text-foreground border border-border/30 hover:border-primary/40"
+                        }`}
+                      >
+                        6 Months
+                      </button>
+                      <button
+                        onClick={() => setSelectedPlan("12")}
+                        className={`py-3 px-4 rounded-2xl font-semibold text-sm transition-all ${
+                          selectedPlan === "12"
+                            ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
+                            : "bg-white text-foreground border border-border/30 hover:border-primary/40"
+                        }`}
+                      >
+                        12 Months
+                      </button>
+                    </div>
 
-                      <div className="bg-primary text-primary-foreground p-4 rounded-xl">
-                        <div className="flex justify-between items-center">
-                          <span className="font-bold">Total First Month</span>
-                          <span className="text-xl font-bold">£{totalFirstMonth.toFixed(2)}</span>
-                        </div>
-                        <p className="text-xs opacity-90 mt-1 text-right">
-                          (then £{monthlyAfterVAT.toFixed(2)}/month inc. VAT)
+                    {selectedPlan === "12" && (
+                      <div className="bg-green-50 p-4 rounded-2xl mb-6 text-center border border-green-200">
+                        <p className="text-sm font-semibold text-green-700">
+                          You save £{savings.toFixed(2)} with a 12-month plan!
                         </p>
                       </div>
+                    )}
+
+                    {/* Price Breakdown */}
+                    <div className="space-y-3 mb-6">
+                      <div className="flex justify-between items-center py-3 border-b border-border/30">
+                        <span className="text-sm text-foreground">Setup Fee</span>
+                        <span className="font-bold text-foreground">£{setupFee.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-border/30">
+                        <span className="text-sm text-foreground">Monthly Fee</span>
+                        <span className="font-bold text-foreground">£{monthlyFee.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between items-center py-3 border-b border-border/30">
+                        <span className="text-sm text-foreground">VAT</span>
+                        <span className="font-bold text-foreground">£{vat.toFixed(2)}</span>
+                      </div>
                     </div>
 
-                    <p className="text-center text-xs text-muted-foreground">
-                      You're just one step away from starting.
-                    </p>
-                  </GlassCard>
-                </motion.div>
+                    {/* Total */}
+                    <div className="bg-primary text-primary-foreground p-5 rounded-2xl mb-6">
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Total First Month</span>
+                        <span className="text-2xl font-bold">£{totalFirstMonth.toFixed(2)}</span>
+                      </div>
+                      <p className="text-xs opacity-90 mt-2 text-right">
+                        (then £{monthlyAfterVAT.toFixed(2)}/month inc. VAT)
+                      </p>
+                    </div>
+
+                    {/* Continue Button */}
+                    <Button
+                      onClick={() => navigate("/required-info", { state: location.state })}
+                      fullWidth
+                    >
+                      Start My Campaign
+                    </Button>
+
+                    {/* Back Button */}
+                    <button
+                      onClick={() => navigate(-1)}
+                      className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                      </div>
+                      <span className="uppercase tracking-wider">Back</span>
+                    </button>
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-
-        {/* Fixed Button Section */}
-        <div className="fixed bottom-0 left-0 right-0 z-40 px-6 py-5">
-          <div className="max-w-5xl mx-auto flex justify-center">
-            <Button
-              onClick={() => navigate("/required-info", { state: location.state })}
-              className="px-16"
-            >
-              Start My Campaign
-            </Button>
           </div>
         </div>
       </div>

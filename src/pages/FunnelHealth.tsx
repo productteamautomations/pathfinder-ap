@@ -2,9 +2,34 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { GlassCard } from "@/components/GlassCard";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
+import { ChevronRight } from "lucide-react";
+
+// Orange accent motif component
+function OrangeAccent() {
+  return (
+    <div className="flex items-center gap-2 mt-6">
+      <div className="flex gap-1.5">
+        {[...Array(4)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="w-2 h-2 rounded-full bg-primary"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
+            transition={{ delay: i * 0.1, duration: 0.3 }}
+          />
+        ))}
+      </div>
+      <motion.div
+        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ delay: 0.4, duration: 0.4 }}
+      />
+    </div>
+  );
+}
 
 export default function FunnelHealth() {
   const navigate = useNavigate();
@@ -28,7 +53,7 @@ export default function FunnelHealth() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-background">
       <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -39,119 +64,108 @@ export default function FunnelHealth() {
           showProgress
         />
 
-        {/* Fixed Title Section */}
-        <div className="fixed top-[73px] left-0 right-0 z-40 px-6 py-4">
-          <div className="max-w-5xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <h1 className="text-3xl font-bold text-primary">
-                Your Funnel Health Overview
-              </h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Based on your responses, here's how your marketing funnel is performing
-              </p>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Content Area */}
-        <div className="flex-1 pt-[140px] pb-[100px] px-6 overflow-y-auto">
-          <div className="max-w-5xl mx-auto">
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
+          <div className="w-full max-w-6xl">
+            {/* Main Card with soft shadow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             >
-              <div className="grid md:grid-cols-3 gap-4 mb-6">
-                <GlassCard className="p-5 text-center">
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                    Overall Health
-                  </h3>
-                  <div className={`text-4xl font-bold mb-1 ${getHealthColor(overallScore)}`}>
-                    {overallScore}%
-                  </div>
-                  <p className={`text-sm font-medium ${getHealthColor(overallScore)}`}>
-                    {getHealthLabel(overallScore)}
-                  </p>
-                </GlassCard>
-
-                <GlassCard className="p-5 text-center border-2 border-primary">
-                  <h3 className="text-xs font-semibold text-primary uppercase tracking-wide mb-2">
-                    Traffic Rating
-                  </h3>
-                  <div className="text-4xl font-bold text-primary mb-1">
-                    {trafficScore}%
-                  </div>
-                  <p className="text-xs text-muted-foreground">Performing well</p>
-                </GlassCard>
-
-                <GlassCard className="p-5 text-center">
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">
-                    Conversion Rating
-                  </h3>
-                  <div className="text-4xl font-bold text-secondary mb-1">
-                    {conversionScore}%
-                  </div>
-                  <p className="text-xs text-muted-foreground">Room for improvement</p>
-                </GlassCard>
-              </div>
-
-              <GlassCard className="p-6">
-                <div className="grid lg:grid-cols-2 gap-6 items-center">
-                  <div>
-                    <h2 className="text-xl font-bold text-foreground mb-4">
-                      Funnel Visualization
+              <div className="grid md:grid-cols-2 min-h-[70vh]">
+                {/* Left Side - Results Overview */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                      Results
+                    </span>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                      Your Funnel Health Overview
                     </h2>
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-primary" />
-                        <div className="flex-1 flex justify-between items-center">
-                          <span className="text-sm font-medium">Traffic</span>
-                          <span className="text-primary font-bold">{trafficScore}%</span>
+                    
+                    {/* Orange Accent Motif */}
+                    <OrangeAccent />
+
+                    {/* Score Cards */}
+                    <div className="grid grid-cols-3 gap-4 mt-10">
+                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
+                        <div className={`text-3xl font-bold ${getHealthColor(trafficScore)}`}>
+                          {trafficScore}%
                         </div>
+                        <p className="text-xs text-muted-foreground mt-1">Traffic</p>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-secondary" />
-                        <div className="flex-1 flex justify-between items-center">
-                          <span className="text-sm font-medium">Conversion</span>
-                          <span className="text-secondary font-bold">{conversionScore}%</span>
+                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
+                        <div className={`text-3xl font-bold ${getHealthColor(conversionScore)}`}>
+                          {conversionScore}%
                         </div>
+                        <p className="text-xs text-muted-foreground mt-1">Conversion</p>
                       </div>
-                      <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-accent-yellow" />
-                        <div className="flex-1 flex justify-between items-center">
-                          <span className="text-sm font-medium">Lead Management</span>
-                          <span className="text-accent-yellow font-bold">{leadScore}%</span>
+                      <div className="text-center p-4 bg-muted/30 rounded-2xl">
+                        <div className={`text-3xl font-bold ${getHealthColor(leadScore)}`}>
+                          {leadScore}%
                         </div>
+                        <p className="text-xs text-muted-foreground mt-1">Leads</p>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="h-64">
-                    <FunnelVisualization
-                      trafficScore={trafficScore}
-                      conversionScore={conversionScore}
-                      leadScore={leadScore}
-                    />
-                  </div>
+                  </motion.div>
                 </div>
-              </GlassCard>
-            </motion.div>
-          </div>
-        </div>
 
-        {/* Fixed Button Section */}
-        <div className="fixed bottom-0 left-0 right-0 z-40 px-6 py-5">
-          <div className="max-w-5xl mx-auto flex justify-center">
-            <Button
-              onClick={() => navigate("/product-recommendation", { state: location.state })}
-              className="px-12"
-            >
-              See Recommendations
-            </Button>
+                {/* Right Side - Visualization */}
+                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full"
+                  >
+                    {/* Overall Score */}
+                    <div className="mb-8 text-center">
+                      <div className={`text-6xl font-bold ${getHealthColor(overallScore)}`}>
+                        {overallScore}%
+                      </div>
+                      <p className={`text-lg font-medium mt-2 ${getHealthColor(overallScore)}`}>
+                        {getHealthLabel(overallScore)}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">Overall Health Score</p>
+                    </div>
+
+                    {/* Funnel Visualization */}
+                    <div className="h-48 mb-8">
+                      <FunnelVisualization
+                        trafficScore={trafficScore}
+                        conversionScore={conversionScore}
+                        leadScore={leadScore}
+                      />
+                    </div>
+
+                    {/* Continue Button */}
+                    <Button
+                      onClick={() => navigate("/product-recommendation", { state: location.state })}
+                      fullWidth
+                    >
+                      See Recommendations
+                    </Button>
+
+                    {/* Back Button */}
+                    <button
+                      onClick={() => navigate(-1)}
+                      className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                      </div>
+                      <span className="uppercase tracking-wider">Back</span>
+                    </button>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </div>
