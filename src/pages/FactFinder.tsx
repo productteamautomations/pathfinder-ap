@@ -6,6 +6,7 @@ import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { GlassCard } from "@/components/GlassCard";
 import { WaveBackground } from "@/components/WaveBackground";
+import { ChevronRight } from "lucide-react";
 
 const generationOptions = [
   "None",
@@ -15,6 +16,40 @@ const generationOptions = [
   "Offline (Leaflets, press, etc)",
   "Tender Contracts",
   "Recurring",
+];
+
+interface StepConfig {
+  question: string;
+  subtitle: string;
+  type: "date" | "dual-input" | "multi-select" | "number" | "single-select";
+}
+
+const steps: StepConfig[] = [
+  {
+    question: "When did you start trading?",
+    subtitle: "Please enter your trading date",
+    type: "date",
+  },
+  {
+    question: "When was your business established?",
+    subtitle: "Please enter month and year",
+    type: "dual-input",
+  },
+  {
+    question: "How do you generate business?",
+    subtitle: "Select all that apply",
+    type: "multi-select",
+  },
+  {
+    question: "How many leads do you get monthly?",
+    subtitle: "Please enter a number",
+    type: "number",
+  },
+  {
+    question: "Do you have a GMB account?",
+    subtitle: "Please select one option",
+    type: "single-select",
+  },
 ];
 
 export default function FactFinder() {
@@ -29,7 +64,8 @@ export default function FactFinder() {
   const [monthlyLeads, setMonthlyLeads] = useState("");
   const [hasGMB, setHasGMB] = useState<string>("");
 
-  const totalSteps = 5;
+  const totalSteps = steps.length;
+  const currentStep = steps[step];
 
   const toggleGeneration = (option: string) => {
     setBusinessGeneration((prev) =>
@@ -74,32 +110,33 @@ export default function FactFinder() {
     }
   };
 
-  const renderStep = () => {
-    switch (step) {
-      case 0:
+  const handleOptionSelect = (value: string) => {
+    setHasGMB(value);
+    setTimeout(() => {
+      handleNext();
+    }, 300);
+  };
+
+  const renderRightContent = () => {
+    switch (currentStep.type) {
+      case "date":
         return (
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Trading Date</h2>
-              <p className="text-sm text-muted-foreground mt-1">When did you start trading?</p>
-            </div>
             <Input
               type="date"
               value={tradingDate}
               onChange={(e) => setTradingDate(e.target.value)}
-              className="text-center"
             />
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
           </div>
         );
       
-      case 1:
+      case "dual-input":
         return (
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">When was your business established?</h2>
-              <p className="text-sm text-muted-foreground mt-1">Month and year of establishment</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               <Input
                 label="Month"
                 type="number"
@@ -119,41 +156,38 @@ export default function FactFinder() {
                 onChange={(e) => setYearEstablished(e.target.value)}
               />
             </div>
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
           </div>
         );
       
-      case 2:
+      case "multi-select":
         return (
-          <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Business Generation</h2>
-              <p className="text-sm text-muted-foreground mt-1">How do you generate business? (Select all that apply)</p>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {generationOptions.map((option) => (
-                <button
-                  key={option}
-                  onClick={() => toggleGeneration(option)}
-                  className={`p-3 rounded-xl border text-sm font-medium transition-all ${
-                    businessGeneration.includes(option)
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-white/50 text-foreground hover:border-primary/50"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+          <div className="space-y-3">
+            {generationOptions.map((option) => (
+              <button
+                key={option}
+                onClick={() => toggleGeneration(option)}
+                className={`w-full p-4 rounded-xl border text-left font-medium transition-all flex items-center justify-between ${
+                  businessGeneration.includes(option)
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-white/80 text-foreground hover:border-primary/50"
+                }`}
+              >
+                <span>{option}</span>
+                <ChevronRight className="w-5 h-5 opacity-50" />
+              </button>
+            ))}
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth className="mt-4">
+              Continue
+            </Button>
           </div>
         );
       
-      case 3:
+      case "number":
         return (
           <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Monthly Leads</h2>
-              <p className="text-sm text-muted-foreground mt-1">How many leads do you receive per month?</p>
-            </div>
             <Input
               type="number"
               min="0"
@@ -161,31 +195,29 @@ export default function FactFinder() {
               value={monthlyLeads}
               onChange={(e) => setMonthlyLeads(e.target.value)}
             />
+            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
+              Continue
+            </Button>
           </div>
         );
       
-      case 4:
+      case "single-select":
         return (
-          <div className="space-y-4">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-foreground">Google My Business</h2>
-              <p className="text-sm text-muted-foreground mt-1">Do you have a GMB account?</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {["Yes", "No"].map((option) => (
-                <button
-                  key={option}
-                  onClick={() => setHasGMB(option)}
-                  className={`p-4 rounded-xl border text-lg font-medium transition-all ${
-                    hasGMB === option
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-white/50 text-foreground hover:border-primary/50"
-                  }`}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+          <div className="space-y-3">
+            {["Yes", "No"].map((option) => (
+              <button
+                key={option}
+                onClick={() => handleOptionSelect(option)}
+                className={`w-full p-4 rounded-xl border text-left font-medium transition-all flex items-center justify-between ${
+                  hasGMB === option
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-white/80 text-foreground hover:border-primary/50"
+                }`}
+              >
+                <span>{option}</span>
+                <ChevronRight className="w-5 h-5 opacity-50" />
+              </button>
+            ))}
           </div>
         );
       
@@ -206,59 +238,81 @@ export default function FactFinder() {
           showProgress
         />
 
-        {/* Fixed Title Section */}
-        <div className="fixed top-[73px] left-0 right-0 z-40 px-6 py-4">
-          <div className="max-w-md mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              <h1 className="text-3xl font-bold text-primary">Fact Finder</h1>
-              <p className="text-sm text-muted-foreground mt-1">
-                Step {step + 1} of {totalSteps}
-              </p>
-            </motion.div>
-          </div>
-        </div>
+        {/* Content Area - Split Layout */}
+        <div className="flex-1 pt-[73px] px-6 flex items-center justify-center">
+          <div className="w-full max-w-5xl">
+            <GlassCard className="p-0 overflow-hidden">
+              <div className="grid md:grid-cols-2 min-h-[450px]">
+                {/* Left Side - Question */}
+                <div className="bg-foreground/95 p-8 md:p-12 flex flex-col justify-center">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={step}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <h2 className="text-3xl md:text-4xl font-bold text-background leading-tight">
+                        {currentStep.question}
+                      </h2>
+                      
+                      {/* Decorative Element */}
+                      <div className="mt-6 flex gap-1">
+                        {Array.from({ length: 8 }).map((_, i) => (
+                          <motion.div
+                            key={i}
+                            className="w-1 bg-primary rounded-full"
+                            initial={{ height: 0 }}
+                            animate={{ height: 8 + Math.random() * 16 }}
+                            transition={{ delay: i * 0.05, duration: 0.3 }}
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-        {/* Content Area */}
-        <div className="flex-1 pt-[140px] pb-[100px] px-6 flex items-center justify-center">
-          <div className="w-full max-w-md">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <GlassCard className="p-8">
-                  {renderStep()}
-                </GlassCard>
-              </motion.div>
-            </AnimatePresence>
+                {/* Right Side - Options */}
+                <div className="p-8 md:p-12 flex flex-col justify-center bg-white/50">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={step}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {/* Step Indicator */}
+                      <div className="mb-6">
+                        <p className="text-lg font-medium text-foreground">
+                          Step {step + 1} — {totalSteps}
+                        </p>
+                        <p className="text-sm text-muted-foreground mt-1">
+                          {currentStep.subtitle}
+                        </p>
+                      </div>
 
-            {/* Step Indicators */}
-            <div className="flex justify-center gap-2 mt-6">
-              {Array.from({ length: totalSteps }).map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-1.5 rounded-full transition-all ${
-                    idx === step ? "bg-primary w-8" : idx < step ? "bg-primary/50 w-1.5" : "bg-muted w-1.5"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+                      {/* Options/Inputs */}
+                      <div className="max-h-[300px] overflow-y-auto pr-2">
+                        {renderRightContent()}
+                      </div>
 
-        {/* Fixed Button Section */}
-        <div className="fixed bottom-0 left-0 right-0 z-40 px-6 py-5">
-          <div className="max-w-md mx-auto">
-            <Button onClick={handleNext} disabled={!isStepValid()} fullWidth>
-              {step === totalSteps - 1 ? "Continue" : "Next"}
-            </Button>
+                      {/* Cancel Button */}
+                      <button
+                        onClick={handleBack}
+                        className="mt-6 text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
+                      >
+                        {step > 0 ? "BACK" : "CANCEL"}
+                        <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                          <ChevronRight className="w-4 h-4 text-primary-foreground rotate-180" />
+                        </div>
+                      </button>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+            </GlassCard>
           </div>
         </div>
       </div>
