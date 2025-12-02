@@ -14,7 +14,7 @@ export function FunnelVisualization({
 }: FunnelVisualizationProps) {
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <svg viewBox="0 0 260 180" className="w-full h-full">
+      <svg viewBox="-40 40 280 160" className="w-full h-full max-w-md">
         <defs>
           {/* Gradients for each segment */}
           <linearGradient
