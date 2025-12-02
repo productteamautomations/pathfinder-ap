@@ -11,50 +11,58 @@ export function FunnelVisualization({
   conversionScore,
   leadScore,
 }: FunnelVisualizationProps) {
-  const total = trafficScore + conversionScore + leadScore;
-  
   const stages = [
-    { label: "Traffic", score: trafficScore, color: "#3b82f6", percent: (trafficScore / total) * 100 },
-    { label: "Conversion", score: conversionScore, color: "#E3664F", percent: (conversionScore / total) * 100 },
-    { label: "Leads", score: leadScore, color: "#eab308", percent: (leadScore / total) * 100 },
+    { label: "Traffic", score: trafficScore, color: "#6366f1" },
+    { label: "Conversion", score: conversionScore, color: "#E3664F" },
+    { label: "Leads", score: leadScore, color: "#eab308" },
   ];
 
+  const total = stages.reduce((sum, s) => sum + s.score, 0);
+
   return (
-    <div className="w-full space-y-4">
-      {/* Labels row */}
-      <div className="flex justify-between text-sm">
-        {stages.map((stage) => (
-          <div key={stage.label} className="text-center">
-            <p className="text-muted-foreground text-xs">{stage.label}</p>
-            <p className="font-semibold" style={{ color: stage.color }}>{stage.score}%</p>
+    <div className="w-full space-y-3">
+      {/* Labels above bar */}
+      <div className="flex">
+        {stages.map((stage, index) => (
+          <div
+            key={stage.label}
+            className="text-center"
+            style={{ width: `${(stage.score / total) * 100}%` }}
+          >
+            <p className="text-xs font-medium" style={{ color: stage.color }}>
+              {stage.label}
+            </p>
+            <p className="text-sm font-bold" style={{ color: stage.color }}>
+              {stage.score}%
+            </p>
           </div>
         ))}
       </div>
-      
+
       {/* Stacked bar */}
-      <div className="h-3 bg-muted/30 rounded-full overflow-hidden flex">
+      <div className="h-4 rounded-full overflow-hidden flex shadow-sm">
         {stages.map((stage, index) => (
           <motion.div
             key={stage.label}
-            className="h-full first:rounded-l-full last:rounded-r-full"
+            className="h-full"
             style={{ backgroundColor: stage.color }}
             initial={{ width: 0 }}
-            animate={{ width: `${stage.percent}%` }}
-            transition={{ 
-              duration: 0.6, 
-              delay: index * 0.1, 
-              ease: "easeOut" 
+            animate={{ width: `${(stage.score / total) * 100}%` }}
+            transition={{
+              duration: 0.6,
+              delay: index * 0.15,
+              ease: "easeOut",
             }}
           />
         ))}
       </div>
-      
-      {/* Legend dots */}
-      <div className="flex justify-center gap-6 pt-2">
+
+      {/* Legend */}
+      <div className="flex justify-center gap-5 pt-1">
         {stages.map((stage) => (
           <div key={stage.label} className="flex items-center gap-1.5">
-            <div 
-              className="w-2 h-2 rounded-full" 
+            <div
+              className="w-2 h-2 rounded-full"
               style={{ backgroundColor: stage.color }}
             />
             <span className="text-xs text-muted-foreground">{stage.label}</span>
