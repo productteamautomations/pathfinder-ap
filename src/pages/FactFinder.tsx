@@ -244,7 +244,7 @@ export default function FactFinder() {
             <GlassCard className="p-0 overflow-hidden rounded-3xl h-full">
               <div className="grid md:grid-cols-2 h-full">
                 {/* Left Side - Question */}
-                <div className="bg-white p-10 md:p-16 flex flex-col justify-center rounded-l-3xl">
+                <div className="bg-white p-10 md:p-16 flex items-center justify-center rounded-l-3xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -252,6 +252,7 @@ export default function FactFinder() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
+                      className="w-full"
                     >
                       <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight">
                         {currentStep.question}
@@ -274,7 +275,7 @@ export default function FactFinder() {
                 </div>
 
                 {/* Right Side - Options */}
-                <div className="p-10 md:p-16 flex flex-col justify-center bg-white/50 rounded-r-3xl">
+                <div className="p-10 md:p-16 flex items-center justify-center bg-white/50 rounded-r-3xl">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={step}
@@ -282,6 +283,7 @@ export default function FactFinder() {
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
                       transition={{ duration: 0.3 }}
+                      className="w-full"
                     >
                       {/* Step Indicator */}
                       <div className="mb-8">
