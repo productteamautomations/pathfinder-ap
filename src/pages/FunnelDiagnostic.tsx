@@ -203,7 +203,7 @@ export default function FunnelDiagnostic() {
                       </div>
 
                       {/* Options */}
-                      <div className="space-y-3 max-h-[350px] overflow-y-auto pr-2">
+                      <div className="space-y-3">
                         {question.options.map((option, index) => (
                           <motion.button
                             key={option}
