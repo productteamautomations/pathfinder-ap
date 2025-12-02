@@ -216,6 +216,28 @@ export function FunnelVisualization({
             {leadScore}%
           </text>
         </motion.g>
+
+        {/* Legend/Key */}
+        <motion.g
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 0.5 }}
+        >
+          {/* Traffic */}
+          <rect x="-35" y="70" width="12" height="12" fill="#0a24e3" rx="2" />
+          <line x1="-18" y1="76" x2="-10" y2="76" stroke="#173340" strokeWidth="1.5" />
+          <text x="-5" y="80" fill="#173340" fontSize="10" fontWeight="500">Traffic</text>
+
+          {/* Conversions */}
+          <rect x="-35" y="90" width="12" height="12" fill="#e3664f" rx="2" />
+          <line x1="-18" y1="96" x2="-10" y2="96" stroke="#173340" strokeWidth="1.5" />
+          <text x="-5" y="100" fill="#173340" fontSize="10" fontWeight="500">Conversions</text>
+
+          {/* Lead Management */}
+          <rect x="-35" y="110" width="12" height="12" fill="#ffcd63" rx="2" />
+          <line x1="-18" y1="116" x2="-10" y2="116" stroke="#173340" strokeWidth="1.5" />
+          <text x="-5" y="120" fill="#173340" fontSize="10" fontWeight="500">Lead Management</text>
+        </motion.g>
       </svg>
     </div>
   )
