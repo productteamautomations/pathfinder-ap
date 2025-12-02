@@ -50,9 +50,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
       update() {
         for (let i = 0; i < this.points.length; i++) {
           const point = this.points[i];
-          const wave =
-            Math.sin(point.x * waveFrequency + timeRef.current + this.index * 0.25) *
-            waveAmplitude;
+          const wave = Math.sin(point.x * waveFrequency + timeRef.current + this.index * 0.25) * waveAmplitude;
           point.y = point.baseY + wave;
         }
       }
