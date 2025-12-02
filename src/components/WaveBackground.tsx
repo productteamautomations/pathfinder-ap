@@ -95,7 +95,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
         const last = this.points[this.points.length - 1];
         ctx.lineTo(last.x + 50, last.y);
         ctx.strokeStyle = "rgba(227, 102, 79, 0.6)";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         ctx.lineCap = "round";
         ctx.lineJoin = "round";
         ctx.stroke();
@@ -114,7 +114,7 @@ export function WaveBackground({ className = "" }: WaveBackgroundProps) {
         l.update();
         l.draw(ctx, idx === numLines - 1);
       });
-      timeRef.current += 0.004;
+      timeRef.current += 0.008;
       animationRef.current = requestAnimationFrame(animate);
     }
     animate();
