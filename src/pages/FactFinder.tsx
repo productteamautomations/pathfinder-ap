@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { GlassCard } from "@/components/GlassCard";
-import { WaveBackground } from "@/components/WaveBackground";
+import { TopographicBackground } from "@/components/TopographicBackground";
 import { ChevronRight } from "lucide-react";
 
 const generationOptions = [
@@ -228,7 +228,7 @@ export default function FactFinder() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <WaveBackground />
+      <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <PageHeader
