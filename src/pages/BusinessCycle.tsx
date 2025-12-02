@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { TopographicBackground } from "@/components/TopographicBackground";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Orange accent motif component
@@ -159,10 +158,7 @@ export default function BusinessCycle() {
   const totalSlides = slides.length;
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background">
-      <TopographicBackground />
-
-      <div className="relative z-10 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
           currentStep={7}
@@ -306,7 +302,6 @@ export default function BusinessCycle() {
             </motion.div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

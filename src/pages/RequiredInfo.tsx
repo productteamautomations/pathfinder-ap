@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
-import { TopographicBackground } from "@/components/TopographicBackground";
 import { Eye, EyeOff, ChevronRight } from "lucide-react";
 
 // Orange accent motif component
@@ -55,10 +54,7 @@ export default function RequiredInfo() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background">
-      <TopographicBackground />
-
-      <div className="relative z-10 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
           currentStep={11}
@@ -207,7 +203,6 @@ export default function RequiredInfo() {
             </motion.div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
