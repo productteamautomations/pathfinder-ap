@@ -12,51 +12,64 @@ export function FunnelVisualization({
   leadScore,
 }: FunnelVisualizationProps) {
   const stages = [
-    { label: "Traffic", score: trafficScore, color: "#6366f1", width: 100 },
-    { label: "Conversion", score: conversionScore, color: "#E3664F", width: 70 },
-    { label: "Leads", score: leadScore, color: "#eab308", width: 45 },
+    { label: "Traffic", score: trafficScore, color: "#6366f1" },
+    { label: "Conversion", score: conversionScore, color: "#E3664F" },
+    { label: "Leads", score: leadScore, color: "#eab308" },
   ];
 
   return (
-    <div className="w-full flex flex-col items-center gap-1">
-      {stages.map((stage, index) => (
-        <motion.div
-          key={stage.label}
-          className="relative flex items-center justify-center"
-          style={{ width: `${stage.width}%` }}
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{
-            duration: 0.5,
-            delay: index * 0.15,
-            ease: "easeOut",
-          }}
-        >
-          {/* Funnel segment */}
-          <div
-            className="w-full h-10 flex items-center justify-center relative overflow-hidden"
-            style={{
-              backgroundColor: stage.color,
-              clipPath: index === stages.length - 1 
-                ? "polygon(5% 0%, 95% 0%, 85% 100%, 15% 100%)"
-                : "polygon(0% 0%, 100% 0%, 95% 100%, 5% 100%)",
-            }}
-          >
-            <span className="text-white text-sm font-semibold z-10 drop-shadow-sm">
-              {stage.label}
-            </span>
-            {/* Score badge */}
-            <motion.span
-              className="absolute right-4 text-white/90 text-xs font-bold"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 + index * 0.15 }}
-            >
-              {stage.score}%
-            </motion.span>
-          </div>
-        </motion.div>
-      ))}
+    <div className="w-full max-w-xs mx-auto">
+      <svg viewBox="0 0 200 140" className="w-full h-auto">
+        {stages.map((stage, index) => {
+          const topWidth = 180 - index * 40;
+          const bottomWidth = 140 - index * 40;
+          const yOffset = index * 42;
+          const topX = (200 - topWidth) / 2;
+          const bottomX = (200 - bottomWidth) / 2;
+          
+          return (
+            <g key={stage.label}>
+              <motion.path
+                d={`M ${topX} ${yOffset} 
+                    L ${topX + topWidth} ${yOffset} 
+                    L ${bottomX + bottomWidth} ${yOffset + 38} 
+                    L ${bottomX} ${yOffset + 38} Z`}
+                fill={stage.color}
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={{ opacity: 1, scaleY: 1 }}
+                transition={{ duration: 0.4, delay: index * 0.12 }}
+                style={{ transformOrigin: "center top" }}
+              />
+              <motion.text
+                x="100"
+                y={yOffset + 22}
+                textAnchor="middle"
+                fill="white"
+                fontSize="11"
+                fontWeight="600"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 + index * 0.12 }}
+              >
+                {stage.label}
+              </motion.text>
+              <motion.text
+                x="100"
+                y={yOffset + 34}
+                textAnchor="middle"
+                fill="white"
+                fontSize="10"
+                opacity={0.9}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }}
+                transition={{ delay: 0.4 + index * 0.12 }}
+              >
+                {stage.score}%
+              </motion.text>
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
