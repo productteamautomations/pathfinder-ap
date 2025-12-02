@@ -12,9 +12,35 @@ export function FunnelVisualization({
   conversionScore,
   leadScore,
 }: FunnelVisualizationProps) {
+  const legendItems = [
+    { color: '#0a24e3', label: 'Traffic' },
+    { color: '#e3664f', label: 'Conversions' },
+    { color: '#ffcd63', label: 'Lead Management' },
+  ]
+
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
-      <svg viewBox="-60 40 320 160" className="w-full h-full max-w-md">
+    <div className="relative w-full h-full flex items-center justify-center gap-8">
+      {/* Legend/Key - separate element */}
+      <motion.div
+        className="flex flex-col gap-3"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.8, duration: 0.5 }}
+      >
+        {legendItems.map((item) => (
+          <div key={item.label} className="flex items-center gap-2">
+            <div
+              className="w-3 h-3 rounded-sm"
+              style={{ backgroundColor: item.color }}
+            />
+            <span className="text-[#173340] text-xs">—</span>
+            <span className="text-[#173340] text-xs font-medium">{item.label}</span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Funnel SVG */}
+      <svg viewBox="0 40 260 160" className="w-full h-full max-w-xs">
         <defs>
           {/* Gradients for each segment */}
           <linearGradient
@@ -215,28 +241,6 @@ export function FunnelVisualization({
           >
             {leadScore}%
           </text>
-        </motion.g>
-
-        {/* Legend/Key */}
-        <motion.g
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 0.5 }}
-        >
-          {/* Traffic */}
-          <rect x="-55" y="70" width="12" height="12" fill="#0a24e3" rx="2" />
-          <line x1="-38" y1="76" x2="-30" y2="76" stroke="#173340" strokeWidth="1.5" />
-          <text x="-25" y="80" fill="#173340" fontSize="10" fontWeight="500">Traffic</text>
-
-          {/* Conversions */}
-          <rect x="-55" y="90" width="12" height="12" fill="#e3664f" rx="2" />
-          <line x1="-38" y1="96" x2="-30" y2="96" stroke="#173340" strokeWidth="1.5" />
-          <text x="-25" y="100" fill="#173340" fontSize="10" fontWeight="500">Conversions</text>
-
-          {/* Lead Management */}
-          <rect x="-55" y="110" width="12" height="12" fill="#ffcd63" rx="2" />
-          <line x1="-38" y1="116" x2="-30" y2="116" stroke="#173340" strokeWidth="1.5" />
-          <text x="-25" y="120" fill="#173340" fontSize="10" fontWeight="500">Lead Management</text>
         </motion.g>
       </svg>
     </div>
