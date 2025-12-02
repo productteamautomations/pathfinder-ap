@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { TopographicBackground } from "@/components/TopographicBackground";
 
 const generationOptions = [
   "None",
@@ -111,10 +110,7 @@ export default function FactFinder() {
     "w-full px-4 py-3.5 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background">
-      <TopographicBackground />
-
-      <div className="relative z-10 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
           currentStep={2}
@@ -274,7 +270,6 @@ export default function FactFinder() {
             </motion.div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

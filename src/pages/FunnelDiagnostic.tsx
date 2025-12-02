@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
-import { TopographicBackground } from "@/components/TopographicBackground";
 import { ChevronRight } from "lucide-react";
 
 // Orange accent motif component
@@ -133,10 +132,7 @@ export default function FunnelDiagnostic() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background">
-      <TopographicBackground />
-
-      <div className="relative z-10 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={handleBack}
           currentStep={4}
@@ -240,7 +236,6 @@ export default function FunnelDiagnostic() {
             </motion.div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

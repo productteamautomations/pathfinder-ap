@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { TopographicBackground } from "@/components/TopographicBackground";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
 import { ArrowRight } from "lucide-react";
 
@@ -122,10 +121,7 @@ export default function FunnelHealth() {
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-background">
-      <TopographicBackground />
-
-      <div className="relative z-10 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
           currentStep={5}
@@ -220,7 +216,6 @@ export default function FunnelHealth() {
             </motion.div>
           </div>
         </div>
-      </div>
     </div>
   );
 }
