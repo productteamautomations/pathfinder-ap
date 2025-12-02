@@ -112,7 +112,7 @@ export default function FactFinder() {
     if (step < totalSteps - 1) {
       setStep(step + 1);
     } else {
-      navigate("/business-details", {
+      navigate("/funnel-diagnostic", {
         state: {
           ...location.state,
           tradingDate,
