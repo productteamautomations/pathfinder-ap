@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
+import { GlassCard } from "@/components/GlassCard";
+import { WaveBackground } from "@/components/WaveBackground";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -52,8 +53,6 @@ const slides = [
       { label: "78% of sales", description: "Go to first responder" },
       { label: "Waiting 30 minutes", description: "100× less likely to connect" },
       { label: "Slow responses", description: "Cost UK businesses £20k–£22k monthly" },
-      { label: "75% of businesses", description: "Never call leads back" },
-      { label: "Missed leads", description: "Rarely return" },
     ],
   },
   {
@@ -61,22 +60,11 @@ const slides = [
     timeline: [
       {
         phase: "Welcome Call",
-        points: [
-          "First meeting with onboarding team",
-          "Understand goals",
-          "Implement tracking needs",
-          "Website audit & content plan",
-          "Q&A opportunity",
-        ],
+        points: ["First meeting with onboarding team", "Understand goals", "Implement tracking needs", "Website audit & content plan"],
       },
       {
         phase: "Launch Call",
-        points: [
-          "Launch newly built campaigns",
-          "Final changes",
-          "Track test in real time",
-          "Agree next steps",
-        ],
+        points: ["Launch newly built campaigns", "Final changes", "Track test in real time", "Agree next steps"],
       },
     ],
   },
@@ -87,7 +75,7 @@ const slides = [
       { label: "Monthly performance reporting", description: "" },
       { label: "Advanced AI call tracking", description: "" },
       { label: "In-depth onboarding", description: "" },
-      { label: "Full SEO service", description: "Optimisation, content creation, directory submissions, GBP updates" },
+      { label: "Full SEO service", description: "Optimisation, content creation, directory submissions" },
     ],
   },
   {
@@ -96,7 +84,6 @@ const slides = [
       { label: "Strategic onboarding call", description: "" },
       { label: "Installation of all tracking tools", description: "" },
       { label: "Local SEO tracking setup", description: "" },
-      { label: "Say Hello setup", description: "" },
       { label: "Website audit + content plan", description: "" },
       { label: "Google Business Profile optimisation", description: "" },
       { label: "Campaign launch call", description: "" },
@@ -107,16 +94,10 @@ const slides = [
     content: [
       { label: "Dedicated account manager", description: "" },
       { label: "Monthly on-page optimisation", description: "" },
-      { label: "Keyword + competitor research", description: "" },
       { label: "2+ SEO content pages monthly", description: "" },
       { label: "Local SEO dashboard access", description: "" },
-      { label: "Monthly directory submissions", description: "" },
-      { label: "Monthly GBP updates", description: "" },
       { label: "Monthly review calls", description: "" },
       { label: "Quarterly strategy call", description: "" },
-      { label: "Call & form reporting", description: "" },
-      { label: "Keyword traffic reporting", description: "With Google Ads" },
-      { label: "Enhanced call attribution dashboard", description: "" },
     ],
   },
 ];
@@ -144,113 +125,103 @@ export default function BusinessCycle() {
   const isLastSlide = currentSlide === slides.length - 1;
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={7}
-        totalSteps={11}
-        showProgress
-      />
+    <div className="min-h-screen relative overflow-hidden">
+      <WaveBackground />
 
-      {/* Content Area */}
-      <div className="flex-1 pt-[73px] px-6 overflow-y-auto flex items-center justify-center">
-        <div className="w-full max-w-4xl py-12">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <Card className="p-8">
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h1 className="text-4xl font-bold text-foreground">{slide.title}</h1>
-                    <span className="text-sm text-muted-foreground">
-                      {currentSlide + 1} / {slides.length}
-                    </span>
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <PageHeader
+          onBack={() => navigate(-1)}
+          currentStep={7}
+          totalSteps={11}
+          showProgress
+        />
+
+        {/* Content Area */}
+        <div className="flex-1 pt-[73px] px-6 flex items-center justify-center">
+          <div className="w-full max-w-3xl py-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentSlide}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4 }}
+              >
+                <GlassCard className="p-8">
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h1 className="text-3xl font-bold text-primary">{slide.title}</h1>
+                      <span className="text-sm text-muted-foreground">
+                        {currentSlide + 1} / {slides.length}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="min-h-[350px] mb-8">
-                  {slide.timeline ? (
-                    <div className="space-y-8">
-                      {slide.timeline.map((item, idx) => (
-                        <div key={idx}>
-                          <h3 className="text-xl font-bold text-primary mb-4">
-                            {item.phase}
-                          </h3>
-                          <ul className="space-y-2">
-                            {item.points.map((point, pidx) => (
-                              <li
-                                key={pidx}
-                                className="flex items-start gap-3 text-foreground"
-                              >
-                                <span className="text-primary mt-1">•</span>
-                                <span>{point}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                  <div className="min-h-[280px] mb-6">
+                    {slide.timeline ? (
+                      <div className="space-y-6">
+                        {slide.timeline.map((item, idx) => (
+                          <div key={idx}>
+                            <h3 className="text-lg font-bold text-primary mb-3">{item.phase}</h3>
+                            <ul className="space-y-2">
+                              {item.points.map((point, pidx) => (
+                                <li key={pidx} className="flex items-start gap-3 text-foreground text-sm">
+                                  <span className="text-primary mt-0.5">•</span>
+                                  <span>{point}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <ul className="space-y-2">
+                        {slide.content?.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 p-2 rounded-lg hover:bg-white/30 transition-colors">
+                            <span className="text-primary font-bold mt-0.5">•</span>
+                            <div className="flex-1">
+                              <span className="font-medium text-foreground text-sm">{item.label}</span>
+                              {item.description && (
+                                <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <Button
+                      onClick={prevSlide}
+                      disabled={currentSlide === 0}
+                      variant="outline"
+                      className="flex items-center gap-2"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Previous
+                    </Button>
+
+                    <div className="flex gap-1.5">
+                      {slides.map((_, idx) => (
+                        <div
+                          key={idx}
+                          className={`h-1.5 rounded-full transition-all ${
+                            idx === currentSlide ? "bg-primary w-6" : "bg-muted w-1.5"
+                          }`}
+                        />
                       ))}
                     </div>
-                  ) : (
-                    <ul className="space-y-3">
-                      {slide.content?.map((item, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/30 transition-colors"
-                        >
-                          <span className="text-primary font-bold mt-1">•</span>
-                          <div className="flex-1">
-                            <span className="font-semibold text-foreground">
-                              {item.label}
-                            </span>
-                            {item.description && (
-                              <p className="text-sm text-muted-foreground mt-1">
-                                {item.description}
-                              </p>
-                            )}
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
 
-                <div className="flex items-center justify-between">
-                  <Button
-                    onClick={prevSlide}
-                    disabled={currentSlide === 0}
-                    variant="outline"
-                    className="flex items-center gap-2"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
-                  </Button>
-
-                  <div className="flex gap-2">
-                    {slides.map((_, idx) => (
-                      <div
-                        key={idx}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          idx === currentSlide
-                            ? "bg-primary w-8"
-                            : "bg-muted"
-                        }`}
-                      />
-                    ))}
+                    <Button onClick={nextSlide} className="flex items-center gap-2">
+                      {isLastSlide ? "View Pricing" : "Next"}
+                      <ChevronRight className="w-4 h-4" />
+                    </Button>
                   </div>
-
-                  <Button onClick={nextSlide} className="flex items-center gap-2">
-                    {isLastSlide ? "View Pricing" : "Next"}
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
-              </Card>
-            </motion.div>
-          </AnimatePresence>
+                </GlassCard>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>
