@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { GlassCard } from "@/components/GlassCard";
-import { WaveBackground } from "@/components/WaveBackground";
+import { TopographicBackground } from "@/components/TopographicBackground";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
@@ -126,7 +126,7 @@ export default function BusinessCycle() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <WaveBackground />
+      <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <PageHeader

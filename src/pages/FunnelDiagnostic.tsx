@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { GlassCard } from "@/components/GlassCard";
-import { WaveBackground } from "@/components/WaveBackground";
+import { TopographicBackground } from "@/components/TopographicBackground";
 
 interface Question {
   id: string;
@@ -108,7 +108,7 @@ export default function FunnelDiagnostic() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <WaveBackground />
+      <TopographicBackground />
 
       <div className="relative z-10 min-h-screen flex flex-col">
         <PageHeader
