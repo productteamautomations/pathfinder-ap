@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
-import { TrendingUp, TrendingDown, Minus, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -28,67 +28,6 @@ function OrangeAccent() {
         transition={{ delay: 0.4, duration: 0.4 }}
       />
     </div>
-  );
-}
-
-// Score card component
-function ScoreCard({ 
-  label, 
-  score, 
-  delay = 0 
-}: { 
-  label: string; 
-  score: number; 
-  delay?: number;
-}) {
-  const getHealthColor = (score: number) => {
-    if (score >= 70) return "text-green-600";
-    if (score >= 40) return "text-accent-yellow";
-    return "text-secondary";
-  };
-
-  const getTrendIcon = (score: number) => {
-    if (score >= 70) return <TrendingUp className="w-4 h-4 text-green-600" />;
-    if (score >= 40) return <Minus className="w-4 h-4 text-accent-yellow" />;
-    return <TrendingDown className="w-4 h-4 text-secondary" />;
-  };
-
-  const getStatusLabel = (score: number) => {
-    if (score >= 70) return "Strong";
-    if (score >= 40) return "Moderate";
-    return "Weak";
-  };
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.4 }}
-      className="relative p-5 bg-white rounded-2xl border border-border/30 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300"
-    >
-      <div className="flex items-start justify-between mb-3">
-        <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
-          {label}
-        </span>
-        {getTrendIcon(score)}
-      </div>
-      <div className={`text-4xl font-bold ${getHealthColor(score)} mb-1`}>
-        {score}%
-      </div>
-      <div className="flex items-center gap-2">
-        <div className="flex-1 h-1.5 bg-muted/50 rounded-full overflow-hidden">
-          <motion.div
-            className={`h-full rounded-full ${score >= 70 ? 'bg-green-500' : score >= 40 ? 'bg-accent-yellow' : 'bg-secondary'}`}
-            initial={{ width: 0 }}
-            animate={{ width: `${score}%` }}
-            transition={{ delay: delay + 0.3, duration: 0.6, ease: "easeOut" }}
-          />
-        </div>
-        <span className={`text-xs font-medium ${getHealthColor(score)}`}>
-          {getStatusLabel(score)}
-        </span>
-      </div>
-    </motion.div>
   );
 }
 
@@ -222,12 +161,10 @@ export default function FunnelHealth() {
                     {/* Orange Accent Motif */}
                     <OrangeAccent />
 
-                    {/* Score Cards */}
-                    <div className="grid gap-4 mt-8">
-                      <ScoreCard label="Traffic" score={trafficScore} delay={0.2} />
-                      <ScoreCard label="Conversion" score={conversionScore} delay={0.3} />
-                      <ScoreCard label="Leads" score={leadScore} delay={0.4} />
-                    </div>
+                    {/* Summary text */}
+                    <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
+                      We've analyzed your funnel performance across three key areas to identify opportunities for growth.
+                    </p>
                   </motion.div>
                 </div>
 
