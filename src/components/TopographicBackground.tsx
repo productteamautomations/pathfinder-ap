@@ -4,6 +4,7 @@ export function TopographicBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
   const timeRef = useRef(0);
+  const mouseRef = useRef({ x: -1000, y: -1000, targetX: -1000, targetY: -1000 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -14,12 +15,41 @@ export function TopographicBackground() {
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Noise function for organic shapes
+    // Mouse interaction handlers
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.targetX = e.clientX;
+      mouseRef.current.targetY = e.clientY;
+    };
+
+    const handleMouseLeave = () => {
+      mouseRef.current.targetX = -1000;
+      mouseRef.current.targetY = -1000;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseleave", handleMouseLeave);
+
+    // Noise function for organic shapes with mouse distortion
     const noise = (x: number, y: number, t: number) => {
       const scale = 0.003;
       let value = 0;
       let amplitude = 1;
       let frequency = 1;
+
+      // Smooth mouse position interpolation
+      const mouse = mouseRef.current;
+      mouse.x += (mouse.targetX - mouse.x) * 0.08;
+      mouse.y += (mouse.targetY - mouse.y) * 0.08;
+
+      // Calculate distance from mouse
+      const dx = x - mouse.x;
+      const dy = y - mouse.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxRadius = 200;
+      const influence = Math.max(0, 1 - distance / maxRadius);
+
+      // Mouse distortion effect
+      const distortion = influence * Math.sin(distance * 0.02 - t * 3) * 0.5;
 
       for (let i = 0; i < 4; i++) {
         value +=
@@ -30,7 +60,8 @@ export function TopographicBackground() {
         amplitude *= 0.5;
         frequency *= 2;
       }
-      return value;
+      
+      return value + distortion;
     };
 
     function drawContours() {
@@ -149,6 +180,8 @@ export function TopographicBackground() {
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
