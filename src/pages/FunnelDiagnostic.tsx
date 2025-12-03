@@ -47,7 +47,7 @@ const questions: Question[] = [
     id: "trackingConversions",
     section: "Traffic",
     question: "Are you tracking key conversions?",
-    options: ["Both", "Form fills", "Calls", "None"],
+    options: ["Form Fills", "Calls", "Both", "None"],
   },
   {
     id: "avgCPC",
@@ -70,7 +70,7 @@ const questions: Question[] = [
   {
     id: "ctaVisibility",
     section: "Conversion",
-    question: "Is your CTA visible on all devices?",
+    question: "Is your primary CTA visible without scrolling?",
     options: ["Yes – both mobile & desktop", "Yes – desktop only", "Yes – mobile only", "No"],
   },
   {
@@ -82,8 +82,8 @@ const questions: Question[] = [
   {
     id: "leadManagementSystem",
     section: "Lead Management",
-    question: "How do you manage your leads?",
-    options: ["Dedicated admin/assistant", "Answer every call", "Organised chaos"],
+    question: "Which best describes your current lead management system?",
+    options: ["Self dedicated admin time", "Assistant (Human/Virtual)", "Answer Every Call", "Organised Chaos"],
   },
   {
     id: "responseTime",
