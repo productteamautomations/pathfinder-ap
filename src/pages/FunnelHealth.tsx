@@ -165,7 +165,7 @@ export default function FunnelHealth() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={() => navigate(-1)} currentStep={5} totalSteps={11} showProgress />
+      <PageHeader onBack={() => navigate("/funnel-diagnostic", { state: location.state })} currentStep={4} totalSteps={7} showProgress />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
