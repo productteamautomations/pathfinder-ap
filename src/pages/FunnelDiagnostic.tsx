@@ -4,10 +4,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { ChevronRight } from "lucide-react";
 
+// Import question images
+import imgCTR from "@/assets/Average_CTR.png";
+import imgConversions from "@/assets/Are_you_Tracking_key_conversions.png";
+import imgCPC from "@/assets/Average_CPC.png";
+import imgCPA from "@/assets/Average_Cost_per_acquisition.png";
+import imgConversionRate from "@/assets/Average_webste_conversion_rate.png";
+import imgCTA from "@/assets/Primary_call_to_action_visibility.png";
+import imgServicePages from "@/assets/Dedicated_service_page.png";
+import imgLeadManagement from "@/assets/Lead_managemnt_system.png";
+import imgResponseTime from "@/assets/average_response_time.png";
+
 // Orange accent motif component
 function OrangeAccent() {
   return (
-    <div className="flex items-center gap-2 mt-8">
+    <div className="flex items-center gap-2 mt-4">
       <div className="flex gap-1.5">
         {[...Array(4)].map((_, i) => (
           <motion.div
@@ -34,6 +45,7 @@ interface Question {
   section: string;
   question: string;
   options: string[];
+  image: string;
 }
 
 const questions: Question[] = [
@@ -42,54 +54,63 @@ const questions: Question[] = [
     section: "Traffic",
     question: "What's your average CTR over the last 30 days?",
     options: ["≥5%", "3–5%", "<2%", "Unsure"],
+    image: imgCTR,
   },
   {
     id: "trackingConversions",
     section: "Traffic",
     question: "Are you tracking key conversions?",
     options: ["Form Fills", "Calls", "Both", "None"],
+    image: imgConversions,
   },
   {
     id: "avgCPC",
     section: "Traffic",
     question: "What's your average CPC?",
     options: ["<£0.50", "£0.50–£3.00", "≥£3.00", "Unsure"],
+    image: imgCPC,
   },
   {
     id: "costPerAcquisition",
     section: "Conversion",
     question: "What's your average cost-per-acquisition?",
     options: ["<£10", "£10–£50", "≥£50", "Unsure"],
+    image: imgCPA,
   },
   {
     id: "conversionRate",
     section: "Conversion",
     question: "What's your website conversion rate?",
     options: ["≥5%", "2–5%", "1–2%", "<1%"],
+    image: imgConversionRate,
   },
   {
     id: "ctaVisibility",
     section: "Conversion",
     question: "Is your primary CTA visible without scrolling?",
     options: ["Yes – both mobile & desktop", "Yes – desktop only", "Yes – mobile only", "No"],
+    image: imgCTA,
   },
   {
     id: "servicePages",
     section: "Conversion",
     question: "Do you have dedicated service pages?",
     options: ["Yes – all services", "Yes – some", "No"],
+    image: imgServicePages,
   },
   {
     id: "leadManagementSystem",
     section: "Lead Management",
     question: "Which best describes your current lead management system?",
     options: ["Self dedicated admin time", "Assistant (Human/Virtual)", "Answer Every Call", "Organised Chaos"],
+    image: imgLeadManagement,
   },
   {
     id: "responseTime",
     section: "Lead Management",
     question: "What's your average response time?",
     options: ["Same hour", "Same day", "Same week", "When I get a chance"],
+    image: imgResponseTime,
   },
 ];
 
@@ -151,8 +172,8 @@ export default function FunnelDiagnostic() {
               className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
-                {/* Left Side - Question Area */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                {/* Left Side - Question Area with Image */}
+                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
@@ -160,22 +181,37 @@ export default function FunnelDiagnostic() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
+                      className="flex flex-col"
                     >
-                      <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                      <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
                         {question.section}
                       </span>
-                      <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                         {question.question}
                       </h2>
                       
                       {/* Orange Accent Motif */}
                       <OrangeAccent />
+
+                      {/* Question Image */}
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.4 }}
+                        className="mt-6 flex justify-center"
+                      >
+                        <img 
+                          src={question.image} 
+                          alt={question.question}
+                          className="max-h-[200px] md:max-h-[250px] w-auto object-contain rounded-xl"
+                        />
+                      </motion.div>
                     </motion.div>
                   </AnimatePresence>
                 </div>
 
                 {/* Right Side - Options Area */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
@@ -186,7 +222,7 @@ export default function FunnelDiagnostic() {
                       className="w-full"
                     >
                       {/* Step Indicator */}
-                      <div className="mb-10">
+                      <div className="mb-8">
                         <div className="flex items-center gap-3">
                           <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
                           <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
@@ -222,7 +258,7 @@ export default function FunnelDiagnostic() {
                       {/* Back Button */}
                       <button
                         onClick={handleBack}
-                        className="mt-10 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                        className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                       >
                         <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                           <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
