@@ -109,9 +109,9 @@ export default function FactFinder() {
   return (
     <div className="min-h-screen flex flex-col">
         <PageHeader
-          onBack={() => navigate(-1)}
-          currentStep={2}
-          totalSteps={10}
+          onBack={() => navigate("/")}
+          currentStep={1}
+          totalSteps={7}
           showProgress
         />
 
@@ -132,7 +132,7 @@ export default function FactFinder() {
                   animate={{ opacity: 1, x: 0 }}
                   className="inline-block text-xs font-semibold tracking-widest text-primary uppercase mb-3"
                 >
-                  Step 2 of 10
+                  Step 1 of 7
                 </motion.span>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                   Business Information

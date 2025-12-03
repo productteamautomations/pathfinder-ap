@@ -83,9 +83,9 @@ export default function ProductRecommendationLSA() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={6}
-        totalSteps={9}
+        onBack={() => navigate("/funnel-health", { state: location.state })}
+        currentStep={4}
+        totalSteps={6}
         showProgress
       />
 
