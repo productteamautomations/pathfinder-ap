@@ -82,12 +82,7 @@ export default function ProductRecommendationLocalSEO() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={6}
-        totalSteps={11}
-        showProgress
-      />
+      <PageHeader onBack={() => navigate(-1)} currentStep={6} totalSteps={11} showProgress />
 
       <div className="flex-1 pt-[73px] flex flex-col">
         <motion.div
@@ -114,12 +109,11 @@ export default function ProductRecommendationLocalSEO() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Stay ahead of competitors in local search rankings
+                  Stay Ahead Of Competitors In Local Search Rankings
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Get found by customers in your area when they search for services like yours. 
-                  With Local SEO, you'll appear in Google Maps and local search results right when 
-                  potential customers need you most.
+                  Get found by customers in your area when they search for services like yours. With Local SEO, you'll
+                  appear in Google Maps and local search results right when potential customers need you most.
                 </p>
 
                 <div className="space-y-4 mb-10">
