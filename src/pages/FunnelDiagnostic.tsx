@@ -173,7 +173,7 @@ export default function FunnelDiagnostic() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Question & Options */}
-                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30">
+                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
