@@ -47,7 +47,7 @@ export default function PricingLeadGen() {
     "Google Ads campaign management",
     "Responsive Search Ad creation",
     "Enhanced call tracking",
-    "Say Hello CRM access",
+    "Say Hello access",
     "Monthly performance reporting",
   ];
 

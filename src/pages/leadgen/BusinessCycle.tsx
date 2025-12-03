@@ -47,8 +47,8 @@ const slides = [
     content: [
       { label: "Be Relevant", description: "Match your ad to search intent" },
       { label: "Be Clear", description: "Communicate your value instantly" },
-      { label: "Be Tempting", description: "Give them a reason to click now" },
-      { label: "Example", description: "\"Loft Conversions in Altrincham – Free Quote Today\" beats \"Professional Loft Conversions\"" },
+      { label: "Be Tempting", description: "Give them a reason to click" },
+      { label: "Example", description: "\"Loft Conversions in Altrincham – Free Quote Today\" Is more enticing than \"Professional Loft Conversions\"" },
     ],
   },
   {
@@ -59,7 +59,7 @@ const slides = [
       { label: "Track Conversions", description: "Know which ads generate enquiries" },
       { label: "Measure ROI", description: "Understand your cost per lead" },
       { label: "Optimise Campaigns", description: "Use real data, not guesswork" },
-      { label: "CRM Integration", description: "Manage customers easily with Say Hello" },
+      { label: "Say Hello", description: "Keep leads warm when a call is missed" },
     ],
   },
   {
@@ -79,9 +79,9 @@ const slides = [
     content: [
       { label: "Strategic onboarding call", description: "Understand your goals and develop strategy" },
       { label: "Google Ads account setup", description: "New account or optimise existing" },
-      { label: "Search campaign creation", description: "Built from scratch or refined" },
+      { label: "Search campaign creation", description: "Built from scratch" },
       { label: "Responsive Search Ads", description: "Engaging ad copy that converts" },
-      { label: "Call tracking installation", description: "Enhanced attribution solution" },
+      { label: "Conversion tracking setup", description: "Enhanced attribution solution" },
       { label: "Say Hello setup", description: "CRM for managing leads" },
       { label: "Campaign launch call", description: "Final review and go live" },
     ],
@@ -91,7 +91,7 @@ const slides = [
     subtitle: "Continuous improvement",
     content: [
       { label: "Lead Generation Service team", description: "Dedicated support" },
-      { label: "Technical team support", description: "For any issues or optimisations" },
+      { label: "Technical team support", description: "Monthly Account optimisations and tracking checks" },
       { label: "Campaign monitoring", description: "Continuous oversight and refinement" },
       { label: "Call attribution dashboard", description: "Track performance data" },
       { label: "Monthly reporting", description: "Detailed campaign performance" },
