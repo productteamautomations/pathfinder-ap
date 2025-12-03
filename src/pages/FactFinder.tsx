@@ -66,7 +66,6 @@ export default function FactFinder() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [tradingDate, setTradingDate] = useState("");
   const [monthEstablished, setMonthEstablished] = useState("");
   const [yearEstablished, setYearEstablished] = useState("");
   const [businessGeneration, setBusinessGeneration] = useState<string[]>([]);
@@ -81,7 +80,6 @@ export default function FactFinder() {
 
   const isFormValid = () => {
     return (
-      tradingDate &&
       monthEstablished &&
       yearEstablished &&
       businessGeneration.length > 0 &&
@@ -95,7 +93,6 @@ export default function FactFinder() {
       navigate("/funnel-diagnostic", {
         state: {
           ...location.state,
-          tradingDate,
           monthEstablished,
           yearEstablished,
           businessGeneration,
@@ -154,18 +151,9 @@ export default function FactFinder() {
                     <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">1</span>
                     Timeline
                   </h3>
-                  <div className="grid md:grid-cols-2 gap-5 pl-8">
-                    <FormField label="When did you start trading?" required>
-                      <input
-                        type="date"
-                        value={tradingDate}
-                        onChange={(e) => setTradingDate(e.target.value)}
-                        className={inputStyles}
-                      />
-                    </FormField>
-
+                  <div className="pl-8">
                     <FormField label="Business established" required>
-                      <div className="grid grid-cols-2 gap-3">
+                      <div className="grid grid-cols-2 gap-3 max-w-xs">
                         <input
                           type="number"
                           min="1"
