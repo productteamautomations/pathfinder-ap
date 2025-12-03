@@ -109,18 +109,9 @@ export default function ProductRecommendationLeadGen() {
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border/30 mb-6"
-                >
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <span className="text-sm font-medium text-foreground">Lead Generation</span>
-                </motion.div>
 
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Sponsored Links in Google Search
+                  Stay Ahead of Competitors In Google Search Results
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
                   Get your business in front of customers actively searching for your services. 
