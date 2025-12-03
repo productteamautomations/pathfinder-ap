@@ -154,7 +154,7 @@ export default function FunnelDiagnostic() {
     if (currentQuestion > 0) {
       setCurrentQuestion((prev) => prev - 1);
     } else {
-      navigate(-1);
+      navigate("/fact-finder", { state: location.state });
     }
   };
 
@@ -162,8 +162,8 @@ export default function FunnelDiagnostic() {
     <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={handleBack}
-          currentStep={4}
-          totalSteps={11}
+          currentStep={2}
+          totalSteps={7}
           showProgress
         />
 

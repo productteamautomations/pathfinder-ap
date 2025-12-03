@@ -160,9 +160,9 @@ export default function BusinessCycleLocalSEO() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={7}
-        totalSteps={11}
+        onBack={() => navigate("/product-recommendation/localseo", { state: location.state })}
+        currentStep={5}
+        totalSteps={7}
         showProgress
       />
 

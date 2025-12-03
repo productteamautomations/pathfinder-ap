@@ -50,7 +50,7 @@ export default function PricingLocalSEO() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={() => navigate(-1)} currentStep={10} totalSteps={11} showProgress />
+      <PageHeader onBack={() => navigate("/business-cycle/localseo", { state: location.state })} currentStep={6} totalSteps={7} showProgress />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
         <div className="w-full max-w-6xl">

@@ -34,9 +34,9 @@ export default function ServiceSelector() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={5}
-        totalSteps={11}
+        onBack={() => navigate("/funnel-health", { state: location.state })}
+        currentStep={4}
+        totalSteps={7}
         showProgress
       />
 

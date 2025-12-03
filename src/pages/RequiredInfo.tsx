@@ -57,8 +57,8 @@ export default function RequiredInfo() {
     <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
-          currentStep={11}
-          totalSteps={11}
+          currentStep={7}
+          totalSteps={7}
           showProgress
         />
 
