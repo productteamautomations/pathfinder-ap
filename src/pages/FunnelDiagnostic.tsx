@@ -172,75 +172,43 @@ export default function FunnelDiagnostic() {
               className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
-                {/* Left Side - Question Area with Image */}
-                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-white to-muted/20">
-                  {/* Fixed height container to prevent layout shift */}
-                  <div className="flex flex-col h-full">
-                    {/* Question Text - Fixed Height Section */}
-                    <div className="flex-shrink-0">
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={`text-${currentQuestion}`}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                        >
-                          <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
-                            {question.section}
-                          </span>
-                          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
-                            {question.question}
-                          </h2>
-                          <OrangeAccent />
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Image Section - Fixed Height Container */}
-                    <div className="flex-1 flex items-center justify-center mt-4 min-h-[280px] md:min-h-[320px]">
-                      <AnimatePresence mode="wait">
-                        <motion.img
-                          key={`img-${currentQuestion}`}
-                          src={question.image}
-                          alt={question.question}
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="max-h-[280px] md:max-h-[320px] w-auto object-contain"
-                        />
-                      </AnimatePresence>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Side - Options Area */}
-                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                {/* Left Side - Question & Options */}
+                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex flex-col h-full"
                     >
+                      {/* Question Title at Top */}
+                      <div className="flex-shrink-0 mb-6">
+                        <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
+                          {question.section}
+                        </span>
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
+                          {question.question}
+                        </h2>
+                        <OrangeAccent />
+                      </div>
+
                       {/* Step Indicator */}
-                      <div className="mb-8">
+                      <div className="mb-6">
                         <div className="flex items-center gap-3">
                           <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
                           <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
                           <span className="text-muted-foreground text-lg">—</span>
                           <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
                         </div>
-                        <p className="text-base text-muted-foreground mt-3">
+                        <p className="text-base text-muted-foreground mt-2">
                           Select one option
                         </p>
                       </div>
 
                       {/* Options */}
-                      <div className="space-y-3">
+                      <div className="space-y-3 flex-1">
                         {question.options.map((option, index) => (
                           <motion.button
                             key={option}
@@ -263,7 +231,7 @@ export default function FunnelDiagnostic() {
                       {/* Back Button */}
                       <button
                         onClick={handleBack}
-                        className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                        className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                       >
                         <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                           <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
@@ -271,6 +239,22 @@ export default function FunnelDiagnostic() {
                         <span className="uppercase tracking-wider">{currentQuestion > 0 ? "Back" : "Cancel"}</span>
                       </button>
                     </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Right Side - Image fills section */}
+                <div className="relative bg-gradient-to-br from-white to-muted/20 border-l border-border/20 flex items-center justify-center p-8">
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={`img-${currentQuestion}`}
+                      src={question.image}
+                      alt={question.question}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="max-w-full max-h-full w-auto h-auto object-contain"
+                    />
                   </AnimatePresence>
                 </div>
               </div>
