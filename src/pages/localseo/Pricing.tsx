@@ -42,8 +42,8 @@ export default function PricingLocalSEO() {
   const savings = 600.0;
 
   const features = [
-    "All Local SEO features",
-    "All SmartSite features",
+    "Google Business Profile optimisation",
+    "Local keyword targeting",
     "Perfectly optimised local content",
     "Best-practice technical SEO",
   ];
@@ -76,12 +76,12 @@ export default function PricingLocalSEO() {
                     Primary Recommendation
                   </span>
                   <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
-                    Local SEO & SmartSite
+                    Local SEO
                   </h2>
                   <OrangeAccent />
                   <p className="text-base text-muted-foreground mt-8 leading-relaxed">
-                    Combine a dominant local presence on Google Maps with a powerful website
-                    designed to convert local searchers into loyal customers.
+                    Dominate local search results on Google Maps and attract customers 
+                    in your area when they search for services like yours.
                   </p>
                   <div className="mt-8 space-y-3">
                     {features.map((item, index) => (
