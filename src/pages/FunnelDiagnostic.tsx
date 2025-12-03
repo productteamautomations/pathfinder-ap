@@ -242,8 +242,8 @@ export default function FunnelDiagnostic() {
                   </AnimatePresence>
                 </div>
 
-                {/* Right Side - Image fills section */}
-                <div className="relative bg-gradient-to-br from-white to-muted/20 border-l border-border/20 flex items-center justify-center p-8">
+                {/* Right Side - Image fills section corner to corner */}
+                <div className="relative bg-white border-l border-border/20 overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.img
                       key={`img-${currentQuestion}`}
@@ -253,7 +253,7 @@ export default function FunnelDiagnostic() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
-                      className="max-w-full max-h-full w-auto h-auto object-contain"
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   </AnimatePresence>
                 </div>
