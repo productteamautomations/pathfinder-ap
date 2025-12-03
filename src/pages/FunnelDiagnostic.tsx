@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
@@ -119,10 +119,16 @@ export default function FunnelDiagnostic() {
   const location = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const question = questions[currentQuestion];
   const isLastQuestion = currentQuestion === questions.length - 1;
   const totalSteps = questions.length;
+
+  // Reset imageLoaded when question changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentQuestion]);
 
   const handleAnswer = (answer: string) => {
     const newAnswers = { ...answers, [question.id]: answer };
@@ -249,10 +255,11 @@ export default function FunnelDiagnostic() {
                       key={`img-${currentQuestion}`}
                       src={question.image}
                       alt={question.question}
+                      onLoad={() => setImageLoaded(true)}
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      animate={{ opacity: imageLoaded ? 1 : 0 }}
                       exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                   </AnimatePresence>
