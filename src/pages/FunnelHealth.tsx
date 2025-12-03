@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -103,11 +104,30 @@ function OverallScoreRing({ score }: { score: number }) {
 export default function FunnelHealth() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { recommendation } = useRecommendation();
 
   const trafficScore = 75;
   const conversionScore = 60;
   const leadScore = 45;
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
+
+  const handleContinue = () => {
+    // Map product to route
+    const productRoutes: Record<string, string> = {
+      SEO: "/product-recommendation/localseo",
+      LeadGen: "/product-recommendation/leadgen",
+      LSA: "/product-recommendation/lsa",
+    };
+
+    if (recommendation.product && productRoutes[recommendation.product]) {
+      navigate(productRoutes[recommendation.product], { state: location.state });
+    } else {
+      // Fallback to service selector if no recommendation yet
+      navigate("/service-selector", { state: location.state });
+    }
+  };
+
+  const isWaitingForRecommendation = recommendation.isLoading;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -175,13 +195,28 @@ export default function FunnelHealth() {
 
                   {/* Continue Button */}
                   <Button
-                    onClick={() => navigate("/service-selector", { state: location.state })}
+                    onClick={handleContinue}
                     fullWidth
                     className="group"
+                    disabled={isWaitingForRecommendation}
                   >
                     <span className="flex items-center justify-center gap-2">
-                      Choose Your Service
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      {isWaitingForRecommendation ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          Analyzing...
+                        </>
+                      ) : recommendation.product ? (
+                        <>
+                          View Your Recommendation
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      ) : (
+                        <>
+                          Choose Your Service
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
                     </span>
                   </Button>
 
