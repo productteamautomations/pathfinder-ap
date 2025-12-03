@@ -173,41 +173,46 @@ export default function FunnelDiagnostic() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Question Area with Image */}
-                <div className="p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentQuestion}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex flex-col"
-                    >
-                      <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
-                        {question.section}
-                      </span>
-                      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
-                        {question.question}
-                      </h2>
-                      
-                      {/* Orange Accent Motif */}
-                      <OrangeAccent />
+                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-white to-muted/20">
+                  {/* Fixed height container to prevent layout shift */}
+                  <div className="flex flex-col h-full">
+                    {/* Question Text - Fixed Height Section */}
+                    <div className="flex-shrink-0">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={`text-${currentQuestion}`}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
+                            {question.section}
+                          </span>
+                          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
+                            {question.question}
+                          </h2>
+                          <OrangeAccent />
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
 
-                      {/* Question Image */}
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.2, duration: 0.4 }}
-                        className="mt-6 flex justify-center"
-                      >
-                        <img 
-                          src={question.image} 
+                    {/* Image Section - Fixed Height Container */}
+                    <div className="flex-1 flex items-center justify-center mt-4 min-h-[280px] md:min-h-[320px]">
+                      <AnimatePresence mode="wait">
+                        <motion.img
+                          key={`img-${currentQuestion}`}
+                          src={question.image}
                           alt={question.question}
-                          className="max-h-[200px] md:max-h-[250px] w-auto object-contain rounded-xl"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="max-h-[280px] md:max-h-[320px] w-auto object-contain"
                         />
-                      </motion.div>
-                    </motion.div>
-                  </AnimatePresence>
+                      </AnimatePresence>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right Side - Options Area */}
