@@ -175,12 +175,12 @@ export default function FunnelHealth() {
 
                   {/* Continue Button */}
                   <Button
-                    onClick={() => navigate("/product-recommendation", { state: location.state })}
+                    onClick={() => navigate("/service-selector", { state: location.state })}
                     fullWidth
                     className="group"
                   >
                     <span className="flex items-center justify-center gap-2">
-                      Product Recommendation
+                      Choose Your Service
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
