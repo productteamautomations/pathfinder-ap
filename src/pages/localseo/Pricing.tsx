@@ -50,12 +50,7 @@ export default function PricingLocalSEO() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader
-        onBack={() => navigate(-1)}
-        currentStep={10}
-        totalSteps={11}
-        showProgress
-      />
+      <PageHeader onBack={() => navigate(-1)} currentStep={10} totalSteps={11} showProgress />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
         <div className="w-full max-w-6xl">
@@ -80,8 +75,8 @@ export default function PricingLocalSEO() {
                   </h2>
                   <OrangeAccent />
                   <p className="text-base text-muted-foreground mt-8 leading-relaxed">
-                    Dominate local search results on Google Maps and attract customers 
-                    in your area when they search for services like yours.
+                    Stay ahead of competitors in search results and Google Maps when customers in your area search for
+                    services like yours.
                   </p>
                   <div className="mt-8 space-y-3">
                     {features.map((item, index) => (
@@ -167,10 +162,7 @@ export default function PricingLocalSEO() {
                     </p>
                   </div>
 
-                  <Button
-                    onClick={() => navigate("/required-info", { state: location.state })}
-                    fullWidth
-                  >
+                  <Button onClick={() => navigate("/required-info", { state: location.state })} fullWidth>
                     Start My Campaign
                   </Button>
 
