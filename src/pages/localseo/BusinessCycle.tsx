@@ -58,7 +58,8 @@ const slides = [
       { label: "More external links", description: "Quality backlinks from authoritative sites" },
       { label: "More reviews", description: "Quantity of customer reviews matters" },
       { label: "Better review scores", description: "Average rating impacts visibility" },
-      { label: "Higher reputation → higher map pack ranking", description: "" },
+      { label: "Increase reputation", description: "" },
+      { label: "Higher map pack ranking", description: "" },
     ],
   },
   {
@@ -92,7 +93,7 @@ const slides = [
       },
       {
         phase: "Launch Call",
-        points: ["Launch newly built campaigns", "Final changes", "Track test in real time", "Agree next steps"],
+        points: ["Launch newly built campaigns", "Final changes", "Tracking test in real time", "Agree on next steps"],
       },
     ],
   },
