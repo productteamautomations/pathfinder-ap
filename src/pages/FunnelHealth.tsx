@@ -101,22 +101,22 @@ function OverallScoreRing({ score }: { score: number }) {
   );
 }
 
-// Calculate scores based on diagnostic answers
+// Calculate scores based on diagnostic answers (0-4 ranking per question)
 function calculateScores(answers: Record<string, string>) {
-  // Score mapping: best option = 100, worst = 25, middle options = 75/50
+  // Score mapping: each answer ranked 0-4 (4 = best, 0 = worst)
   const scoreMap: Record<string, Record<string, number>> = {
     // Traffic questions
-    avgCTR: { "≥5%": 100, "3–5%": 75, "<2%": 40, "Unsure": 30 },
-    trackingConversions: { "Both": 100, "Form Fills": 65, "Calls": 65, "None": 20 },
-    avgCPC: { "<£0.50": 100, "£0.50–£3.00": 70, "≥£3.00": 40, "Unsure": 30 },
+    avgCTR: { "≥5%": 4, "3–5%": 3, "<2%": 1, "Unsure": 0 },
+    trackingConversions: { "Both": 4, "Form Fills": 2, "Calls": 2, "None": 0 },
+    avgCPC: { "<£0.50": 4, "£0.50–£3.00": 2, "≥£3.00": 1, "Unsure": 0 },
     // Conversion questions
-    costPerAcquisition: { "<£10": 100, "£10–£50": 70, "≥£50": 40, "Unsure": 30 },
-    conversionRate: { "≥5%": 100, "2–5%": 75, "1–2%": 50, "<1%": 25 },
-    ctaVisibility: { "Yes – both mobile & desktop": 100, "Yes – desktop only": 60, "Yes – mobile only": 60, "No": 20 },
-    servicePages: { "Yes – all services": 100, "Yes – some": 60, "No": 25 },
+    costPerAcquisition: { "<£10": 4, "£10–£50": 2, "≥£50": 1, "Unsure": 0 },
+    conversionRate: { "≥5%": 4, "2–5%": 3, "1–2%": 2, "<1%": 0 },
+    ctaVisibility: { "Yes – both mobile & desktop": 4, "Yes – desktop only": 2, "Yes – mobile only": 2, "No": 0 },
+    servicePages: { "Yes – all services": 4, "Yes – some": 2, "No": 0 },
     // Lead Management questions
-    leadManagementSystem: { "Assistant (Human/Virtual)": 100, "Answer Every Call": 90, "Self dedicated admin time": 50, "Organised Chaos": 20 },
-    responseTime: { "Same hour": 100, "Same day": 70, "Same week": 40, "When I get a chance": 15 },
+    leadManagementSystem: { "Assistant (Human/Virtual)": 4, "Answer Every Call": 3, "Self dedicated admin time": 2, "Organised Chaos": 0 },
+    responseTime: { "Same hour": 4, "Same day": 3, "Same week": 1, "When I get a chance": 0 },
   };
 
   const trafficQuestions = ["avgCTR", "trackingConversions", "avgCPC"];
@@ -124,8 +124,9 @@ function calculateScores(answers: Record<string, string>) {
   const leadQuestions = ["leadManagementSystem", "responseTime"];
 
   const calcCategoryScore = (questionIds: string[]) => {
-    const scores = questionIds.map((id) => scoreMap[id]?.[answers[id]] ?? 50);
-    return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    const totalScore = questionIds.reduce((sum, id) => sum + (scoreMap[id]?.[answers[id]] ?? 0), 0);
+    const maxScore = questionIds.length * 4; // Each question max is 4
+    return Math.round((totalScore / maxScore) * 100);
   };
 
   return {
