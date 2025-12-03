@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { useNavigate } from "react-router-dom";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 export default function Welcome() {
   const navigate = useNavigate();
+  const { fetchRecommendation } = useRecommendation();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const isValid = name.trim() !== "" && url.trim() !== "";
@@ -212,6 +214,9 @@ export default function Welcome() {
   }, []);
 
   const handleContinue = () => {
+    // Start the webhook request in background (don't await)
+    fetchRecommendation(name, url);
+    
     isTransitioningRef.current = true;
     transitionProgressRef.current = 0;
     setTimeout(() => {
