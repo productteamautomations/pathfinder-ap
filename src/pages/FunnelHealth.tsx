@@ -101,14 +101,47 @@ function OverallScoreRing({ score }: { score: number }) {
   );
 }
 
+// Calculate scores based on diagnostic answers
+function calculateScores(answers: Record<string, string>) {
+  // Score mapping: best option = 100, worst = 25, middle options = 75/50
+  const scoreMap: Record<string, Record<string, number>> = {
+    // Traffic questions
+    avgCTR: { "≥5%": 100, "3–5%": 75, "<2%": 40, "Unsure": 30 },
+    trackingConversions: { "Both": 100, "Form Fills": 65, "Calls": 65, "None": 20 },
+    avgCPC: { "<£0.50": 100, "£0.50–£3.00": 70, "≥£3.00": 40, "Unsure": 30 },
+    // Conversion questions
+    costPerAcquisition: { "<£10": 100, "£10–£50": 70, "≥£50": 40, "Unsure": 30 },
+    conversionRate: { "≥5%": 100, "2–5%": 75, "1–2%": 50, "<1%": 25 },
+    ctaVisibility: { "Yes – both mobile & desktop": 100, "Yes – desktop only": 60, "Yes – mobile only": 60, "No": 20 },
+    servicePages: { "Yes – all services": 100, "Yes – some": 60, "No": 25 },
+    // Lead Management questions
+    leadManagementSystem: { "Assistant (Human/Virtual)": 100, "Answer Every Call": 90, "Self dedicated admin time": 50, "Organised Chaos": 20 },
+    responseTime: { "Same hour": 100, "Same day": 70, "Same week": 40, "When I get a chance": 15 },
+  };
+
+  const trafficQuestions = ["avgCTR", "trackingConversions", "avgCPC"];
+  const conversionQuestions = ["costPerAcquisition", "conversionRate", "ctaVisibility", "servicePages"];
+  const leadQuestions = ["leadManagementSystem", "responseTime"];
+
+  const calcCategoryScore = (questionIds: string[]) => {
+    const scores = questionIds.map((id) => scoreMap[id]?.[answers[id]] ?? 50);
+    return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+  };
+
+  return {
+    trafficScore: calcCategoryScore(trafficQuestions),
+    conversionScore: calcCategoryScore(conversionQuestions),
+    leadScore: calcCategoryScore(leadQuestions),
+  };
+}
+
 export default function FunnelHealth() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
 
-  const trafficScore = 75;
-  const conversionScore = 60;
-  const leadScore = 45;
+  const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
+  const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
 
   const handleContinue = () => {
