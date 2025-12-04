@@ -140,8 +140,8 @@ export default function BusinessCycleLeadGen() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 min-h-[70vh]">
-              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+            <div className="grid md:grid-cols-2 h-[75vh]">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -174,7 +174,7 @@ export default function BusinessCycleLeadGen() {
                 </AnimatePresence>
               </div>
 
-              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-between bg-muted/30 border-l border-border/20 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -193,7 +193,7 @@ export default function BusinessCycleLeadGen() {
                       </div>
                     </div>
 
-                    <div className="mb-8">
+                    <div className="flex-1 overflow-y-auto mb-4">
                       <ul className="space-y-2">
                         {slide.content?.map((item, idx) => (
                           <motion.li
