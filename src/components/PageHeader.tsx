@@ -1,6 +1,5 @@
 import { ArrowLeft } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
-
 interface PageHeaderProps {
   onBack?: () => void;
   currentStep?: number;
@@ -8,7 +7,6 @@ interface PageHeaderProps {
   showProgress?: boolean;
   productLabel?: string;
 }
-
 export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel }: PageHeaderProps) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50">
@@ -25,16 +23,14 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
           ) : (
             <div className="w-20" />
           )}
-
           {showProgress && currentStep && totalSteps && (
             <div className="flex-1 flex justify-center max-w-md mx-auto">
               <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
             </div>
           )}
-
           {productLabel ? (
             <div className="w-32 text-right">
-              <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+              <span className="text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1.5 rounded-full">
                 {productLabel}
               </span>
             </div>
