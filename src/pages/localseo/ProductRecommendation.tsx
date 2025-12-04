@@ -101,7 +101,7 @@ export default function ProductRecommendationLocalSEO() {
             <span className="text-foreground">Local SEO</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Why Local SEO is the <span className="text-primary font-semibold">Right Fit</span> for you.
+            Why Local SEO is the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
