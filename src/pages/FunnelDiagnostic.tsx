@@ -120,10 +120,16 @@ export default function FunnelDiagnostic() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const question = questions[currentQuestion];
   const isLastQuestion = currentQuestion === questions.length - 1;
   const totalSteps = questions.length;
+
+  // Guard against undefined question
+  if (!question) {
+    return null;
+  }
 
   // Reset imageLoaded when question changes
   useEffect(() => {
@@ -131,6 +137,10 @@ export default function FunnelDiagnostic() {
   }, [currentQuestion]);
 
   const handleAnswer = (answer: string) => {
+    // Prevent clicks during transition
+    if (isTransitioning) return;
+    
+    setIsTransitioning(true);
     const newAnswers = { ...answers, [question.id]: answer };
     setAnswers(newAnswers);
 
@@ -146,13 +156,20 @@ export default function FunnelDiagnostic() {
     } else {
       setTimeout(() => {
         setCurrentQuestion((prev) => prev + 1);
-      }, 300);
+        setIsTransitioning(false);
+      }, 400);
     }
   };
 
   const handleBack = () => {
+    if (isTransitioning) return;
+    
     if (currentQuestion > 0) {
-      setCurrentQuestion((prev) => prev - 1);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentQuestion((prev) => prev - 1);
+        setIsTransitioning(false);
+      }, 300);
     } else {
       navigate("/fact-finder", { state: location.state });
     }
