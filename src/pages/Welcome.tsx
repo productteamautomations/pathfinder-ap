@@ -289,27 +289,27 @@ export default function Welcome() {
 
       <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
-        <div className="w-full max-w-md relative">
+        <div className="w-full max-w-xl relative">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-10"
           >
-            <h1 className="text-6xl font-bold text-deep-blue mb-3">Pathfinder</h1>
-            <p className="text-xl text-deep-blue/70">Find the right path for you</p>
+            <h1 className="text-7xl font-bold text-deep-blue mb-4">Pathfinder</h1>
+            <p className="text-2xl text-deep-blue/70">Find the right path for you</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass p-8"
+            className="glass p-10"
           >
-            <div className="space-y-6">
-              <div className="space-y-1 mb-8">
-                <h2 className="text-2xl font-semibold text-deep-blue">Get Started</h2>
-                <p className="text-deep-blue/50 text-sm">Enter your details to begin your personalised path</p>
+            <div className="space-y-8">
+              <div className="space-y-2 mb-10">
+                <h2 className="text-3xl font-semibold text-deep-blue">Get Started</h2>
+                <p className="text-deep-blue/50 text-base">Enter your details to begin your personalised path</p>
               </div>
               <Input
                 label="Name"

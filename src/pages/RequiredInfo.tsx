@@ -64,7 +64,7 @@ export default function RequiredInfo() {
 
         {/* Content Area - Split Layout */}
         <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-          <div className="w-full max-w-6xl">
+          <div className="w-full max-w-7xl">
             {/* Main Card with soft shadow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -74,16 +74,16 @@ export default function RequiredInfo() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Client Details */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                <div className="p-14 md:p-18 lg:p-24 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                    <span className="text-base font-semibold text-primary uppercase tracking-wider mb-5 block">
                       Final Step
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
                       Client Details
                     </h2>
                     
@@ -125,14 +125,14 @@ export default function RequiredInfo() {
                 </div>
 
                 {/* Right Side - Login Details */}
-                <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                <div className="p-14 md:p-18 lg:p-24 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                   <motion.div
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-8">Website Login Details</h3>
+                    <h3 className="text-3xl font-bold text-foreground mb-10">Website Login Details</h3>
 
                     {/* Form Fields */}
                     <div className="space-y-5 mb-8">

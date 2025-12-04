@@ -186,7 +186,7 @@ export default function FunnelDiagnostic() {
 
         {/* Content Area - Split Layout */}
         <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-          <div className="w-full max-w-6xl">
+          <div className="w-full max-w-7xl">
             {/* Main Card with soft shadow */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -196,7 +196,7 @@ export default function FunnelDiagnostic() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Question & Options */}
-                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
+                <div className="p-8 md:p-12 lg:p-16 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
@@ -207,31 +207,31 @@ export default function FunnelDiagnostic() {
                       className="flex flex-col h-full"
                     >
                       {/* Question Title at Top */}
-                      <div className="flex-shrink-0 mb-6">
-                        <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
+                      <div className="flex-shrink-0 mb-8">
+                        <span className="text-base font-semibold text-primary uppercase tracking-wider mb-3 block">
                           {question.section}
                         </span>
-                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
+                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                           {question.question}
                         </h2>
                         <OrangeAccent />
                       </div>
 
                       {/* Step Indicator */}
-                      <div className="mb-6">
-                        <div className="flex items-center gap-3">
-                          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
-                          <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
-                          <span className="text-muted-foreground text-lg">—</span>
-                          <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
+                      <div className="mb-8">
+                        <div className="flex items-center gap-4">
+                          <span className="text-base font-semibold text-primary uppercase tracking-wider">Question</span>
+                          <span className="text-3xl font-bold text-foreground">{currentQuestion + 1}</span>
+                          <span className="text-muted-foreground text-xl">—</span>
+                          <span className="text-3xl font-bold text-muted-foreground">{totalSteps}</span>
                         </div>
-                        <p className="text-base text-muted-foreground mt-2">
+                        <p className="text-lg text-muted-foreground mt-3">
                           Select one option
                         </p>
                       </div>
 
                       {/* Options */}
-                      <div className="space-y-3 flex-1">
+                      <div className="space-y-4 flex-1">
                         {question.options.map((option, index) => (
                           <motion.button
                             key={option}
@@ -239,14 +239,14 @@ export default function FunnelDiagnostic() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
                             onClick={() => handleAnswer(option)}
-                            className={`w-full p-4 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                            className={`w-full p-5 rounded-2xl border text-left font-medium text-lg transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                               answers[question.id] === option
                                 ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                                 : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                             }`}
                           >
                             <span>{option}</span>
-                            <ChevronRight className={`w-5 h-5 transition-transform ${answers[question.id] === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                            <ChevronRight className={`w-6 h-6 transition-transform ${answers[question.id] === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
                           </motion.button>
                         ))}
                       </div>
