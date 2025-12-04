@@ -105,7 +105,7 @@ export default function ProductRecommendationLSA() {
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
+        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
