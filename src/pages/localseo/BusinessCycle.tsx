@@ -175,7 +175,7 @@ export default function BusinessCycleLocalSEO() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[70vh]">
+            <div className="grid md:grid-cols-2 h-[75vh]">
               <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
