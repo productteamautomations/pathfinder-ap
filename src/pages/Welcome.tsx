@@ -305,31 +305,34 @@ export default function Welcome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass p-8"
+            style={{ aspectRatio: '1 / 1.1' }}
           >
-            <div className="space-y-6">
-              <div className="space-y-1 mb-8">
+            <div className="space-y-6 h-full flex flex-col justify-between">
+              <div className="space-y-1">
                 <h2 className="text-2xl font-semibold text-deep-blue">Get Started</h2>
                 <p className="text-deep-blue/50 text-sm">Enter your details to begin your personalised path</p>
               </div>
-              <Input
-                label="Name"
-                value={name}
-                placeholder="Enter your business name"
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <div className="space-y-1">
+              <div className="space-y-6 flex-1 flex flex-col justify-center">
                 <Input
-                  label="Website URL"
-                  value={url}
-                  onChange={(e) => handleUrlChange(e.target.value)}
-                  placeholder="https://yourwebsite.com"
-                  type="url"
+                  label="Name"
+                  value={name}
+                  placeholder="Enter your business name"
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
-                {urlError && (
-                  <p className="text-sm text-destructive">{urlError}</p>
-                )}
+                <div className="space-y-1">
+                  <Input
+                    label="Website URL"
+                    value={url}
+                    onChange={(e) => handleUrlChange(e.target.value)}
+                    placeholder="https://yourwebsite.com"
+                    type="url"
+                    required
+                  />
+                  {urlError && (
+                    <p className="text-sm text-destructive">{urlError}</p>
+                  )}
+                </div>
               </div>
               <Button onClick={handleContinue} disabled={!isValid} fullWidth>
                 Continue
