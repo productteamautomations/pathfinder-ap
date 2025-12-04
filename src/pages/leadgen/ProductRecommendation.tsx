@@ -100,26 +100,26 @@ export default function ProductRecommendationLeadGen() {
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-8">
+        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] p-8 md:p-10 lg:p-12 max-w-7xl mx-auto shadow-lg border border-border/30"
+            className="bg-white rounded-[2rem] p-8 md:p-12 lg:p-14 max-w-6xl mx-auto shadow-lg border border-border/30"
           >
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
 
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
-                <p className="text-base text-muted-foreground leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed mb-8">
                   Get your business in front of customers actively searching for your services. 
                   With Google Ads, you appear at the top of search results exactly when 
                   potential customers are ready to buy.
                 </p>
 
-                <div className="space-y-3 mb-8">
+                <div className="space-y-4 mb-10">
                   <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Key Benefits:
                   </h3>

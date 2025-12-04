@@ -53,32 +53,32 @@ export default function PricingLocalSEO() {
       <PageHeader onBack={() => navigate("/business-cycle/localseo", { state: location.state })} currentStep={6} totalSteps={7} showProgress />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
-              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+            <div className="grid md:grid-cols-2 min-h-[70vh]">
+              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                     Primary Recommendation
                   </span>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                  <h2 className="text-4xl md:text-5xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                     Local SEO
                   </h2>
                   <OrangeAccent />
-                  <p className="text-base text-muted-foreground mt-6 leading-relaxed">
+                  <p className="text-base text-muted-foreground mt-8 leading-relaxed">
                     Stay ahead of competitors in search results and Google Maps when customers in your area search for
                     services like yours.
                   </p>
-                  <div className="mt-6 space-y-2.5">
+                  <div className="mt-8 space-y-3">
                     {features.map((item, index) => (
                       <motion.div
                         key={item}
@@ -97,16 +97,16 @@ export default function PricingLocalSEO() {
                 </motion.div>
               </div>
 
-              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
                   className="w-full"
                 >
-                  <h3 className="text-xl font-bold text-foreground mb-5">Transparent Pricing</h3>
+                  <h3 className="text-xl font-bold text-foreground mb-6">Transparent Pricing</h3>
 
-                  <div className="grid grid-cols-2 gap-2 mb-5">
+                  <div className="grid grid-cols-2 gap-2 mb-6">
                     <button
                       onClick={() => setSelectedPlan("6")}
                       className={`py-3 px-4 rounded-2xl font-semibold text-sm transition-all ${
@@ -130,34 +130,34 @@ export default function PricingLocalSEO() {
                   </div>
 
                   {selectedPlan === "12" && (
-                    <div className="bg-green-50 p-3 rounded-2xl mb-5 text-center border border-green-200">
+                    <div className="bg-green-50 p-4 rounded-2xl mb-6 text-center border border-green-200">
                       <p className="text-sm font-semibold text-green-700">
                         You save £{savings.toFixed(2)} with a 12-month plan!
                       </p>
                     </div>
                   )}
 
-                  <div className="space-y-2 mb-5">
-                    <div className="flex justify-between items-center py-2.5 border-b border-border/30">
+                  <div className="space-y-3 mb-6">
+                    <div className="flex justify-between items-center py-3 border-b border-border/30">
                       <span className="text-sm text-foreground">Setup Fee</span>
                       <span className="font-bold text-foreground">£{setupFee.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2.5 border-b border-border/30">
+                    <div className="flex justify-between items-center py-3 border-b border-border/30">
                       <span className="text-sm text-foreground">Monthly Fee</span>
                       <span className="font-bold text-foreground">£{monthlyFee.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between items-center py-2.5 border-b border-border/30">
+                    <div className="flex justify-between items-center py-3 border-b border-border/30">
                       <span className="text-sm text-foreground">VAT</span>
                       <span className="font-bold text-foreground">£{vat.toFixed(2)}</span>
                     </div>
                   </div>
 
-                  <div className="bg-white border-2 border-border/30 p-4 rounded-2xl mb-5">
+                  <div className="bg-primary text-primary-foreground p-5 rounded-2xl mb-6">
                     <div className="flex justify-between items-center">
-                      <span className="font-bold text-foreground">Total First Month</span>
-                      <span className="text-2xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</span>
+                      <span className="font-bold">Total First Month</span>
+                      <span className="text-2xl font-bold">£{totalFirstMonth.toFixed(2)}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-2 text-right">
+                    <p className="text-xs opacity-90 mt-2 text-right">
                       (then £{monthlyAfterVAT.toFixed(2)}/month inc. VAT)
                     </p>
                   </div>
@@ -168,7 +168,7 @@ export default function PricingLocalSEO() {
 
                   <button
                     onClick={() => navigate(-1)}
-                    className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group"
+                    className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                   >
                     <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                       <ChevronRight className="w-4 h-4 text-foreground rotate-180" />

@@ -96,7 +96,7 @@ function OverallScoreRing({ score }: { score: number }) {
         <p className="text-lg font-semibold" style={{ color: getHealthColor(score) }}>
           {getHealthLabel(score)}
         </p>
-        <p className="text-base text-muted-foreground">Overall Health</p>
+        <p className="text-sm text-muted-foreground">Overall Health</p>
       </motion.div>
     </motion.div>
   );
@@ -201,7 +201,7 @@ export default function FunnelHealth() {
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-6xl">
           {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -209,15 +209,15 @@ export default function FunnelHealth() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
+            <div className="grid md:grid-cols-2 min-h-[70vh]">
               {/* Left Side - Results Overview */}
-              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+              <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                     Results
                   </span>
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
@@ -229,7 +229,7 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-8 space-y-5">
+                    <div className="mt-10 space-y-6">
                       <div>
                         <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
                         <div className="flex flex-wrap gap-2">
@@ -252,7 +252,7 @@ export default function FunnelHealth() {
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
-                        <ul className="space-y-2 text-muted-foreground text-base">
+                        <ul className="space-y-2 text-muted-foreground">
                           {trafficScore < 70 && (
                             <li className="flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
@@ -271,11 +271,11 @@ export default function FunnelHealth() {
                               <span>Say Hello to never miss a lead</span>
                             </li>
                           )}
-                      </ul>
+                        </ul>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground mt-8 text-base leading-relaxed">
+                    <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
                       Great work! Your funnel is performing well across all key areas.
                     </p>
                   )}
@@ -283,7 +283,7 @@ export default function FunnelHealth() {
               </div>
 
               {/* Right Side - Visualization */}
-              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -334,16 +334,16 @@ export default function FunnelHealth() {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-2 text-base text-destructive mt-5"
+                      className="flex items-center gap-2 text-sm text-destructive mt-4"
                     >
-                      <AlertCircle className="w-5 h-5" />
+                      <AlertCircle className="w-4 h-4" />
                       <span>Unable to get recommendation. Please try again.</span>
                     </motion.div>
                   )}
 
                   {/* Insight text */}
                   <motion.p
-                    className="text-base text-muted-foreground text-center mt-8 max-w-sm"
+                    className="text-sm text-muted-foreground text-center mt-6 max-w-xs"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}

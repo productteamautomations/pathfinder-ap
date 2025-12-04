@@ -53,7 +53,7 @@ function FormField({
 }) {
   return (
     <div className={className}>
-      <label className="block text-base font-semibold text-[#173340] mb-3">
+      <label className="block text-sm font-semibold text-[#173340] mb-2">
         {label}
         {required && <span className="text-primary ml-0.5">*</span>}
       </label>
@@ -104,7 +104,7 @@ export default function FactFinder() {
   };
 
   const inputStyles =
-    "w-full px-5 py-4 rounded-xl border-2 border-border/30 bg-white/80 text-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
+    "w-full px-4 py-3.5 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -116,39 +116,39 @@ export default function FactFinder() {
         />
 
         {/* Content Area */}
-        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center py-4">
-          <div className="w-full max-w-5xl">
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center py-8">
+          <div className="w-full max-w-3xl">
             {/* Main Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-8 md:p-10"
+              className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-8 md:p-12"
             >
               {/* Header */}
-              <div className="mb-6">
+              <div className="mb-8">
                 <motion.span
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="inline-block text-sm font-semibold tracking-widest text-primary uppercase mb-2"
+                  className="inline-block text-xs font-semibold tracking-widest text-primary uppercase mb-3"
                 >
                   Step 1 of 7
                 </motion.span>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                   Business Information
                 </h2>
-                <p className="text-muted-foreground mt-2 text-base">
+                <p className="text-muted-foreground mt-2 text-sm">
                   Help us understand your business better
                 </p>
                 <OrangeAccent />
               </div>
 
               {/* Form Grid */}
-              <div className="space-y-10">
+              <div className="space-y-8">
                 {/* Section 1: Timeline */}
-                <div className="space-y-5">
-                  <h3 className="text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold">1</span>
+                <div className="space-y-4">
+                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">1</span>
                     Timeline
                   </h3>
                   <div className="pl-8">
@@ -178,9 +178,9 @@ export default function FactFinder() {
                 </div>
 
                 {/* Section 2: Lead Generation */}
-                <div className="space-y-5">
-                  <h3 className="text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold">2</span>
+                <div className="space-y-4">
+                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">2</span>
                     Lead Generation
                   </h3>
                   <div className="grid md:grid-cols-2 gap-5 pl-8">
@@ -202,7 +202,7 @@ export default function FactFinder() {
                             key={option}
                             type="button"
                             onClick={() => setHasGMB(option)}
-                            className={`flex-1 px-5 py-4 rounded-xl border-2 text-lg font-medium transition-all duration-200 ${
+                            className={`flex-1 px-4 py-3.5 rounded-xl border-2 font-medium transition-all duration-200 ${
                               hasGMB === option
                                 ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                                 : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
@@ -217,13 +217,13 @@ export default function FactFinder() {
                 </div>
 
                 {/* Section 3: Business Channels */}
-                <div className="space-y-3">
-                  <h3 className="text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                    <span className="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold">3</span>
+                <div className="space-y-4">
+                  <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                    <span className="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">3</span>
                     Business Channels
                   </h3>
-                  <FormField label="How do you generate business?" required className="pl-9">
-                    <div className="flex flex-wrap gap-2">
+                  <FormField label="How do you generate business?" required className="pl-8">
+                    <div className="flex flex-wrap gap-2.5">
                       {generationOptions.map((option) => (
                         <motion.button
                           key={option}
@@ -231,7 +231,7 @@ export default function FactFinder() {
                           onClick={() => toggleGeneration(option)}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className={`px-4 py-2.5 rounded-full border-2 text-base font-medium transition-all duration-200 ${
+                          className={`px-4 py-2.5 rounded-full border-2 text-sm font-medium transition-all duration-200 ${
                             businessGeneration.includes(option)
                               ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                               : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
@@ -245,7 +245,7 @@ export default function FactFinder() {
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex justify-end pt-4 border-t border-border/20">
+                <div className="flex justify-end pt-6 border-t border-border/20">
                   <Button
                     onClick={handleSubmit}
                     disabled={!isFormValid()}
