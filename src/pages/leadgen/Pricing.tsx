@@ -160,12 +160,12 @@ export default function PricingLeadGen() {
                     </div>
                   </div>
 
-                  <div className="bg-primary text-primary-foreground p-5 rounded-2xl mb-6">
+                  <div className="bg-white border-2 border-border/30 p-5 rounded-2xl mb-6">
                     <div className="flex justify-between items-center">
-                      <span className="font-bold">Total First Month</span>
-                      <span className="text-2xl font-bold">£{totalFirstMonth.toFixed(2)}</span>
+                      <span className="font-bold text-foreground">Total First Month</span>
+                      <span className="text-2xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</span>
                     </div>
-                    <p className="text-xs opacity-90 mt-2 text-right">
+                    <p className="text-xs text-muted-foreground mt-2 text-right">
                       (then £{monthlyAfterVAT.toFixed(2)}/month inc. VAT)
                     </p>
                   </div>
