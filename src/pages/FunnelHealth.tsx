@@ -197,23 +197,23 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {(trafficScore < 70 || conversionScore < 70 || leadScore < 70) ? (
-                    <div className="mt-8 space-y-6">
+                    <div className="mt-8 space-y-4">
                       {trafficScore < 70 && (
-                        <div>
-                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Traffic Generation</p>
-                          <p className="text-foreground">Our targeted advertising campaigns put your business in front of the right customers at the right time, driving qualified traffic through Google Ads and Local Service Ads.</p>
+                        <div className="space-y-1">
+                          <p className="text-sm text-muted-foreground"><span className="font-semibold">Problem:</span> Not enough qualified visitors reaching your website.</p>
+                          <p className="text-sm text-foreground"><span className="font-semibold">Solution:</span> Targeted Google Ads & Local Service Ads campaigns.</p>
                         </div>
                       )}
                       {conversionScore < 70 && (
-                        <div>
-                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Website Conversions</p>
-                          <p className="text-foreground">Our Smart Site solution optimises your website for conversions with clear calls-to-action, mobile-first design, and conversion tracking to turn more visitors into leads.</p>
+                        <div className="space-y-1">
+                          <p className="text-sm text-muted-foreground"><span className="font-semibold">Problem:</span> Visitors aren't converting into leads.</p>
+                          <p className="text-sm text-foreground"><span className="font-semibold">Solution:</span> SmartSite – optimised for conversions with clear CTAs.</p>
                         </div>
                       )}
                       {leadScore < 70 && (
-                        <div>
-                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Lead Management</p>
-                          <p className="text-foreground">Say Hello ensures you never miss a lead with instant notifications, automated follow-ups, and a streamlined system to respond faster than your competitors.</p>
+                        <div className="space-y-1">
+                          <p className="text-sm text-muted-foreground"><span className="font-semibold">Problem:</span> Leads are slipping through the cracks.</p>
+                          <p className="text-sm text-foreground"><span className="font-semibold">Solution:</span> Say Hello – instant notifications & automated follow-ups.</p>
                         </div>
                       )}
                     </div>
