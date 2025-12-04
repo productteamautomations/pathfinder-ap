@@ -1,9 +1,10 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, AlertCircle, RefreshCw } from "lucide-react";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 
 // Orange accent motif component
@@ -144,7 +145,8 @@ function calculateScores(answers: Record<string, string>) {
 export default function FunnelHealth() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation } = useRecommendation();
+  const { recommendation, fetchRecommendation } = useRecommendation();
+  const [retryError, setRetryError] = useState(false);
 
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
@@ -161,12 +163,22 @@ export default function FunnelHealth() {
     if (recommendation.product && productRoutes[recommendation.product]) {
       navigate(productRoutes[recommendation.product], { state: location.state });
     } else {
-      // Fallback to service selector if no recommendation yet
-      navigate("/service-selector", { state: location.state });
+      // No recommendation available - retry the webhook
+      const state = location.state as any;
+      const name = state?.name || "";
+      const websiteUrl = state?.websiteUrl || "";
+      
+      if (name && websiteUrl) {
+        setRetryError(false);
+        fetchRecommendation(name, websiteUrl);
+      } else {
+        setRetryError(true);
+      }
     }
   };
 
   const isWaitingForRecommendation = recommendation.isLoading;
+  const showError = !recommendation.isLoading && !recommendation.product && retryError;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -300,12 +312,24 @@ export default function FunnelHealth() {
                         </>
                       ) : (
                         <>
-                          Choose Your Service
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <RefreshCw className="w-4 h-4" />
+                          Retry Analysis
                         </>
                       )}
                     </span>
                   </Button>
+
+                  {/* Error message */}
+                  {showError && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-2 text-sm text-destructive mt-4"
+                    >
+                      <AlertCircle className="w-4 h-4" />
+                      <span>Unable to get recommendation. Please try again.</span>
+                    </motion.div>
+                  )}
 
                   {/* Insight text */}
                   <motion.p
@@ -314,7 +338,9 @@ export default function FunnelHealth() {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
                   >
-                    Based on your responses, we've identified the right product for you.
+                    {recommendation.product 
+                      ? "Based on your responses, we've identified the right product for you."
+                      : "Click above to analyze your business and get a personalized recommendation."}
                   </motion.p>
                 </motion.div>
               </div>
