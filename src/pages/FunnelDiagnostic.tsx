@@ -192,9 +192,9 @@ export default function FunnelDiagnostic() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden aspect-[16/9]"
             >
-              <div className="grid md:grid-cols-2 min-h-[70vh]">
+              <div className="grid md:grid-cols-2 h-full">
                 {/* Left Side - Question & Options */}
                 <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                   <AnimatePresence mode="wait">
@@ -277,7 +277,7 @@ export default function FunnelDiagnostic() {
                       animate={{ opacity: imageLoaded ? 1 : 0 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-contain"
                     />
                   </AnimatePresence>
                 </div>
