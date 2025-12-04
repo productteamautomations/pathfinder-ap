@@ -2,16 +2,16 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { Check, MousePointerClick, TrendingUp, Target, Zap } from "lucide-react";
+import { Check, MapPin, TrendingUp, Users, Star } from "lucide-react";
 
 const benefits = [
-  "Appear at the top of Google Search results",
-  "Pay only when potential customers click",
-  "Target customers by location, device & time",
-  "Track every lead back to its source",
+  "Appear in the top 3 Google Map Pack results",
+  "Attract customers actively searching in your area",
+  "80% higher conversion rates than general searches",
+  "Stay ahead of competitors in local rankings",
 ];
 
-function LeadGenIllustration() {
+function LocalSEOIllustration() {
   return (
     <div className="relative w-full max-w-sm mx-auto">
       <motion.div
@@ -23,13 +23,17 @@ function LeadGenIllustration() {
         <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <MousePointerClick className="w-5 h-5 text-primary" />
+              <MapPin className="w-5 h-5 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Sponsored Search Ads</p>
-              <p className="text-xs text-muted-foreground">Top of Google Results</p>
+              <p className="text-sm font-semibold text-foreground">Google Business Profile</p>
+              <p className="text-xs text-muted-foreground">Optimized & Verified</p>
             </div>
-            <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Ad</span>
+            <div className="flex items-center gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -39,23 +43,23 @@ function LeadGenIllustration() {
               <TrendingUp className="w-5 h-5 text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Click-Through Rate</p>
-              <p className="text-xs text-muted-foreground">Industry-leading CTR</p>
+              <p className="text-sm font-semibold text-foreground">Local Rankings</p>
+              <p className="text-xs text-muted-foreground">+156% visibility increase</p>
             </div>
-            <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+45%</span>
+            <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">Top 3</span>
           </div>
         </div>
 
         <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-3">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Target className="w-5 h-5 text-blue-500" />
+              <Users className="w-5 h-5 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Precise Targeting</p>
-              <p className="text-xs text-muted-foreground">Location, device, demographics</p>
+              <p className="text-sm font-semibold text-foreground">Customer Reach</p>
+              <p className="text-xs text-muted-foreground">2.4k monthly searches</p>
             </div>
-            <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Smart</span>
+            <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Local</span>
           </div>
         </div>
 
@@ -63,16 +67,16 @@ function LeadGenIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-primary shadow-lg flex items-center justify-center"
+          className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
         >
-          <Zap className="w-7 h-7 text-white" strokeWidth={2} />
+          <Check className="w-7 h-7 text-white" strokeWidth={3} />
         </motion.div>
       </motion.div>
     </div>
   );
 }
 
-export default function ProductRecommendationLeadGen() {
+export default function ProductRecommendationLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -83,7 +87,7 @@ export default function ProductRecommendationLeadGen() {
         currentStep={4}
         totalSteps={7}
         showProgress
-        productLabel="Lead Generation"
+        productLabel="Local SEO"
       />
 
       <div className="flex-1 pt-[73px] flex flex-col">
@@ -91,17 +95,17 @@ export default function ProductRecommendationLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center px-6 py-4 md:py-6"
+          className="text-center px-6 py-10 md:py-12"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-            <span className="text-foreground">Lead Generation</span>
+            <span className="text-foreground">Local SEO</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Why Google Ads is the <span className="text-primary font-semibold">Right Fit</span> for you.
+            Why Local SEO is the <span className="text-primary font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 mt-4 pb-12">
+        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,11 +115,11 @@ export default function ProductRecommendationLeadGen() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Stay Ahead of Competitors In Google Search Results
+                  Stay Ahead Of Competitors In Local Search Rankings
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Get your business in front of customers actively searching for your services. With Google Ads, you
-                  appear at the top of search results exactly when potential customers are ready to buy.
+                  Get found by customers in your area when they search for services like yours. With Local SEO, you'll
+                  appear in Google Maps and local search results right when potential customers need you most.
                 </p>
 
                 <div className="space-y-4 mb-10">
@@ -138,13 +142,16 @@ export default function ProductRecommendationLeadGen() {
                   ))}
                 </div>
 
-                <Button onClick={() => navigate("/business-cycle/leadgen", { state: location.state })} className="px-8">
+                <Button
+                  onClick={() => navigate("/business-cycle/localseo", { state: location.state })}
+                  className="px-8"
+                >
                   Learn About Our Process
                 </Button>
               </div>
 
               <div className="hidden md:block">
-                <LeadGenIllustration />
+                <LocalSEOIllustration />
               </div>
             </div>
           </motion.div>
