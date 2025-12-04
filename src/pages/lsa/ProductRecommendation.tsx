@@ -20,7 +20,7 @@ function LSAIllustration() {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3">
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-2">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
               <BadgeCheck className="w-5 h-5 text-green-500" />
