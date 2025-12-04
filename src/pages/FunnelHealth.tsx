@@ -207,28 +207,53 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-8 space-y-4">
+                    <div className="mt-10 space-y-6">
                       <div>
-                        <p className="text-sm font-semibold text-foreground mb-2">Areas of Improvement:</p>
-                        <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                          {trafficScore < 70 && <li>Traffic Generation</li>}
-                          {conversionScore < 70 && <li>Website Conversions</li>}
-                          {leadScore < 70 && <li>Lead Management</li>}
-                        </ul>
+                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {trafficScore < 70 && (
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                              Traffic Generation
+                            </span>
+                          )}
+                          {conversionScore < 70 && (
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                              Website Conversions
+                            </span>
+                          )}
+                          {leadScore < 70 && (
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                              Lead Management
+                            </span>
+                          )}
+                        </div>
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-foreground mb-2">Our Recommended Solutions:</p>
-                        <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
+                        <ul className="space-y-2 text-muted-foreground">
                           {trafficScore < 70 && (
-                            <li>Targeted advertising or SEO optimisation to drive qualified traffic</li>
+                            <li className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                              <span>Targeted advertising or SEO optimisation to drive qualified traffic</span>
+                            </li>
                           )}
-                          {conversionScore < 70 && <li>SmartSite to optimise your website for conversions</li>}
-                          {leadScore < 70 && <li>Say Hello to never miss a lead</li>}
+                          {conversionScore < 70 && (
+                            <li className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                              <span>SmartSite to optimise your website for conversions</span>
+                            </li>
+                          )}
+                          {leadScore < 70 && (
+                            <li className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                              <span>Say Hello to never miss a lead</span>
+                            </li>
+                          )}
                         </ul>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
+                    <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
                       Great work! Your funnel is performing well across all key areas.
                     </p>
                   )}
