@@ -20,42 +20,42 @@ function LeadGenIllustration() {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 mb-4">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <MousePointerClick className="w-6 h-6 text-primary" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+              <MousePointerClick className="w-7 h-7 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Sponsored Search Ads</p>
-              <p className="text-sm text-muted-foreground">Top of Google Results</p>
+              <p className="text-lg font-semibold text-foreground">Sponsored Search Ads</p>
+              <p className="text-base text-muted-foreground">Top of Google Results</p>
             </div>
-            <span className="text-sm font-bold text-primary bg-primary/10 px-3 py-1.5 rounded-full">Ad</span>
+            <span className="text-base font-bold text-primary bg-primary/10 px-4 py-2 rounded-full">Ad</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 mb-4 ml-6">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-green-500" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5 ml-6">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center">
+              <TrendingUp className="w-7 h-7 text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Click-Through Rate</p>
-              <p className="text-sm text-muted-foreground">Industry-leading CTR</p>
+              <p className="text-lg font-semibold text-foreground">Click-Through Rate</p>
+              <p className="text-base text-muted-foreground">Industry-leading CTR</p>
             </div>
-            <span className="text-sm font-bold text-green-500 bg-green-50 px-3 py-1.5 rounded-full">+45%</span>
+            <span className="text-base font-bold text-green-500 bg-green-50 px-4 py-2 rounded-full">+45%</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 ml-3">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Target className="w-6 h-6 text-blue-500" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 ml-3">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <Target className="w-7 h-7 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Precise Targeting</p>
-              <p className="text-sm text-muted-foreground">Location, device, demographics</p>
+              <p className="text-lg font-semibold text-foreground">Precise Targeting</p>
+              <p className="text-base text-muted-foreground">Location, device, demographics</p>
             </div>
-            <span className="text-sm font-bold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full">Smart</span>
+            <span className="text-base font-bold text-blue-500 bg-blue-50 px-4 py-2 rounded-full">Smart</span>
           </div>
         </div>
 
@@ -63,9 +63,9 @@ function LeadGenIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-primary shadow-lg flex items-center justify-center"
+          className="absolute -top-5 -right-5 w-20 h-20 rounded-full bg-primary shadow-lg flex items-center justify-center"
         >
-          <Zap className="w-8 h-8 text-white" strokeWidth={2} />
+          <Zap className="w-10 h-10 text-white" strokeWidth={2} />
         </motion.div>
       </motion.div>
     </div>
@@ -129,12 +129,12 @@ export default function ProductRecommendationLeadGen() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-4"
                     >
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
                       </div>
-                      <span className="text-foreground text-sm">{benefit}</span>
+                      <span className="text-foreground text-base">{benefit}</span>
                     </motion.div>
                   ))}
                 </div>

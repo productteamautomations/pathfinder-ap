@@ -20,46 +20,46 @@ function LocalSEOIllustration() {
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 mb-4">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <MapPin className="w-6 h-6 text-primary" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
+              <MapPin className="w-7 h-7 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Google Business Profile</p>
-              <p className="text-sm text-muted-foreground">Optimized & Verified</p>
+              <p className="text-lg font-semibold text-foreground">Google Business Profile</p>
+              <p className="text-base text-muted-foreground">Optimized & Verified</p>
             </div>
             <div className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 mb-4 ml-6">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <TrendingUp className="w-6 h-6 text-green-500" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5 ml-6">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center">
+              <TrendingUp className="w-7 h-7 text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Local Rankings</p>
-              <p className="text-sm text-muted-foreground">+156% visibility increase</p>
+              <p className="text-lg font-semibold text-foreground">Local Rankings</p>
+              <p className="text-base text-muted-foreground">+156% visibility increase</p>
             </div>
-            <span className="text-sm font-bold text-green-500 bg-green-50 px-3 py-1.5 rounded-full">Top 3</span>
+            <span className="text-base font-bold text-green-500 bg-green-50 px-4 py-2 rounded-full">Top 3</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-6 shadow-lg border border-border/20 ml-3">
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Users className="w-6 h-6 text-blue-500" />
+        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 ml-3">
+          <div className="flex items-center gap-6">
+            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <Users className="w-7 h-7 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-base font-semibold text-foreground">Customer Reach</p>
-              <p className="text-sm text-muted-foreground">2.4k monthly searches</p>
+              <p className="text-lg font-semibold text-foreground">Customer Reach</p>
+              <p className="text-base text-muted-foreground">2.4k monthly searches</p>
             </div>
-            <span className="text-sm font-bold text-blue-500 bg-blue-50 px-3 py-1.5 rounded-full">Local</span>
+            <span className="text-base font-bold text-blue-500 bg-blue-50 px-4 py-2 rounded-full">Local</span>
           </div>
         </div>
 
@@ -67,9 +67,9 @@ function LocalSEOIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
+          className="absolute -top-5 -right-5 w-20 h-20 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
         >
-          <Check className="w-8 h-8 text-white" strokeWidth={3} />
+          <Check className="w-10 h-10 text-white" strokeWidth={3} />
         </motion.div>
       </motion.div>
     </div>
@@ -126,12 +126,12 @@ export default function ProductRecommendationLocalSEO() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-4"
                     >
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
                       </div>
-                      <span className="text-foreground text-sm">{benefit}</span>
+                      <span className="text-foreground text-base">{benefit}</span>
                     </motion.div>
                   ))}
                 </div>
