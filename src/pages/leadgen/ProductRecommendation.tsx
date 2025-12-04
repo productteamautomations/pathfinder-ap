@@ -91,7 +91,7 @@ export default function ProductRecommendationLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center px-6 py-10 md:py-12"
+          className="text-center px-6 py-6 md:py-8"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
             <span className="text-foreground">Lead Generation</span>
