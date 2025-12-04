@@ -48,7 +48,11 @@ const slides = [
       { label: "Be Relevant", description: "Match your ad to search intent" },
       { label: "Be Clear", description: "Communicate your value instantly" },
       { label: "Be Tempting", description: "Give them a reason to click" },
-      { label: "Example", description: "\"Loft Conversions in Altrincham – Free Quote Today\" Is more enticing than \"Professional Loft Conversions\"" },
+      {
+        label: "Example",
+        description:
+          '"Loft Conversions in Altrincham – Free Quote Today" Is more enticing than "Professional Loft Conversions"',
+      },
     ],
   },
   {
@@ -80,9 +84,7 @@ const slides = [
       { label: "Strategic onboarding call", description: "Understand your goals and develop strategy" },
       { label: "Google Ads account setup", description: "New account or optimise existing" },
       { label: "Search campaign creation", description: "Built from scratch" },
-      { label: "Responsive Search Ads", description: "Engaging ad copy that converts" },
       { label: "Conversion tracking setup", description: "Enhanced attribution solution" },
-      { label: "Say Hello setup", description: "CRM for managing leads" },
       { label: "Campaign launch call", description: "Final review and go live" },
     ],
   },
@@ -157,9 +159,7 @@ export default function BusinessCycleLeadGen() {
                       {slide.title}
                     </h2>
                     <OrangeAccent />
-                    <p className="text-lg text-muted-foreground mt-8 leading-relaxed">
-                      {slide.subtitle}
-                    </p>
+                    <p className="text-lg text-muted-foreground mt-8 leading-relaxed">{slide.subtitle}</p>
                     <div className="flex gap-1.5 mt-10">
                       {slides.map((_, idx) => (
                         <div
