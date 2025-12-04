@@ -101,7 +101,7 @@ export default function ProductRecommendationLSA() {
             <span className="text-foreground">Local Services Ads</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Why LSAs are the <span className="text-primary font-semibold">Right Fit</span> for you.
+            Why LSAs are the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
