@@ -106,16 +106,21 @@ function calculateScores(answers: Record<string, string>) {
   // Score mapping: each answer ranked 0-4 (4 = best, 0 = worst)
   const scoreMap: Record<string, Record<string, number>> = {
     // Traffic questions
-    avgCTR: { "≥5%": 4, "3–5%": 3, "<2%": 1, "Unsure": 0 },
-    trackingConversions: { "Both": 4, "Form Fills": 2, "Calls": 2, "None": 0 },
-    avgCPC: { "<£0.50": 4, "£0.50–£3.00": 2, "≥£3.00": 1, "Unsure": 0 },
+    avgCTR: { "≥5%": 4, "3–5%": 3, "<2%": 1, Unsure: 0 },
+    trackingConversions: { Both: 4, "Form Fills": 2, Calls: 2, None: 0 },
+    avgCPC: { "<£0.50": 4, "£0.50–£3.00": 2, "≥£3.00": 1, Unsure: 0 },
     // Conversion questions
-    costPerAcquisition: { "<£10": 4, "£10–£50": 2, "≥£50": 1, "Unsure": 0 },
+    costPerAcquisition: { "<£10": 4, "£10–£50": 2, "≥£50": 1, Unsure: 0 },
     conversionRate: { "≥5%": 4, "2–5%": 3, "1–2%": 2, "<1%": 0 },
-    ctaVisibility: { "Yes – both mobile & desktop": 4, "Yes – desktop only": 2, "Yes – mobile only": 2, "No": 0 },
-    servicePages: { "Yes – all services": 4, "Yes – some": 2, "No": 0 },
+    ctaVisibility: { "Yes – both mobile & desktop": 4, "Yes – desktop only": 2, "Yes – mobile only": 2, No: 0 },
+    servicePages: { "Yes – all services": 4, "Yes – some": 2, No: 0 },
     // Lead Management questions
-    leadManagementSystem: { "Assistant (Human/Virtual)": 4, "Answer Every Call": 3, "Self dedicated admin time": 2, "Organised Chaos": 0 },
+    leadManagementSystem: {
+      "Assistant (Human/Virtual)": 4,
+      "Answer Every Call": 3,
+      "Self dedicated admin time": 2,
+      "Organised Chaos": 0,
+    },
     responseTime: { "Same hour": 4, "Same day": 3, "Same week": 1, "When I get a chance": 0 },
   };
 
@@ -165,7 +170,12 @@ export default function FunnelHealth() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={() => navigate("/funnel-diagnostic", { state: location.state })} currentStep={3} totalSteps={7} showProgress />
+      <PageHeader
+        onBack={() => navigate("/funnel-diagnostic", { state: location.state })}
+        currentStep={3}
+        totalSteps={7}
+        showProgress
+      />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
@@ -196,7 +206,7 @@ export default function FunnelHealth() {
                   <OrangeAccent />
 
                   {/* Improvement Insights - show when any score is under 70% */}
-                  {(trafficScore < 70 || conversionScore < 70 || leadScore < 70) ? (
+                  {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
                     <div className="mt-8 space-y-4">
                       <div>
                         <p className="text-sm font-semibold text-foreground mb-2">Areas of Improvement:</p>
@@ -209,7 +219,9 @@ export default function FunnelHealth() {
                       <div>
                         <p className="text-sm font-semibold text-foreground mb-2">Our Recommended Solutions:</p>
                         <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                          {trafficScore < 70 && <li>Targeted advertising to drive qualified traffic</li>}
+                          {trafficScore < 70 && (
+                            <li>Targeted advertising or SEO optimisation to drive qualified traffic</li>
+                          )}
                           {conversionScore < 70 && <li>SmartSite to optimise your website for conversions</li>}
                           {leadScore < 70 && <li>Say Hello to never miss a lead</li>}
                         </ul>
@@ -249,12 +261,7 @@ export default function FunnelHealth() {
                   </motion.div>
 
                   {/* Continue Button */}
-                  <Button
-                    onClick={handleContinue}
-                    fullWidth
-                    className="group"
-                    disabled={isWaitingForRecommendation}
-                  >
+                  <Button onClick={handleContinue} fullWidth className="group" disabled={isWaitingForRecommendation}>
                     <span className="flex items-center justify-center gap-2">
                       {isWaitingForRecommendation ? (
                         <>
