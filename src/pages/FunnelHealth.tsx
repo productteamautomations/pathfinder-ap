@@ -96,7 +96,7 @@ function OverallScoreRing({ score }: { score: number }) {
         <p className="text-lg font-semibold" style={{ color: getHealthColor(score) }}>
           {getHealthLabel(score)}
         </p>
-        <p className="text-sm text-muted-foreground">Overall Health</p>
+        <p className="text-base text-muted-foreground">Overall Health</p>
       </motion.div>
     </motion.div>
   );
@@ -334,16 +334,16 @@ export default function FunnelHealth() {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-2 text-sm text-destructive mt-4"
+                      className="flex items-center gap-2 text-base text-destructive mt-5"
                     >
-                      <AlertCircle className="w-4 h-4" />
+                      <AlertCircle className="w-5 h-5" />
                       <span>Unable to get recommendation. Please try again.</span>
                     </motion.div>
                   )}
 
                   {/* Insight text */}
                   <motion.p
-                    className="text-sm text-muted-foreground text-center mt-6 max-w-xs"
+                    className="text-base text-muted-foreground text-center mt-8 max-w-sm"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}

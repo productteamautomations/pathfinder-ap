@@ -328,7 +328,7 @@ export default function Welcome() {
                   required
                 />
                 {urlError && (
-                  <p className="text-sm text-destructive">{urlError}</p>
+                  <p className="text-base text-destructive">{urlError}</p>
                 )}
               </div>
               <Button onClick={handleContinue} disabled={!isValid} fullWidth>
