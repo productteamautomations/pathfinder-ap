@@ -67,15 +67,15 @@ export default function ServiceSelector() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
                 onClick={() => navigate(service.path, { state: location.state })}
-                className="bg-white rounded-[2rem] p-10 shadow-lg border border-border/30 hover:border-primary/50 hover:shadow-xl transition-all text-left group"
+                className="bg-white rounded-[2rem] p-12 shadow-lg border border-border/30 hover:border-primary/50 hover:shadow-xl transition-all text-left group"
               >
-                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-8 h-8 text-primary" />
+                <div className="w-20 h-20 rounded-2xl bg-primary/10 flex items-center justify-center mb-10 group-hover:bg-primary/20 transition-colors">
+                  <service.icon className="w-10 h-10 text-primary" />
                 </div>
-                <h2 className="text-2xl font-bold text-foreground mb-3">
+                <h2 className="text-3xl font-bold text-foreground mb-4">
                   {service.title}
                 </h2>
-                <p className="text-base text-muted-foreground">
+                <p className="text-lg text-muted-foreground">
                   {service.description}
                 </p>
               </motion.button>

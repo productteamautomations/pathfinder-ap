@@ -91,33 +91,33 @@ export default function RequiredInfo() {
                     <OrangeAccent />
 
                     {/* Form Fields */}
-                    <div className="mt-10 space-y-6">
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                    <div className="mt-10 space-y-7">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Client Name"
                           value={clientName}
                           onChange={(e) => setClientName(e.target.value)}
                           placeholder="Enter client name"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+                          className="border-0 shadow-none focus:ring-0 bg-transparent text-xl"
                         />
                       </div>
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Contract Selected"
                           value={contractSelected}
                           onChange={(e) => setContractSelected(e.target.value)}
                           placeholder="E.g., 12 Month Local SEO"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+                          className="border-0 shadow-none focus:ring-0 bg-transparent text-xl"
                         />
                       </div>
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Recurring Revenue"
                           type="number"
                           value={recurringRevenue}
                           onChange={(e) => setRecurringRevenue(e.target.value)}
                           placeholder="£ per month"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+                          className="border-0 shadow-none focus:ring-0 bg-transparent text-xl"
                         />
                       </div>
                     </div>
@@ -132,21 +132,21 @@ export default function RequiredInfo() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-8">Website Login Details</h3>
+                    <h3 className="text-3xl font-bold text-foreground mb-8">Website Login Details</h3>
 
                     {/* Form Fields */}
-                    <div className="space-y-6 mb-8">
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                    <div className="space-y-7 mb-8">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Username"
                           value={username}
                           onChange={(e) => setUsername(e.target.value)}
                           placeholder="Enter username"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+                          className="border-0 shadow-none focus:ring-0 bg-transparent text-xl"
                         />
                       </div>
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
-                        <label className="block text-sm font-medium text-foreground mb-2">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                        <label className="block text-base font-medium text-foreground mb-2">
                           Password
                         </label>
                         <div className="relative">
@@ -155,25 +155,25 @@ export default function RequiredInfo() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter password"
-                            className="w-full pr-12 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none text-lg"
+                            className="w-full pr-12 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none text-xl"
                           />
                           <button
                             type="button"
                             onClick={() => setShowPassword(!showPassword)}
                             className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                           >
-                            {showPassword ? <EyeOff className="w-6 h-6" /> : <Eye className="w-6 h-6" />}
+                            {showPassword ? <EyeOff className="w-7 h-7" /> : <Eye className="w-7 h-7" />}
                           </button>
                         </div>
                       </div>
-                      <div className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <div className="bg-white rounded-2xl p-6 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Login URL"
                           type="url"
                           value={loginUrl}
                           onChange={(e) => setLoginUrl(e.target.value)}
                           placeholder="https://yourwebsite.com/wp-admin"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent text-lg"
+                          className="border-0 shadow-none focus:ring-0 bg-transparent text-xl"
                         />
                       </div>
                     </div>
