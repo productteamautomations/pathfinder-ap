@@ -13,53 +13,53 @@ const benefits = [
 
 function LSAIllustration() {
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-sm mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5">
-          <div className="flex items-center gap-6">
-            <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <BadgeCheck className="w-7 h-7 text-green-500" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+              <BadgeCheck className="w-5 h-5 text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="text-lg font-semibold text-foreground">Google Guaranteed</p>
-              <p className="text-base text-muted-foreground">Verified & Trusted</p>
+              <p className="text-sm font-semibold text-foreground">Google Guaranteed</p>
+              <p className="text-xs text-muted-foreground">Verified & Trusted</p>
             </div>
             <div className="flex items-center gap-0.5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
               ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 mb-5 ml-6">
-          <div className="flex items-center gap-6">
-            <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Shield className="w-7 h-7 text-blue-500" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3 ml-6">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <Shield className="w-5 h-5 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-lg font-semibold text-foreground">Background Checked</p>
-              <p className="text-base text-muted-foreground">Fully verified business</p>
+              <p className="text-sm font-semibold text-foreground">Background Checked</p>
+              <p className="text-xs text-muted-foreground">Fully verified business</p>
             </div>
-            <span className="text-base font-bold text-blue-500 bg-blue-50 px-4 py-2 rounded-full">Secure</span>
+            <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Secure</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-7 shadow-lg border border-border/20 ml-3">
-          <div className="flex items-center gap-6">
-            <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Phone className="w-7 h-7 text-primary" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-3">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Phone className="w-5 h-5 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-lg font-semibold text-foreground">Pay Per Lead</p>
-              <p className="text-base text-muted-foreground">Only valid enquiries</p>
+              <p className="text-sm font-semibold text-foreground">Pay Per Lead</p>
+              <p className="text-xs text-muted-foreground">Only valid enquiries</p>
             </div>
-            <span className="text-base font-bold text-primary bg-primary/10 px-4 py-2 rounded-full">Smart</span>
+            <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Smart</span>
           </div>
         </div>
 
@@ -67,9 +67,9 @@ function LSAIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-5 -right-5 w-20 h-20 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
+          className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
         >
-          <Check className="w-10 h-10 text-white" strokeWidth={3} />
+          <Check className="w-7 h-7 text-white" strokeWidth={3} />
         </motion.div>
       </motion.div>
     </div>
@@ -142,12 +142,12 @@ export default function ProductRecommendationLSA() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-4"
+                      className="flex items-center gap-3"
                     >
-                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
                       </div>
-                      <span className="text-foreground text-base">{benefit}</span>
+                      <span className="text-foreground text-sm">{benefit}</span>
                     </motion.div>
                   ))}
                 </div>
