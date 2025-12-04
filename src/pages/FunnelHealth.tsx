@@ -197,19 +197,25 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {(trafficScore < 70 || conversionScore < 70 || leadScore < 70) ? (
-                    <div className="mt-8 space-y-4">
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">Areas of Improvement:</p>
-                        <ul className="space-y-1 text-foreground">
-                          {trafficScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Traffic Generation</li>}
-                          {conversionScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Website Conversions</li>}
-                          {leadScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Lead Management</li>}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">Our Recommended Solution:</p>
-                        <p className="text-foreground">A tailored strategy to strengthen these areas and maximize your ROI.</p>
-                      </div>
+                    <div className="mt-8 space-y-6">
+                      {trafficScore < 70 && (
+                        <div>
+                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Traffic Generation</p>
+                          <p className="text-foreground">Our targeted advertising campaigns put your business in front of the right customers at the right time, driving qualified traffic through Google Ads and Local Service Ads.</p>
+                        </div>
+                      )}
+                      {conversionScore < 70 && (
+                        <div>
+                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Website Conversions</p>
+                          <p className="text-foreground">Our Smart Site solution optimises your website for conversions with clear calls-to-action, mobile-first design, and conversion tracking to turn more visitors into leads.</p>
+                        </div>
+                      )}
+                      {leadScore < 70 && (
+                        <div>
+                          <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-1">Lead Management</p>
+                          <p className="text-foreground">Say Hello ensures you never miss a lead with instant notifications, automated follow-ups, and a streamlined system to respond faster than your competitors.</p>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
