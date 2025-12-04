@@ -70,73 +70,73 @@ export default function RequiredInfo() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
-            >
-              <div className="grid md:grid-cols-2 min-h-[70vh]">
-                {/* Left Side - Client Details */}
-                <div className="p-14 md:p-18 lg:p-24 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <span className="text-base font-semibold text-primary uppercase tracking-wider mb-5 block">
-                      Final Step
-                    </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
-                      Client Details
-                    </h2>
-                    
-                    {/* Orange Accent Motif */}
-                    <OrangeAccent />
+            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          >
+            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
+              {/* Left Side - Client Details */}
+              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
+                    Final Step
+                  </span>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                    Client Details
+                  </h2>
+                  
+                  {/* Orange Accent Motif */}
+                  <OrangeAccent />
 
-                    {/* Form Fields */}
-                    <div className="mt-10 space-y-5">
-                      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
-                        <Input
-                          label="Client Name"
-                          value={clientName}
-                          onChange={(e) => setClientName(e.target.value)}
-                          placeholder="Enter client name"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent"
-                        />
-                      </div>
-                      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
-                        <Input
-                          label="Contract Selected"
-                          value={contractSelected}
-                          onChange={(e) => setContractSelected(e.target.value)}
-                          placeholder="E.g., 12 Month Local SEO"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent"
-                        />
-                      </div>
-                      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
-                        <Input
-                          label="Recurring Revenue"
-                          type="number"
-                          value={recurringRevenue}
-                          onChange={(e) => setRecurringRevenue(e.target.value)}
-                          placeholder="£ per month"
-                          className="border-0 shadow-none focus:ring-0 bg-transparent"
-                        />
-                      </div>
+                  {/* Form Fields */}
+                  <div className="mt-6 space-y-4">
+                    <div className="bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <Input
+                        label="Client Name"
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)}
+                        placeholder="Enter client name"
+                        className="border-0 shadow-none focus:ring-0 bg-transparent"
+                      />
                     </div>
-                  </motion.div>
-                </div>
+                    <div className="bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <Input
+                        label="Contract Selected"
+                        value={contractSelected}
+                        onChange={(e) => setContractSelected(e.target.value)}
+                        placeholder="E.g., 12 Month Local SEO"
+                        className="border-0 shadow-none focus:ring-0 bg-transparent"
+                      />
+                    </div>
+                    <div className="bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                      <Input
+                        label="Recurring Revenue"
+                        type="number"
+                        value={recurringRevenue}
+                        onChange={(e) => setRecurringRevenue(e.target.value)}
+                        placeholder="£ per month"
+                        className="border-0 shadow-none focus:ring-0 bg-transparent"
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
 
-                {/* Right Side - Login Details */}
-                <div className="p-14 md:p-18 lg:p-24 flex flex-col justify-center bg-muted/30 border-l border-border/20">
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
-                  >
-                    <h3 className="text-3xl font-bold text-foreground mb-10">Website Login Details</h3>
+              {/* Right Side - Login Details */}
+              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="w-full"
+                >
+                  <h3 className="text-2xl font-bold text-foreground mb-6">Website Login Details</h3>
 
-                    {/* Form Fields */}
-                    <div className="space-y-5 mb-8">
-                      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
+                  {/* Form Fields */}
+                  <div className="space-y-4 mb-6">
+                    <div className="bg-white rounded-2xl p-3 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                         <Input
                           label="Username"
                           value={username}
@@ -183,17 +183,17 @@ export default function RequiredInfo() {
                       Complete Setup
                     </Button>
 
-                    <p className="text-base text-muted-foreground text-center mt-5">
+                    <p className="text-sm text-muted-foreground text-center mt-3">
                       All information is securely stored and encrypted
                     </p>
 
                     {/* Back Button */}
                     <button
                       onClick={() => navigate(-1)}
-                      className="mt-10 text-base font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                      className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group"
                     >
-                      <div className="w-12 h-12 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
-                        <ChevronRight className="w-5 h-5 text-foreground rotate-180" />
+                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
                       </div>
                       <span className="uppercase tracking-wider">Back</span>
                     </button>
