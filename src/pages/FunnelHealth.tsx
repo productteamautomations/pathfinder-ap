@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
@@ -147,10 +147,19 @@ export default function FunnelHealth() {
   const location = useLocation();
   const { recommendation, fetchRecommendation } = useRecommendation();
   const [retryError, setRetryError] = useState(false);
+  const hasAttemptedRetry = useRef(false);
 
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
+
+  // Watch for when loading finishes after a retry attempt
+  useEffect(() => {
+    if (hasAttemptedRetry.current && !recommendation.isLoading && !recommendation.product) {
+      setRetryError(true);
+      hasAttemptedRetry.current = false;
+    }
+  }, [recommendation.isLoading, recommendation.product]);
 
   const handleContinue = () => {
     // Map product to route
@@ -166,10 +175,11 @@ export default function FunnelHealth() {
       // No recommendation available - retry the webhook
       const state = location.state as any;
       const name = state?.name || "";
-      const websiteUrl = state?.websiteUrl || "";
+      const websiteUrl = state?.url || ""; // Welcome page passes 'url' not 'websiteUrl'
       
       if (name && websiteUrl) {
         setRetryError(false);
+        hasAttemptedRetry.current = true;
         fetchRecommendation(name, websiteUrl);
       } else {
         setRetryError(true);
@@ -178,7 +188,7 @@ export default function FunnelHealth() {
   };
 
   const isWaitingForRecommendation = recommendation.isLoading;
-  const showError = !recommendation.isLoading && !recommendation.product && retryError;
+  const showError = retryError;
 
   return (
     <div className="min-h-screen flex flex-col">
