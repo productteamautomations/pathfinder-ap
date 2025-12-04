@@ -96,7 +96,7 @@ export default function ProductRecommendationLeadGen() {
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
             <span className="text-foreground">Lead Generation</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mt-2 max-w-2xl mx-auto">
             Why Google Ads is the <span className="text-primary font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
@@ -110,14 +110,12 @@ export default function ProductRecommendationLeadGen() {
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-
                 <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Get your business in front of customers actively searching for your services. 
-                  With Google Ads, you appear at the top of search results exactly when 
-                  potential customers are ready to buy.
+                  Get your business in front of customers actively searching for your services. With Google Ads, you
+                  appear at the top of search results exactly when potential customers are ready to buy.
                 </p>
 
                 <div className="space-y-4 mb-10">
@@ -140,10 +138,7 @@ export default function ProductRecommendationLeadGen() {
                   ))}
                 </div>
 
-                <Button
-                  onClick={() => navigate("/business-cycle/leadgen", { state: location.state })}
-                  className="px-8"
-                >
+                <Button onClick={() => navigate("/business-cycle/leadgen", { state: location.state })} className="px-8">
                   Learn About Our Process
                 </Button>
               </div>
