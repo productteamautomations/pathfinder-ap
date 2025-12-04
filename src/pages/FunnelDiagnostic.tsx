@@ -181,7 +181,7 @@ export default function FunnelDiagnostic() {
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-5xl">
           {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -191,7 +191,7 @@ export default function FunnelDiagnostic() {
           >
             <div className="grid md:grid-cols-2 h-full">
               {/* Left Side - Question & Options */}
-              <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
+              <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentQuestion}
@@ -272,7 +272,7 @@ export default function FunnelDiagnostic() {
                     animate={{ opacity: imageLoaded ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="absolute inset-0 w-full h-full object-contain"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 </AnimatePresence>
               </div>
