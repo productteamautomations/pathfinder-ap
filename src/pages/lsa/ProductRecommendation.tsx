@@ -118,7 +118,7 @@ export default function ProductRecommendationLSA() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border/30 mb-4"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border/30 mb-4 -mt-2"
                 >
                   <div className="w-2 h-2 rounded-full bg-green-500" />
                   <span className="text-sm font-medium text-foreground">Google Guaranteed</span>
