@@ -201,7 +201,7 @@ export default function FunnelHealth() {
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-6xl">
+        <div className="w-full max-w-7xl">
           {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -211,16 +211,16 @@ export default function FunnelHealth() {
           >
             <div className="grid md:grid-cols-2 min-h-[70vh]">
               {/* Left Side - Results Overview */}
-              <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                  <span className="text-base font-semibold text-primary uppercase tracking-wider mb-5 block">
                     Results
                   </span>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
                     Your Funnel Health Overview
                   </h2>
 
@@ -229,30 +229,30 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-10 space-y-6">
+                    <div className="mt-12 space-y-8">
                       <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
-                        <div className="flex flex-wrap gap-2">
+                        <h3 className="text-xl font-semibold text-[#173340] mb-4">Areas of Improvement</h3>
+                        <div className="flex flex-wrap gap-3">
                           {trafficScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
                               Traffic Generation
                             </span>
                           )}
                           {conversionScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
                               Website Conversions
                             </span>
                           )}
                           {leadScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
                               Lead Management
                             </span>
                           )}
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
-                        <ul className="space-y-2 text-muted-foreground">
+                        <h3 className="text-xl font-semibold text-[#173340] mb-4">Our Recommended Solutions</h3>
+                        <ul className="space-y-3 text-muted-foreground text-lg">
                           {trafficScore < 70 && (
                             <li className="flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
@@ -283,7 +283,7 @@ export default function FunnelHealth() {
               </div>
 
               {/* Right Side - Visualization */}
-              <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
