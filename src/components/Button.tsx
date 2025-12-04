@@ -12,7 +12,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={cn(
-          "px-6 py-3.5 rounded-xl font-semibold transition-all duration-300",
+          "px-8 py-4 rounded-xl text-lg font-semibold transition-all duration-300",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "transform active:scale-[0.98]",
           fullWidth && "w-full",

@@ -53,7 +53,7 @@ function FormField({
 }) {
   return (
     <div className={className}>
-      <label className="block text-sm font-semibold text-[#173340] mb-2">
+      <label className="block text-base font-semibold text-[#173340] mb-3">
         {label}
         {required && <span className="text-primary ml-0.5">*</span>}
       </label>
@@ -104,7 +104,7 @@ export default function FactFinder() {
   };
 
   const inputStyles =
-    "w-full px-4 py-3.5 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
+    "w-full px-5 py-4 rounded-xl border-2 border-border/30 bg-white/80 text-lg text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -202,7 +202,7 @@ export default function FactFinder() {
                             key={option}
                             type="button"
                             onClick={() => setHasGMB(option)}
-                            className={`flex-1 px-4 py-3.5 rounded-xl border-2 font-medium transition-all duration-200 ${
+                            className={`flex-1 px-5 py-4 rounded-xl border-2 text-lg font-medium transition-all duration-200 ${
                               hasGMB === option
                                 ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                                 : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"

@@ -183,17 +183,17 @@ export default function RequiredInfo() {
                       Complete Setup
                     </Button>
 
-                    <p className="text-xs text-muted-foreground text-center mt-4">
+                    <p className="text-base text-muted-foreground text-center mt-5">
                       All information is securely stored and encrypted
                     </p>
 
                     {/* Back Button */}
                     <button
                       onClick={() => navigate(-1)}
-                      className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                      className="mt-10 text-base font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                     >
-                      <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
-                        <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
+                      <div className="w-12 h-12 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                        <ChevronRight className="w-5 h-5 text-foreground rotate-180" />
                       </div>
                       <span className="uppercase tracking-wider">Back</span>
                     </button>
