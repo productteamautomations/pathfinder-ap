@@ -95,7 +95,7 @@ export default function ProductRecommendationLSA() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center px-6 py-10 md:py-12"
+          className="text-center px-6 py-6 md:py-8"
         >
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
             <span className="text-foreground">Local Services Ads</span>
@@ -124,13 +124,10 @@ export default function ProductRecommendationLSA() {
                   <span className="text-sm font-medium text-foreground">Google Guaranteed</span>
                 </motion.div>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Google's Most Trusted Ad Format
-                </h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Google's Most Trusted Ad Format</h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
-                  Local Services Ads put your business at the very top of Google with the 
-                  Google Guaranteed badge. You only pay for valid leads, and customers 
-                  trust you because Google has verified your business.
+                  Local Services Ads put your business at the very top of Google with the Google Guaranteed badge. You
+                  only pay for valid leads, and customers trust you because Google has verified your business.
                 </p>
 
                 <div className="space-y-4 mb-10">
@@ -153,10 +150,7 @@ export default function ProductRecommendationLSA() {
                   ))}
                 </div>
 
-                <Button
-                  onClick={() => navigate("/pricing/lsa", { state: location.state })}
-                  className="px-8"
-                >
+                <Button onClick={() => navigate("/pricing/lsa", { state: location.state })} className="px-8">
                   View Pricing
                 </Button>
               </div>
