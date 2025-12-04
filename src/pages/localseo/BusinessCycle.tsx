@@ -175,7 +175,7 @@ export default function BusinessCycleLocalSEO() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[75vh]">
+            <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
               <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -228,7 +228,7 @@ export default function BusinessCycleLocalSEO() {
                       </div>
                     </div>
 
-                    <div className="flex-1 overflow-y-auto mb-4">
+                    <div className="flex-1 overflow-hidden mb-4">
                       {slide.timeline ? (
                         <div className="space-y-6">
                           {slide.timeline.map((item, idx) => (
