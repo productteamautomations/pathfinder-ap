@@ -195,10 +195,35 @@ export default function FunnelHealth() {
                   {/* Orange Accent Motif */}
                   <OrangeAccent />
 
-                  {/* Summary text */}
-                  <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
-                    We've analyzed your funnel performance across three key areas to identify opportunities for growth.
-                  </p>
+                  {/* Improvement Insights - show when any score is under 70% */}
+                  {(trafficScore < 70 || conversionScore < 70 || leadScore < 70) ? (
+                    <div className="mt-8 space-y-3">
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {trafficScore < 70 && conversionScore < 70 && leadScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Traffic</span>, <span className="font-semibold text-foreground">Conversions</span>, and <span className="font-semibold text-foreground">Lead Management</span> could all use attention.</>
+                        ) : trafficScore < 70 && conversionScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Traffic</span> and <span className="font-semibold text-foreground">Conversions</span> need improvement.</>
+                        ) : trafficScore < 70 && leadScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Traffic</span> and <span className="font-semibold text-foreground">Lead Management</span> need improvement.</>
+                        ) : conversionScore < 70 && leadScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Conversions</span> and <span className="font-semibold text-foreground">Lead Management</span> need improvement.</>
+                        ) : trafficScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Traffic</span> performance needs improvement.</>
+                        ) : conversionScore < 70 ? (
+                          <>Your <span className="font-semibold text-foreground">Conversions</span> need improvement.</>
+                        ) : (
+                          <>Your <span className="font-semibold text-foreground">Lead Management</span> needs improvement.</>
+                        )}
+                      </p>
+                      <p className="text-primary font-medium">
+                        We recommend a tailored strategy to strengthen these areas and maximize your ROI.
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
+                      Great work! Your funnel is performing well across all key areas.
+                    </p>
+                  )}
                 </motion.div>
               </div>
 
