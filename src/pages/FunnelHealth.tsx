@@ -197,27 +197,19 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {(trafficScore < 70 || conversionScore < 70 || leadScore < 70) ? (
-                    <div className="mt-8 space-y-3">
-                      <p className="text-muted-foreground text-lg leading-relaxed">
-                        {trafficScore < 70 && conversionScore < 70 && leadScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Traffic</span>, <span className="font-semibold text-foreground">Conversions</span>, and <span className="font-semibold text-foreground">Lead Management</span> could all use attention.</>
-                        ) : trafficScore < 70 && conversionScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Traffic</span> and <span className="font-semibold text-foreground">Conversions</span> need improvement.</>
-                        ) : trafficScore < 70 && leadScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Traffic</span> and <span className="font-semibold text-foreground">Lead Management</span> need improvement.</>
-                        ) : conversionScore < 70 && leadScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Conversions</span> and <span className="font-semibold text-foreground">Lead Management</span> need improvement.</>
-                        ) : trafficScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Traffic</span> performance needs improvement.</>
-                        ) : conversionScore < 70 ? (
-                          <>Your <span className="font-semibold text-foreground">Conversions</span> need improvement.</>
-                        ) : (
-                          <>Your <span className="font-semibold text-foreground">Lead Management</span> needs improvement.</>
-                        )}
-                      </p>
-                      <p className="text-primary font-medium">
-                        We recommend a tailored strategy to strengthen these areas and maximize your ROI.
-                      </p>
+                    <div className="mt-8 space-y-4">
+                      <div>
+                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">Areas of Improvement:</p>
+                        <ul className="space-y-1 text-foreground">
+                          {trafficScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Traffic Generation</li>}
+                          {conversionScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Website Conversions</li>}
+                          {leadScore < 70 && <li className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" />Lead Management</li>}
+                        </ul>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-2">Our Recommended Solution:</p>
+                        <p className="text-foreground">A tailored strategy to strengthen these areas and maximize your ROI.</p>
+                      </div>
                     </div>
                   ) : (
                     <p className="text-muted-foreground mt-8 text-lg leading-relaxed">
