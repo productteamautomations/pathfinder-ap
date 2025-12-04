@@ -116,28 +116,28 @@ export default function FactFinder() {
         />
 
         {/* Content Area */}
-        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center py-8">
+        <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center py-4">
           <div className="w-full max-w-5xl">
             {/* Main Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-10 md:p-14"
+              className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-8 md:p-10"
             >
               {/* Header */}
-              <div className="mb-10">
+              <div className="mb-6">
                 <motion.span
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  className="inline-block text-sm font-semibold tracking-widest text-primary uppercase mb-4"
+                  className="inline-block text-sm font-semibold tracking-widest text-primary uppercase mb-2"
                 >
                   Step 1 of 7
                 </motion.span>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                   Business Information
                 </h2>
-                <p className="text-muted-foreground mt-3 text-lg">
+                <p className="text-muted-foreground mt-2 text-base">
                   Help us understand your business better
                 </p>
                 <OrangeAccent />
@@ -217,13 +217,13 @@ export default function FactFinder() {
                 </div>
 
                 {/* Section 3: Business Channels */}
-                <div className="space-y-5">
-                  <h3 className="text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold">3</span>
+                <div className="space-y-3">
+                  <h3 className="text-sm font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
+                    <span className="w-7 h-7 rounded-full bg-primary/10 text-primary text-sm flex items-center justify-center font-bold">3</span>
                     Business Channels
                   </h3>
-                  <FormField label="How do you generate business?" required className="pl-11">
-                    <div className="flex flex-wrap gap-3">
+                  <FormField label="How do you generate business?" required className="pl-9">
+                    <div className="flex flex-wrap gap-2">
                       {generationOptions.map((option) => (
                         <motion.button
                           key={option}
@@ -231,7 +231,7 @@ export default function FactFinder() {
                           onClick={() => toggleGeneration(option)}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className={`px-5 py-3 rounded-full border-2 text-base font-medium transition-all duration-200 ${
+                          className={`px-4 py-2.5 rounded-full border-2 text-base font-medium transition-all duration-200 ${
                             businessGeneration.includes(option)
                               ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                               : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
@@ -245,7 +245,7 @@ export default function FactFinder() {
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex justify-end pt-6 border-t border-border/20">
+                <div className="flex justify-end pt-4 border-t border-border/20">
                   <Button
                     onClick={handleSubmit}
                     disabled={!isFormValid()}

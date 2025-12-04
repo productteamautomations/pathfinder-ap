@@ -104,36 +104,36 @@ export default function ProductRecommendationLSA() {
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
+        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] p-10 md:p-14 lg:p-18 max-w-7xl mx-auto shadow-lg border border-border/30"
+            className="bg-white rounded-[2rem] p-8 md:p-10 lg:p-12 max-w-7xl mx-auto shadow-lg border border-border/30"
           >
-            <div className="grid md:grid-cols-2 gap-14 items-center">
+            <div className="grid md:grid-cols-2 gap-10 items-center">
               <div>
                 <motion.div
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-muted border border-border/30 mb-8"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border/30 mb-4"
                 >
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
-                  <span className="text-base font-medium text-foreground">Google Guaranteed</span>
+                  <div className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="text-sm font-medium text-foreground">Google Guaranteed</span>
                 </motion.div>
 
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-5">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   Google's Most Trusted Ad Format
                 </h2>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-10">
+                <p className="text-base text-muted-foreground leading-relaxed mb-6">
                   Local Services Ads put your business at the very top of Google with the 
                   Google Guaranteed badge. You only pay for valid leads, and customers 
                   trust you because Google has verified your business.
                 </p>
 
-                <div className="space-y-5 mb-12">
-                  <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                <div className="space-y-3 mb-8">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Key Benefits:
                   </h3>
                   {benefits.map((benefit, index) => (
@@ -142,12 +142,12 @@ export default function ProductRecommendationLSA() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-4"
+                      className="flex items-center gap-3"
                     >
-                      <div className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
                       </div>
-                      <span className="text-foreground text-base">{benefit}</span>
+                      <span className="text-foreground text-sm">{benefit}</span>
                     </motion.div>
                   ))}
                 </div>

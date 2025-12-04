@@ -209,18 +209,18 @@ export default function FunnelHealth() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 min-h-[70vh]">
+            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
               {/* Left Side - Results Overview */}
-              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <span className="text-base font-semibold text-primary uppercase tracking-wider mb-5 block">
+                  <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-3 block">
                     Results
                   </span>
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#173340] leading-tight tracking-tight">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                     Your Funnel Health Overview
                   </h2>
 
@@ -229,30 +229,30 @@ export default function FunnelHealth() {
 
                   {/* Improvement Insights - show when any score is under 70% */}
                   {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-12 space-y-8">
+                    <div className="mt-8 space-y-5">
                       <div>
-                        <h3 className="text-xl font-semibold text-[#173340] mb-4">Areas of Improvement</h3>
-                        <div className="flex flex-wrap gap-3">
+                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
+                        <div className="flex flex-wrap gap-2">
                           {trafficScore < 70 && (
-                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
                               Traffic Generation
                             </span>
                           )}
                           {conversionScore < 70 && (
-                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
                               Website Conversions
                             </span>
                           )}
                           {leadScore < 70 && (
-                            <span className="px-4 py-2 bg-primary/10 text-primary text-base font-medium rounded-full">
+                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
                               Lead Management
                             </span>
                           )}
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold text-[#173340] mb-4">Our Recommended Solutions</h3>
-                        <ul className="space-y-3 text-muted-foreground text-lg">
+                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
+                        <ul className="space-y-2 text-muted-foreground text-base">
                           {trafficScore < 70 && (
                             <li className="flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
@@ -271,11 +271,11 @@ export default function FunnelHealth() {
                               <span>Say Hello to never miss a lead</span>
                             </li>
                           )}
-                        </ul>
+                      </ul>
                       </div>
                     </div>
                   ) : (
-                    <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
+                    <p className="text-muted-foreground mt-8 text-base leading-relaxed">
                       Great work! Your funnel is performing well across all key areas.
                     </p>
                   )}
@@ -283,7 +283,7 @@ export default function FunnelHealth() {
               </div>
 
               {/* Right Side - Visualization */}
-              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}

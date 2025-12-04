@@ -174,8 +174,8 @@ export default function BusinessCycleLocalSEO() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 min-h-[70vh]">
-              <div className="p-14 md:p-18 lg:p-24 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
+              <div className="p-8 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}

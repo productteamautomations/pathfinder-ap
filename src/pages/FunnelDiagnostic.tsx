@@ -192,11 +192,11 @@ export default function FunnelDiagnostic() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
-            >
-              <div className="grid md:grid-cols-2 min-h-[70vh]">
-                {/* Left Side - Question & Options */}
-                <div className="p-8 md:p-12 lg:p-16 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
+            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          >
+            <div className="grid md:grid-cols-2 h-[calc(100vh-120px)]">
+              {/* Left Side - Question & Options */}
+                <div className="p-6 md:p-10 lg:p-12 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentQuestion}
@@ -207,31 +207,31 @@ export default function FunnelDiagnostic() {
                       className="flex flex-col h-full"
                     >
                       {/* Question Title at Top */}
-                      <div className="flex-shrink-0 mb-8">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider mb-3 block">
+                      <div className="flex-shrink-0 mb-4">
+                        <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
                           {question.section}
                         </span>
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
                           {question.question}
                         </h2>
                         <OrangeAccent />
                       </div>
 
                       {/* Step Indicator */}
-                      <div className="mb-8">
-                        <div className="flex items-center gap-4">
-                          <span className="text-base font-semibold text-primary uppercase tracking-wider">Question</span>
-                          <span className="text-3xl font-bold text-foreground">{currentQuestion + 1}</span>
-                          <span className="text-muted-foreground text-xl">—</span>
-                          <span className="text-3xl font-bold text-muted-foreground">{totalSteps}</span>
+                      <div className="mb-4">
+                        <div className="flex items-center gap-3">
+                          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
+                          <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
+                          <span className="text-muted-foreground text-lg">—</span>
+                          <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
                         </div>
-                        <p className="text-lg text-muted-foreground mt-3">
+                        <p className="text-base text-muted-foreground mt-1">
                           Select one option
                         </p>
                       </div>
 
                       {/* Options */}
-                      <div className="space-y-4 flex-1">
+                      <div className="space-y-2.5 flex-1">
                         {question.options.map((option, index) => (
                           <motion.button
                             key={option}
@@ -239,14 +239,14 @@ export default function FunnelDiagnostic() {
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
                             onClick={() => handleAnswer(option)}
-                            className={`w-full p-5 rounded-2xl border text-left font-medium text-lg transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                            className={`w-full p-4 rounded-2xl border text-left font-medium text-base transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                               answers[question.id] === option
                                 ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                                 : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                             }`}
                           >
                             <span>{option}</span>
-                            <ChevronRight className={`w-6 h-6 transition-transform ${answers[question.id] === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
+                            <ChevronRight className={`w-5 h-5 transition-transform ${answers[question.id] === option ? "text-primary-foreground" : "text-muted-foreground"}`} />
                           </motion.button>
                         ))}
                       </div>
@@ -254,10 +254,10 @@ export default function FunnelDiagnostic() {
                       {/* Back Button */}
                       <button
                         onClick={handleBack}
-                        className="mt-8 text-base font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                        className="mt-4 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group"
                       >
-                        <div className="w-12 h-12 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
-                          <ChevronRight className="w-5 h-5 text-foreground rotate-180" />
+                        <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
+                          <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
                         </div>
                         <span className="uppercase tracking-wider">{currentQuestion > 0 ? "Back" : "Cancel"}</span>
                       </button>
