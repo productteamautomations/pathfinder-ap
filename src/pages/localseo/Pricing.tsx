@@ -61,7 +61,7 @@ export default function PricingLocalSEO() {
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
             <div className="grid md:grid-cols-2">
-              <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -97,7 +97,7 @@ export default function PricingLocalSEO() {
                 </motion.div>
               </div>
 
-              <div className="p-6 md:p-8 lg:p-10 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -129,13 +129,17 @@ export default function PricingLocalSEO() {
                     </button>
                   </div>
 
-                  {selectedPlan === "12" && (
-                    <div className="bg-green-50 p-2.5 rounded-xl mb-4 text-center border border-green-200">
-                      <p className="text-xs font-semibold text-green-700">
-                        You save £{savings.toFixed(2)} with a 12-month plan!
-                      </p>
-                    </div>
-                  )}
+                  <div className={`p-2.5 rounded-xl mb-4 text-center border ${
+                    selectedPlan === "12" 
+                      ? "bg-green-50 border-green-200" 
+                      : "bg-transparent border-transparent"
+                  }`}>
+                    <p className={`text-xs font-semibold ${
+                      selectedPlan === "12" ? "text-green-700" : "text-transparent"
+                    }`}>
+                      You save £{savings.toFixed(2)} with a 12-month plan!
+                    </p>
+                  </div>
 
                   <div className="space-y-1.5 mb-4">
                     <div className="flex justify-between items-center py-2 border-b border-border/30">
