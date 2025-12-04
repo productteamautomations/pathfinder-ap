@@ -58,6 +58,7 @@ export default function PricingLSA() {
         currentStep={5}
         totalSteps={6}
         showProgress
+        productLabel="LSAs"
       />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
@@ -171,7 +172,7 @@ export default function PricingLSA() {
                   </div>
 
                   <Button
-                    onClick={() => navigate("/required-info", { state: location.state })}
+                    onClick={() => navigate("/required-info", { state: { ...location.state, product: "LSAs" } })}
                     fullWidth
                   >
                     Start My Campaign

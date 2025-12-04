@@ -83,6 +83,7 @@ export default function ProductRecommendationLeadGen() {
         currentStep={4}
         totalSteps={7}
         showProgress
+        productLabel="Lead Generation"
       />
 
       <div className="flex-1 pt-[73px] flex flex-col">

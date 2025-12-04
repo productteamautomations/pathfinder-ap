@@ -34,6 +34,9 @@ function OrangeAccent() {
 export default function RequiredInfo() {
   const navigate = useNavigate();
   const location = useLocation();
+  const state = location.state as { product?: string } | null;
+  const productLabel = state?.product;
+  const totalSteps = productLabel === "LSAs" ? 6 : 7;
 
   const [clientName, setClientName] = useState("");
   const [contractSelected, setContractSelected] = useState("");
@@ -57,9 +60,10 @@ export default function RequiredInfo() {
     <div className="min-h-screen flex flex-col">
         <PageHeader
           onBack={() => navigate(-1)}
-          currentStep={7}
-          totalSteps={7}
+          currentStep={totalSteps}
+          totalSteps={totalSteps}
           showProgress
+          productLabel={productLabel}
         />
 
         {/* Content Area - Split Layout */}

@@ -82,7 +82,7 @@ export default function ProductRecommendationLocalSEO() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={() => navigate("/funnel-health", { state: location.state })} currentStep={4} totalSteps={7} showProgress />
+      <PageHeader onBack={() => navigate("/funnel-health", { state: location.state })} currentStep={4} totalSteps={7} showProgress productLabel="Local SEO" />
 
       <div className="flex-1 pt-[73px] flex flex-col">
         <motion.div

@@ -87,6 +87,7 @@ export default function ProductRecommendationLSA() {
         currentStep={4}
         totalSteps={6}
         showProgress
+        productLabel="LSAs"
       />
 
       <div className="flex-1 pt-[73px] flex flex-col">
