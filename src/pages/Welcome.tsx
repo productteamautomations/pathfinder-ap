@@ -10,7 +10,28 @@ export default function Welcome() {
   const { fetchRecommendation } = useRecommendation();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
-  const isValid = name.trim() !== "" && url.trim() !== "";
+  const [urlError, setUrlError] = useState("");
+
+  const validateUrl = (value: string): boolean => {
+    if (!value.trim()) return false;
+    try {
+      const urlObj = new URL(value);
+      return urlObj.protocol === "http:" || urlObj.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+
+  const handleUrlChange = (value: string) => {
+    setUrl(value);
+    if (value.trim() && !validateUrl(value)) {
+      setUrlError("Please enter a valid URL (e.g., https://yourwebsite.com)");
+    } else {
+      setUrlError("");
+    }
+  };
+
+  const isValid = name.trim() !== "" && validateUrl(url);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
@@ -297,14 +318,19 @@ export default function Welcome() {
                 onChange={(e) => setName(e.target.value)}
                 required
               />
-              <Input
-                label="Website URL"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://yourwebsite.com"
-                type="url"
-                required
-              />
+              <div className="space-y-1">
+                <Input
+                  label="Website URL"
+                  value={url}
+                  onChange={(e) => handleUrlChange(e.target.value)}
+                  placeholder="https://yourwebsite.com"
+                  type="url"
+                  required
+                />
+                {urlError && (
+                  <p className="text-sm text-destructive">{urlError}</p>
+                )}
+              </div>
               <Button onClick={handleContinue} disabled={!isValid} fullWidth>
                 Continue
               </Button>
