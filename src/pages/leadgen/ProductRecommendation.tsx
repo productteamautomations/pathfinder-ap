@@ -97,7 +97,7 @@ export default function ProductRecommendationLeadGen() {
             <span className="text-foreground">Lead Generation</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
-            Why Google Ads is the <span className="text-primary font-semibold">Right Fit</span> for you.
+            Why Google Ads is the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
