@@ -31,7 +31,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
           {productLabel ? (
             <div className="w-32 text-right">
               <span className="text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1.5 rounded-full">
-                {productLabel}
+                Product: {productLabel}
               </span>
             </div>
           ) : (
