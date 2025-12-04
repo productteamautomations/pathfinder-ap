@@ -6,9 +6,10 @@ interface PageHeaderProps {
   currentStep?: number;
   totalSteps?: number;
   showProgress?: boolean;
+  productLabel?: string;
 }
 
-export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false }: PageHeaderProps) {
+export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel }: PageHeaderProps) {
   return (
     <div className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50">
       <div className="max-w-7xl mx-auto px-6 py-4">
@@ -31,7 +32,15 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
             </div>
           )}
 
-          <div className="w-20" />
+          {productLabel ? (
+            <div className="w-32 text-right">
+              <span className="text-xs font-semibold text-primary bg-primary/10 px-3 py-1.5 rounded-full">
+                {productLabel}
+              </span>
+            </div>
+          ) : (
+            <div className="w-20" />
+          )}
         </div>
       </div>
     </div>

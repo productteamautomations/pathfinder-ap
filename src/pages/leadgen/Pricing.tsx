@@ -58,6 +58,7 @@ export default function PricingLeadGen() {
         currentStep={6}
         totalSteps={7}
         showProgress
+        productLabel="Lead Generation"
       />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
@@ -171,7 +172,7 @@ export default function PricingLeadGen() {
                   </div>
 
                   <Button
-                    onClick={() => navigate("/required-info", { state: location.state })}
+                    onClick={() => navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })}
                     fullWidth
                   >
                     Start My Campaign
