@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 interface ImprovementArea {
   title: string;
   score: number;
-  explanation: string;
+  explanations: string[];
   recommendation: string;
 }
 
@@ -77,9 +77,14 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             <div className="space-y-4">
               <div>
                 <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {currentArea.explanation}
-                </p>
+                <ul className="space-y-1.5">
+                  {currentArea.explanations.map((point, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground leading-relaxed flex items-start gap-2">
+                      <span className="text-primary mt-1.5 flex-shrink-0">•</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               <div className="pt-3 border-t border-border/30">
