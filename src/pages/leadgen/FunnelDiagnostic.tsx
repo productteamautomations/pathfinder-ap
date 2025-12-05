@@ -146,7 +146,7 @@ export default function FunnelDiagnostic() {
 
     if (isLastQuestion) {
       setTimeout(() => {
-        navigate("/funnel-health", {
+        navigate("/funnel-health/leadgen", {
           state: {
             ...location.state,
             diagnosticAnswers: newAnswers,
@@ -171,13 +171,13 @@ export default function FunnelDiagnostic() {
         setIsTransitioning(false);
       }, 300);
     } else {
-      navigate("/fact-finder", { state: location.state });
+      navigate("/product-recommendation/leadgen", { state: location.state });
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={handleBack} currentStep={2} totalSteps={7} showProgress />
+      <PageHeader onBack={handleBack} currentStep={4} totalSteps={7} showProgress productLabel="Lead Generation" />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">

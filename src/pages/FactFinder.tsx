@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
+import { useRecommendation } from "@/contexts/RecommendationContext";
+import { Loader2, AlertCircle, RefreshCw } from "lucide-react";
 
 const generationOptions = [
   "None",
@@ -65,6 +67,9 @@ function FormField({
 export default function FactFinder() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { recommendation, fetchRecommendation } = useRecommendation();
+  const [retryError, setRetryError] = useState(false);
+  const hasAttemptedRetry = useRef(false);
 
   const [monthEstablished, setMonthEstablished] = useState("");
   const [yearEstablished, setYearEstablished] = useState("");
@@ -80,20 +85,53 @@ export default function FactFinder() {
     return monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB;
   };
 
+  // Watch for when loading finishes after a retry attempt
+  useEffect(() => {
+    if (hasAttemptedRetry.current && !recommendation.isLoading && !recommendation.product) {
+      setRetryError(true);
+      hasAttemptedRetry.current = false;
+    }
+  }, [recommendation.isLoading, recommendation.product]);
+
   const handleSubmit = () => {
-    if (isFormValid()) {
-      navigate("/funnel-diagnostic", {
-        state: {
-          ...location.state,
-          monthEstablished,
-          yearEstablished,
-          businessGeneration,
-          monthlyLeads,
-          hasGMB,
-        },
-      });
+    if (!isFormValid()) return;
+
+    const newState = {
+      ...location.state,
+      monthEstablished,
+      yearEstablished,
+      businessGeneration,
+      monthlyLeads,
+      hasGMB,
+    };
+
+    // Map product to route
+    const productRoutes: Record<string, string> = {
+      SEO: "/product-recommendation/localseo",
+      LeadGen: "/product-recommendation/leadgen",
+      LSA: "/product-recommendation/lsa",
+    };
+
+    if (recommendation.product && productRoutes[recommendation.product]) {
+      navigate(productRoutes[recommendation.product], { state: newState });
+    } else {
+      // No recommendation available - retry the webhook
+      const state = location.state as any;
+      const name = state?.name || "";
+      const websiteUrl = state?.url || "";
+
+      if (name && websiteUrl) {
+        setRetryError(false);
+        hasAttemptedRetry.current = true;
+        fetchRecommendation(name, websiteUrl);
+      } else {
+        setRetryError(true);
+      }
     }
   };
+
+  const isWaitingForRecommendation = recommendation.isLoading;
+  const showError = retryError;
 
   const inputStyles =
     "w-full px-4 py-3 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
@@ -234,10 +272,39 @@ export default function FactFinder() {
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-end pt-4 border-t border-border/20">
-                <Button onClick={handleSubmit} disabled={!isFormValid()} className="px-10">
-                  Continue
+              <div className="flex flex-col items-end pt-4 border-t border-border/20">
+                <Button 
+                  onClick={handleSubmit} 
+                  disabled={!isFormValid() || isWaitingForRecommendation} 
+                  className="px-10"
+                >
+                  <span className="flex items-center gap-2">
+                    {isWaitingForRecommendation ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : recommendation.product ? (
+                      "Continue"
+                    ) : (
+                      <>
+                        <RefreshCw className="w-4 h-4" />
+                        Retry
+                      </>
+                    )}
+                  </span>
                 </Button>
+                
+                {showError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center gap-2 text-sm text-destructive mt-3"
+                  >
+                    <AlertCircle className="w-4 h-4" />
+                    <span>Unable to get recommendation. Please try again.</span>
+                  </motion.div>
+                )}
               </div>
             </div>
           </motion.div>
