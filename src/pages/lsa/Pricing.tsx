@@ -77,15 +77,15 @@ export default function PricingLSA() {
                   transition={{ duration: 0.3 }}
                 >
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
-                    Local Services Ads
+                    Google Guaranteed
                   </span>
                   <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
-                    Google Guaranteed
+                    Local Services Ads
                   </h2>
                   <OrangeAccent />
                   <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                    Get the Google Guaranteed badge and only pay for valid leads. 
-                    We handle setup, optimisation, and lead dispute management.
+                    Get the Google Guaranteed badge and only pay for valid leads. We handle setup, optimisation, and
+                    lead dispute management.
                   </p>
                   <div className="mt-4 space-y-2">
                     {features.map((item, index) => (
@@ -138,14 +138,16 @@ export default function PricingLSA() {
                     </button>
                   </div>
 
-                  <div className={`p-2.5 rounded-xl mb-4 text-center border ${
-                    selectedPlan === "12" 
-                      ? "bg-green-50 border-green-200" 
-                      : "bg-transparent border-transparent"
-                  }`}>
-                    <p className={`text-xs font-semibold ${
-                      selectedPlan === "12" ? "text-green-700" : "text-transparent"
-                    }`}>
+                  <div
+                    className={`p-2.5 rounded-xl mb-4 text-center border ${
+                      selectedPlan === "12" ? "bg-green-50 border-green-200" : "bg-transparent border-transparent"
+                    }`}
+                  >
+                    <p
+                      className={`text-xs font-semibold ${
+                        selectedPlan === "12" ? "text-green-700" : "text-transparent"
+                      }`}
+                    >
                       You save £{savings.toFixed(2)} with a 12-month plan!
                     </p>
                   </div>
