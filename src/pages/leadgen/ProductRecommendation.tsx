@@ -79,8 +79,8 @@ export default function ProductRecommendationLeadGen() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/funnel-health", { state: location.state })}
-        currentStep={4}
+        onBack={() => navigate("/fact-finder", { state: location.state })}
+        currentStep={3}
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
@@ -138,8 +138,8 @@ export default function ProductRecommendationLeadGen() {
                   ))}
                 </div>
 
-                <Button onClick={() => navigate("/business-cycle/leadgen", { state: location.state })} className="px-8">
-                  Learn About Our Process
+                <Button onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })} className="px-8">
+                  Start Your Assessment
                 </Button>
               </div>
 

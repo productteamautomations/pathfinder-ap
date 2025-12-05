@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
-import { ArrowRight, Loader2, AlertCircle, RefreshCw } from "lucide-react";
-import { useRecommendation } from "@/contexts/RecommendationContext";
+import { ArrowRight } from "lucide-react";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -58,9 +56,7 @@ function OverallScoreRing({ score }: { score: number }) {
     >
       <div className="relative w-36 h-36">
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-          {/* Background circle */}
           <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" className="text-muted/30" />
-          {/* Progress circle */}
           <motion.circle
             cx="50"
             cy="50"
@@ -75,7 +71,6 @@ function OverallScoreRing({ score }: { score: number }) {
             transition={{ duration: 1.2, delay: 0.3, ease: "easeOut" }}
           />
         </svg>
-        {/* Center content */}
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <motion.span
             className="text-4xl font-bold text-foreground"
@@ -104,7 +99,6 @@ function OverallScoreRing({ score }: { score: number }) {
 
 // Calculate scores based on diagnostic answers (0-4 ranking per question)
 function calculateScores(answers: Record<string, string>) {
-  // Score mapping: each answer ranked 0-4 (4 = best, 0 = worst)
   const scoreMap: Record<string, Record<string, number>> = {
     // Traffic questions
     avgCTR: { "≥5%": 4, "3–5%": 3, "<2%": 1, Unsure: 0 },
@@ -131,7 +125,7 @@ function calculateScores(answers: Record<string, string>) {
 
   const calcCategoryScore = (questionIds: string[]) => {
     const totalScore = questionIds.reduce((sum, id) => sum + (scoreMap[id]?.[answers[id]] ?? 0), 0);
-    const maxScore = questionIds.length * 4; // Each question max is 4
+    const maxScore = questionIds.length * 4;
     return Math.round((totalScore / maxScore) * 100);
   };
 
@@ -142,67 +136,30 @@ function calculateScores(answers: Record<string, string>) {
   };
 }
 
-export default function FunnelHealth() {
+export default function FunnelHealthLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation, fetchRecommendation } = useRecommendation();
-  const [retryError, setRetryError] = useState(false);
-  const hasAttemptedRetry = useRef(false);
 
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
 
-  // Watch for when loading finishes after a retry attempt
-  useEffect(() => {
-    if (hasAttemptedRetry.current && !recommendation.isLoading && !recommendation.product) {
-      setRetryError(true);
-      hasAttemptedRetry.current = false;
-    }
-  }, [recommendation.isLoading, recommendation.product]);
-
   const handleContinue = () => {
-    // Map product to route
-    const productRoutes: Record<string, string> = {
-      SEO: "/product-recommendation/localseo",
-      LeadGen: "/product-recommendation/leadgen",
-      LSA: "/product-recommendation/lsa",
-    };
-
-    if (recommendation.product && productRoutes[recommendation.product]) {
-      navigate(productRoutes[recommendation.product], { state: location.state });
-    } else {
-      // No recommendation available - retry the webhook
-      const state = location.state as any;
-      const name = state?.name || "";
-      const websiteUrl = state?.url || ""; // Welcome page passes 'url' not 'websiteUrl'
-      
-      if (name && websiteUrl) {
-        setRetryError(false);
-        hasAttemptedRetry.current = true;
-        fetchRecommendation(name, websiteUrl);
-      } else {
-        setRetryError(true);
-      }
-    }
+    navigate("/business-cycle/leadgen", { state: location.state });
   };
-
-  const isWaitingForRecommendation = recommendation.isLoading;
-  const showError = retryError;
 
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/funnel-diagnostic", { state: location.state })}
-        currentStep={3}
+        onBack={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
+        currentStep={5}
         totalSteps={7}
         showProgress
+        productLabel="Lead Generation"
       />
 
-      {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
         <div className="w-full max-w-6xl">
-          {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -224,10 +181,8 @@ export default function FunnelHealth() {
                     Your Funnel Health Overview
                   </h2>
 
-                  {/* Orange Accent Motif */}
                   <OrangeAccent />
 
-                  {/* Improvement Insights - show when any score is under 70% */}
                   {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
                     <div className="mt-10 space-y-6">
                       <div>
@@ -256,7 +211,7 @@ export default function FunnelHealth() {
                           {trafficScore < 70 && (
                             <li className="flex items-start gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>Targeted advertising or SEO optimisation to drive qualified traffic</span>
+                              <span>Targeted advertising to drive qualified traffic</span>
                             </li>
                           )}
                           {conversionScore < 70 && (
@@ -290,10 +245,8 @@ export default function FunnelHealth() {
                   transition={{ duration: 0.3 }}
                   className="w-full flex flex-col items-center"
                 >
-                  {/* Overall Score Ring */}
                   <OverallScoreRing score={overallScore} />
 
-                  {/* Funnel Visualization */}
                   <motion.div
                     className="w-full h-40 mt-8 mb-8"
                     initial={{ opacity: 0 }}
@@ -307,50 +260,20 @@ export default function FunnelHealth() {
                     />
                   </motion.div>
 
-                  {/* Continue Button */}
-                  <Button onClick={handleContinue} fullWidth className="group" disabled={isWaitingForRecommendation}>
+                  <Button onClick={handleContinue} fullWidth className="group">
                     <span className="flex items-center justify-center gap-2">
-                      {isWaitingForRecommendation ? (
-                        <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
-                          Analyzing...
-                        </>
-                      ) : recommendation.product ? (
-                        <>
-                          View Your Recommendation
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </>
-                      ) : (
-                        <>
-                          <RefreshCw className="w-4 h-4" />
-                          Retry Analysis
-                        </>
-                      )}
+                      See How We Can Help
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </Button>
 
-                  {/* Error message */}
-                  {showError && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="flex items-center gap-2 text-sm text-destructive mt-4"
-                    >
-                      <AlertCircle className="w-4 h-4" />
-                      <span>Unable to get recommendation. Please try again.</span>
-                    </motion.div>
-                  )}
-
-                  {/* Insight text */}
                   <motion.p
                     className="text-sm text-muted-foreground text-center mt-6 max-w-xs"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1.2 }}
                   >
-                    {recommendation.product 
-                      ? "Based on your responses, we've identified the right product for you."
-                      : "Click above to analyze your business and get a personalized recommendation."}
+                    Based on your responses, we've identified areas where Google Ads can help.
                   </motion.p>
                 </motion.div>
               </div>

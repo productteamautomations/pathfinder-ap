@@ -83,8 +83,8 @@ export default function ProductRecommendationLocalSEO() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/funnel-health", { state: location.state })}
-        currentStep={4}
+        onBack={() => navigate("/fact-finder", { state: location.state })}
+        currentStep={3}
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
@@ -143,10 +143,10 @@ export default function ProductRecommendationLocalSEO() {
                 </div>
 
                 <Button
-                  onClick={() => navigate("/business-cycle/localseo", { state: location.state })}
+                  onClick={() => navigate("/funnel-diagnostic/localseo", { state: location.state })}
                   className="px-8"
                 >
-                  Learn About Our Process
+                  Start Your Assessment
                 </Button>
               </div>
 
