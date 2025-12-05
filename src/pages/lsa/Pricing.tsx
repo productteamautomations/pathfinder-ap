@@ -77,7 +77,7 @@ export default function PricingLSA() {
                   transition={{ duration: 0.3 }}
                 >
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
-                    Google Guaranteed
+                    Recommended Product
                   </span>
                   <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
                     Local Services Ads
