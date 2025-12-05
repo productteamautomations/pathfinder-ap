@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
+import { ImprovementCarousel } from "@/components/ImprovementCarousel";
 import { ArrowRight } from "lucide-react";
 
 // Orange accent motif component
@@ -136,6 +137,105 @@ function calculateScores(answers: Record<string, string>) {
   };
 }
 
+// Generate improvement explanations based on LeadGen answers
+function getImprovementAreas(
+  answers: Record<string, string>,
+  trafficScore: number,
+  conversionScore: number,
+  leadScore: number
+) {
+  const areas: { title: string; score: number; explanation: string; recommendation: string }[] = [];
+
+  if (trafficScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.avgCTR === "<2%" || answers.avgCTR === "Unsure") {
+      explanations.push("Your click-through rate is below industry average, meaning your ads aren't compelling enough to drive clicks.");
+    } else if (answers.avgCTR === "3–5%") {
+      explanations.push("Your CTR is decent but there's room to improve ad relevance and copy to drive more qualified clicks.");
+    }
+    
+    if (answers.trackingConversions === "None") {
+      explanations.push("Without conversion tracking, you can't measure which campaigns are actually generating leads.");
+    } else if (answers.trackingConversions === "Calls" || answers.trackingConversions === "Form Fills") {
+      explanations.push("You're only tracking one conversion type—leads come through both calls and forms.");
+    }
+    
+    if (answers.avgCPC === "≥£3.00" || answers.avgCPC === "Unsure") {
+      explanations.push("High cost-per-click eats into your budget quickly, leaving less room for actual conversions.");
+    } else if (answers.avgCPC === "£0.50–£3.00") {
+      explanations.push("Your CPC is moderate but optimising keywords and quality scores could reduce costs further.");
+    }
+
+    areas.push({
+      title: "Traffic Generation",
+      score: trafficScore,
+      explanation: explanations.join(" ") || "Your ad traffic metrics need improvement to drive more qualified visitors.",
+      recommendation: "Targeted Google Ads campaigns with optimised keywords, compelling ad copy, and proper conversion tracking will improve your CTR while reducing wasted spend.",
+    });
+  }
+
+  if (conversionScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.costPerAcquisition === "≥£50" || answers.costPerAcquisition === "Unsure") {
+      explanations.push("Your cost per acquisition is high, meaning you're spending more than necessary to win each customer.");
+    } else if (answers.costPerAcquisition === "£10–£50") {
+      explanations.push("Your CPA is reasonable but there's opportunity to improve landing page conversion rates.");
+    }
+    
+    if (answers.conversionRate === "<1%") {
+      explanations.push("A conversion rate under 1% means 99% of visitors leave without taking action—your website isn't converting traffic into leads.");
+    } else if (answers.conversionRate === "1–2%") {
+      explanations.push("Your conversion rate is below average—small improvements to your landing pages could significantly increase leads.");
+    }
+    
+    if (answers.ctaVisibility === "No") {
+      explanations.push("Your call-to-action isn't visible without scrolling, causing visitors to leave before seeing how to contact you.");
+    } else if (answers.ctaVisibility === "Yes – desktop only" || answers.ctaVisibility === "Yes – mobile only") {
+      explanations.push("Your CTA is only visible on one device type—with 60%+ of searches on mobile, this limits conversions.");
+    }
+    
+    if (answers.servicePages === "No") {
+      explanations.push("Without dedicated service pages, visitors from specific ad campaigns land on generic pages that don't match their intent.");
+    } else if (answers.servicePages === "Yes – some") {
+      explanations.push("Some services lack dedicated landing pages, reducing relevance and quality scores for those campaigns.");
+    }
+
+    areas.push({
+      title: "Website Conversions",
+      score: conversionScore,
+      explanation: explanations.join(" ") || "Your website isn't converting paid traffic effectively.",
+      recommendation: "SmartSite will optimise your landing pages with prominent CTAs, dedicated service pages, and conversion-focused design to turn more visitors into leads.",
+    });
+  }
+
+  if (leadScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.leadManagementSystem === "Organised Chaos") {
+      explanations.push("Without a proper lead management system, enquiries slip through the cracks and you lose potential customers.");
+    } else if (answers.leadManagementSystem === "Self dedicated admin time") {
+      explanations.push("Managing leads yourself takes time away from your core business and can cause delays in follow-up.");
+    }
+    
+    if (answers.responseTime === "When I get a chance" || answers.responseTime === "Same week") {
+      explanations.push("Slow response times are costing you leads—78% of customers go with whoever responds first, and leads contacted within 5 minutes are 21x more likely to convert.");
+    } else if (answers.responseTime === "Same day") {
+      explanations.push("Same-day responses are good, but studies show responding within the first hour dramatically increases your chances of winning the lead.");
+    }
+
+    areas.push({
+      title: "Lead Management",
+      score: leadScore,
+      explanation: explanations.join(" ") || "Your lead management process has gaps that are costing you customers.",
+      recommendation: "Say Hello ensures instant response to every enquiry, keeping leads warm until you can speak with them personally. Never miss another opportunity.",
+    });
+  }
+
+  return areas;
+}
+
 export default function FunnelHealthLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -143,6 +243,8 @@ export default function FunnelHealthLeadGen() {
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
+  
+  const improvementAreas = getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
 
   const handleContinue = () => {
     navigate("/business-cycle/leadgen", { state: location.state });
@@ -183,52 +285,8 @@ export default function FunnelHealthLeadGen() {
 
                   <OrangeAccent />
 
-                  {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-10 space-y-6">
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {trafficScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Traffic Generation
-                            </span>
-                          )}
-                          {conversionScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Website Conversions
-                            </span>
-                          )}
-                          {leadScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Lead Management
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
-                        <ul className="space-y-2 text-muted-foreground">
-                          {trafficScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>Targeted advertising to drive qualified traffic</span>
-                            </li>
-                          )}
-                          {conversionScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>SmartSite to optimise your website for conversions</span>
-                            </li>
-                          )}
-                          {leadScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>Say Hello to never miss a lead</span>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
+                  {improvementAreas.length > 0 ? (
+                    <ImprovementCarousel areas={improvementAreas} />
                   ) : (
                     <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
                       Great work! Your funnel is performing well across all key areas.

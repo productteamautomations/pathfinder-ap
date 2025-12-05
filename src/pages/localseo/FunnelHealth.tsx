@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
+import { ImprovementCarousel } from "@/components/ImprovementCarousel";
 import { ArrowRight } from "lucide-react";
 
 // Orange accent motif component
@@ -142,6 +142,106 @@ function calculateScores(answers: Record<string, string | string[]>) {
   };
 }
 
+// Generate improvement explanations based on SEO answers
+function getImprovementAreas(
+  answers: Record<string, string | string[]>,
+  trafficScore: number,
+  conversionScore: number,
+  leadScore: number
+) {
+  const areas: { title: string; score: number; explanation: string; recommendation: string }[] = [];
+
+  if (trafficScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.avgRanking === ">20" || answers.avgRanking === "Unsure") {
+      explanations.push("Your top keywords are ranking outside the top 20, which means you're missing out on significant organic traffic.");
+    } else if (answers.avgRanking === "10-20") {
+      explanations.push("Your keywords ranking between 10-20 are close to page one but not quite there—a small push could make a big difference.");
+    }
+    
+    if (answers.visibilityTracking === "Neither") {
+      explanations.push("Without tracking in Google Search Console or Google Business Profile, you can't measure what's working.");
+    } else if (answers.visibilityTracking === "GSC" || answers.visibilityTracking === "GBP") {
+      explanations.push("You're only tracking one platform—combining GSC and GBP insights gives you the full picture.");
+    }
+    
+    const actionStats = (answers.actionStatsTracking as string[]) || [];
+    if (actionStats.includes("None of the above") || actionStats.length === 0) {
+      explanations.push("You're not tracking key metrics in GA4, GSC, or GBP, making it hard to understand user behaviour.");
+    } else if (actionStats.length < 3) {
+      explanations.push(`You're only tracking in ${actionStats.join(" and ")}—adding more sources would improve your visibility insights.`);
+    }
+
+    areas.push({
+      title: "Visibility & Tracking",
+      score: trafficScore,
+      explanation: explanations.join(" ") || "Your visibility tracking and keyword rankings need improvement to drive more organic traffic.",
+      recommendation: "Local SEO optimisation will improve your rankings for key search terms and ensure you're tracking the right metrics to measure success.",
+    });
+  }
+
+  if (conversionScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.ctaVisibility === "No") {
+      explanations.push("Your call-to-action isn't visible without scrolling, meaning visitors may leave before seeing how to contact you.");
+    } else if (answers.ctaVisibility === "Yes - Just on desktop" || answers.ctaVisibility === "Yes - Just on mobile") {
+      explanations.push("Your CTA is only visible on one device type—mobile users account for over 60% of local searches.");
+    }
+    
+    if (answers.servicePages === "No") {
+      explanations.push("Without dedicated service pages, you're missing opportunities to rank for specific service-related searches.");
+    } else if (answers.servicePages === "Yes - For some services") {
+      explanations.push("Some services don't have dedicated pages, limiting your ability to rank for those specific terms.");
+    }
+    
+    if (answers.locationTargeting === "No" || answers.locationTargeting === "Unsure") {
+      explanations.push("Your site isn't optimised for your target location, making it harder to appear in local search results.");
+    } else if (answers.locationTargeting === "Yes - Just the homepage/main pages") {
+      explanations.push("Location targeting is limited to main pages—extending this throughout your site strengthens local signals.");
+    }
+
+    areas.push({
+      title: "Website Optimisation",
+      score: conversionScore,
+      explanation: explanations.join(" ") || "Your website structure needs optimisation to better convert visitors into leads.",
+      recommendation: "SmartSite will optimise your website for local conversions with prominent CTAs, dedicated service pages, and proper location targeting throughout.",
+    });
+  }
+
+  if (leadScore < 70) {
+    const explanations: string[] = [];
+    
+    if (answers.conversionTracking === "None") {
+      explanations.push("You're not tracking any conversions, so you can't measure which marketing efforts generate actual leads.");
+    } else if (answers.conversionTracking === "Calls" || answers.conversionTracking === "Form fills and/or emails") {
+      explanations.push("You're only tracking one type of conversion—leads come through multiple channels.");
+    }
+    
+    if (answers.leadManagementSystem === "No system in place") {
+      explanations.push("Without a lead management system, enquiries can easily fall through the cracks.");
+    } else if (answers.leadManagementSystem === "Self dedicated admin time") {
+      explanations.push("Managing leads yourself takes time away from running your business and can delay responses.");
+    }
+    
+    if (answers.responseTime === "When I can" || answers.responseTime === "Same week") {
+      explanations.push("Slow response times mean competitors who respond faster will win the lead—78% of customers go with the first responder.");
+    } else if (answers.responseTime === "Same day") {
+      explanations.push("Same-day responses are good, but leads contacted within an hour are 21x more likely to convert.");
+    }
+
+    areas.push({
+      title: "Lead Management",
+      score: leadScore,
+      explanation: explanations.join(" ") || "Your lead management process needs improvement to capture and convert more enquiries.",
+      recommendation: "Say Hello ensures you never miss a lead with instant response capabilities, keeping potential customers engaged until you can speak with them.",
+    });
+  }
+
+  return areas;
+}
+
 export default function FunnelHealthLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -149,6 +249,8 @@ export default function FunnelHealthLocalSEO() {
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   const overallScore = Math.round((trafficScore + conversionScore + leadScore) / 3);
+  
+  const improvementAreas = getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
 
   const handleContinue = () => {
     navigate("/business-cycle/localseo", { state: location.state });
@@ -189,52 +291,8 @@ export default function FunnelHealthLocalSEO() {
 
                   <OrangeAccent />
 
-                  {trafficScore < 70 || conversionScore < 70 || leadScore < 70 ? (
-                    <div className="mt-10 space-y-6">
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Areas of Improvement</h3>
-                        <div className="flex flex-wrap gap-2">
-                          {trafficScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Visibility & Tracking
-                            </span>
-                          )}
-                          {conversionScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Website Optimisation
-                            </span>
-                          )}
-                          {leadScore < 70 && (
-                            <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
-                              Lead Management
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#173340] mb-3">Our Recommended Solutions</h3>
-                        <ul className="space-y-2 text-muted-foreground">
-                          {trafficScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>Local SEO optimisation to improve rankings and visibility tracking</span>
-                            </li>
-                          )}
-                          {conversionScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>SmartSite to optimise your website for local conversions</span>
-                            </li>
-                          )}
-                          {leadScore < 70 && (
-                            <li className="flex items-start gap-2">
-                              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                              <span>Say Hello to never miss a lead</span>
-                            </li>
-                          )}
-                        </ul>
-                      </div>
-                    </div>
+                  {improvementAreas.length > 0 ? (
+                    <ImprovementCarousel areas={improvementAreas} />
                   ) : (
                     <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
                       Great work! Your SEO foundation is performing well across all key areas.
