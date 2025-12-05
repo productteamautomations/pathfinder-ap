@@ -149,7 +149,7 @@ function getImprovementAreas(
   conversionScore: number,
   leadScore: number
 ) {
-  const areas: { title: string; score: number; explanation: string; recommendation: string }[] = [];
+  const areas: { title: string; score: number; explanations: string[]; recommendation: string }[] = [];
 
   if (trafficScore < 70) {
     const explanations: string[] = [];
@@ -157,26 +157,30 @@ function getImprovementAreas(
     if (answers.avgRanking === ">20" || answers.avgRanking === "Unsure") {
       explanations.push("Your top keywords are ranking outside the top 20, which means you're missing out on significant organic traffic.");
     } else if (answers.avgRanking === "10-20") {
-      explanations.push("Your keywords ranking between 10-20 are close to page one but not quite there—a small push could make a big difference.");
+      explanations.push("Your keywords ranking between 10-20 are close to page one but not quite there. A small push could make a big difference.");
     }
     
     if (answers.visibilityTracking === "Neither") {
       explanations.push("Without tracking in Google Search Console or Google Business Profile, you can't measure what's working.");
     } else if (answers.visibilityTracking === "GSC" || answers.visibilityTracking === "GBP") {
-      explanations.push("You're only tracking one platform—combining GSC and GBP insights gives you the full picture.");
+      explanations.push("You're only tracking one platform. Combining GSC and GBP insights gives you the full picture.");
     }
     
     const actionStats = (answers.actionStatsTracking as string[]) || [];
     if (actionStats.includes("None of the above") || actionStats.length === 0) {
       explanations.push("You're not tracking key metrics in GA4, GSC, or GBP, making it hard to understand user behaviour.");
     } else if (actionStats.length < 3) {
-      explanations.push(`You're only tracking in ${actionStats.join(" and ")}—adding more sources would improve your visibility insights.`);
+      explanations.push(`You're only tracking in ${actionStats.join(" and ")}. Adding more sources would improve your visibility insights.`);
+    }
+
+    if (explanations.length === 0) {
+      explanations.push("Your visibility tracking and keyword rankings need improvement to drive more organic traffic.");
     }
 
     areas.push({
       title: "Visibility & Tracking",
       score: trafficScore,
-      explanation: explanations.join(" ") || "Your visibility tracking and keyword rankings need improvement to drive more organic traffic.",
+      explanations,
       recommendation: "Local SEO optimisation will improve your rankings for key search terms and ensure you're tracking the right metrics to measure success.",
     });
   }
@@ -187,7 +191,7 @@ function getImprovementAreas(
     if (answers.ctaVisibility === "No") {
       explanations.push("Your call-to-action isn't visible without scrolling, meaning visitors may leave before seeing how to contact you.");
     } else if (answers.ctaVisibility === "Yes - Just on desktop" || answers.ctaVisibility === "Yes - Just on mobile") {
-      explanations.push("Your CTA is only visible on one device type—mobile users account for over 60% of local searches.");
+      explanations.push("Your CTA is only visible on one device type. Mobile users account for over 60% of local searches.");
     }
     
     if (answers.servicePages === "No") {
@@ -199,13 +203,17 @@ function getImprovementAreas(
     if (answers.locationTargeting === "No" || answers.locationTargeting === "Unsure") {
       explanations.push("Your site isn't optimised for your target location, making it harder to appear in local search results.");
     } else if (answers.locationTargeting === "Yes - Just the homepage/main pages") {
-      explanations.push("Location targeting is limited to main pages—extending this throughout your site strengthens local signals.");
+      explanations.push("Location targeting is limited to main pages. Extending this throughout your site strengthens local signals.");
+    }
+
+    if (explanations.length === 0) {
+      explanations.push("Your website structure needs optimisation to better convert visitors into leads.");
     }
 
     areas.push({
       title: "Website Optimisation",
       score: conversionScore,
-      explanation: explanations.join(" ") || "Your website structure needs optimisation to better convert visitors into leads.",
+      explanations,
       recommendation: "SmartSite will optimise your website for local conversions with prominent CTAs, dedicated service pages, and proper location targeting throughout.",
     });
   }
@@ -216,7 +224,7 @@ function getImprovementAreas(
     if (answers.conversionTracking === "None") {
       explanations.push("You're not tracking any conversions, so you can't measure which marketing efforts generate actual leads.");
     } else if (answers.conversionTracking === "Calls" || answers.conversionTracking === "Form fills and/or emails") {
-      explanations.push("You're only tracking one type of conversion—leads come through multiple channels.");
+      explanations.push("You're only tracking one type of conversion. Leads come through multiple channels.");
     }
     
     if (answers.leadManagementSystem === "No system in place") {
@@ -226,15 +234,19 @@ function getImprovementAreas(
     }
     
     if (answers.responseTime === "When I can" || answers.responseTime === "Same week") {
-      explanations.push("Slow response times mean competitors who respond faster will win the lead—78% of customers go with the first responder.");
+      explanations.push("Slow response times mean competitors who respond faster will win the lead. 78% of customers go with the first responder.");
     } else if (answers.responseTime === "Same day") {
       explanations.push("Same-day responses are good, but leads contacted within an hour are 21x more likely to convert.");
+    }
+
+    if (explanations.length === 0) {
+      explanations.push("Your lead management process needs improvement to capture and convert more enquiries.");
     }
 
     areas.push({
       title: "Lead Management",
       score: leadScore,
-      explanation: explanations.join(" ") || "Your lead management process needs improvement to capture and convert more enquiries.",
+      explanations,
       recommendation: "Say Hello ensures you never miss a lead with instant response capabilities, keeping potential customers engaged until you can speak with them.",
     });
   }

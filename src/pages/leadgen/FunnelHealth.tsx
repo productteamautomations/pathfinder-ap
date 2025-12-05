@@ -144,7 +144,7 @@ function getImprovementAreas(
   conversionScore: number,
   leadScore: number
 ) {
-  const areas: { title: string; score: number; explanation: string; recommendation: string }[] = [];
+  const areas: { title: string; score: number; explanations: string[]; recommendation: string }[] = [];
 
   if (trafficScore < 70) {
     const explanations: string[] = [];
@@ -158,7 +158,7 @@ function getImprovementAreas(
     if (answers.trackingConversions === "None") {
       explanations.push("Without conversion tracking, you can't measure which campaigns are actually generating leads.");
     } else if (answers.trackingConversions === "Calls" || answers.trackingConversions === "Form Fills") {
-      explanations.push("You're only tracking one conversion type—leads come through both calls and forms.");
+      explanations.push("You're only tracking one conversion type. Leads come through both calls and forms.");
     }
     
     if (answers.avgCPC === "≥£3.00" || answers.avgCPC === "Unsure") {
@@ -167,10 +167,14 @@ function getImprovementAreas(
       explanations.push("Your CPC is moderate but optimising keywords and quality scores could reduce costs further.");
     }
 
+    if (explanations.length === 0) {
+      explanations.push("Your ad traffic metrics need improvement to drive more qualified visitors.");
+    }
+
     areas.push({
       title: "Traffic Generation",
       score: trafficScore,
-      explanation: explanations.join(" ") || "Your ad traffic metrics need improvement to drive more qualified visitors.",
+      explanations,
       recommendation: "Targeted Google Ads campaigns with optimised keywords, compelling ad copy, and proper conversion tracking will improve your CTR while reducing wasted spend.",
     });
   }
@@ -185,15 +189,15 @@ function getImprovementAreas(
     }
     
     if (answers.conversionRate === "<1%") {
-      explanations.push("A conversion rate under 1% means 99% of visitors leave without taking action—your website isn't converting traffic into leads.");
+      explanations.push("A conversion rate under 1% means 99% of visitors leave without taking action. Your website isn't converting traffic into leads.");
     } else if (answers.conversionRate === "1–2%") {
-      explanations.push("Your conversion rate is below average—small improvements to your landing pages could significantly increase leads.");
+      explanations.push("Your conversion rate is below average. Small improvements to your landing pages could significantly increase leads.");
     }
     
     if (answers.ctaVisibility === "No") {
       explanations.push("Your call-to-action isn't visible without scrolling, causing visitors to leave before seeing how to contact you.");
     } else if (answers.ctaVisibility === "Yes – desktop only" || answers.ctaVisibility === "Yes – mobile only") {
-      explanations.push("Your CTA is only visible on one device type—with 60%+ of searches on mobile, this limits conversions.");
+      explanations.push("Your CTA is only visible on one device type. With 60%+ of searches on mobile, this limits conversions.");
     }
     
     if (answers.servicePages === "No") {
@@ -202,10 +206,14 @@ function getImprovementAreas(
       explanations.push("Some services lack dedicated landing pages, reducing relevance and quality scores for those campaigns.");
     }
 
+    if (explanations.length === 0) {
+      explanations.push("Your website isn't converting paid traffic effectively.");
+    }
+
     areas.push({
       title: "Website Conversions",
       score: conversionScore,
-      explanation: explanations.join(" ") || "Your website isn't converting paid traffic effectively.",
+      explanations,
       recommendation: "SmartSite will optimise your landing pages with prominent CTAs, dedicated service pages, and conversion-focused design to turn more visitors into leads.",
     });
   }
@@ -220,15 +228,19 @@ function getImprovementAreas(
     }
     
     if (answers.responseTime === "When I get a chance" || answers.responseTime === "Same week") {
-      explanations.push("Slow response times are costing you leads—78% of customers go with whoever responds first, and leads contacted within 5 minutes are 21x more likely to convert.");
+      explanations.push("Slow response times are costing you leads. 78% of customers go with whoever responds first, and leads contacted within 5 minutes are 21x more likely to convert.");
     } else if (answers.responseTime === "Same day") {
       explanations.push("Same-day responses are good, but studies show responding within the first hour dramatically increases your chances of winning the lead.");
+    }
+
+    if (explanations.length === 0) {
+      explanations.push("Your lead management process has gaps that are costing you customers.");
     }
 
     areas.push({
       title: "Lead Management",
       score: leadScore,
-      explanation: explanations.join(" ") || "Your lead management process has gaps that are costing you customers.",
+      explanations,
       recommendation: "Say Hello ensures instant response to every enquiry, keeping leads warm until you can speak with them personally. Never miss another opportunity.",
     });
   }
