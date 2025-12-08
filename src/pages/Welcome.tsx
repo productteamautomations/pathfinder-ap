@@ -296,7 +296,7 @@ export default function Welcome() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8"
           >
-            <h1 className="text-6xl font-bold text-deep-blue mb-3 font-display">Pathfinder</h1>
+            <h1 className="text-[57px] font-bold text-title mb-3 font-display">Pathfinder</h1>
             <p className="text-xl text-deep-blue/70">Find the right path for you</p>
           </motion.div>
 
@@ -308,7 +308,7 @@ export default function Welcome() {
           >
             <div className="space-y-6">
               <div className="space-y-1 mb-8">
-                <h2 className="text-2xl font-semibold text-deep-blue font-display">Get Started</h2>
+                <h2 className="text-2xl font-bold text-title font-display">Get Started</h2>
                 <p className="text-deep-blue/50 text-sm">Enter your details to begin your personalised path</p>
               </div>
               <Input
