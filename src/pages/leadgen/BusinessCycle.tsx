@@ -174,7 +174,7 @@ export default function BusinessCycleLeadGen() {
                 </AnimatePresence>
               </div>
 
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-between bg-muted/30 border-l border-border/20 overflow-hidden">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -193,7 +193,7 @@ export default function BusinessCycleLeadGen() {
                       </div>
                     </div>
 
-                    <div className="flex-1 overflow-hidden mb-4">
+                    <div className="flex-1 overflow-hidden">
                       <ul className="space-y-2">
                         {slide.content?.map((item, idx) => (
                           <motion.li
@@ -214,24 +214,24 @@ export default function BusinessCycleLeadGen() {
                         ))}
                       </ul>
                     </div>
-
-                    <div className="flex items-center justify-between">
-                      <Button
-                        onClick={prevSlide}
-                        disabled={currentSlide === 0}
-                        variant="outline"
-                        className="flex items-center gap-2"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                        Previous
-                      </Button>
-                      <Button onClick={nextSlide} className="flex items-center gap-2">
-                        {isLastSlide ? "About Us" : "Next"}
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </div>
                   </motion.div>
                 </AnimatePresence>
+
+                <div className="flex items-center justify-between mt-auto pt-4">
+                  <Button
+                    onClick={prevSlide}
+                    disabled={currentSlide === 0}
+                    variant="outline"
+                    className="flex items-center gap-2"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    Previous
+                  </Button>
+                  <Button onClick={nextSlide} className="flex items-center gap-2">
+                    {isLastSlide ? "About Us" : "Next"}
+                    <ChevronRight className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </motion.div>
