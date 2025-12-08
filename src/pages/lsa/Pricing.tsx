@@ -79,7 +79,7 @@ export default function PricingLSA() {
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
                     Recommended Product
                   </span>
-                  <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
+                  <h2 className="text-3xl md:text-4xl font-display font-bold text-title leading-tight tracking-tight">
                     Local Services Ads
                   </h2>
                   <OrangeAccent />

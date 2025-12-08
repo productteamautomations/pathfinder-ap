@@ -97,8 +97,8 @@ export default function ProductRecommendationLSA() {
           transition={{ duration: 0.5 }}
           className="text-center px-6 py-6 md:py-8"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-            <span className="text-foreground">Local Services Ads</span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title tracking-tight">
+            Local Services Ads
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
             Why LSAs are the <span className="text-green-600 font-semibold">Right Fit</span> for you.
@@ -124,7 +124,7 @@ export default function ProductRecommendationLSA() {
                   <span className="text-sm font-medium text-foreground">Google Guaranteed</span>
                 </motion.div>
 
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">Google's Most Trusted Ad Format</h2>
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">Google's Most Trusted Ad Format</h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
                   Local Services Ads put your business at the very top of Google with the Google Guaranteed badge. You
                   only pay for valid leads, and customers trust you because Google has verified your business.

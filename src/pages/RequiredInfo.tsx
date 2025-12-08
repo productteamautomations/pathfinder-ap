@@ -87,7 +87,7 @@ export default function RequiredInfo() {
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                       Final Step
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                       Client Details
                     </h2>
                     
@@ -136,7 +136,7 @@ export default function RequiredInfo() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <h3 className="text-2xl font-bold text-foreground mb-8">Website Login Details</h3>
+                    <h3 className="text-2xl font-display font-bold text-title mb-8">Website Login Details</h3>
 
                     {/* Form Fields */}
                     <div className="space-y-5 mb-8">
