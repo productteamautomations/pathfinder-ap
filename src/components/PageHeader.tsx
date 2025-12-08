@@ -31,7 +31,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
           {productLabel ? (
             <div className="text-right">
               <span className="text-xs font-semibold text-green-600 bg-green-500/10 px-3 py-1.5 rounded-full whitespace-nowrap">
-                Product: {productLabel}
+                Product: LSA's
               </span>
             </div>
           ) : (
