@@ -54,7 +54,7 @@ export default function PricingLeadGen() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
+        onBack={() => navigate("/about/leadgen", { state: location.state })}
         currentStep={6}
         totalSteps={7}
         showProgress

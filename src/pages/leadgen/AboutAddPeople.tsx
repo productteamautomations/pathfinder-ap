@@ -47,7 +47,7 @@ export default function AboutAddPeopleLeadGen() {
     <div className="min-h-screen h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
-        currentStep={6}
+        currentStep={5}
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
