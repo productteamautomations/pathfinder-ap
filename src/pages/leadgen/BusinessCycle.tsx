@@ -110,7 +110,7 @@ export default function BusinessCycleLeadGen() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      navigate("/pricing/leadgen", { state: location.state });
+      navigate("/about/leadgen", { state: location.state });
     }
   };
 
