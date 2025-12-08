@@ -79,9 +79,8 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
                 <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
                 <ul className="space-y-1">
                   {currentArea.explanations.slice(0, 3).map((point, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground leading-snug flex items-start gap-2">
-                      <span className="text-primary mt-1 flex-shrink-0">•</span>
-                      <span className="line-clamp-2">{point}</span>
+                    <li key={idx} className="text-sm text-muted-foreground leading-snug line-clamp-2">
+                      {point}
                     </li>
                   ))}
                 </ul>
