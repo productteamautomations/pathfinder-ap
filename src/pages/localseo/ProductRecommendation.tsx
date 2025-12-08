@@ -112,7 +112,7 @@ export default function ProductRecommendationLocalSEO() {
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-[40px] font-bold text-title font-display leading-tight mb-4">
+                <h2 className="text-[35px] font-bold text-title font-display leading-tight mb-4">
                   Stay Ahead Of Competitors In Local Search Rankings
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">
