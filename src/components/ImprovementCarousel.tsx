@@ -55,7 +55,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
         )}
       </div>
 
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden min-h-[280px]">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -63,7 +63,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.25 }}
-            className="bg-muted/30 rounded-2xl p-6 border border-border/30"
+            className="bg-muted/30 rounded-2xl p-6 border border-border/30 h-[280px] flex flex-col"
           >
             <div className="flex items-center justify-between mb-4">
               <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
@@ -74,7 +74,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
               </span>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-4 flex-1 overflow-y-auto">
               <div>
                 <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
                 <ul className="space-y-1.5">
