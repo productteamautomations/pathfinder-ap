@@ -279,7 +279,7 @@ export default function BusinessCycleLocalSEO() {
                         Previous
                       </Button>
                       <Button onClick={nextSlide} className="flex items-center gap-2">
-                        {isLastSlide ? "View Pricing" : "Next"}
+                        {isLastSlide ? "About Us" : "Next"}
                         <ChevronRight className="w-4 h-4" />
                       </Button>
                     </div>
