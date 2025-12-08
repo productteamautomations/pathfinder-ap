@@ -206,7 +206,7 @@ export default function FunnelDiagnostic() {
                       <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
                         {question.section}
                       </span>
-                      <h2 className="text-[57px] font-bold text-title font-display leading-tight">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
                         {question.question}
                       </h2>
                       <OrangeAccent />

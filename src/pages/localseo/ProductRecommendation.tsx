@@ -97,7 +97,9 @@ export default function ProductRecommendationLocalSEO() {
           transition={{ duration: 0.5 }}
           className="text-center px-6 py-6 md:py-8"
         >
-          <h1 className="text-[57px] font-bold text-title font-display leading-tight">Local SEO</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+            <span className="text-foreground">Local SEO</span>
+          </h1>
           <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
             Why Local SEO is the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
@@ -112,7 +114,7 @@ export default function ProductRecommendationLocalSEO() {
           >
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-[35px] font-bold text-title font-display leading-tight mb-4">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                   Stay Ahead Of Competitors In Local Search Rankings
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-8">

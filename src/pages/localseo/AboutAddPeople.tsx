@@ -65,7 +65,7 @@ export default function AboutAddPeopleLocalSEO() {
               className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
             >
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
-              <h1 className="text-[57px] font-bold text-white font-display leading-tight mt-1">
+              <h1 className="text-2xl lg:text-3xl font-bold mt-1 leading-tight">
                 Add People
               </h1>
               <p className="text-white/80 mt-2 text-sm leading-relaxed">

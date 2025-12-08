@@ -291,7 +291,7 @@ export default function FunnelHealthLeadGen() {
                   <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                     Results
                   </span>
-                  <h2 className="text-[57px] font-bold text-title font-display leading-tight">
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                     Your Funnel Health Overview
                   </h2>
 

@@ -70,7 +70,7 @@ export default function PricingLocalSEO() {
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
                     Primary Recommendation
                   </span>
-                  <h2 className="text-[57px] font-bold text-title font-display leading-tight">
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#173340] leading-tight tracking-tight">
                     Local SEO
                   </h2>
                   <OrangeAccent />

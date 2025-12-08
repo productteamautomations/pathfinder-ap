@@ -87,7 +87,7 @@ export default function RequiredInfo() {
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                       Final Step
                     </span>
-                    <h2 className="text-[57px] font-bold text-title font-display leading-tight">
+                    <h2 className="text-4xl md:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
                       Client Details
                     </h2>
                     

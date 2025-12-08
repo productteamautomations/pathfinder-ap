@@ -55,7 +55,6 @@ export default {
         "accent-yellow": "hsl(var(--accent-yellow))",
         cream: "hsl(var(--cream))",
         "button-dark": "hsl(var(--button-dark))",
-        "title": "hsl(var(--title))",
       },
       borderRadius: {
         lg: "var(--radius)",
