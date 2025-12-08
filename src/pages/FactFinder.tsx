@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { useRecommendation } from "@/contexts/RecommendationContext";
-import { Loader2, AlertCircle, RefreshCw } from "lucide-react";
+import { Loader2, AlertCircle } from "lucide-react";
 
 const generationOptions = [
   "None",
@@ -69,6 +69,7 @@ export default function FactFinder() {
   const location = useLocation();
   const { recommendation, fetchRecommendation } = useRecommendation();
   const [retryError, setRetryError] = useState(false);
+  const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
   const hasAttemptedRetry = useRef(false);
 
   const [monthEstablished, setMonthEstablished] = useState("");
@@ -93,44 +94,78 @@ export default function FactFinder() {
     }
   }, [recommendation.isLoading, recommendation.product]);
 
+  // Navigate when recommendation arrives after clicking submit
+  useEffect(() => {
+    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
+      const productRoutes: Record<string, string> = {
+        SEO: "/product-recommendation/localseo",
+        LeadGen: "/product-recommendation/leadgen",
+        LSA: "/product-recommendation/lsa",
+      };
+      
+      const newState = {
+        ...location.state,
+        monthEstablished,
+        yearEstablished,
+        businessGeneration,
+        monthlyLeads,
+        hasGMB,
+      };
+      
+      if (productRoutes[recommendation.product]) {
+        navigate(productRoutes[recommendation.product], { state: newState });
+      }
+    }
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading]);
+
   const handleSubmit = () => {
     if (!isFormValid()) return;
 
-    const newState = {
-      ...location.state,
-      monthEstablished,
-      yearEstablished,
-      businessGeneration,
-      monthlyLeads,
-      hasGMB,
-    };
-
-    // Map product to route
-    const productRoutes: Record<string, string> = {
-      SEO: "/product-recommendation/localseo",
-      LeadGen: "/product-recommendation/leadgen",
-      LSA: "/product-recommendation/lsa",
-    };
-
-    if (recommendation.product && productRoutes[recommendation.product]) {
-      navigate(productRoutes[recommendation.product], { state: newState });
-    } else {
-      // No recommendation available - retry the webhook
-      const state = location.state as any;
-      const name = state?.name || "";
-      const websiteUrl = state?.url || "";
-
-      if (name && websiteUrl) {
-        setRetryError(false);
-        hasAttemptedRetry.current = true;
-        fetchRecommendation(name, websiteUrl);
-      } else {
-        setRetryError(true);
+    // If recommendation is already available, navigate immediately
+    if (recommendation.product) {
+      const productRoutes: Record<string, string> = {
+        SEO: "/product-recommendation/localseo",
+        LeadGen: "/product-recommendation/leadgen",
+        LSA: "/product-recommendation/lsa",
+      };
+      
+      const newState = {
+        ...location.state,
+        monthEstablished,
+        yearEstablished,
+        businessGeneration,
+        monthlyLeads,
+        hasGMB,
+      };
+      
+      if (productRoutes[recommendation.product]) {
+        navigate(productRoutes[recommendation.product], { state: newState });
       }
+      return;
+    }
+
+    // If still loading, mark that we clicked and wait
+    if (recommendation.isLoading) {
+      setHasClickedSubmit(true);
+      return;
+    }
+
+    // No recommendation available - retry the webhook
+    const state = location.state as any;
+    const name = state?.name || "";
+    const websiteUrl = state?.url || "";
+
+    if (name && websiteUrl) {
+      setRetryError(false);
+      setHasClickedSubmit(true);
+      hasAttemptedRetry.current = true;
+      fetchRecommendation(name, websiteUrl);
+    } else {
+      setRetryError(true);
     }
   };
 
-  const isWaitingForRecommendation = recommendation.isLoading;
+  const isWaitingForRecommendation = hasClickedSubmit && recommendation.isLoading;
   const showError = retryError;
 
   const inputStyles =
@@ -284,13 +319,8 @@ export default function FactFinder() {
                         <Loader2 className="w-4 h-4 animate-spin" />
                         Analyzing...
                       </>
-                    ) : recommendation.product ? (
-                      "Continue"
                     ) : (
-                      <>
-                        <RefreshCw className="w-4 h-4" />
-                        Retry
-                      </>
+                      "Continue"
                     )}
                   </span>
                 </Button>
