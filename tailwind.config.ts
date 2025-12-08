@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        display: ['Playfair Display', 'serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,6 +54,7 @@ export default {
         "accent-orange": "hsl(var(--accent-orange))",
         "accent-yellow": "hsl(var(--accent-yellow))",
         cream: "hsl(var(--cream))",
+        "button-dark": "hsl(var(--button-dark))",
       },
       borderRadius: {
         lg: "var(--radius)",

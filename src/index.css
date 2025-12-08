@@ -42,6 +42,7 @@ All colors MUST be HSL.
     --accent-orange: 9 73% 60%;
     --accent-yellow: 42 100% 69%;
     --cream: 30 25% 96%;
+    --button-dark: 195 43% 17%;
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     
