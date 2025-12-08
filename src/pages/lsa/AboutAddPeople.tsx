@@ -50,12 +50,11 @@ export default function AboutAddPeopleLSA() {
         currentStep={2}
         totalSteps={3}
         showProgress
-        productLabel="Local Services Ads"
+        productLabel="LSA's"
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
         <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-6 py-4 max-w-[1600px] mx-auto w-full h-full">
-          
           {/* Left Column - About & Stats */}
           <div className="lg:col-span-4 flex flex-col gap-4 h-full">
             <motion.div
@@ -65,12 +64,10 @@ export default function AboutAddPeopleLSA() {
               className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
             >
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
-              <h1 className="text-2xl lg:text-3xl font-bold mt-1 leading-tight">
-                Add People
-              </h1>
+              <h1 className="text-2xl lg:text-3xl font-bold mt-1 leading-tight">Add People</h1>
               <p className="text-white/80 mt-2 text-sm leading-relaxed">
-                We're a team of digital marketing specialists based in Altrincham, 
-                dedicated to helping local businesses thrive online.
+                We're a team of digital marketing specialists based in Altrincham, dedicated to helping local businesses
+                thrive online.
               </p>
             </motion.div>
 
@@ -124,7 +121,7 @@ export default function AboutAddPeopleLSA() {
                 Local Services Ads Reviews
               </span>
             </motion.div>
-            
+
             <div className="flex-1 flex flex-col gap-3">
               {lsaReviews.map((review, idx) => (
                 <motion.div
@@ -139,9 +136,7 @@ export default function AboutAddPeopleLSA() {
                       <Star key={i} className="w-4 h-4 fill-primary text-primary" />
                     ))}
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed mb-3">
-                    "{review.review}"
-                  </p>
+                  <p className="text-sm text-foreground leading-relaxed mb-3">"{review.review}"</p>
                   <div>
                     <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
                     <div className="text-xs text-muted-foreground">{review.company}</div>
@@ -159,9 +154,7 @@ export default function AboutAddPeopleLSA() {
               transition={{ duration: 0.5, delay: 0.25 }}
               className="flex-shrink-0"
             >
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Why Choose Us
-              </span>
+              <span className="text-sm font-semibold text-primary uppercase tracking-wider">Why Choose Us</span>
             </motion.div>
 
             <div className="flex-1 flex flex-col gap-3">
@@ -194,9 +187,7 @@ export default function AboutAddPeopleLSA() {
               className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white flex-shrink-0"
             >
               <div className="text-lg font-bold mb-1">Ready to grow?</div>
-              <p className="text-sm text-white/90 mb-4">
-                Join over 3,000 businesses who have grown with Add People.
-              </p>
+              <p className="text-sm text-white/90 mb-4">Join over 3,000 businesses who have grown with Add People.</p>
               <Button
                 onClick={() => navigate("/pricing/lsa", { state: location.state })}
                 className="w-full bg-white text-primary hover:bg-white/90 flex items-center justify-center gap-2 font-semibold"
