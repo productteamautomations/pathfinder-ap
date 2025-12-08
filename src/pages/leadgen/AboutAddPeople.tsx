@@ -44,7 +44,7 @@ export default function AboutAddPeopleLeadGen() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={6}
@@ -53,22 +53,22 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex flex-col">
-        {/* Main Content Grid */}
-        <div className="flex-1 grid lg:grid-cols-3 gap-6 py-6 max-w-7xl mx-auto w-full">
+      <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
+        <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-6 py-4 max-w-[1600px] mx-auto w-full h-full">
           
-          {/* Left Column - Stats & About */}
-          <div className="space-y-6">
+          {/* Left Column - About & Stats */}
+          <div className="lg:col-span-4 flex flex-col gap-4 h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
             >
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">About</span>
-              <h1 className="text-3xl md:text-4xl font-bold text-[#173340] mt-2 leading-tight">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
+              <h1 className="text-2xl lg:text-3xl font-bold mt-1 leading-tight">
                 Add People
               </h1>
-              <p className="text-muted-foreground mt-3 text-sm leading-relaxed">
+              <p className="text-white/80 mt-2 text-sm leading-relaxed">
                 We're a team of digital marketing specialists based in Altrincham, 
                 dedicated to helping local businesses thrive online.
               </p>
@@ -79,15 +79,15 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-2 gap-3 flex-1"
             >
               {stats.map((stat, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/80 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm"
+                  className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex flex-col justify-center"
                 >
                   <stat.icon className="w-5 h-5 text-primary mb-2" />
-                  <div className="text-2xl font-bold text-[#173340]">{stat.value}</div>
+                  <div className="text-2xl lg:text-3xl font-bold text-[#173340]">{stat.value}</div>
                   <div className="text-xs text-muted-foreground">{stat.label}</div>
                 </div>
               ))}
@@ -98,102 +98,108 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white/80 backdrop-blur-sm rounded-xl p-3 border border-border/30 shadow-sm"
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex-shrink-0"
             >
-              <div className="flex items-center gap-2 mb-2">
+              <div className="flex items-center gap-2 mb-3">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-[#173340]">Based in Altrincham</span>
               </div>
               <img
                 src={altrinchamMap}
                 alt="Add People location in Altrincham"
-                className="w-full h-24 object-cover rounded-lg"
+                className="w-full h-28 lg:h-32 object-cover rounded-lg"
               />
             </motion.div>
           </div>
 
           {/* Middle Column - Reviews */}
-          <div className="space-y-4">
+          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
+              className="flex-shrink-0"
             >
               <span className="text-sm font-semibold text-primary uppercase tracking-wider">
                 Lead Generation Reviews
               </span>
             </motion.div>
             
-            {leadgenReviews.map((review, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm"
-              >
-                <div className="flex items-center gap-1 mb-2">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-3 h-3 fill-primary text-primary" />
-                  ))}
-                </div>
-                <p className="text-sm text-foreground leading-relaxed mb-3">
-                  "{review.review}"
-                </p>
-                <div>
-                  <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
-                  <div className="text-xs text-muted-foreground">{review.company}</div>
-                </div>
-              </motion.div>
-            ))}
+            <div className="flex-1 flex flex-col gap-3">
+              {leadgenReviews.map((review, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                >
+                  <div className="flex items-center gap-1 mb-3">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed mb-3">
+                    "{review.review}"
+                  </p>
+                  <div>
+                    <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
+                    <div className="text-xs text-muted-foreground">{review.company}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Right Column - Highlights & CTA */}
-          <div className="space-y-4 flex flex-col">
+          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
+              className="flex-shrink-0"
             >
               <span className="text-sm font-semibold text-primary uppercase tracking-wider">
                 Why Choose Us
               </span>
             </motion.div>
 
-            {highlights.map((highlight, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
-                className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <highlight.icon className="w-5 h-5 text-primary" />
+            <div className="flex-1 flex flex-col gap-3">
+              {highlights.map((highlight, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex items-center"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <highlight.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <div className="font-semibold text-[#173340]">{highlight.title}</div>
+                      <div className="text-sm text-muted-foreground mt-1">{highlight.description}</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-semibold text-[#173340] text-sm">{highlight.title}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{highlight.description}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
 
-            {/* Trust Badge */}
+            {/* CTA Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-xl p-4 text-white mt-auto"
+              className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white flex-shrink-0"
             >
-              <div className="text-lg font-bold mb-1">Trusted by thousands</div>
-              <p className="text-sm text-white/80 mb-3">
+              <div className="text-lg font-bold mb-1">Ready to grow?</div>
+              <p className="text-sm text-white/90 mb-4">
                 Join over 3,000 businesses who have grown with Add People.
               </p>
               <Button
                 onClick={() => navigate("/pricing/leadgen", { state: location.state })}
-                className="w-full bg-white text-[#173340] hover:bg-white/90 flex items-center justify-center gap-2"
+                className="w-full bg-white text-primary hover:bg-white/90 flex items-center justify-center gap-2 font-semibold"
               >
                 View Pricing
                 <ChevronRight className="w-4 h-4" />
