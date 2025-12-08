@@ -50,6 +50,7 @@ const siteStructure: FolderSection[] = [
       { path: "/funnel-diagnostic/localseo", label: "Funnel Diagnostic", icon: BarChart3 },
       { path: "/funnel-health/localseo", label: "Funnel Health", icon: HeartPulse },
       { path: "/business-cycle/localseo", label: "Business Cycle", icon: RefreshCw },
+      { path: "/about/localseo", label: "About Add People", icon: FileText },
       { path: "/pricing/localseo", label: "Pricing", icon: CreditCard },
     ],
   },
@@ -62,6 +63,7 @@ const siteStructure: FolderSection[] = [
       { path: "/funnel-diagnostic/leadgen", label: "Funnel Diagnostic", icon: BarChart3 },
       { path: "/funnel-health/leadgen", label: "Funnel Health", icon: HeartPulse },
       { path: "/business-cycle/leadgen", label: "Business Cycle", icon: RefreshCw },
+      { path: "/about/leadgen", label: "About Add People", icon: FileText },
       { path: "/pricing/leadgen", label: "Pricing", icon: CreditCard },
     ],
   },
@@ -71,6 +73,7 @@ const siteStructure: FolderSection[] = [
     icon: BadgeCheck,
     routes: [
       { path: "/product-recommendation/lsa", label: "Product Recommendation", icon: BadgeCheck },
+      { path: "/about/lsa", label: "About Add People", icon: FileText },
       { path: "/pricing/lsa", label: "Pricing", icon: CreditCard },
     ],
   },
