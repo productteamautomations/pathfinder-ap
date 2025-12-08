@@ -17,7 +17,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           "transform active:scale-[0.98]",
           fullWidth && "w-full",
           variant === "primary" &&
-            "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_4px_14px_0_rgba(227,102,79,0.39)] hover:shadow-[0_6px_20px_rgba(227,102,79,0.4)]",
+            "bg-button-dark text-white hover:bg-button-dark/90 shadow-[0_4px_14px_0_rgba(23,51,64,0.3)] hover:shadow-[0_6px_20px_rgba(23,51,64,0.4)]",
           variant === "secondary" &&
             "bg-secondary text-secondary-foreground hover:bg-secondary/90",
           variant === "outline" &&
