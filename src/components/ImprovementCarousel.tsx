@@ -74,21 +74,21 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
               </span>
             </div>
 
-            <div className="space-y-3 flex-1 overflow-hidden">
+            <div className="space-y-4 flex-1 overflow-y-auto">
               <div>
                 <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
-                <ul className="space-y-1">
-                  {currentArea.explanations.slice(0, 3).map((point, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground leading-snug line-clamp-2">
+                <ul className="space-y-1.5">
+                  {currentArea.explanations.map((point, idx) => (
+                    <li key={idx} className="text-sm text-muted-foreground leading-relaxed">
                       {point}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-2 border-t border-border/30">
-                <h4 className="text-sm font-semibold text-[#173340] mb-1.5">Our Recommendation</h4>
-                <p className="text-sm text-muted-foreground leading-snug line-clamp-3">
+              <div className="pt-3 border-t border-border/30">
+                <h4 className="text-sm font-semibold text-[#173340] mb-2">Our Recommendation</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   {currentArea.recommendation}
                 </p>
               </div>
