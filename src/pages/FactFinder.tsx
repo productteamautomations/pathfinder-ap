@@ -194,7 +194,7 @@ export default function FactFinder() {
               >
                 Step 1 of 7
               </motion.span>
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Business Information</h2>
+              <h2 className="text-[57px] font-bold text-title font-display leading-tight">Business Information</h2>
               <p className="text-muted-foreground mt-1 text-sm">Help us understand your business better</p>
               <OrangeAccent />
             </div>

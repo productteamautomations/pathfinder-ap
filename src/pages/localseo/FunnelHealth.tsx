@@ -297,7 +297,7 @@ export default function FunnelHealthLocalSEO() {
                   <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                     Results
                   </span>
-                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#173340] leading-tight tracking-tight">
+                  <h2 className="text-[57px] font-bold text-title font-display leading-tight">
                     Your SEO Health Overview
                   </h2>
 
