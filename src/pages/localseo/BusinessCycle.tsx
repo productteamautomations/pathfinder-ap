@@ -143,7 +143,7 @@ export default function BusinessCycleLocalSEO() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      navigate("/pricing/localseo", { state: location.state });
+      navigate("/about/localseo", { state: location.state });
     }
   };
 

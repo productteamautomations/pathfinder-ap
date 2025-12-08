@@ -150,8 +150,8 @@ export default function ProductRecommendationLSA() {
                   ))}
                 </div>
 
-                <Button onClick={() => navigate("/pricing/lsa", { state: location.state })} className="px-8">
-                  View Pricing
+                <Button onClick={() => navigate("/about/lsa", { state: location.state })} className="px-8">
+                  Continue
                 </Button>
               </div>
 

@@ -13,6 +13,7 @@ import ProductRecommendationLocalSEO from "@/pages/localseo/ProductRecommendatio
 import FunnelDiagnosticLocalSEO from "@/pages/localseo/FunnelDiagnostic";
 import FunnelHealthLocalSEO from "@/pages/localseo/FunnelHealth";
 import BusinessCycleLocalSEO from "@/pages/localseo/BusinessCycle";
+import AboutAddPeopleLocalSEO from "@/pages/localseo/AboutAddPeople";
 import PricingLocalSEO from "@/pages/localseo/Pricing";
 
 // Lead Gen pages
@@ -20,10 +21,12 @@ import ProductRecommendationLeadGen from "@/pages/leadgen/ProductRecommendation"
 import FunnelDiagnosticLeadGen from "@/pages/leadgen/FunnelDiagnostic";
 import FunnelHealthLeadGen from "@/pages/leadgen/FunnelHealth";
 import BusinessCycleLeadGen from "@/pages/leadgen/BusinessCycle";
+import AboutAddPeopleLeadGen from "@/pages/leadgen/AboutAddPeople";
 import PricingLeadGen from "@/pages/leadgen/Pricing";
 
 // LSA pages
 import ProductRecommendationLSA from "@/pages/lsa/ProductRecommendation";
+import AboutAddPeopleLSA from "@/pages/lsa/AboutAddPeople";
 import PricingLSA from "@/pages/lsa/Pricing";
 
 export function AnimatedRoutes() {
@@ -46,6 +49,7 @@ export function AnimatedRoutes() {
             <Route path="/funnel-diagnostic/localseo" element={<PageTransition><FunnelDiagnosticLocalSEO /></PageTransition>} />
             <Route path="/funnel-health/localseo" element={<PageTransition><FunnelHealthLocalSEO /></PageTransition>} />
             <Route path="/business-cycle/localseo" element={<PageTransition><BusinessCycleLocalSEO /></PageTransition>} />
+            <Route path="/about/localseo" element={<PageTransition><AboutAddPeopleLocalSEO /></PageTransition>} />
             <Route path="/pricing/localseo" element={<PageTransition><PricingLocalSEO /></PageTransition>} />
             
             {/* Lead Gen path */}
@@ -53,10 +57,12 @@ export function AnimatedRoutes() {
             <Route path="/funnel-diagnostic/leadgen" element={<PageTransition><FunnelDiagnosticLeadGen /></PageTransition>} />
             <Route path="/funnel-health/leadgen" element={<PageTransition><FunnelHealthLeadGen /></PageTransition>} />
             <Route path="/business-cycle/leadgen" element={<PageTransition><BusinessCycleLeadGen /></PageTransition>} />
+            <Route path="/about/leadgen" element={<PageTransition><AboutAddPeopleLeadGen /></PageTransition>} />
             <Route path="/pricing/leadgen" element={<PageTransition><PricingLeadGen /></PageTransition>} />
             
-            {/* LSA path (no funnel, no business cycle - direct to pricing) */}
+            {/* LSA path */}
             <Route path="/product-recommendation/lsa" element={<PageTransition><ProductRecommendationLSA /></PageTransition>} />
+            <Route path="/about/lsa" element={<PageTransition><AboutAddPeopleLSA /></PageTransition>} />
             <Route path="/pricing/lsa" element={<PageTransition><PricingLSA /></PageTransition>} />
             
             <Route path="/required-info" element={<PageTransition><RequiredInfo /></PageTransition>} />
