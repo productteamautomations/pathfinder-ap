@@ -54,9 +54,9 @@ export default function PricingLSA() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
-        currentStep={4}
-        totalSteps={4}
+        onBack={() => navigate("/about/lsa", { state: location.state })}
+        currentStep={3}
+        totalSteps={3}
         showProgress
         productLabel="LSAs"
       />

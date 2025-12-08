@@ -47,7 +47,7 @@ export default function AboutAddPeopleLocalSEO() {
     <div className="min-h-screen h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/business-cycle/localseo", { state: location.state })}
-        currentStep={6}
+        currentStep={5}
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
