@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import LogoGraphic from "@/assets/Logo_graphic.svg";
+import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 
 function OrangeAccent() {
