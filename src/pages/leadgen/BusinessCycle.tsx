@@ -12,7 +12,6 @@ import DeviceIcon from "@/assets/device-icon.svg";
 import TimeIcon from "@/assets/time-icon.svg";
 import DemographicsIcon from "@/assets/demographics-icon.svg";
 
-
 const slides = [
   {
     title: "Visibility",
@@ -66,7 +65,11 @@ const slides = [
     title: "Your Setup",
     subtitle: "Getting started",
     content: [
-      { label: "Strategic onboarding call", description: "Understand your goals and develop strategy", icon: KeywordsIcon },
+      {
+        label: "Strategic onboarding call",
+        description: "Understand your goals and develop strategy",
+        icon: KeywordsIcon,
+      },
       { label: "Google Ads account setup", description: "New account or optimise existing", icon: LocationIcon },
       { label: "Search campaign creation", description: "Built from scratch", icon: DeviceIcon },
       { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: TimeIcon },
@@ -78,7 +81,11 @@ const slides = [
     subtitle: "Continuous improvement",
     content: [
       { label: "Lead Generation Service team", description: "Dedicated support", icon: KeywordsIcon },
-      { label: "Technical team support", description: "Monthly Account optimisations and tracking checks", icon: LocationIcon },
+      {
+        label: "Technical team support",
+        description: "Monthly Account optimisations and tracking checks",
+        icon: LocationIcon,
+      },
       { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: DeviceIcon },
       { label: "Call attribution dashboard", description: "Track performance data", icon: TimeIcon },
       { label: "Monthly reporting", description: "Detailed campaign performance", icon: DemographicsIcon },
@@ -140,14 +147,14 @@ export default function BusinessCycleLeadGen() {
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
-                    <div className="flex items-center gap-4 mb-3 -mt-8">
+                    <div className="flex items-center gap-4 mb-3">
                       <img src={LogoGraphic} alt="Add People" className="w-14 h-14" />
                       <h2 className="text-6xl md:text-6xl font-display font-bold text-title leading-tight tracking-tight">
                         {slide.title}
                       </h2>
                     </div>
                     <p className="text-base text-primary mt-1 leading-relaxed">{slide.subtitle}</p>
-                    
+
                     {/* Orange accent dots */}
                     <div className="flex items-center gap-2 mt-4">
                       <div className="flex items-center gap-1.5">
@@ -176,7 +183,7 @@ export default function BusinessCycleLeadGen() {
                         </motion.div>
                       </div>
                     </div>
-                    
+
                     {/* Main image */}
                     <div className="flex-1 flex items-center justify-center w-full mt-16">
                       <img
@@ -217,7 +224,7 @@ export default function BusinessCycleLeadGen() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.05 }}
-                            className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? 'items-center p-2' : 'items-start p-3'}`}
+                            className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-2" : "items-start p-3"}`}
                           >
                             {item.icon ? (
                               <img src={item.icon} alt="" className="w-10 h-10 flex-shrink-0" />
@@ -247,21 +254,19 @@ export default function BusinessCycleLeadGen() {
                     <ChevronLeft className="w-4 h-4" />
                     Previous
                   </Button>
-                  
+
                   {/* Dot Progress Indicator */}
                   <div className="flex items-center gap-2">
                     {slides.map((_, index) => (
                       <div
                         key={index}
                         className={`h-2 rounded-full transition-all duration-300 ${
-                          index === currentSlide
-                            ? "w-6 bg-accent"
-                            : "w-2 bg-muted-foreground/30"
+                          index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
                         }`}
                       />
                     ))}
                   </div>
-                  
+
                   <Button onClick={nextSlide} className="flex items-center gap-2">
                     {isLastSlide ? "About Us" : "Next"}
                     <ChevronRight className="w-4 h-4" />
