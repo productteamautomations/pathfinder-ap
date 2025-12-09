@@ -168,8 +168,8 @@ export default function BusinessCycleLeadGen() {
                         </div>
                         <p className="text-base text-primary mt-1 leading-relaxed">{slide.subtitle}</p>
                         <div className="flex items-center gap-2 mt-4">
-                          <div className="flex gap-1.5">
-                            {[...Array(4)].map((_, i) => (
+                          <div className="flex items-center gap-2">
+                            {[...Array(3)].map((_, i) => (
                               <motion.div
                                 key={i}
                                 className="w-2 h-2 rounded-full bg-primary"
@@ -178,6 +178,13 @@ export default function BusinessCycleLeadGen() {
                                 transition={{ delay: i * 0.1, duration: 0.3 }}
                               />
                             ))}
+                            <motion.div
+                              className="h-0.5 w-12 bg-primary"
+                              initial={{ scaleX: 0, opacity: 0 }}
+                              animate={{ scaleX: 1, opacity: 1 }}
+                              transition={{ delay: 0.3, duration: 0.3 }}
+                              style={{ transformOrigin: "left" }}
+                            />
                           </div>
                         </div>
                         <div className="flex-1 flex items-center justify-center w-full mt-10">
