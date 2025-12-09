@@ -190,7 +190,7 @@ export default function BusinessCycleLeadGen() {
                       </>
                     ) : (
                       <>
-                        <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                        <span className="text-sm font-semibold text-primary uppercase tracking-wider -mt-2 mb-4 block">
                           Google Ads Process
                         </span>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title leading-tight tracking-tight">
