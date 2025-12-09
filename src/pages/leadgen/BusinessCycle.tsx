@@ -158,19 +158,31 @@ export default function BusinessCycleLeadGen() {
                     {slide.hasCustomLayout ? (
                       <>
                         {/* Visibility custom layout */}
-                        <div className="flex items-center gap-3 mb-2">
-                          <img src={LogoGraphic} alt="Add People" className="w-10 h-10" />
+                        <div className="flex items-center gap-4 mb-3">
+                          <img src={LogoGraphic} alt="Add People" className="w-14 h-14" />
                           <h2 className="text-4xl md:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                             {slide.title}
                           </h2>
                         </div>
-                        <OrangeAccent />
+                        <div className="flex items-center gap-2 mt-4">
+                          <div className="flex gap-1.5">
+                            {[...Array(4)].map((_, i) => (
+                              <motion.div
+                                key={i}
+                                className="w-2 h-2 rounded-full bg-primary"
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: i * 0.1, duration: 0.3 }}
+                              />
+                            ))}
+                          </div>
+                        </div>
                         <p className="text-base text-muted-foreground mt-4 leading-relaxed">{slide.subtitle}</p>
-                        <div className="flex-1 flex items-center justify-center w-full mt-6">
+                        <div className="flex-1 flex items-center justify-center w-full mt-4">
                           <img 
                             src={VisibilityMainImage} 
                             alt="Visibility - Get found by local customers" 
-                            className="max-w-full max-h-[45vh] object-contain"
+                            className="w-full h-auto max-h-[55vh] object-contain"
                           />
                         </div>
                       </>
