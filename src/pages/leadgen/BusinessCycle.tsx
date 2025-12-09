@@ -180,7 +180,7 @@ export default function BusinessCycleLeadGen() {
                             ))}
                           </div>
                         </div>
-                        <div className="flex-1 flex items-center justify-center w-full mt-8">
+                        <div className="flex-1 flex items-center justify-center w-full mt-10">
                           <img
                             src={VisibilityMainImage}
                             alt="Visibility - Get found by local customers"
