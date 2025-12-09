@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-
+import visibilityMainImage from "@/assets/visibility-main.svg";
 function OrangeAccent() {
   return (
     <div className="flex items-center gap-2 mt-6">
@@ -143,7 +143,7 @@ export default function BusinessCycleLeadGen() {
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
             <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+              <div className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${currentSlide === 0 ? 'bg-muted/30' : 'bg-gradient-to-br from-white to-muted/20'}`}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -151,30 +151,43 @@ export default function BusinessCycleLeadGen() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
+                    className="flex flex-col h-full"
                   >
-                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
-                      Google Ads Process
-                    </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title leading-tight tracking-tight">
-                      {slide.title}
-                    </h2>
-                    <OrangeAccent />
-                    <p className="text-lg text-muted-foreground mt-8 leading-relaxed">{slide.subtitle}</p>
-                    <div className="flex gap-1.5 mt-10">
-                      {slides.map((_, idx) => (
-                        <div
-                          key={idx}
-                          className={`h-1.5 rounded-full transition-all ${
-                            idx === currentSlide ? "bg-primary w-6" : "bg-muted w-1.5"
-                          }`}
+                    {currentSlide === 0 ? (
+                      <div className="flex-1 flex items-center justify-center">
+                        <img 
+                          src={visibilityMainImage} 
+                          alt="Visibility illustration" 
+                          className="max-w-full max-h-full object-contain"
                         />
-                      ))}
-                    </div>
+                      </div>
+                    ) : (
+                      <>
+                        <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                          Google Ads Process
+                        </span>
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title leading-tight tracking-tight">
+                          {slide.title}
+                        </h2>
+                        <OrangeAccent />
+                        <p className="text-lg text-muted-foreground mt-8 leading-relaxed">{slide.subtitle}</p>
+                        <div className="flex gap-1.5 mt-10">
+                          {slides.map((_, idx) => (
+                            <div
+                              key={idx}
+                              className={`h-1.5 rounded-full transition-all ${
+                                idx === currentSlide ? "bg-primary w-6" : "bg-muted w-1.5"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
+              <div className={`p-8 md:p-10 lg:p-12 flex flex-col border-l border-border/20 overflow-hidden ${currentSlide === 0 ? 'bg-gradient-to-br from-white to-muted/20' : 'bg-muted/30'}`}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
