@@ -197,7 +197,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col border-l border-border/20 overflow-hidden bg-gradient-to-br from-white to-muted/20">
+              <div className="relative p-8 md:p-10 lg:p-12 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
