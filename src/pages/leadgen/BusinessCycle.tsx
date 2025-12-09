@@ -294,6 +294,21 @@ export default function BusinessCycleLeadGen() {
                     <ChevronLeft className="w-4 h-4" />
                     Previous
                   </Button>
+                  
+                  {/* Dot Progress Indicator */}
+                  <div className="flex items-center gap-2">
+                    {slides.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`h-2 rounded-full transition-all duration-300 ${
+                          index === currentSlide
+                            ? "w-6 bg-accent"
+                            : "w-2 bg-muted-foreground/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  
                   <Button onClick={nextSlide} className="flex items-center gap-2">
                     {isLastSlide ? "About Us" : "Next"}
                     <ChevronRight className="w-4 h-4" />
