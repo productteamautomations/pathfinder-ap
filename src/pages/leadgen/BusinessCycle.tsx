@@ -232,9 +232,9 @@ export default function BusinessCycleLeadGen() {
                               <span className="text-primary font-bold mt-0.5">•</span>
                             )}
                             <div className="flex-1">
-                              <span className="font-medium text-foreground text-sm">{item.label}</span>
+                              <span className="font-semibold text-foreground text-base">{item.label}</span>
                               {item.description && (
-                                <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
+                                <p className="text-sm text-muted-foreground mt-0.5">{item.description}</p>
                               )}
                             </div>
                           </motion.li>
