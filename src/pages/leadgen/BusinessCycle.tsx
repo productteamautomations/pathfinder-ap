@@ -141,11 +141,13 @@ export default function BusinessCycleLeadGen() {
           >
             <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
               {/* Left side - swapped: now muted for regular, white for visibility */}
-              <div className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${
-                slide.hasCustomLayout 
-                  ? "bg-gradient-to-br from-muted/30 to-muted/50" 
-                  : "bg-gradient-to-br from-white to-muted/20"
-              }`}>
+              <div
+                className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${
+                  slide.hasCustomLayout
+                    ? "bg-gradient-to-br from-muted/30 to-muted/50"
+                    : "bg-gradient-to-br from-white to-muted/20"
+                }`}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -158,7 +160,7 @@ export default function BusinessCycleLeadGen() {
                     {slide.hasCustomLayout ? (
                       <>
                         {/* Visibility custom layout */}
-                        <div className="flex items-center gap-4 mb-3 -mt-8">
+                        <div className="flex items-center gap-4 mb-3">
                           <img src={LogoGraphic} alt="Add People" className="w-14 h-14" />
                           <h2 className="text-4xl md:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                             {slide.title}
@@ -179,9 +181,9 @@ export default function BusinessCycleLeadGen() {
                         </div>
                         <p className="text-base text-muted-foreground mt-4 leading-relaxed">{slide.subtitle}</p>
                         <div className="flex-1 flex items-center justify-center w-full mt-4">
-                          <img 
-                            src={VisibilityMainImage} 
-                            alt="Visibility - Get found by local customers" 
+                          <img
+                            src={VisibilityMainImage}
+                            alt="Visibility - Get found by local customers"
                             className="w-full h-auto max-h-[55vh] object-contain"
                           />
                         </div>
@@ -212,11 +214,11 @@ export default function BusinessCycleLeadGen() {
                 </AnimatePresence>
               </div>
 
-              <div className={`p-8 md:p-10 lg:p-12 flex flex-col border-l border-border/20 overflow-hidden ${
-                slide.hasCustomLayout 
-                  ? "bg-gradient-to-br from-white to-muted/20" 
-                  : "bg-muted/30"
-              }`}>
+              <div
+                className={`p-8 md:p-10 lg:p-12 flex flex-col border-l border-border/20 overflow-hidden ${
+                  slide.hasCustomLayout ? "bg-gradient-to-br from-white to-muted/20" : "bg-muted/30"
+                }`}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
