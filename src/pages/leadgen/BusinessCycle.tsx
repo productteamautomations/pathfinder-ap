@@ -139,8 +139,9 @@ export default function BusinessCycleLeadGen() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
-              {/* Left side - swapped: now muted for regular, white for visibility */}
+            <div className={`p-8 md:p-10 lg:p-12 flex flex-col ${
+                slide.hasCustomLayout ? '' : 'justify-center'
+              } ${/* Left side - swapped: now muted for regular, white for visibility */}
               <div
                 className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center ${
                   slide.hasCustomLayout
