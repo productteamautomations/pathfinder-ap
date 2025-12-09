@@ -194,7 +194,7 @@ export default function BusinessCycleLeadGen() {
                             </motion.div>
                           </div>
                         </div>
-                        <div className="flex-1 flex items-center justify-center w-full">
+                        <div className="flex-1 flex items-center justify-center w-full mt-10">
                           <img
                             src={VisibilityMainImage}
                             alt="Visibility - Get found by local customers"
