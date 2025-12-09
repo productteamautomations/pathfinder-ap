@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import visibilityHeroImage from "@/assets/leadgen-visibility-hero.svg";
+
 function OrangeAccent() {
   return (
     <div className="flex items-center gap-2 mt-6">
@@ -143,10 +143,7 @@ export default function BusinessCycleLeadGen() {
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
             <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
-              {/* Left side - swapped backgrounds for Visibility slide */}
-              <div className={`p-8 md:p-10 lg:p-12 flex flex-col justify-center relative ${
-                currentSlide === 0 ? "bg-muted/30" : "bg-gradient-to-br from-white to-muted/20"
-              }`}>
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -154,7 +151,6 @@ export default function BusinessCycleLeadGen() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="relative z-10"
                   >
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
                       Google Ads Process
@@ -176,23 +172,9 @@ export default function BusinessCycleLeadGen() {
                     </div>
                   </motion.div>
                 </AnimatePresence>
-                
-                {/* SVG image only on Visibility slide */}
-                {currentSlide === 0 && (
-                  <motion.img
-                    src={visibilityHeroImage}
-                    alt="Visibility illustration"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.15 }}
-                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                  />
-                )}
               </div>
 
-              {/* Right side - swapped backgrounds for Visibility slide */}
-              <div className={`p-8 md:p-10 lg:p-12 flex flex-col border-l border-border/20 overflow-hidden ${
-                currentSlide === 0 ? "bg-gradient-to-br from-white to-muted/20" : "bg-muted/30"
-              }`}>
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
