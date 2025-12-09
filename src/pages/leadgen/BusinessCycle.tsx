@@ -6,6 +6,11 @@ import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
+import KeywordsIcon from "@/assets/keywords-icon.svg";
+import LocationIcon from "@/assets/location-icon.svg";
+import DeviceIcon from "@/assets/device-icon.svg";
+import TimeIcon from "@/assets/time-icon.svg";
+import DemographicsIcon from "@/assets/demographics-icon.svg";
 
 function OrangeAccent() {
   return (
@@ -30,11 +35,11 @@ const slides = [
     title: "Visibility",
     subtitle: "Get found by local customers",
     content: [
-      { label: "Keywords They Search", description: "Target the exact terms your customers use" },
-      { label: "Their Location", description: "Show ads only in your service area" },
-      { label: "Device Type", description: "Optimise for mobile and desktop users" },
-      { label: "Time of Day", description: "Appear when customers are most active" },
-      { label: "Demographics & Interests", description: "Reach your ideal audience" },
+      { label: "Keywords They Search", description: "Target the exact terms your customers use", icon: KeywordsIcon },
+      { label: "Their Location", description: "Show ads only in your service area", icon: LocationIcon },
+      { label: "Device Type", description: "Optimise for mobile and desktop users", icon: DeviceIcon },
+      { label: "Time of Day", description: "Appear when customers are most active", icon: TimeIcon },
+      { label: "Demographics & Interests", description: "Reach your ideal audience", icon: DemographicsIcon },
     ],
     hasCustomLayout: true,
   },
@@ -261,7 +266,11 @@ export default function BusinessCycleLeadGen() {
                             transition={{ delay: idx * 0.05 }}
                             className="flex items-start gap-3 p-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
                           >
-                            <span className="text-primary font-bold mt-0.5">•</span>
+                            {item.icon ? (
+                              <img src={item.icon} alt="" className="w-8 h-8 flex-shrink-0" />
+                            ) : (
+                              <span className="text-primary font-bold mt-0.5">•</span>
+                            )}
                             <div className="flex-1">
                               <span className="font-medium text-foreground text-sm">{item.label}</span>
                               {item.description && (
