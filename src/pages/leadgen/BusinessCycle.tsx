@@ -180,11 +180,11 @@ export default function BusinessCycleLeadGen() {
                           </div>
                         </div>
                         <p className="text-base text-muted-foreground mt-4 leading-relaxed">{slide.subtitle}</p>
-                        <div className="flex-1 flex items-center justify-center w-full mt-4">
+                        <div className="flex-1 flex items-center justify-center w-full">
                           <img
                             src={VisibilityMainImage}
                             alt="Visibility - Get found by local customers"
-                            className="w-full h-auto max-h-[55vh] object-contain"
+                            className="w-full h-auto max-h-[50vh] object-contain"
                           />
                         </div>
                       </>
