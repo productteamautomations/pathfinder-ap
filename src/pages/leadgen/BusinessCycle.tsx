@@ -162,7 +162,7 @@ export default function BusinessCycleLeadGen() {
                         {/* Visibility custom layout */}
                         <div className="flex items-center gap-4 mb-3">
                           <img src={LogoGraphic} alt="Add People" className="w-14 h-14" />
-                          <h2 className="text-4xl md:text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                          <h2 className="text-6xl md:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                             {slide.title}
                           </h2>
                         </div>
