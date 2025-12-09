@@ -15,7 +15,7 @@ import DemographicsIcon from "@/assets/demographics-icon.svg";
 const slides = [
   {
     title: "Visibility",
-    subtitle: "Get found by local customers",
+    subtitle: "Get found by the right customers",
     content: [
       { label: "Keywords They Search", description: "Target the exact terms your customers use", icon: KeywordsIcon },
       { label: "Their Location", description: "Show ads only in your service area", icon: LocationIcon },
