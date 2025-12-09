@@ -221,9 +221,9 @@ export default function BusinessCycleLeadGen() {
                         {slide.content?.map((item, idx) => (
                           <motion.li
                             key={idx}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.05 }}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
                             className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-2" : "items-start p-3"}`}
                           >
                             {item.icon ? (
