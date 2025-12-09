@@ -168,23 +168,30 @@ export default function BusinessCycleLeadGen() {
                         </div>
                         <p className="text-base text-primary mt-1 leading-relaxed">{slide.subtitle}</p>
                         <div className="flex items-center gap-2 mt-4">
-                          <div className="flex items-center gap-2">
-                            {[...Array(3)].map((_, i) => (
+                          <div className="flex items-center gap-1.5">
+                            {[...Array(4)].map((_, i) => (
                               <motion.div
                                 key={i}
                                 className="w-2 h-2 rounded-full bg-primary"
                                 initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
+                                animate={{ scale: 1, opacity: 1 - i * 0.25 }}
                                 transition={{ delay: i * 0.1, duration: 0.3 }}
                               />
                             ))}
                             <motion.div
-                              className="h-0.5 w-12 bg-primary"
+                              className="relative h-0.5 w-16 overflow-hidden"
                               initial={{ scaleX: 0, opacity: 0 }}
                               animate={{ scaleX: 1, opacity: 1 }}
-                              transition={{ delay: 0.3, duration: 0.3 }}
+                              transition={{ delay: 0.4, duration: 0.4 }}
                               style={{ transformOrigin: "left" }}
-                            />
+                            >
+                              <div
+                                className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
+                                style={{
+                                  clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
+                                }}
+                              />
+                            </motion.div>
                           </div>
                         </div>
                         <div className="flex-1 flex items-center justify-center w-full mt-10">
