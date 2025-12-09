@@ -166,6 +166,7 @@ export default function BusinessCycleLeadGen() {
                             {slide.title}
                           </h2>
                         </div>
+                        <p className="text-base text-primary mt-4 leading-relaxed">{slide.subtitle}</p>
                         <div className="flex items-center gap-2 mt-4">
                           <div className="flex gap-1.5">
                             {[...Array(4)].map((_, i) => (
@@ -179,7 +180,6 @@ export default function BusinessCycleLeadGen() {
                             ))}
                           </div>
                         </div>
-                        <p className="text-base text-primary mt-4 leading-relaxed">{slide.subtitle}</p>
                         <div className="flex-1 flex items-center justify-center w-full mt-8">
                           <img
                             src={VisibilityMainImage}
