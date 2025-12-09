@@ -267,7 +267,9 @@ export default function BusinessCycleLeadGen() {
                             className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? 'items-center p-2' : 'items-start p-3'}`}
                           >
                             {item.icon ? (
-                              <img src={item.icon} alt="" className="w-10 h-10 flex-shrink-0" />
+                              <div className="flex-shrink-0 w-14 h-14 rounded-xl bg-muted/40 flex items-center justify-center p-2">
+                                <img src={item.icon} alt="" className="w-10 h-10" />
+                              </div>
                             ) : (
                               <span className="text-primary font-bold mt-0.5">•</span>
                             )}
