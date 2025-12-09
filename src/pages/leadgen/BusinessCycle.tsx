@@ -264,10 +264,10 @@ export default function BusinessCycleLeadGen() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.05 }}
-                            className="flex items-start gap-3 p-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                            className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? 'items-center p-2' : 'items-start p-3'}`}
                           >
                             {item.icon ? (
-                              <img src={item.icon} alt="" className="w-8 h-8 flex-shrink-0" />
+                              <img src={item.icon} alt="" className="w-10 h-10 flex-shrink-0" />
                             ) : (
                               <span className="text-primary font-bold mt-0.5">•</span>
                             )}
