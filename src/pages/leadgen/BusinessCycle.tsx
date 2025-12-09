@@ -136,7 +136,7 @@ export default function BusinessCycleLeadGen() {
           >
             <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
               {/* Left side - logo, title, image */}
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
+              <div className="relative z-10 p-8 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 shadow-[8px_0_20px_-5px_rgba(0,0,0,0.1)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -197,7 +197,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-8 md:p-10 lg:p-12 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
+              <div className="p-8 md:p-10 lg:p-12 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
