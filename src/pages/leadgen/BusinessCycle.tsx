@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
@@ -115,6 +115,12 @@ export default function BusinessCycleLeadGen() {
   const slide = slides[currentSlide];
   const isLastSlide = currentSlide === slides.length - 1;
   const totalSlides = slides.length;
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Reset image loaded state when slide changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentSlide]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -186,10 +192,14 @@ export default function BusinessCycleLeadGen() {
 
                     {/* Main image */}
                     <div className="flex-1 flex items-center justify-center w-full mt-16">
-                      <img
+                      <motion.img
                         src={VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
                         className="w-full h-auto max-h-[50vh] object-contain"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        onLoad={() => setImageLoaded(true)}
                       />
                     </div>
                   </motion.div>
