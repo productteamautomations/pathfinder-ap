@@ -9,6 +9,7 @@ import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
 import ConversionsMainImage from "@/assets/conversions-main.svg";
 import SalesMainImage from "@/assets/sales-main.svg";
+import YourSetupMainImage from "@/assets/your-setup-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
@@ -25,6 +26,42 @@ import SalesWaitingIcon from "@/assets/sales-waiting-icon.svg";
 import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
 import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
 import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
+
+// Timeline component for Your Setup slide
+const TimelineItem = ({ 
+  label, 
+  description, 
+  isLast, 
+  index 
+}: { 
+  label: string; 
+  description: string; 
+  isLast: boolean; 
+  index: number;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, x: 20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ delay: 0.4 + index * 0.1, duration: 0.3, ease: "easeOut" }}
+    className="flex gap-4"
+  >
+    {/* Timeline line and circle */}
+    <div className="flex flex-col items-center">
+      <div className="w-5 h-5 rounded-full bg-accent border-4 border-accent/30 flex-shrink-0" />
+      {!isLast && (
+        <div className="w-0.5 bg-accent/40 flex-1 min-h-[40px]" />
+      )}
+    </div>
+    
+    {/* Content */}
+    <div className="pb-4 flex-1">
+      <span className="font-semibold text-foreground text-lg">{label}</span>
+      {description && (
+        <p className="text-base text-muted-foreground mt-1">{description}</p>
+      )}
+    </div>
+  </motion.div>
+);
 
 const slides = [
   {
@@ -79,16 +116,17 @@ const slides = [
   {
     title: "Your Set Up",
     subtitle: "Getting started",
+    mainImage: YourSetupMainImage,
+    useTimeline: true,
     content: [
       {
         label: "Strategic onboarding call",
         description: "Understand your goals and develop strategy",
-        icon: KeywordsIcon,
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing", icon: LocationIcon },
-      { label: "Search campaign creation", description: "Built from scratch", icon: DeviceIcon },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: TimeIcon },
-      { label: "Campaign launch call", description: "Final review and go live", icon: DemographicsIcon },
+      { label: "Google Ads account setup", description: "New account or optimise existing" },
+      { label: "Search campaign creation", description: "Built from scratch" },
+      { label: "Conversion tracking setup", description: "Enhanced attribution solution" },
+      { label: "Campaign launch call", description: "Final review and go live" },
     ],
   },
   {
@@ -259,49 +297,63 @@ export default function BusinessCycleLeadGen() {
                       </div>
 
                       <div className="flex-1 overflow-hidden">
-                        <ul className="space-y-3">
-                          {slide.content?.map((item, idx) => (
-                            <motion.li
-                              key={idx}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                              className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                item.isExample
-                                  ? "bg-accent p-4 text-center"
-                                  : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                              }`}
-                            >
-                              {item.isExample ? (
-                                <div className="space-y-2">
-                                  <p className="text-foreground font-semibold text-base">
-                                    INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                  </p>
-                                  <p className="text-white font-semibold text-base">
-                                    USE:{" "}
-                                    <span className="font-bold">
-                                      "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
-                                    </span>
-                                  </p>
-                                </div>
-                              ) : (
-                                <>
-                                  {item.icon ? (
-                                    <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
-                                  ) : (
-                                    <span className="text-primary font-bold mt-0.5">•</span>
-                                  )}
-                                  <div className="flex-1">
-                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                    {item.description && (
-                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                    )}
+                        {slide.useTimeline ? (
+                          <div className="space-y-0">
+                            {slide.content?.map((item, idx) => (
+                              <TimelineItem
+                                key={idx}
+                                label={item.label}
+                                description={item.description || ""}
+                                isLast={idx === (slide.content?.length || 0) - 1}
+                                index={idx}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <ul className="space-y-3">
+                            {slide.content?.map((item, idx) => (
+                              <motion.li
+                                key={idx}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                  item.isExample
+                                    ? "bg-accent p-4 text-center"
+                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
+                                }`}
+                              >
+                                {item.isExample ? (
+                                  <div className="space-y-2">
+                                    <p className="text-foreground font-semibold text-base">
+                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
+                                    </p>
+                                    <p className="text-white font-semibold text-base">
+                                      USE:{" "}
+                                      <span className="font-bold">
+                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
+                                      </span>
+                                    </p>
                                   </div>
-                                </>
-                              )}
-                            </motion.li>
-                          ))}
-                        </ul>
+                                ) : (
+                                  <>
+                                    {item.icon ? (
+                                      <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
+                                    ) : (
+                                      <span className="text-primary font-bold mt-0.5">•</span>
+                                    )}
+                                    <div className="flex-1">
+                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                      {item.description && (
+                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                      )}
+                                    </div>
+                                  </>
+                                )}
+                              </motion.li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </motion.div>
                   </AnimatePresence>
