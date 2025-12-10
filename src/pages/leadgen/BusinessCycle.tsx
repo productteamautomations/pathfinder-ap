@@ -6,11 +6,13 @@ import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
+import EngagementMainImage from "@/assets/engagement-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
 import TimeIcon from "@/assets/time-icon.svg";
 import DemographicsIcon from "@/assets/demographics-icon.svg";
+import EngagementIcon from "@/assets/engagement-icon.svg";
 
 const slides = [
   {
@@ -27,15 +29,16 @@ const slides = [
   {
     title: "Engagement",
     subtitle: "Make your ads impossible to ignore",
+    mainImage: EngagementMainImage,
     content: [
-      { label: "Be Relevant", description: "Match your ad to search intent", icon: KeywordsIcon },
-      { label: "Be Clear", description: "Communicate your value instantly", icon: LocationIcon },
-      { label: "Be Tempting", description: "Give them a reason to click", icon: DeviceIcon },
+      { label: "Be Relevant", description: "Match your ad to search intent", icon: EngagementIcon },
+      { label: "Be Clear", description: "Communicate your value instantly", icon: EngagementIcon },
+      { label: "Be Tempting", description: "Give them a reason to click", icon: EngagementIcon },
       {
         label: "Example",
         description:
           '"Loft Conversions in Altrincham – Free Quote Today" Is more enticing than "Professional Loft Conversions"',
-        icon: TimeIcon,
+        icon: EngagementIcon,
       },
     ],
   },
@@ -193,7 +196,7 @@ export default function BusinessCycleLeadGen() {
                     {/* Main image */}
                     <div className="flex-1 flex items-center justify-center w-full mt-12">
                       <motion.img
-                        src={VisibilityMainImage}
+                        src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
                         className="w-full h-auto max-h-[50vh] object-contain"
                         initial={{ opacity: 0 }}
