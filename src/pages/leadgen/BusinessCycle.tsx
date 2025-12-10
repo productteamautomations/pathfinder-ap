@@ -260,49 +260,58 @@ export default function BusinessCycleLeadGen() {
                       </div>
 
                       <div className="flex-1 overflow-hidden">
-                        <ul className="space-y-3">
-                          {slide.content?.map((item, idx) => (
-                            <motion.li
-                              key={idx}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                              className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                item.isExample
-                                  ? "bg-accent p-4 text-center"
-                                  : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                              }`}
-                            >
-                              {item.isExample ? (
-                                <div className="space-y-2">
-                                  <p className="text-foreground font-semibold text-base">
-                                    INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                  </p>
-                                  <p className="text-white font-semibold text-base">
-                                    USE:{" "}
-                                    <span className="font-bold">
-                                      "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
-                                    </span>
-                                  </p>
-                                </div>
-                              ) : (
-                                <>
-                                  {item.icon ? (
-                                    <img src={item.icon} alt="" className={`flex-shrink-0 ${slide.title === "Your Setup" ? "w-[18px] h-[18px]" : "w-12 h-12"}`} />
-                                  ) : (
-                                    <span className="text-primary font-bold mt-0.5">•</span>
-                                  )}
-                                  <div className="flex-1">
-                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                    {item.description && (
-                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                    )}
+                        <div className="relative">
+                          {/* Vertical connecting line for Your Setup */}
+                          {slide.title === "Your Setup" && (
+                            <div 
+                              className="absolute left-[21px] top-[24px] bottom-[24px] w-[2px] bg-gradient-to-b from-primary via-primary/50 to-primary/20"
+                              style={{ zIndex: 0 }}
+                            />
+                          )}
+                          <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                            {slide.content?.map((item, idx) => (
+                              <motion.li
+                                key={idx}
+                                initial={{ opacity: 0, x: 20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                  item.isExample
+                                    ? "bg-accent p-4 text-center"
+                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
+                                }`}
+                              >
+                                {item.isExample ? (
+                                  <div className="space-y-2">
+                                    <p className="text-foreground font-semibold text-base">
+                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
+                                    </p>
+                                    <p className="text-white font-semibold text-base">
+                                      USE:{" "}
+                                      <span className="font-bold">
+                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
+                                      </span>
+                                    </p>
                                   </div>
-                                </>
-                              )}
-                            </motion.li>
-                          ))}
-                        </ul>
+                                ) : (
+                                  <>
+                                    {item.icon ? (
+                                      <img src={item.icon} alt="" className={`flex-shrink-0 ${slide.title === "Your Setup" ? "w-[18px] h-[18px]" : "w-12 h-12"}`} />
+                                    ) : (
+                                      <span className="text-primary font-bold mt-0.5">•</span>
+                                    )}
+                                    <div className="flex-1">
+                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                      {item.description && (
+                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                      )}
+                                    </div>
+                                  </>
+                                )}
+                              </motion.li>
+                            ))}
+                          </ul>
+                        </div>
                       </div>
                     </motion.div>
                   </AnimatePresence>
