@@ -27,7 +27,8 @@ import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
 import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
 import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 import YourSetupIcon from "@/assets/your-setup-icon.svg";
-
+import OngoingServiceIcon from "@/assets/ongoing-service-icon.svg";
+import OngoingServiceMainImage from "@/assets/ongoing-service-main.svg";
 const slides = [
   {
     title: "Visibility",
@@ -97,16 +98,17 @@ const slides = [
   {
     title: "Ongoing Service",
     subtitle: "Continuous improvement",
+    mainImage: OngoingServiceMainImage,
     content: [
-      { label: "Lead Generation Service team", description: "Dedicated support", icon: KeywordsIcon },
+      { label: "Lead Generation Service team", description: "Dedicated support", icon: OngoingServiceIcon },
       {
         label: "Technical team support",
         description: "Monthly Account optimisations and tracking checks",
-        icon: LocationIcon,
+        icon: OngoingServiceIcon,
       },
-      { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: DeviceIcon },
-      { label: "Call attribution dashboard", description: "Track performance data", icon: TimeIcon },
-      { label: "Monthly reporting", description: "Detailed campaign performance", icon: DemographicsIcon },
+      { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: OngoingServiceIcon },
+      { label: "Call attribution dashboard", description: "Track performance data", icon: OngoingServiceIcon },
+      { label: "Monthly reporting", description: "Detailed campaign performance", icon: OngoingServiceIcon },
     ],
   },
 ];
