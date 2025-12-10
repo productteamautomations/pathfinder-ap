@@ -348,7 +348,7 @@ export default function BusinessCycleLeadGen() {
                 </div>
 
                 {/* Fixed navigation buttons - outside AnimatePresence */}
-                <div className="flex items-center justify-between pt-4 flex-shrink-0">
+                <div className="flex items-center justify-between pt-4 flex-shrink-0 mt-auto">
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
