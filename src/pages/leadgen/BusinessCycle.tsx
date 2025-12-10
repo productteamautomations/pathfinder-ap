@@ -77,7 +77,7 @@ const slides = [
     ],
   },
   {
-    title: "Your Set up",
+    title: "Your Set Up",
     subtitle: "Getting started",
     content: [
       {
