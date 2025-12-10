@@ -132,15 +132,15 @@ export default function BusinessCycleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-6xl">
+      <div className="flex-1 pt-[73px] py-[5vh] px-6 md:px-12 flex items-center justify-center">
+        <div className="w-full h-full max-w-[90vw] 2xl:max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden h-full"
           >
-            <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
+            <div className="grid md:grid-cols-2 h-full overflow-hidden">
               {/* Left side - logo, title, image */}
               <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
                 <AnimatePresence mode="wait">
