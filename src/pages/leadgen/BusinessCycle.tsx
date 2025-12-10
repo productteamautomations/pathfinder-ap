@@ -132,17 +132,17 @@ export default function BusinessCycleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
+      <div className="flex-1 pt-[73px] px-[1rem] md:px-[2rem] flex items-center justify-center">
         <div className="w-full max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            className="bg-white rounded-[2.5rem] shadow-[0_1.25rem_3.75rem_rgba(0,0,0,0.1),0_0.5rem_1.563rem_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[82vh] overflow-hidden">
+            <div className="grid md:grid-cols-2 min-h-[82vh] max-h-[90vh]">
               {/* Left side - logo, title, image */}
-              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
+              <div className="p-[2.5rem] md:p-[3rem] lg:p-[3.5rem] flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -153,28 +153,41 @@ export default function BusinessCycleLeadGen() {
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
-                    <div className="flex items-center gap-5 mb-4">
-                      <img src={LogoGraphic} alt="Add People" className="w-16 h-16" />
-                      <h2 className="text-7xl md:text-7xl font-display font-bold text-title leading-tight tracking-tight">
+                    <div className="flex items-center gap-[1.25rem] mb-[1rem]">
+                      <img
+                        src={LogoGraphic}
+                        alt="Add People"
+                        className="w-[4rem] h-[4rem]"
+                        style={{ width: "clamp(3rem, 10vw, 4rem)", height: "clamp(3rem, 10vw, 4rem)" }}
+                      />
+                      <h2
+                        className="font-display font-bold text-title leading-tight tracking-tight"
+                        style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                      >
                         {slide.title}
                       </h2>
                     </div>
-                    <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
+                    <p
+                      className="text-primary mt-[0.5rem] leading-relaxed"
+                      style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
+                    >
+                      {slide.subtitle}
+                    </p>
 
                     {/* Orange accent dots */}
-                    <div className="flex items-center gap-2 mt-4">
-                      <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-[0.5rem] mt-[1rem]">
+                      <div className="flex items-center gap-[0.375rem]">
                         {[...Array(4)].map((_, i) => (
                           <motion.div
                             key={i}
-                            className="w-2 h-2 rounded-full bg-primary"
+                            className="w-[0.5rem] h-[0.5rem] rounded-full bg-primary"
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 - i * 0.25 }}
                             transition={{ delay: i * 0.1, duration: 0.3 }}
                           />
                         ))}
                         <motion.div
-                          className="relative h-0.5 w-16 overflow-hidden"
+                          className="relative h-[0.125rem] w-[4rem] overflow-hidden"
                           initial={{ scaleX: 0, opacity: 0 }}
                           animate={{ scaleX: 1, opacity: 1 }}
                           transition={{ delay: 0.4, duration: 0.4 }}
@@ -191,11 +204,12 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-center justify-center w-full mt-12">
+                    <div className="flex-1 flex items-center justify-center w-full mt-[3rem]">
                       <motion.img
                         src={VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className="w-full h-auto max-h-[50vh] object-contain"
+                        className="w-full h-auto object-contain"
+                        style={{ maxHeight: "min(50vh, 30rem)" }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -207,7 +221,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
+              <div className="relative p-[2.5rem] md:p-[3rem] lg:p-[3.5rem] flex flex-col bg-gradient-to-br from-white to-muted/20 shadow-[-0.5rem_0_1.25rem_-0.313rem_rgba(0,0,0,0.1)] overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -217,34 +231,71 @@ export default function BusinessCycleLeadGen() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <div className="mb-8">
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-xl">—</span>
-                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
+                    <div className="mb-[2rem]">
+                      <div className="flex items-center gap-[1rem]">
+                        <span
+                          className="font-semibold text-primary uppercase tracking-wider"
+                          style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)" }}
+                        >
+                          Slide
+                        </span>
+                        <span
+                          className="font-bold text-foreground"
+                          style={{ fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)" }}
+                        >
+                          {currentSlide + 1}
+                        </span>
+                        <span className="text-muted-foreground" style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)" }}>
+                          —
+                        </span>
+                        <span
+                          className="font-bold text-muted-foreground"
+                          style={{ fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)" }}
+                        >
+                          {totalSlides}
+                        </span>
                       </div>
                     </div>
 
                     <div className="flex-1 overflow-hidden">
-                      <ul className="space-y-3">
+                      <ul className="space-y-[0.75rem]">
                         {slide.content?.map((item, idx) => (
                           <motion.li
                             key={idx}
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                            className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-3" : "items-start p-4"}`}
+                            className={`flex gap-[1rem] bg-white rounded-[1rem] shadow-[0_0.125rem_0.625rem_rgba(0,0,0,0.04)] border border-border/30 ${
+                              item.icon ? "items-center p-[0.75rem]" : "items-start p-[1rem]"
+                            }`}
                           >
                             {item.icon ? (
-                              <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
+                              <img
+                                src={item.icon}
+                                alt=""
+                                className="flex-shrink-0"
+                                style={{
+                                  width: "clamp(2.5rem, 5vw, 3rem)",
+                                  height: "clamp(2.5rem, 5vw, 3rem)",
+                                }}
+                              />
                             ) : (
-                              <span className="text-primary font-bold mt-0.5">•</span>
+                              <span className="text-primary font-bold mt-[0.125rem]">•</span>
                             )}
                             <div className="flex-1">
-                              <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                              <span
+                                className="font-semibold text-foreground"
+                                style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
+                              >
+                                {item.label}
+                              </span>
                               {item.description && (
-                                <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                <p
+                                  className="text-muted-foreground mt-[0.25rem]"
+                                  style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)" }}
+                                >
+                                  {item.description}
+                                </p>
                               )}
                             </div>
                           </motion.li>
@@ -254,32 +305,32 @@ export default function BusinessCycleLeadGen() {
                   </motion.div>
                 </AnimatePresence>
 
-                <div className="flex items-center justify-between mt-auto pt-4">
+                <div className="flex items-center justify-between mt-auto pt-[1rem]">
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
                     variant="outline"
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-[0.5rem]"
                   >
-                    <ChevronLeft className="w-4 h-4" />
+                    <ChevronLeft className="w-[1rem] h-[1rem]" />
                     Previous
                   </Button>
 
                   {/* Dot Progress Indicator */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-[0.5rem]">
                     {slides.map((_, index) => (
                       <div
                         key={index}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
+                        className={`h-[0.5rem] rounded-full transition-all duration-300 ${
+                          index === currentSlide ? "w-[1.5rem] bg-accent" : "w-[0.5rem] bg-muted-foreground/30"
                         }`}
                       />
                     ))}
                   </div>
 
-                  <Button onClick={nextSlide} className="flex items-center gap-2">
+                  <Button onClick={nextSlide} className="flex items-center gap-[0.5rem]">
                     {isLastSlide ? "About Us" : "Next"}
-                    <ChevronRight className="w-4 h-4" />
+                    <ChevronRight className="w-[1rem] h-[1rem]" />
                   </Button>
                 </div>
               </div>
