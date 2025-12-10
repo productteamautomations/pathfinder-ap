@@ -65,7 +65,7 @@ const slides = [
     ],
   },
   {
-    title: "Lead Warming",
+    title: "Lead Management",
     subtitle: "Speed wins deals",
     mainImage: SalesMainImage,
     content: [
