@@ -231,7 +231,7 @@ export default function BusinessCycleLeadGen() {
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`w-[95%] h-auto max-h-[65vh] object-contain ${
+                        className={`w-full h-auto max-h-[75vh] object-contain ${
                           slide.title === "Lead Management" ? "mb-[-40px]" : "mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
