@@ -216,11 +216,11 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-center justify-center w-full -mt-4">
+                    <div className="flex-1 flex items-end justify-center w-full">
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className="w-full h-auto max-h-[65vh] object-contain scale-110"
+                        className="w-3/4 h-auto max-h-[55vh] object-contain"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
