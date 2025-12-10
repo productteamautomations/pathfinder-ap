@@ -145,7 +145,7 @@ export default function BusinessCycleLeadGen() {
           >
             <div className="grid md:grid-cols-2 min-h-[82vh] max-h-[90vh]">
               {/* Left side - logo, title, image */}
-              <div className="p-[clamp(2rem,4vw,3.5rem)] flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-y-auto">
+              <div className="p-[clamp(2rem,3.5vw,3.5rem)] flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -156,16 +156,24 @@ export default function BusinessCycleLeadGen() {
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
-                    <div className="flex items-center gap-[clamp(1rem,2vw,1.25rem)] mb-[clamp(0.75rem,1.5vw,1rem)]">
+                    <div
+                      className="flex items-center"
+                      style={{
+                        gap: "clamp(1rem, 1.75vw, 1.25rem)",
+                        marginBottom: "clamp(0.75rem, 1.3vw, 1rem)",
+                      }}
+                    >
                       <img
                         src={LogoGraphic}
                         alt="Add People"
-                        className="w-[4rem] h-[4rem]"
-                        style={{ width: "clamp(3rem, 10vw, 4rem)", height: "clamp(3rem, 10vw, 4rem)" }}
+                        style={{
+                          width: "clamp(3rem, 5.25vw, 4rem)",
+                          height: "clamp(3rem, 5.25vw, 4rem)",
+                        }}
                       />
                       <h2
                         className="font-display font-bold text-title leading-tight tracking-tight"
-                        style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
+                        style={{ fontSize: "clamp(2.5rem, 4.4vw, 4.5rem)" }}
                       >
                         {slide.title}
                       </h2>
@@ -173,8 +181,8 @@ export default function BusinessCycleLeadGen() {
                     <p
                       className="text-primary leading-relaxed"
                       style={{
-                        fontSize: "clamp(1rem, 1.5vw, 1.125rem)",
-                        marginTop: "clamp(0.375rem, 0.8vw, 0.5rem)",
+                        fontSize: "clamp(1rem, 1.3vw, 1.125rem)",
+                        marginTop: "clamp(0.375rem, 0.7vw, 0.5rem)",
                       }}
                     >
                       {slide.subtitle}
@@ -183,16 +191,19 @@ export default function BusinessCycleLeadGen() {
                     {/* Orange accent dots */}
                     <div
                       className="flex items-center"
-                      style={{ gap: "clamp(0.375rem, 0.8vw, 0.5rem)", marginTop: "clamp(0.75rem, 1.5vw, 1rem)" }}
+                      style={{
+                        gap: "clamp(0.375rem, 0.7vw, 0.5rem)",
+                        marginTop: "clamp(0.75rem, 1.3vw, 1rem)",
+                      }}
                     >
-                      <div className="flex items-center" style={{ gap: "clamp(0.25rem, 0.5vw, 0.375rem)" }}>
+                      <div className="flex items-center" style={{ gap: "clamp(0.25rem, 0.44vw, 0.375rem)" }}>
                         {[...Array(4)].map((_, i) => (
                           <motion.div
                             key={i}
                             className="rounded-full bg-primary"
                             style={{
-                              width: "clamp(0.375rem, 0.8vw, 0.5rem)",
-                              height: "clamp(0.375rem, 0.8vw, 0.5rem)",
+                              width: "clamp(0.375rem, 0.7vw, 0.5rem)",
+                              height: "clamp(0.375rem, 0.7vw, 0.5rem)",
                             }}
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 - i * 0.25 }}
@@ -205,8 +216,8 @@ export default function BusinessCycleLeadGen() {
                           animate={{ scaleX: 1, opacity: 1 }}
                           transition={{ delay: 0.4, duration: 0.4 }}
                           style={{
-                            height: "clamp(0.0625rem, 0.15vw, 0.125rem)",
-                            width: "clamp(3rem, 6vw, 4rem)",
+                            height: "clamp(0.0625rem, 0.13vw, 0.125rem)",
+                            width: "clamp(3rem, 5.25vw, 4rem)",
                             transformOrigin: "left",
                           }}
                         >
@@ -223,7 +234,7 @@ export default function BusinessCycleLeadGen() {
                     {/* Main image */}
                     <div
                       className="flex-1 flex items-center justify-center w-full"
-                      style={{ marginTop: "clamp(2rem, 4vw, 3rem)" }}
+                      style={{ marginTop: "clamp(2rem, 3.5vw, 3rem)" }}
                     >
                       <motion.img
                         src={VisibilityMainImage}
@@ -241,7 +252,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-[clamp(2rem,4vw,3.5rem)] flex flex-col bg-gradient-to-br from-white to-muted/20 shadow-[-0.5rem_0_1.25rem_-0.313rem_rgba(0,0,0,0.1)] overflow-y-auto">
+              <div className="relative p-[clamp(2rem,3.5vw,3.5rem)] flex flex-col bg-gradient-to-br from-white to-muted/20 shadow-[-0.5rem_0_1.25rem_-0.313rem_rgba(0,0,0,0.1)] overflow-y-auto">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -251,26 +262,26 @@ export default function BusinessCycleLeadGen() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <div style={{ marginBottom: "clamp(1.5rem, 3vw, 2rem)" }}>
-                      <div className="flex items-center" style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
+                    <div style={{ marginBottom: "clamp(1.5rem, 2.63vw, 2rem)" }}>
+                      <div className="flex items-center" style={{ gap: "clamp(0.75rem, 1.3vw, 1rem)" }}>
                         <span
                           className="font-semibold text-primary uppercase tracking-wider"
-                          style={{ fontSize: "clamp(0.875rem, 1.2vw, 1rem)" }}
+                          style={{ fontSize: "clamp(0.875rem, 1.05vw, 1rem)" }}
                         >
                           Slide
                         </span>
                         <span
                           className="font-bold text-foreground"
-                          style={{ fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)" }}
+                          style={{ fontSize: "clamp(1.5rem, 2.19vw, 1.875rem)" }}
                         >
                           {currentSlide + 1}
                         </span>
-                        <span className="text-muted-foreground" style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)" }}>
+                        <span className="text-muted-foreground" style={{ fontSize: "clamp(1rem, 1.58vw, 1.25rem)" }}>
                           —
                         </span>
                         <span
                           className="font-bold text-muted-foreground"
-                          style={{ fontSize: "clamp(1.5rem, 2.5vw, 1.875rem)" }}
+                          style={{ fontSize: "clamp(1.5rem, 2.19vw, 1.875rem)" }}
                         >
                           {totalSlides}
                         </span>
@@ -278,7 +289,7 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     <div className="flex-1 overflow-hidden">
-                      <ul style={{ display: "flex", flexDirection: "column", gap: "clamp(0.5rem, 1vw, 0.75rem)" }}>
+                      <ul style={{ display: "flex", flexDirection: "column", gap: "clamp(0.5rem, 0.88vw, 0.75rem)" }}>
                         {slide.content?.map((item, idx) => (
                           <motion.li
                             key={idx}
@@ -287,9 +298,9 @@ export default function BusinessCycleLeadGen() {
                             transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
                             className="flex bg-white shadow-[0_0.125rem_0.625rem_rgba(0,0,0,0.04)] border border-border/30"
                             style={{
-                              gap: "clamp(0.75rem, 1.5vw, 1rem)",
-                              padding: item.icon ? "clamp(0.5rem, 1vw, 0.75rem)" : "clamp(0.75rem, 1.5vw, 1rem)",
-                              borderRadius: "clamp(0.75rem, 1.5vw, 1rem)",
+                              gap: "clamp(0.75rem, 1.3vw, 1rem)",
+                              padding: item.icon ? "clamp(0.5rem, 0.88vw, 0.75rem)" : "clamp(0.75rem, 1.3vw, 1rem)",
+                              borderRadius: "clamp(0.75rem, 1.3vw, 1rem)",
                               alignItems: item.icon ? "center" : "start",
                             }}
                           >
@@ -299,8 +310,8 @@ export default function BusinessCycleLeadGen() {
                                 alt=""
                                 className="flex-shrink-0"
                                 style={{
-                                  width: "clamp(2.5rem, 5vw, 3rem)",
-                                  height: "clamp(2.5rem, 5vw, 3rem)",
+                                  width: "clamp(2.5rem, 4.38vw, 3rem)",
+                                  height: "clamp(2.5rem, 4.38vw, 3rem)",
                                 }}
                               />
                             ) : (
@@ -309,7 +320,7 @@ export default function BusinessCycleLeadGen() {
                             <div className="flex-1">
                               <span
                                 className="font-semibold text-foreground"
-                                style={{ fontSize: "clamp(1rem, 1.5vw, 1.125rem)" }}
+                                style={{ fontSize: "clamp(1rem, 1.3vw, 1.125rem)" }}
                               >
                                 {item.label}
                               </span>
@@ -317,8 +328,8 @@ export default function BusinessCycleLeadGen() {
                                 <p
                                   className="text-muted-foreground"
                                   style={{
-                                    fontSize: "clamp(0.875rem, 1.2vw, 1rem)",
-                                    marginTop: "clamp(0.1875rem, 0.4vw, 0.25rem)",
+                                    fontSize: "clamp(0.875rem, 1.05vw, 1rem)",
+                                    marginTop: "clamp(0.1875rem, 0.35vw, 0.25rem)",
                                   }}
                                 >
                                   {item.description}
@@ -334,33 +345,33 @@ export default function BusinessCycleLeadGen() {
 
                 <div
                   className="flex items-center justify-between mt-auto"
-                  style={{ paddingTop: "clamp(0.75rem, 1.5vw, 1rem)" }}
+                  style={{ paddingTop: "clamp(0.75rem, 1.3vw, 1rem)" }}
                 >
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
                     variant="outline"
                     className="flex items-center"
-                    style={{ gap: "clamp(0.375rem, 0.8vw, 0.5rem)" }}
+                    style={{ gap: "clamp(0.375rem, 0.7vw, 0.5rem)" }}
                   >
                     <ChevronLeft
-                      style={{ width: "clamp(0.875rem, 1.5vw, 1rem)", height: "clamp(0.875rem, 1.5vw, 1rem)" }}
+                      style={{ width: "clamp(0.875rem, 1.3vw, 1rem)", height: "clamp(0.875rem, 1.3vw, 1rem)" }}
                     />
                     Previous
                   </Button>
 
                   {/* Dot Progress Indicator */}
-                  <div className="flex items-center" style={{ gap: "clamp(0.375rem, 0.8vw, 0.5rem)" }}>
+                  <div className="flex items-center" style={{ gap: "clamp(0.375rem, 0.7vw, 0.5rem)" }}>
                     {slides.map((_, index) => (
                       <div
                         key={index}
                         className="rounded-full transition-all duration-300"
                         style={{
-                          height: "clamp(0.375rem, 0.8vw, 0.5rem)",
+                          height: "clamp(0.375rem, 0.7vw, 0.5rem)",
                           width:
                             index === currentSlide
-                              ? "clamp(1.125rem, 2.4vw, 1.5rem)"
-                              : "clamp(0.375rem, 0.8vw, 0.5rem)",
+                              ? "clamp(1.125rem, 2.1vw, 1.5rem)"
+                              : "clamp(0.375rem, 0.7vw, 0.5rem)",
                           backgroundColor:
                             index === currentSlide
                               ? "var(--accent)"
@@ -373,11 +384,11 @@ export default function BusinessCycleLeadGen() {
                   <Button
                     onClick={nextSlide}
                     className="flex items-center"
-                    style={{ gap: "clamp(0.375rem, 0.8vw, 0.5rem)" }}
+                    style={{ gap: "clamp(0.375rem, 0.7vw, 0.5rem)" }}
                   >
                     {isLastSlide ? "About Us" : "Next"}
                     <ChevronRight
-                      style={{ width: "clamp(0.875rem, 1.5vw, 1rem)", height: "clamp(0.875rem, 1.5vw, 1rem)" }}
+                      style={{ width: "clamp(0.875rem, 1.3vw, 1rem)", height: "clamp(0.875rem, 1.3vw, 1rem)" }}
                     />
                   </Button>
                 </div>
