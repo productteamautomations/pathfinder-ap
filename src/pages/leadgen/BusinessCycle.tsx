@@ -9,6 +9,7 @@ import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
 import ConversionsMainImage from "@/assets/conversions-main.svg";
 import SalesMainImage from "@/assets/sales-main.svg";
+import YourSetupMainImage from "@/assets/your-setup-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
@@ -25,6 +26,7 @@ import SalesWaitingIcon from "@/assets/sales-waiting-icon.svg";
 import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
 import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
 import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
+import YourSetupIcon from "@/assets/your-setup-icon.svg";
 
 const slides = [
   {
@@ -79,16 +81,17 @@ const slides = [
   {
     title: "Your Setup",
     subtitle: "Getting started",
+    mainImage: YourSetupMainImage,
     content: [
       {
         label: "Strategic onboarding call",
         description: "Understand your goals and develop strategy",
-        icon: KeywordsIcon,
+        icon: YourSetupIcon,
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing", icon: LocationIcon },
-      { label: "Search campaign creation", description: "Built from scratch", icon: DeviceIcon },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: TimeIcon },
-      { label: "Campaign launch call", description: "Final review and go live", icon: DemographicsIcon },
+      { label: "Google Ads account setup", description: "New account or optimise existing", icon: YourSetupIcon },
+      { label: "Search campaign creation", description: "Built from scratch", icon: YourSetupIcon },
+      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: YourSetupIcon },
+      { label: "Campaign launch call", description: "Final review and go live", icon: YourSetupIcon },
     ],
   },
   {
