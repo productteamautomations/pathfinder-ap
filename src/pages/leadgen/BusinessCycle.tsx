@@ -185,7 +185,9 @@ export default function BusinessCycleLeadGen() {
                       />
                       <h2
                         className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
+                          slide.title === "Lead Management" || slide.title === "Ongoing Service"
+                            ? "text-4xl md:text-5xl"
+                            : "text-7xl md:text-7xl"
                         }`}
                       >
                         {slide.title}
