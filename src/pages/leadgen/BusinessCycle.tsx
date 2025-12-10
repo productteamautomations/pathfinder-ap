@@ -7,12 +7,18 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
+import ConversionsMainImage from "@/assets/conversions-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
 import TimeIcon from "@/assets/time-icon.svg";
 import DemographicsIcon from "@/assets/demographics-icon.svg";
 import EngagementIcon from "@/assets/engagement-icon.svg";
+import SeeExactlyIcon from "@/assets/see-exactly-icon.svg";
+import TrackConversionsIcon from "@/assets/track-conversions-icon.svg";
+import MeasureIcon from "@/assets/measure-icon.svg";
+import OptimiseIcon from "@/assets/optimise-icon.svg";
+import SayHelloIcon from "@/assets/say-hello-icon.svg";
 
 const slides = [
   {
@@ -43,12 +49,13 @@ const slides = [
   {
     title: "Conversions",
     subtitle: "Track what happens after someone clicks",
+    mainImage: ConversionsMainImage,
     content: [
-      { label: "See Exactly What Happens", description: "Full visibility after each click", icon: KeywordsIcon },
-      { label: "Track Conversions", description: "Know which ads generate enquiries", icon: LocationIcon },
-      { label: "Measure ROI", description: "Understand your cost per lead", icon: DeviceIcon },
-      { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: TimeIcon },
-      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: DemographicsIcon },
+      { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
+      { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
+      { label: "Measure ROI", description: "Understand your cost per lead", icon: MeasureIcon },
+      { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: OptimiseIcon },
+      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: SayHelloIcon },
     ],
   },
   {
