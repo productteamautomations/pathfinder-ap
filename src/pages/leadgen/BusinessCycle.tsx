@@ -259,7 +259,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]" style={{ display: 'grid', gridTemplateRows: '1fr auto' }}>
+              <div className="relative p-10 md:p-12 lg:p-14 pb-24 overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
                 <div className="overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
@@ -347,8 +347,8 @@ export default function BusinessCycleLeadGen() {
                   </AnimatePresence>
                 </div>
 
-                {/* Fixed navigation buttons - outside AnimatePresence */}
-                <div className="flex items-center justify-between pt-4 flex-shrink-0 mt-auto">
+                {/* Fixed navigation buttons - absolutely positioned */}
+                <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
