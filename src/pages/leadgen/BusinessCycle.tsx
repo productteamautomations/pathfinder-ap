@@ -183,9 +183,11 @@ export default function BusinessCycleLeadGen() {
                         transition={{ duration: 0.4, ease: "easeOut" }}
                         onLoad={() => setIconLoaded(true)}
                       />
-                      <h2 className={`font-display font-bold text-title leading-tight tracking-tight ${
-                        slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
-                      }`}>
+                      <h2
+                        className={`font-display font-bold text-title leading-tight tracking-tight ${
+                          slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
+                        }`}
+                      >
                         {slide.title}
                       </h2>
                     </div>
@@ -263,8 +265,13 @@ export default function BusinessCycleLeadGen() {
                         <div className="relative">
                           {/* Vertical connecting line for Your Setup */}
                           {slide.title === "Your Setup" && (
-                            <div 
-                              className="absolute left-[21px] top-[24px] bottom-[24px] w-[2px] bg-gradient-to-b from-primary via-primary/50 to-primary/20 z-10"
+                            <div
+                              className="absolute left-[15px] w-[3px] bg-orange-500/40"
+                              style={{
+                                zIndex: 0,
+                                top: "60px",
+                                height: "calc(100% - 120px)",
+                              }}
                             />
                           )}
                           <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
@@ -295,7 +302,11 @@ export default function BusinessCycleLeadGen() {
                                 ) : (
                                   <>
                                     {item.icon ? (
-                                      <img src={item.icon} alt="" className={`flex-shrink-0 ${slide.title === "Your Setup" ? "w-[18px] h-[18px]" : "w-12 h-12"}`} />
+                                      <img
+                                        src={item.icon}
+                                        alt=""
+                                        className={`flex-shrink-0 ${slide.title === "Your Setup" ? "w-[18px] h-[18px]" : "w-12 h-12"}`}
+                                      />
                                     ) : (
                                       <span className="text-primary font-bold mt-0.5">•</span>
                                     )}
