@@ -9,8 +9,6 @@ import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
 import ConversionsMainImage from "@/assets/conversions-main.svg";
 import SalesMainImage from "@/assets/sales-main.svg";
-import SetupMainImage from "@/assets/setup-main.svg";
-import SetupPointsIcon from "@/assets/setup-points.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
@@ -81,17 +79,16 @@ const slides = [
   {
     title: "Your Set Up",
     subtitle: "Getting started",
-    mainImage: SetupMainImage,
-    useTimelineIcon: true,
     content: [
       {
         label: "Strategic onboarding call",
         description: "Understand your goals and develop strategy",
+        icon: KeywordsIcon,
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing" },
-      { label: "Search campaign creation", description: "Built from scratch" },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution" },
-      { label: "Campaign launch call", description: "Final review and go live" },
+      { label: "Google Ads account setup", description: "New account or optimise existing", icon: LocationIcon },
+      { label: "Search campaign creation", description: "Built from scratch", icon: DeviceIcon },
+      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: TimeIcon },
+      { label: "Campaign launch call", description: "Final review and go live", icon: DemographicsIcon },
     ],
   },
   {
@@ -262,76 +259,49 @@ export default function BusinessCycleLeadGen() {
                       </div>
 
                       <div className="flex-1 overflow-hidden">
-                        {slide.useTimelineIcon ? (
-                          <div className="flex gap-4">
-                            <img 
-                              src={SetupPointsIcon} 
-                              alt="" 
-                              className="h-full w-auto flex-shrink-0"
-                              style={{ height: `${(slide.content?.length || 5) * 72}px` }}
-                            />
-                            <ul className="flex-1 space-y-3">
-                              {slide.content?.map((item, idx) => (
-                                <motion.li
-                                  key={idx}
-                                  initial={{ opacity: 0, x: 20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                  className="flex-1"
-                                >
-                                  <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                  {item.description && (
-                                    <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                  )}
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : (
-                          <ul className="space-y-3">
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.isExample
-                                    ? "bg-accent p-4 text-center"
-                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                                }`}
-                              >
-                                {item.isExample ? (
-                                  <div className="space-y-2">
-                                    <p className="text-foreground font-semibold text-base">
-                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                    </p>
-                                    <p className="text-white font-semibold text-base">
-                                      USE:{" "}
-                                      <span className="font-bold">
-                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
+                        <ul className="space-y-3">
+                          {slide.content?.map((item, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                              className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                item.isExample
+                                  ? "bg-accent p-4 text-center"
+                                  : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
+                              }`}
+                            >
+                              {item.isExample ? (
+                                <div className="space-y-2">
+                                  <p className="text-foreground font-semibold text-base">
+                                    INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
+                                  </p>
+                                  <p className="text-white font-semibold text-base">
+                                    USE:{" "}
+                                    <span className="font-bold">
+                                      "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
                                     </span>
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <>
-                                    {item.icon ? (
-                                      <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
-                                    ) : (
-                                      <span className="text-primary font-bold mt-0.5">•</span>
+                                  </p>
+                                </div>
+                              ) : (
+                                <>
+                                  {item.icon ? (
+                                    <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
+                                  ) : (
+                                    <span className="text-primary font-bold mt-0.5">•</span>
+                                  )}
+                                  <div className="flex-1">
+                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                    {item.description && (
+                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
                                     )}
-                                    <div className="flex-1">
-                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                      {item.description && (
-                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                      )}
-                                    </div>
-                                  </>
-                                )}
-                              </motion.li>
-                            ))}
-                          </ul>
-                        )}
+                                  </div>
+                                </>
+                              )}
+                            </motion.li>
+                          ))}
+                        </ul>
                       </div>
                     </motion.div>
                   </AnimatePresence>
