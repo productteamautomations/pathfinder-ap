@@ -266,7 +266,7 @@ export default function BusinessCycleLeadGen() {
                           {/* Vertical connecting line for Your Setup */}
                           {slide.title === "Your Setup" && (
                             <div
-                              className="absolute left-[24px] w-[2px] bg-primary z-10 -translate-x-1/2"
+                              className="absolute left-[22px] w-[2px] bg-primary z-10 -translate-x-1/2"
                               style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
                             />
                           )}
