@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { FunnelVisualization } from "@/components/FunnelVisualization";
 import { ImprovementCarousel } from "@/components/ImprovementCarousel";
 import { ArrowRight } from "lucide-react";
+import AttentionIcon from "@/assets/attention-icon.svg";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -89,9 +90,12 @@ function OverallScoreRing({ score }: { score: number }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
       >
-        <p className="text-lg font-semibold" style={{ color: getHealthColor(score) }}>
-          {getHealthLabel(score)}
-        </p>
+        <div className="flex items-center justify-center gap-2">
+          {score < 40 && <img src={AttentionIcon} alt="" className="w-5 h-5" />}
+          <p className="text-lg font-semibold" style={{ color: getHealthColor(score) }}>
+            {getHealthLabel(score)}
+          </p>
+        </div>
         <p className="text-sm text-muted-foreground">Overall Health</p>
       </motion.div>
     </motion.div>
