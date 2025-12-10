@@ -123,7 +123,7 @@ export default function BusinessCycleLeadGen() {
   }, [currentSlide]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/funnel-health/leadgen", { state: location.state })}
         currentStep={4}
@@ -132,17 +132,22 @@ export default function BusinessCycleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] py-[5vh] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full h-full max-w-[90vw] 2xl:max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden h-full"
-          >
-            <div className="grid md:grid-cols-2 h-full overflow-hidden">
-              {/* Left side - logo, title, image */}
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
+      <div 
+        className="flex-1 px-[5vw] flex items-center justify-center"
+        style={{ 
+          paddingTop: 'calc(73px + 5vh)',
+          paddingBottom: '5vh',
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden w-full h-full max-w-[1600px]"
+        >
+          <div className="grid md:grid-cols-2 h-full overflow-hidden">
+            {/* Left side - logo, title, image */}
+            <div className="p-[4%] flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -191,11 +196,11 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-center justify-center w-full mt-16">
+                    <div className="flex-1 flex items-center justify-center w-full mt-[8%]">
                       <motion.img
                         src={VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className="w-full h-auto max-h-[50vh] object-contain"
+                        className="w-full h-full max-h-full object-contain"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -207,7 +212,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-8 md:p-10 lg:p-12 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
+              <div className="relative p-[4%] flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -285,7 +290,6 @@ export default function BusinessCycleLeadGen() {
               </div>
             </div>
           </motion.div>
-        </div>
       </div>
     </div>
   );
