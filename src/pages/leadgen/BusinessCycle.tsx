@@ -43,18 +43,27 @@ const TimelineItem = ({
     initial={{ opacity: 0, x: 20 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ delay: 0.4 + index * 0.1, duration: 0.3, ease: "easeOut" }}
-    className="flex gap-4"
+    className="flex gap-4 relative"
   >
-    {/* Timeline line and circle */}
-    <div className="flex flex-col items-center">
-      <div className="w-5 h-5 rounded-full bg-accent border-4 border-accent/30 flex-shrink-0" />
+    {/* Timeline line and circle - positioned to align with box center */}
+    <div className="flex flex-col items-center absolute left-0 top-0 bottom-0">
+      {/* Top connector line */}
+      {index !== 0 && (
+        <div className="w-0.5 bg-accent/40 h-[6px]" />
+      )}
+      {index === 0 && <div className="h-[6px]" />}
+      
+      {/* Circle - centered with box */}
+      <div className="w-4 h-4 rounded-full bg-accent border-[3px] border-accent/30 flex-shrink-0 z-10" />
+      
+      {/* Bottom connector line */}
       {!isLast && (
-        <div className="w-0.5 bg-accent/40 flex-1 min-h-[40px]" />
+        <div className="w-0.5 bg-accent/40 flex-1" />
       )}
     </div>
     
-    {/* Content */}
-    <div className="pb-4 flex-1">
+    {/* Content box */}
+    <div className="ml-6 flex-1 rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 bg-white p-3">
       <span className="font-semibold text-foreground text-lg">{label}</span>
       {description && (
         <p className="text-base text-muted-foreground mt-1">{description}</p>
