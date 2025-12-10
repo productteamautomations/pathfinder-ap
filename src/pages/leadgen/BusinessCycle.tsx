@@ -132,17 +132,17 @@ export default function BusinessCycleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-6xl">
+      <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
+        <div className="w-full max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
+            <div className="grid md:grid-cols-2 h-[82vh] overflow-hidden">
               {/* Left side - logo, title, image */}
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
+              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -153,13 +153,13 @@ export default function BusinessCycleLeadGen() {
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
-                    <div className="flex items-center gap-4 mb-3">
-                      <img src={LogoGraphic} alt="Add People" className="w-14 h-14" />
-                      <h2 className="text-6xl md:text-6xl font-display font-bold text-title leading-tight tracking-tight">
+                    <div className="flex items-center gap-5 mb-4">
+                      <img src={LogoGraphic} alt="Add People" className="w-16 h-16" />
+                      <h2 className="text-7xl md:text-7xl font-display font-bold text-title leading-tight tracking-tight">
                         {slide.title}
                       </h2>
                     </div>
-                    <p className="text-base text-primary mt-1 leading-relaxed">{slide.subtitle}</p>
+                    <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
 
                     {/* Orange accent dots */}
                     <div className="flex items-center gap-2 mt-4">
@@ -191,7 +191,7 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-center justify-center w-full mt-16">
+                    <div className="flex-1 flex items-center justify-center w-full mt-12">
                       <motion.img
                         src={VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
@@ -207,7 +207,7 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-8 md:p-10 lg:p-12 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
+              <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -218,33 +218,33 @@ export default function BusinessCycleLeadGen() {
                     className="w-full"
                   >
                     <div className="mb-8">
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-2xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-lg">—</span>
-                        <span className="text-2xl font-bold text-muted-foreground">{totalSlides}</span>
+                      <div className="flex items-center gap-4">
+                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
+                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
+                        <span className="text-muted-foreground text-xl">—</span>
+                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
                       </div>
                     </div>
 
                     <div className="flex-1 overflow-hidden">
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {slide.content?.map((item, idx) => (
                           <motion.li
                             key={idx}
                             initial={{ opacity: 0, x: 20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                            className={`flex gap-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-2" : "items-start p-3"}`}
+                            className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-3" : "items-start p-4"}`}
                           >
                             {item.icon ? (
-                              <img src={item.icon} alt="" className="w-10 h-10 flex-shrink-0" />
+                              <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
                             ) : (
                               <span className="text-primary font-bold mt-0.5">•</span>
                             )}
                             <div className="flex-1">
-                              <span className="font-semibold text-foreground text-base">{item.label}</span>
+                              <span className="font-semibold text-foreground text-lg">{item.label}</span>
                               {item.description && (
-                                <p className="text-sm text-muted-foreground mt-0.5">{item.description}</p>
+                                <p className="text-base text-muted-foreground mt-1">{item.description}</p>
                               )}
                             </div>
                           </motion.li>
