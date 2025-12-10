@@ -77,7 +77,7 @@ const slides = [
     ],
   },
   {
-    title: "Your Setup",
+    title: "Your Set up",
     subtitle: "Getting started",
     content: [
       {
@@ -180,9 +180,11 @@ export default function BusinessCycleLeadGen() {
                         transition={{ duration: 0.4, ease: "easeOut" }}
                         onLoad={() => setIconLoaded(true)}
                       />
-                      <h2 className={`font-display font-bold text-title leading-tight tracking-tight ${
-                        slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
-                      }`}>
+                      <h2
+                        className={`font-display font-bold text-title leading-tight tracking-tight ${
+                          slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
+                        }`}
+                      >
                         {slide.title}
                       </h2>
                     </div>
