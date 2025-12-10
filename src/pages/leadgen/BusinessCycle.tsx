@@ -237,7 +237,7 @@ export default function BusinessCycleLeadGen() {
                         alt={`${slide.title} - ${slide.subtitle}`}
                         className={`h-auto object-contain ${
                           slide.title === "Lead Management"
-                            ? "w-full max-h-[75vh] mb-[-40px]"
+                            ? "w-full max-h-[85vh] mb-[-60px]"
                             : slide.title === "Visibility"
                             ? "w-[108%] max-h-[70vh]"
                             : slide.title === "Engagement"
