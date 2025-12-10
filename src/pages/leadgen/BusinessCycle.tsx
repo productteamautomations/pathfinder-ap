@@ -77,7 +77,7 @@ const slides = [
     ],
   },
   {
-    title: "Ongoing Service",
+    title: "Service",
     subtitle: "Continuous improvement",
     content: [
       { label: "Lead Generation Service team", description: "Dedicated support", icon: KeywordsIcon },
