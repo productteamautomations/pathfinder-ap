@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import AttentionIcon from "@/assets/attention-icon.svg";
 
 interface ImprovementArea {
   title: string;
@@ -31,7 +32,10 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
   return (
     <div className="mt-8">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-[#173340]">Areas of Improvement</h3>
+        <div className="flex items-center gap-2">
+          <img src={AttentionIcon} alt="" className="w-6 h-6" />
+          <h3 className="text-lg font-semibold text-accent-orange">Areas requiring immediate attention.</h3>
+        </div>
         {areas.length > 1 && (
           <div className="flex items-center gap-2">
             <button
