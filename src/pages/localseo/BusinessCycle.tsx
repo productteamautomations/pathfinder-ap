@@ -210,77 +210,80 @@ export default function BusinessCycleLocalSEO() {
               </div>
 
               <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
-                  >
-                    <div className="mb-10">
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-xl">—</span>
-                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
-                      </div>
-                    </div>
-
-                    <div className="flex-1 overflow-hidden">
-                      {slide.timeline ? (
-                        <div className="space-y-8">
-                          {slide.timeline.map((item, idx) => (
-                            <div key={idx} className="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30">
-                              <h3 className="text-xl font-bold text-primary mb-4">{item.phase}</h3>
-                              <ul className="space-y-3">
-                                {item.points.map((point, pidx) => (
-                                  <li key={pidx} className="flex items-start gap-4 text-foreground text-base">
-                                    <span className="text-primary mt-0.5">•</span>
-                                    <span>{point}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
+                <div className="flex-1 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentSlide}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      <div className="mb-10">
+                        <div className="flex items-center gap-4">
+                          <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
+                          <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
+                          <span className="text-muted-foreground text-xl">—</span>
+                          <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
                         </div>
-                      ) : (
-                        <ul className="space-y-3">
-                          {slide.content?.map((item, idx) => (
-                            <motion.li
-                              key={idx}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: idx * 0.05 }}
-                              className="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
-                            >
-                              <span className="text-primary font-bold mt-0.5">•</span>
-                              <div className="flex-1">
-                                <span className="font-medium text-foreground text-base">{item.label}</span>
-                                {item.description && (
-                                  <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                                )}
-                              </div>
-                            </motion.li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                      </div>
 
-                <div className="flex items-center justify-between mt-auto pt-4">
+                      <div className="flex-1 overflow-hidden">
+                        {slide.timeline ? (
+                          <div className="space-y-8">
+                            {slide.timeline.map((item, idx) => (
+                              <div key={idx} className="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30">
+                                <h3 className="text-xl font-bold text-primary mb-4">{item.phase}</h3>
+                                <ul className="space-y-3">
+                                  {item.points.map((point, pidx) => (
+                                    <li key={pidx} className="flex items-start gap-4 text-foreground text-base">
+                                      <span className="text-primary mt-0.5">•</span>
+                                      <span>{point}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+                        ) : (
+                          <ul className="space-y-3">
+                            {slide.content?.map((item, idx) => (
+                              <motion.li
+                                key={idx}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: idx * 0.05 }}
+                                className="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                              >
+                                <span className="text-primary font-bold mt-0.5">•</span>
+                                <div className="flex-1">
+                                  <span className="font-medium text-foreground text-base">{item.label}</span>
+                                  {item.description && (
+                                    <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
+                                  )}
+                                </div>
+                              </motion.li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Fixed navigation buttons - outside AnimatePresence */}
+                <div className="flex items-center justify-between pt-4 flex-shrink-0">
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
                     variant="outline"
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 min-w-[120px]"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Previous
                   </Button>
-                  <Button onClick={nextSlide} className="flex items-center gap-2">
+                  <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
                     {isLastSlide ? "About Us" : "Next"}
                     <ChevronRight className="w-4 h-4" />
                   </Button>
