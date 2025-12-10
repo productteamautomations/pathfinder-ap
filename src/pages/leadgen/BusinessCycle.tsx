@@ -8,6 +8,7 @@ import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
 import ConversionsMainImage from "@/assets/conversions-main.svg";
+import SalesMainImage from "@/assets/sales-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
@@ -19,6 +20,11 @@ import TrackConversionsIcon from "@/assets/track-conversions-icon.svg";
 import MeasureIcon from "@/assets/measure-icon.svg";
 import OptimiseIcon from "@/assets/optimise-icon.svg";
 import SayHelloIcon from "@/assets/say-hello-icon.svg";
+import SalesRespondIcon from "@/assets/sales-respond-icon.svg";
+import SalesWaitingIcon from "@/assets/sales-waiting-icon.svg";
+import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
+import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
+import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 
 const slides = [
   {
@@ -61,12 +67,13 @@ const slides = [
   {
     title: "Sales",
     subtitle: "Speed wins deals",
+    mainImage: SalesMainImage,
     content: [
-      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: KeywordsIcon },
-      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: LocationIcon },
-      { label: "78% of sales", description: "Go to the first responder", icon: DeviceIcon },
-      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: TimeIcon },
-      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: DemographicsIcon },
+      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
+      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
+      { label: "78% of sales", description: "Go to the first responder", icon: Sales78PercentIcon },
+      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: Sales30MinIcon },
+      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
     ],
   },
   {
