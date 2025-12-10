@@ -167,16 +167,16 @@ export default function BusinessCycleLocalSEO() {
         productLabel="Local SEO"
       />
 
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-6xl">
+      <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
+        <div className="w-full max-w-7xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[75vh] overflow-hidden">
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
+            <div className="grid md:grid-cols-2 h-[82vh] overflow-hidden">
+              <div className="p-10 md:p-12 lg:p-14 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -185,14 +185,14 @@ export default function BusinessCycleLocalSEO() {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">
+                    <span className="text-base font-semibold text-primary uppercase tracking-wider mb-5 block">
                       Our Process
                     </span>
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title leading-tight tracking-tight">
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-title leading-tight tracking-tight">
                       {slide.title}
                     </h2>
                     <OrangeAccent />
-                    <p className="text-lg text-muted-foreground mt-8 leading-relaxed">
+                    <p className="text-xl text-muted-foreground mt-10 leading-relaxed">
                       {slide.subtitle}
                     </p>
                     <div className="flex gap-1.5 mt-10">
@@ -209,7 +209,7 @@ export default function BusinessCycleLocalSEO() {
                 </AnimatePresence>
               </div>
 
-              <div className="p-8 md:p-10 lg:p-12 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
+              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-muted/30 border-l border-border/20 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -219,24 +219,24 @@ export default function BusinessCycleLocalSEO() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <div className="mb-8">
-                      <div className="flex items-center gap-3">
-                        <span className="text-sm font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-2xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-lg">—</span>
-                        <span className="text-2xl font-bold text-muted-foreground">{totalSlides}</span>
+                    <div className="mb-10">
+                      <div className="flex items-center gap-4">
+                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
+                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
+                        <span className="text-muted-foreground text-xl">—</span>
+                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
                       </div>
                     </div>
 
                     <div className="flex-1 overflow-hidden">
                       {slide.timeline ? (
-                        <div className="space-y-6">
+                        <div className="space-y-8">
                           {slide.timeline.map((item, idx) => (
-                            <div key={idx} className="bg-white rounded-2xl p-5 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30">
-                              <h3 className="text-lg font-bold text-primary mb-3">{item.phase}</h3>
-                              <ul className="space-y-2">
+                            <div key={idx} className="bg-white rounded-2xl p-6 shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30">
+                              <h3 className="text-xl font-bold text-primary mb-4">{item.phase}</h3>
+                              <ul className="space-y-3">
                                 {item.points.map((point, pidx) => (
-                                  <li key={pidx} className="flex items-start gap-3 text-foreground text-sm">
+                                  <li key={pidx} className="flex items-start gap-4 text-foreground text-base">
                                     <span className="text-primary mt-0.5">•</span>
                                     <span>{point}</span>
                                   </li>
@@ -246,20 +246,20 @@ export default function BusinessCycleLocalSEO() {
                           ))}
                         </div>
                       ) : (
-                        <ul className="space-y-2">
+                        <ul className="space-y-3">
                           {slide.content?.map((item, idx) => (
                             <motion.li
                               key={idx}
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: idx * 0.05 }}
-                              className="flex items-start gap-3 p-3 bg-white rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                              className="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
                             >
                               <span className="text-primary font-bold mt-0.5">•</span>
                               <div className="flex-1">
-                                <span className="font-medium text-foreground text-sm">{item.label}</span>
+                                <span className="font-medium text-foreground text-base">{item.label}</span>
                                 {item.description && (
-                                  <p className="text-xs text-muted-foreground mt-0.5">{item.description}</p>
+                                  <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
                                 )}
                               </div>
                             </motion.li>
