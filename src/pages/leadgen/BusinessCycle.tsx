@@ -194,7 +194,7 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-center justify-center w-full mt-8">
+                    <div className="flex-1 flex items-center justify-center w-full -mt-4">
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
