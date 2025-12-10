@@ -98,6 +98,8 @@ export default function BusinessCycleLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [iconLoaded, setIconLoaded] = useState(false);
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -116,11 +118,11 @@ export default function BusinessCycleLeadGen() {
   const slide = slides[currentSlide];
   const isLastSlide = currentSlide === slides.length - 1;
   const totalSlides = slides.length;
-  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Reset image loaded state when slide changes
+  // Reset loaded states when slide changes
   useEffect(() => {
     setImageLoaded(false);
+    setIconLoaded(false);
   }, [currentSlide]);
 
   return (
@@ -155,7 +157,15 @@ export default function BusinessCycleLeadGen() {
                   >
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
-                      <img src={LogoGraphic} alt="Add People" className="w-16 h-16" />
+                      <motion.img
+                        src={LogoGraphic}
+                        alt="Add People"
+                        className="w-16 h-16"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: iconLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        onLoad={() => setIconLoaded(true)}
+                      />
                       <h2 className="text-7xl md:text-7xl font-display font-bold text-title leading-tight tracking-tight">
                         {slide.title}
                       </h2>
