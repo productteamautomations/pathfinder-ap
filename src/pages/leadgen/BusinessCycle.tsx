@@ -227,12 +227,26 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-end justify-center w-full overflow-visible">
+                    <div className={`flex-1 flex justify-center w-full overflow-visible ${
+                      slide.title === "Visibility" || slide.title === "Ongoing Service"
+                        ? "items-center"
+                        : "items-end"
+                    }`}>
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`w-full h-auto max-h-[75vh] object-contain ${
-                          slide.title === "Lead Management" ? "mb-[-40px]" : "mb-[-14px]"
+                        className={`h-auto object-contain ${
+                          slide.title === "Lead Management"
+                            ? "w-full max-h-[75vh] mb-[-40px]"
+                            : slide.title === "Visibility"
+                            ? "w-[90%] max-h-[60vh]"
+                            : slide.title === "Engagement"
+                            ? "w-[120%] max-h-[80vh] mb-[-30px]"
+                            : slide.title === "Your Setup"
+                            ? "w-[115%] max-h-[80vh] mb-[-14px]"
+                            : slide.title === "Ongoing Service"
+                            ? "w-[110%] max-h-[70vh]"
+                            : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
