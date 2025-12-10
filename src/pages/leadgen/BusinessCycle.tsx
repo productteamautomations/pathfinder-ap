@@ -305,7 +305,13 @@ export default function BusinessCycleLeadGen() {
                                       <img
                                         src={item.icon}
                                         alt=""
-                                        className={`flex-shrink-0 ${slide.title === "Your Setup" ? "w-[18px] h-[18px]" : "w-12 h-12"}`}
+                                        className={`flex-shrink-0 ${
+                                          slide.title === "Your Setup"
+                                            ? "w-[18px] h-[18px]"
+                                            : slide.title === "Ongoing Service" || slide.title === "Engagement"
+                                            ? "w-6 h-6"
+                                            : "w-12 h-12"
+                                        }`}
                                       />
                                     ) : (
                                       <span className="text-primary font-bold mt-0.5">•</span>
