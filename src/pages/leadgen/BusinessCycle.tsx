@@ -259,8 +259,8 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
-                <div className="flex-1 overflow-hidden">
+              <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]" style={{ display: 'grid', gridTemplateRows: '1fr auto' }}>
+                <div className="overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={currentSlide}
