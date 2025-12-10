@@ -7,24 +7,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
-import ConversionsMainImage from "@/assets/conversions-main.svg";
-import SalesMainImage from "@/assets/sales-main.svg";
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
 import DeviceIcon from "@/assets/device-icon.svg";
 import TimeIcon from "@/assets/time-icon.svg";
 import DemographicsIcon from "@/assets/demographics-icon.svg";
 import EngagementIcon from "@/assets/engagement-icon.svg";
-import SeeExactlyIcon from "@/assets/see-exactly-icon.svg";
-import TrackConversionsIcon from "@/assets/track-conversions-icon.svg";
-import MeasureIcon from "@/assets/measure-icon.svg";
-import OptimiseIcon from "@/assets/optimise-icon.svg";
-import SayHelloIcon from "@/assets/say-hello-icon.svg";
-import SalesRespondIcon from "@/assets/sales-respond-icon.svg";
-import SalesWaitingIcon from "@/assets/sales-waiting-icon.svg";
-import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
-import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
-import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 
 const slides = [
   {
@@ -48,62 +36,62 @@ const slides = [
       { label: "Be Tempting", description: "Give them a reason to click", icon: EngagementIcon },
       {
         label: "Example",
-        isExample: true,
+        description:
+          '"Loft Conversions in Altrincham – Free Quote Today" Is more enticing than "Professional Loft Conversions"',
+        icon: EngagementIcon,
       },
     ],
   },
   {
     title: "Conversions",
     subtitle: "Track what happens after someone clicks",
-    mainImage: ConversionsMainImage,
     content: [
-      { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
-      { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
-      { label: "Measure ROI", description: "Understand your cost per lead", icon: MeasureIcon },
-      { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: OptimiseIcon },
-      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: SayHelloIcon },
+      { label: "See Exactly What Happens", description: "Full visibility after each click", icon: KeywordsIcon },
+      { label: "Track Conversions", description: "Know which ads generate enquiries", icon: LocationIcon },
+      { label: "Measure ROI", description: "Understand your cost per lead", icon: DeviceIcon },
+      { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: TimeIcon },
+      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: DemographicsIcon },
     ],
   },
   {
-    title: "Lead Management",
+    title: "Sales",
     subtitle: "Speed wins deals",
-    mainImage: SalesMainImage,
     content: [
-      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
-      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
-      { label: "78% of sales", description: "Go to the first responder", icon: Sales78PercentIcon },
-      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: Sales30MinIcon },
-      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
+      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: KeywordsIcon },
+      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: LocationIcon },
+      { label: "78% of sales", description: "Go to the first responder", icon: DeviceIcon },
+      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: TimeIcon },
+      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: DemographicsIcon },
     ],
   },
   {
-    title: "Your Set Up",
+    title: "Your Setup",
     subtitle: "Getting started",
-    useTimeline: true,
     content: [
       {
         label: "Strategic onboarding call",
         description: "Understand your goals and develop strategy",
+        icon: KeywordsIcon,
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing" },
-      { label: "Search campaign creation", description: "Built from scratch" },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution" },
-      { label: "Campaign launch call", description: "Final review and go live" },
+      { label: "Google Ads account setup", description: "New account or optimise existing", icon: LocationIcon },
+      { label: "Search campaign creation", description: "Built from scratch", icon: DeviceIcon },
+      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: TimeIcon },
+      { label: "Campaign launch call", description: "Final review and go live", icon: DemographicsIcon },
     ],
   },
   {
     title: "Ongoing Service",
     subtitle: "Continuous improvement",
-    useTimeline: true,
     content: [
-      { label: "Lead Generation Service team", description: "Dedicated support" },
+      { label: "Lead Generation Service team", description: "Dedicated support", icon: KeywordsIcon },
       {
         label: "Technical team support",
         description: "Monthly Account optimisations and tracking checks",
+        icon: LocationIcon,
       },
-      { label: "Campaign monitoring", description: "Continuous oversight and refinement" },
-      { label: "Call attribution dashboard", description: "Track performance data" },
-      { label: "Monthly reporting", description: "Detailed campaign performance" },
+      { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: DeviceIcon },
+      { label: "Call attribution dashboard", description: "Track performance data", icon: TimeIcon },
+      { label: "Monthly reporting", description: "Detailed campaign performance", icon: DemographicsIcon },
     ],
   },
 ];
@@ -112,8 +100,6 @@ export default function BusinessCycleLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [iconLoaded, setIconLoaded] = useState(false);
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -132,11 +118,11 @@ export default function BusinessCycleLeadGen() {
   const slide = slides[currentSlide];
   const isLastSlide = currentSlide === slides.length - 1;
   const totalSlides = slides.length;
+  const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Reset loaded states when slide changes
+  // Reset image loaded state when slide changes
   useEffect(() => {
     setImageLoaded(false);
-    setIconLoaded(false);
   }, [currentSlide]);
 
   return (
@@ -171,20 +157,8 @@ export default function BusinessCycleLeadGen() {
                   >
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
-                      <motion.img
-                        src={LogoGraphic}
-                        alt="Add People"
-                        className="w-16 h-16"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: iconLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setIconLoaded(true)}
-                      />
-                      <h2
-                        className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" ? "text-5xl md:text-5xl" : "text-7xl md:text-7xl"
-                        }`}
-                      >
+                      <img src={LogoGraphic} alt="Add People" className="w-16 h-16" />
+                      <h2 className="text-7xl md:text-7xl font-display font-bold text-title leading-tight tracking-tight">
                         {slide.title}
                       </h2>
                     </div>
@@ -220,13 +194,11 @@ export default function BusinessCycleLeadGen() {
                     </div>
 
                     {/* Main image */}
-                    <div className="flex-1 flex items-end justify-center w-full overflow-visible">
+                    <div className="flex-1 flex items-center justify-center w-full mt-12">
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`w-[95%] h-auto max-h-[65vh] object-contain ${
-                          slide.title === "Lead Management" ? "mb-[-40px]" : "mb-[-14px]"
-                        }`}
+                        className="w-full h-auto max-h-[50vh] object-contain"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -259,83 +231,29 @@ export default function BusinessCycleLeadGen() {
                       </div>
 
                       <div className="flex-1 overflow-hidden">
-                        {slide.useTimeline ? (
-                          // Timeline layout for "Your Set Up" and "Ongoing Service"
-                          <div className="relative pl-8">
-                            {/* Vertical line */}
-                            <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-primary/30" />
-
-                            <ul className="space-y-6">
-                              {slide.content?.map((item, idx) => (
-                                <motion.li
-                                  key={idx}
-                                  initial={{ opacity: 0, x: 20 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                  className="relative"
-                                >
-                                  {/* Timeline dot */}
-                                  <div className="absolute left-[-30px] top-2 w-4 h-4 rounded-full bg-primary border-4 border-white shadow-md" />
-
-                                  {/* Content card */}
-                                  <div className="rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 bg-white p-4">
-                                    <div className="flex-1">
-                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                      {item.description && (
-                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                      )}
-                                    </div>
-                                  </div>
-                                </motion.li>
-                              ))}
-                            </ul>
-                          </div>
-                        ) : (
-                          // Original layout for other slides
-                          <ul className="space-y-3">
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.isExample
-                                    ? "bg-accent p-4 text-center"
-                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                                }`}
-                              >
-                                {item.isExample ? (
-                                  <div className="space-y-2">
-                                    <p className="text-foreground font-semibold text-base">
-                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                    </p>
-                                    <p className="text-white font-semibold text-base">
-                                      USE:{" "}
-                                      <span className="font-bold">
-                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
-                                      </span>
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <>
-                                    {item.icon ? (
-                                      <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
-                                    ) : (
-                                      <span className="text-primary font-bold mt-0.5">•</span>
-                                    )}
-                                    <div className="flex-1">
-                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                      {item.description && (
-                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                      )}
-                                    </div>
-                                  </>
+                        <ul className="space-y-3">
+                          {slide.content?.map((item, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                              className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-3" : "items-start p-4"}`}
+                            >
+                              {item.icon ? (
+                                <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
+                              ) : (
+                                <span className="text-primary font-bold mt-0.5">•</span>
+                              )}
+                              <div className="flex-1">
+                                <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                {item.description && (
+                                  <p className="text-base text-muted-foreground mt-1">{item.description}</p>
                                 )}
-                              </motion.li>
-                            ))}
-                          </ul>
-                        )}
+                              </div>
+                            </motion.li>
+                          ))}
+                        </ul>
                       </div>
                     </motion.div>
                   </AnimatePresence>
