@@ -265,14 +265,7 @@ export default function BusinessCycleLeadGen() {
                         <div className="relative">
                           {/* Vertical connecting line for Your Setup */}
                           {slide.title === "Your Setup" && (
-                            <div
-                              className="absolute left-[15px] w-[3px] bg-orange-500/40"
-                              style={{
-                                zIndex: 0,
-                                top: "60px",
-                                height: "calc(100% - 120px)",
-                              }}
-                            />
+                            <div className="absolute left-[21px] top-[24px] bottom-[24px] w-[2px] bg-gradient-to-b from-primary via-primary/50 to-primary/20 z-10" />
                           )}
                           <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
                             {slide.content?.map((item, idx) => (
