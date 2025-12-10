@@ -31,11 +31,13 @@ import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 const TimelineItem = ({ 
   label, 
   description, 
+  isFirst,
   isLast, 
   index 
 }: { 
   label: string; 
   description: string; 
+  isFirst: boolean;
   isLast: boolean; 
   index: number;
 }) => (
@@ -45,28 +47,23 @@ const TimelineItem = ({
     transition={{ delay: 0.4 + index * 0.1, duration: 0.3, ease: "easeOut" }}
     className="flex gap-4 relative"
   >
-    {/* Timeline line and circle - positioned to align with box center */}
-    <div className="flex flex-col items-center absolute left-0 top-0 bottom-0">
-      {/* Top connector line */}
-      {index !== 0 && (
-        <div className="w-0.5 bg-accent/40 h-[6px]" />
-      )}
-      {index === 0 && <div className="h-[6px]" />}
+    {/* Timeline line and circle */}
+    <div className="flex flex-col items-center w-4 flex-shrink-0">
+      {/* Top line segment */}
+      <div className={`w-0.5 flex-1 ${isFirst ? 'bg-transparent' : 'bg-accent'}`} />
       
-      {/* Circle - centered with box */}
-      <div className="w-4 h-4 rounded-full bg-accent border-[3px] border-accent/30 flex-shrink-0 z-10" />
+      {/* Circle */}
+      <div className="w-3 h-3 rounded-full bg-accent flex-shrink-0 z-10" />
       
-      {/* Bottom connector line */}
-      {!isLast && (
-        <div className="w-0.5 bg-accent/40 flex-1" />
-      )}
+      {/* Bottom line segment */}
+      <div className={`w-0.5 flex-1 ${isLast ? 'bg-transparent' : 'bg-accent'}`} />
     </div>
     
-    {/* Content box */}
-    <div className="ml-6 flex-1 rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 bg-white p-3">
+    {/* Content */}
+    <div className="flex-1 py-3 pr-3 rounded-xl bg-muted/30">
       <span className="font-semibold text-foreground text-lg">{label}</span>
       {description && (
-        <p className="text-base text-muted-foreground mt-1">{description}</p>
+        <p className="text-base text-muted-foreground mt-0.5">{description}</p>
       )}
     </div>
   </motion.div>
@@ -313,6 +310,7 @@ export default function BusinessCycleLeadGen() {
                                 key={idx}
                                 label={item.label}
                                 description={item.description || ""}
+                                isFirst={idx === 0}
                                 isLast={idx === (slide.content?.length || 0) - 1}
                                 index={idx}
                               />
