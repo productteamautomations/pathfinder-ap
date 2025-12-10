@@ -208,58 +208,61 @@ export default function BusinessCycleLeadGen() {
 
               {/* Right side - content list */}
               <div className="relative p-10 md:p-12 lg:p-14 flex flex-col overflow-hidden bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
-                  >
-                    <div className="mb-8">
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-xl">—</span>
-                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
+                <div className="flex-1 overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentSlide}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="w-full"
+                    >
+                      <div className="mb-8">
+                        <div className="flex items-center gap-4">
+                          <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
+                          <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
+                          <span className="text-muted-foreground text-xl">—</span>
+                          <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="flex-1 overflow-hidden">
-                      <ul className="space-y-3">
-                        {slide.content?.map((item, idx) => (
-                          <motion.li
-                            key={idx}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                            className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-3" : "items-start p-4"}`}
-                          >
-                            {item.icon ? (
-                              <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
-                            ) : (
-                              <span className="text-primary font-bold mt-0.5">•</span>
-                            )}
-                            <div className="flex-1">
-                              <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                              {item.description && (
-                                <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                      <div className="flex-1 overflow-hidden">
+                        <ul className="space-y-3">
+                          {slide.content?.map((item, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                              className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${item.icon ? "items-center p-3" : "items-start p-4"}`}
+                            >
+                              {item.icon ? (
+                                <img src={item.icon} alt="" className="w-12 h-12 flex-shrink-0" />
+                              ) : (
+                                <span className="text-primary font-bold mt-0.5">•</span>
                               )}
-                            </div>
-                          </motion.li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
+                              <div className="flex-1">
+                                <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                {item.description && (
+                                  <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                )}
+                              </div>
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-                <div className="flex items-center justify-between mt-auto pt-4">
+                {/* Fixed navigation buttons - outside AnimatePresence */}
+                <div className="flex items-center justify-between pt-4 flex-shrink-0">
                   <Button
                     onClick={prevSlide}
                     disabled={currentSlide === 0}
                     variant="outline"
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 min-w-[120px]"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     Previous
@@ -277,7 +280,7 @@ export default function BusinessCycleLeadGen() {
                     ))}
                   </div>
 
-                  <Button onClick={nextSlide} className="flex items-center gap-2">
+                  <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
                     {isLastSlide ? "About Us" : "Next"}
                     <ChevronRight className="w-4 h-4" />
                   </Button>
