@@ -220,7 +220,11 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh]">
+              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh] ${
+                slides[currentSlide].title === "Product Journey" 
+                  ? "p-10 md:p-12 lg:p-14 pb-0" 
+                  : "p-10 md:p-12 lg:p-14"
+              }`}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -284,8 +288,10 @@ export default function BusinessCycleLocalSEO() {
 
                     {/* Main image */}
                     <div
-                      className={`flex-1 flex justify-center w-full overflow-visible ${
-                        slide.title === "Visibility" || slide.title === "Ongoing Service" || slide.title === "Product Journey" ? "items-center" : "items-end"
+                      className={`flex-1 w-full overflow-visible ${
+                        slide.title === "Product Journey" 
+                          ? "relative" 
+                          : `flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
                       <motion.img
@@ -303,7 +309,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full scale-110 mt-[-40px]"
+                                      ? "w-full absolute bottom-0 left-[-56px] right-[-56px] w-[calc(100%+112px)]"
                                       : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
