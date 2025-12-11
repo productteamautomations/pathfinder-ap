@@ -231,14 +231,7 @@ export default function BusinessCycleLocalSEO() {
               {/* Left side - logo, title, image */}
               <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex flex-col items-start h-full"
-                  >
+                  <div key={currentSlide} className="flex flex-col items-start h-full">
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
                       <motion.img
@@ -325,7 +318,7 @@ export default function BusinessCycleLocalSEO() {
                         onLoad={() => setImageLoaded(true)}
                       />
                     </div>
-                  </motion.div>
+                  </div>
                 </AnimatePresence>
               </div>
 
