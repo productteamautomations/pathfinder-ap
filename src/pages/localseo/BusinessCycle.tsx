@@ -347,9 +347,9 @@ export default function BusinessCycleLocalSEO() {
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.8, duration: 0.4 }}
-                              className="mt-4 flex justify-start"
+                              className="mt-4"
                             >
-                              <img src={slide.bottomImage} alt="" className="w-[85%]" />
+                              <img src={slide.bottomImage} alt="" className="w-[60%]" />
                             </motion.div>
                           )}
                         </div>
