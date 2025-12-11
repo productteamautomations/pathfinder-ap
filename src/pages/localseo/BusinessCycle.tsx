@@ -286,7 +286,7 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "absolute bottom-0 left-0 right-0" 
+                          ? "flex-1 flex items-end -mx-14 -mb-14" 
                           : `flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
@@ -305,7 +305,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full object-cover object-top"
+                                      ? "w-[calc(100%+112px)] object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
