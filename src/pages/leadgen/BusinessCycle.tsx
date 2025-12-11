@@ -233,11 +233,11 @@ export default function BusinessCycleLocalSEO() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col items-start"
+                    className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
@@ -292,43 +292,40 @@ export default function BusinessCycleLocalSEO() {
                         </motion.div>
                       </div>
                     </div>
-                  </motion.div>
-                </AnimatePresence>
 
-                {/* Main image - outside animated container */}
-                <AnimatePresence mode="wait">
-                  <div
-                    key={`image-${currentSlide}`}
-                    className={`${
-                      slide.title === "Product Journey"
-                        ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
-                        : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
-                    }`}
-                  >
-                    <motion.img
-                      src={slide.mainImage || VisibilityMainImage}
-                      alt={`${slide.title} - ${slide.subtitle}`}
-                      className={`h-auto ${
-                        slide.title === "Lead Management"
-                          ? "object-contain w-full max-h-[85vh] mb-[-60px]"
-                          : slide.title === "Visibility"
-                            ? "object-contain w-[108%] max-h-[70vh]"
-                            : slide.title === "Relevance" || slide.title === "Prominence"
-                              ? "object-contain w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
-                              : slide.title === "Your Setup"
-                                ? "object-contain w-[115%] max-h-[80vh] mb-[-14px]"
-                                : slide.title === "Ongoing Service"
-                                  ? "object-contain w-[110%] max-h-[70vh]"
-                                  : slide.title === "Product Journey"
-                                    ? "w-full object-contain object-bottom"
-                                    : "object-contain w-full max-h-[75vh] mb-[-14px]"
+                    {/* Main image */}
+                    <div
+                      className={`${
+                        slide.title === "Product Journey"
+                          ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
+                          : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: imageLoaded ? 1 : 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      onLoad={() => setImageLoaded(true)}
-                    />
-                  </div>
+                    >
+                      <motion.img
+                        src={slide.mainImage || VisibilityMainImage}
+                        alt={`${slide.title} - ${slide.subtitle}`}
+                        className={`h-auto ${
+                          slide.title === "Lead Management"
+                            ? "object-contain w-full max-h-[85vh] mb-[-60px]"
+                            : slide.title === "Visibility"
+                              ? "object-contain w-[108%] max-h-[70vh]"
+                              : slide.title === "Relevance" || slide.title === "Prominence"
+                                ? "object-contain w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
+                                : slide.title === "Your Setup"
+                                  ? "object-contain w-[115%] max-h-[80vh] mb-[-14px]"
+                                  : slide.title === "Ongoing Service"
+                                    ? "object-contain w-[110%] max-h-[70vh]"
+                                    : slide.title === "Product Journey"
+                                      ? "w-full object-contain object-bottom"
+                                      : "object-contain w-full max-h-[75vh] mb-[-14px]"
+                        }`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        onLoad={() => setImageLoaded(true)}
+                      />
+                    </div>
+                  </motion.div>
                 </AnimatePresence>
               </div>
 
