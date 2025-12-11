@@ -44,6 +44,7 @@ import ProminenceMainImage from "@/assets/prominence-main.svg";
 import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
 import MoreReviewsIcon from "@/assets/more-reviews.svg";
 import FiveStarsWideIcon from "@/assets/five-stars-wide.svg";
+import ProductJourneyMainImage from "@/assets/product-journey-main.svg";
 
 const slides = [
   {
@@ -103,6 +104,26 @@ const slides = [
       { label: "78% of sales", description: "Go to first responder", icon: Sales78PercentIcon },
       { label: "Waiting 30 minutes", description: "100× less likely to connect", icon: Sales30MinIcon },
       { label: "Slow responses", description: "Cost UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
+    ],
+  },
+  {
+    title: "Product Journey",
+    subtitle: "Your path to success",
+    mainImage: ProductJourneyMainImage,
+    timeline: [
+      {
+        phase: "Welcome Call",
+        points: [
+          "First meeting with onboarding team",
+          "Understand goals",
+          "Implement tracking needs",
+          "Website audit & content plan",
+        ],
+      },
+      {
+        phase: "Launch Call",
+        points: ["Launch newly built campaigns", "Final changes", "Tracking test in real time", "Agree on next steps"],
+      },
     ],
   },
   {
@@ -264,7 +285,7 @@ export default function BusinessCycleLocalSEO() {
                     {/* Main image */}
                     <div
                       className={`flex-1 flex justify-center w-full overflow-visible ${
-                        slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"
+                        slide.title === "Visibility" || slide.title === "Ongoing Service" || slide.title === "Product Journey" ? "items-center" : "items-end"
                       }`}
                     >
                       <motion.img
@@ -281,7 +302,9 @@ export default function BusinessCycleLocalSEO() {
                                   ? "w-[115%] max-h-[80vh] mb-[-14px]"
                                   : slide.title === "Ongoing Service"
                                     ? "w-[110%] max-h-[70vh]"
-                                    : "w-full max-h-[75vh] mb-[-14px]"
+                                    : slide.title === "Product Journey"
+                                      ? "w-[95%] max-h-[65vh]"
+                                      : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
@@ -323,50 +346,76 @@ export default function BusinessCycleLocalSEO() {
                               style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
                             />
                           )}
-                          <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.icon ? "items-center p-3" : "items-start p-4"
-                                }`}
-                              >
-                                {item.icon ? (
-                                  <img
-                                    src={item.icon}
-                                    alt=""
-                                    className={`flex-shrink-0 ${
-                                      slide.title === "Your Setup"
-                                        ? "w-[18px] h-[18px]"
-                                        : slide.title === "Ongoing Service"
-                                          ? "w-6 h-6"
-                                          : slide.title === "Prominence"
-                                            ? "w-8 h-8"
-                                            : "w-12 h-12"
-                                    }`}
-                                  />
-                                ) : (
-                                  <span className="text-primary font-bold mt-0.5">•</span>
-                                )}
-                                <div className="flex-1">
-                                  <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                  {item.description && (
-                                    <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                          
+                          {/* Product Journey timeline cards */}
+                          {slide.title === "Product Journey" && slide.timeline ? (
+                            <div className="space-y-4">
+                              {slide.timeline.map((phase, phaseIdx) => (
+                                <motion.div
+                                  key={phaseIdx}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.4 + phaseIdx * 0.15, duration: 0.3, ease: "easeOut" }}
+                                  className="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 p-5"
+                                >
+                                  <h3 className="text-primary font-semibold text-lg mb-3">{phase.phase}</h3>
+                                  <ul className="space-y-2">
+                                    {phase.points.map((point, pointIdx) => (
+                                      <li key={pointIdx} className="flex items-start gap-3">
+                                        <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                        <span className="text-foreground">{point}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </motion.div>
+                              ))}
+                            </div>
+                          ) : (
+                            <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                              {slide.content?.map((item, idx) => (
+                                <motion.li
+                                  key={idx}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                                  className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                    item.icon ? "items-center p-3" : "items-start p-4"
+                                  }`}
+                                >
+                                  {item.icon ? (
+                                    <img
+                                      src={item.icon}
+                                      alt=""
+                                      className={`flex-shrink-0 ${
+                                        slide.title === "Your Setup"
+                                          ? "w-[18px] h-[18px]"
+                                          : slide.title === "Ongoing Service"
+                                            ? "w-6 h-6"
+                                            : slide.title === "Prominence"
+                                              ? "w-8 h-8"
+                                              : "w-12 h-12"
+                                      }`}
+                                    />
+                                  ) : (
+                                    <span className="text-primary font-bold mt-0.5">•</span>
                                   )}
-                                </div>
-                                {item.rightIcon && (
-                                  <img
-                                    src={item.rightIcon}
-                                    alt=""
-                                    className="flex-shrink-0 w-32 h-12"
-                                  />
-                                )}
-                              </motion.li>
-                            ))}
-                          </ul>
+                                  <div className="flex-1">
+                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                    {item.description && (
+                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                    )}
+                                  </div>
+                                  {item.rightIcon && (
+                                    <img
+                                      src={item.rightIcon}
+                                      alt=""
+                                      className="flex-shrink-0 w-32 h-12"
+                                    />
+                                  )}
+                                </motion.li>
+                              ))}
+                            </ul>
+                          )}
 
                           {/* Bottom image for Visibility slide */}
                           {slide.bottomImage && (
