@@ -233,7 +233,12 @@ export default function BusinessCycleLocalSEO() {
                 <AnimatePresence mode="wait">
                   <div key={currentSlide} className="flex flex-col items-start h-full">
                     {/* Logo and Title */}
-                    <div className="flex items-center gap-5 mb-4">
+                    <motion.div
+                      className="flex items-center gap-5 mb-4"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
                       <motion.img
                         src={LogoGraphic}
                         alt="Add People"
@@ -254,8 +259,15 @@ export default function BusinessCycleLocalSEO() {
                       >
                         {slide.title}
                       </h2>
-                    </div>
-                    <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
+                    </motion.div>
+                    <motion.p
+                      className="text-lg text-primary mt-2 leading-relaxed"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                    >
+                      {slide.subtitle}
+                    </motion.p>
 
                     {/* Orange accent dots */}
                     <div className="flex items-center gap-2 mt-4">
