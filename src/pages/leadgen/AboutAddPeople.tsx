@@ -50,12 +50,12 @@ export default function AboutAddPeopleLeadGen() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden h-full"
           >
             <img 
               src={mainImage} 
               alt="Add People" 
-              className="w-full h-full object-contain" 
+              className="w-full h-full object-contain rounded-2xl" 
             />
           </motion.div>
 
@@ -79,14 +79,14 @@ export default function AboutAddPeopleLeadGen() {
             </motion.div>
 
             {/* Reviews */}
-            <div className="flex-1 flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                  className="bg-white rounded-xl p-3 border border-border/30 shadow-sm"
                 >
                   <p className="text-sm text-foreground leading-snug mb-2">"{review.review}"</p>
                   <div className="flex items-center justify-between">
