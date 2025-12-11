@@ -68,9 +68,9 @@ const slides = [
     mainImage: EngagementMainImage,
     content: [
       { label: "Being well-known improves rankings", description: "", icon: EngagementIcon },
-      { label: "More external links", description: "Quality backlinks from authoritative sites", icon: LocationIcon },
-      { label: "More reviews", description: "Quantity of customer reviews matters", icon: TrackConversionsIcon },
-      { label: "Better review scores", description: "Average rating impacts visibility", icon: MeasureIcon },
+      { label: "More external links", description: "", icon: LocationIcon },
+      { label: "More reviews", description: "", icon: TrackConversionsIcon },
+      { label: "Better review scores", description: "", icon: MeasureIcon },
       { label: "Increase reputation", description: "", icon: EngagementIcon },
       { label: "Higher map pack ranking", description: "", icon: LocationIcon },
     ],
