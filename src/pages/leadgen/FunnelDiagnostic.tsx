@@ -5,15 +5,15 @@ import { PageHeader } from "@/components/PageHeader";
 import { ChevronRight } from "lucide-react";
 
 // Import question images
-import imgCTR from "@/assets/Average_CTR.png";
-import imgConversions from "@/assets/Are_you_Tracking_key_conversions.png";
-import imgCPC from "@/assets/Average_CPC.png";
-import imgCPA from "@/assets/Average_Cost_per_acquisition.png";
-import imgConversionRate from "@/assets/Average_webste_conversion_rate.png";
-import imgCTA from "@/assets/Primary_call_to_action_visibility.png";
-import imgServicePages from "@/assets/Dedicated_service_page.png";
-import imgLeadManagement from "@/assets/Lead_managemnt_system.png";
-import imgResponseTime from "@/assets/average_response_time.png";
+import imgCTR from "@/assets/leadgen-ctr.svg";
+import imgConversions from "@/assets/leadgen-tracking.svg";
+import imgCPC from "@/assets/leadgen-cpc.svg";
+import imgCPA from "@/assets/leadgen-cpa.svg";
+import imgConversionRate from "@/assets/leadgen-conversion-rate.svg";
+import imgCTA from "@/assets/leadgen-cta.svg";
+import imgServicePages from "@/assets/leadgen-dedicated-service-pages.svg";
+import imgLeadManagement from "@/assets/leadgen-lead-management.svg";
+import imgResponseTime from "@/assets/leadgen-response-time.svg";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -187,9 +187,9 @@ export default function FunnelDiagnostic() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden aspect-[4/3]"
+            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-full">
+            <div className="grid md:grid-cols-[1fr_1fr] h-full" style={{ minHeight: '500px' }}>
               {/* Left Side - Question & Options */}
               <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
                 <AnimatePresence mode="wait">
@@ -260,8 +260,8 @@ export default function FunnelDiagnostic() {
                 </AnimatePresence>
               </div>
 
-              {/* Right Side - Image fills section corner to corner */}
-              <div className="relative bg-white border-l border-border/20 overflow-hidden">
+              {/* Right Side - Square Image Panel */}
+              <div className="relative bg-white border-l border-border/20 overflow-hidden aspect-square">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`img-${currentQuestion}`}
@@ -272,7 +272,7 @@ export default function FunnelDiagnostic() {
                     animate={{ opacity: imageLoaded ? 1 : 0 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.4, ease: "easeOut" }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-contain p-4"
                   />
                 </AnimatePresence>
               </div>
