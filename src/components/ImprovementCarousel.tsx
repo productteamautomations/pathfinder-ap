@@ -30,11 +30,12 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
   const currentArea = areas[currentIndex];
 
   return (
-    <div className="mt-8">
-      <div className="flex items-center justify-between mb-4">
+    <div className="flex flex-col h-full">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-3 flex-shrink-0">
         <div className="flex items-center gap-2">
-          <img src={AttentionIcon} alt="" className="w-6 h-6" />
-          <h3 className="text-lg font-semibold text-accent-orange">Areas requiring immediate attention.</h3>
+          <img src={AttentionIcon} alt="" className="w-5 h-5" />
+          <h3 className="text-base font-semibold text-accent-orange">Areas requiring immediate attention.</h3>
         </div>
         {areas.length > 1 && (
           <div className="flex items-center gap-2">
@@ -59,7 +60,8 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
         )}
       </div>
 
-      <div className="relative overflow-hidden min-h-[280px]">
+      {/* Content fills remaining space */}
+      <div className="relative flex-1 min-h-0">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -67,10 +69,10 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.25 }}
-            className="bg-muted/30 rounded-2xl p-6 border border-border/30 h-[280px] flex flex-col"
+            className="bg-muted/30 rounded-2xl p-5 border border-border/30 h-full flex flex-col"
           >
-            <div className="flex items-center justify-between mb-4">
-              <span className="px-3 py-1.5 bg-primary/10 text-primary text-sm font-medium rounded-full">
+            <div className="flex items-center justify-between mb-3 flex-shrink-0">
+              <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
                 {currentArea.title}
               </span>
               <span className="text-sm font-semibold text-muted-foreground">
@@ -78,21 +80,21 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
               </span>
             </div>
 
-            <div className="space-y-4 flex-1 overflow-y-auto">
-              <div>
+            <div className="flex flex-col flex-1 min-h-0 gap-3">
+              <div className="flex-1">
                 <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
-                <ul className="space-y-1.5">
+                <ul className="space-y-1">
                   {currentArea.explanations.map((point, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground leading-relaxed">
+                    <li key={idx} className="text-sm text-muted-foreground leading-snug">
                       {point}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="pt-3 border-t border-border/30">
-                <h4 className="text-sm font-semibold text-[#173340] mb-2">Our Recommendation</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+              <div className="pt-2 border-t border-border/30 flex-shrink-0">
+                <h4 className="text-sm font-semibold text-[#173340] mb-1">Our Recommendation</h4>
+                <p className="text-sm text-muted-foreground leading-snug">
                   {currentArea.recommendation}
                 </p>
               </div>
@@ -103,7 +105,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
 
       {/* Dot indicators */}
       {areas.length > 1 && (
-        <div className="flex justify-center gap-2 mt-4">
+        <div className="flex justify-center gap-2 mt-3 flex-shrink-0">
           {areas.map((_, index) => (
             <button
               key={index}

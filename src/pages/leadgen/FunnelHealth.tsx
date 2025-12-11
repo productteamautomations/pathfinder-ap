@@ -320,23 +320,26 @@ export default function FunnelHealthLeadGen() {
         >
           <div className="grid md:grid-cols-2 h-full">
             {/* Left Side - Results Overview */}
-            <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20 h-full">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
+            <div className="p-10 md:p-14 lg:p-16 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
+              {/* Fixed Title Section */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex-shrink-0">
                 <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">Results</span>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                   Your Funnel Health Overview
                 </h2>
-
                 <OrangeAccent />
+              </motion.div>
 
+              {/* Improvement Carousel fills remaining space */}
+              <div className="flex-1 flex flex-col mt-6 min-h-0">
                 {improvementAreas.length > 0 ? (
                   <ImprovementCarousel areas={improvementAreas} />
                 ) : (
-                  <p className="text-muted-foreground mt-10 text-lg leading-relaxed">
+                  <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
                     Great work! Your funnel is performing well across all key areas.
                   </p>
                 )}
-              </motion.div>
+              </div>
             </div>
 
             {/* Right Side - Visualization */}
