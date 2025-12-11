@@ -303,7 +303,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full scale-150 mt-[-40px]"
+                                      ? "w-full scale-110 mt-[-40px]"
                                       : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
