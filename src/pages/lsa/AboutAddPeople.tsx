@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronRight, Users, Award, MapPin, Star, TrendingUp, Shield, Clock, BadgeCheck } from "lucide-react";
-import altrinchamMap from "@/assets/altrincham-map.png";
+import altrinchamMap from "@/assets/altrinham-map.svg";
 
 const lsaReviews = [
   {
