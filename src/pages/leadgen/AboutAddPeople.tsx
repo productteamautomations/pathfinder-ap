@@ -43,24 +43,24 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-2 gap-6 py-4 max-w-[1400px] mx-auto w-full">
+        <div className="flex-1 grid lg:grid-cols-2 gap-6 py-4 max-w-[1400px] mx-auto w-full h-full">
           
           {/* Left - Main Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden h-full flex items-center justify-center bg-muted/20"
           >
             <img 
               src={mainImage} 
               alt="Add People" 
-              className="w-full h-full object-cover" 
+              className="w-full h-full object-contain" 
             />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 h-full">
             {/* Maps Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -79,14 +79,14 @@ export default function AboutAddPeopleLeadGen() {
             </motion.div>
 
             {/* Reviews */}
-            <div className="flex flex-col gap-2">
+            <div className="flex-1 flex flex-col gap-2">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-3 border border-border/30 shadow-sm"
+                  className="bg-white rounded-xl p-3 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
                 >
                   <p className="text-sm text-foreground leading-snug mb-2">"{review.review}"</p>
                   <div className="flex items-center justify-between">
