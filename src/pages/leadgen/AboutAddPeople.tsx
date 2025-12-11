@@ -4,8 +4,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronRight, Star } from "lucide-react";
 import mainImage from "@/assets/Main-image-about-us.svg";
-import altrinchamMap from "@/assets/altrinham_map.svg";
-import austinMap from "@/assets/austin_map.svg";
+import altrinchamMap from "@/assets/altrinham map.svg";
+import austinMap from "@/assets/austin map.svg";
 
 const leadgenReviews = [
   {
