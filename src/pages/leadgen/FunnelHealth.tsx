@@ -307,14 +307,17 @@ export default function FunnelHealthLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center">
+      <div
+        className="flex-1 flex items-center justify-center"
+        style={{ paddingTop: "calc(73px + 5vh)", paddingBottom: "5vh" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(66.82vw, calc((100vh - 73px - 10vh) * 1.65))",
+            height: "90vh",
             aspectRatio: "1.65",
           }}
         >
