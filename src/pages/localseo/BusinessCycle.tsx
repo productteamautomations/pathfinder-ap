@@ -27,6 +27,10 @@ import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
 import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 import YourSetupIcon from "@/assets/your-setup-icon.svg";
 import OngoingServiceIcon from "@/assets/ongoing-service-icon.svg";
+import BrightLocalIcon from "@/assets/brightlocal-icon.svg";
+import ProminenceIcon from "@/assets/prominence-icon.svg";
+import ProximityIcon from "@/assets/proximity-icon.svg";
+import RelevanceIcon from "@/assets/relevance-icon.svg";
 
 const slides = [
   {
@@ -335,6 +339,21 @@ export default function BusinessCycleLocalSEO() {
                               </motion.li>
                             ))}
                           </ul>
+                          
+                          {/* Visibility slide icons */}
+                          {slide.title === "Visibility" && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.8, duration: 0.4 }}
+                              className="mt-6 flex items-center justify-center gap-4"
+                            >
+                              <img src={RelevanceIcon} alt="Relevance" className="w-24 h-24" />
+                              <img src={ProximityIcon} alt="Proximity" className="w-24 h-24" />
+                              <img src={ProminenceIcon} alt="Prominence" className="w-24 h-24" />
+                              <img src={BrightLocalIcon} alt="BrightLocal" className="w-24 h-24" />
+                            </motion.div>
+                          )}
                         </div>
                       </div>
                     </motion.div>
