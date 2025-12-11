@@ -50,12 +50,12 @@ export default function AboutAddPeopleLeadGen() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white border border-border/30 shadow-sm rounded-2xl overflow-hidden p-2"
+            className="rounded-2xl overflow-hidden"
           >
             <img 
               src={mainImage} 
               alt="Add People" 
-              className="w-full h-full object-contain rounded-xl" 
+              className="w-full h-full object-cover" 
             />
           </motion.div>
 
