@@ -297,10 +297,9 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`${
                         slide.title === "Product Journey"
-                          ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none overflow-hidden"
+                          ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
                           : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
-                      style={slide.title === "Product Journey" ? { height: "70%" } : undefined}
                     >
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
@@ -317,7 +316,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full h-full object-cover object-bottom"
+                                      ? "w-full object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
