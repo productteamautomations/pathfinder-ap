@@ -189,9 +189,9 @@ export default function FunnelDiagnostic() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-[1fr_1fr] h-full" style={{ minHeight: '500px' }}>
-              {/* Left Side - Question & Options */}
-              <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)]">
+            <div className="grid md:grid-cols-[0.7fr_1fr]">
+              {/* Left Side - Question & Options - Fixed height */}
+              <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-[600px]">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentQuestion}
@@ -213,7 +213,7 @@ export default function FunnelDiagnostic() {
                     </div>
 
                     {/* Step Indicator */}
-                    <div className="mb-6">
+                    <div className="mb-6 flex-shrink-0">
                       <div className="flex items-center gap-3">
                         <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
                         <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
@@ -249,7 +249,7 @@ export default function FunnelDiagnostic() {
                     {/* Back Button */}
                     <button
                       onClick={handleBack}
-                      className="mt-6 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                      className="mt-6 flex-shrink-0 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                     >
                       <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                         <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
@@ -261,7 +261,7 @@ export default function FunnelDiagnostic() {
               </div>
 
               {/* Right Side - Square Image Panel */}
-              <div className="relative bg-white border-l border-border/20 overflow-hidden aspect-square">
+              <div className="relative bg-white border-l border-border/20 overflow-hidden w-full h-[600px]">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`img-${currentQuestion}`}
