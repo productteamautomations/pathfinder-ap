@@ -319,7 +319,7 @@ export default function BusinessCycleLocalSEO() {
                                       ? "w-full object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
-                        initial={{ opacity: 0 }}
+                        style={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
                         onLoad={() => setImageLoaded(true)}
