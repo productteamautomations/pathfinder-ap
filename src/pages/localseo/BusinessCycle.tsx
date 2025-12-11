@@ -249,9 +249,9 @@ export default function BusinessCycleLocalSEO() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
             style={{
-              width: "clamp(1200px, min(90vw, calc(82vh * 1.8)), 1600px)",
-              height: "clamp(667px, min(calc(90vw / 1.8), 82vh), 889px)",
-              aspectRatio: "1.8 / 1",
+              width: "clamp(1283px, min(90vw, calc(82vh * 1.69)), 1600px)",
+              height: "clamp(757px, min(calc(90vw / 1.69), 82vh), 947px)",
+              aspectRatio: "1.69 / 1",
             }}
           >
             <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
