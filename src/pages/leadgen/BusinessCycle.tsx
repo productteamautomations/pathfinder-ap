@@ -233,10 +233,10 @@ export default function BusinessCycleLocalSEO() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    initial={{ opacity: 0 }}
+                    initial={{ opacity: slide.title === "Product Journey" ? 1 : 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: slide.title === "Product Journey" ? 0 : 0.3 }}
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
