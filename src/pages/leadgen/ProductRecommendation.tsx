@@ -104,59 +104,70 @@ export default function ProductRecommendationLeadGen() {
 
         {/* Card Section with 5% margins */}
         <div className="flex-1 flex items-center justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-lg border border-border/30 w-full mx-6 md:mx-12 lg:mx-20"
+          <div
             style={{
-              height: "calc((100vh - 73px - 120px) * 0.9)",
-              maxWidth: "1152px",
+              height: "calc(100vh - 73px - 140px)",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            <div className="grid md:grid-cols-2 gap-12 items-center h-full p-8 md:p-12 lg:p-14">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">
-                  Stay Ahead of Competitors In Google Search Results
-                </h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  Get your business in front of customers actively searching for your services. With Google Ads, you
-                  appear at the top of search results exactly when potential customers are ready to buy.
-                </p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="bg-white rounded-[2rem] shadow-lg border border-border/30"
+              style={{
+                height: "calc((100vh - 73px - 140px) * 0.9)",
+                aspectRatio: "2.2",
+                maxWidth: "min(90vw, 1152px)",
+              }}
+            >
+              <div className="grid md:grid-cols-2 gap-12 items-center h-full p-8 md:p-12 lg:p-14">
+                <div>
+                  <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">
+                    Stay Ahead of Competitors In Google Search Results
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-8">
+                    Get your business in front of customers actively searching for your services. With Google Ads, you
+                    appear at the top of search results exactly when potential customers are ready to buy.
+                  </p>
 
-                <div className="space-y-4 mb-10">
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Key Benefits:
-                  </h3>
-                  {benefits.map((benefit, index) => (
-                    <motion.div
-                      key={benefit}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-foreground text-sm">{benefit}</span>
-                    </motion.div>
-                  ))}
+                  <div className="space-y-4 mb-10">
+                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      Key Benefits:
+                    </h3>
+                    {benefits.map((benefit, index) => (
+                      <motion.div
+                        key={benefit}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + index * 0.1 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                        </div>
+                        <span className="text-foreground text-sm">{benefit}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  <Button
+                    onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
+                    className="px-8"
+                  >
+                    Start Your Assessment
+                  </Button>
                 </div>
 
-                <Button
-                  onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
-                  className="px-8"
-                >
-                  Start Your Assessment
-                </Button>
+                <div className="hidden md:block">
+                  <LeadGenIllustration />
+                </div>
               </div>
-
-              <div className="hidden md:block">
-                <LeadGenIllustration />
-              </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
