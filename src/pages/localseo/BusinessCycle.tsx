@@ -323,9 +323,9 @@ export default function BusinessCycleLocalSEO() {
                     {/* Main image */}
                     <div
                       className={`${
-                        slide.title === "Product Journey"
+                        slide.title === "Product Journey" || slide.title === "Your Setup"
                           ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
-                          : slide.title === "Prominence" || slide.title === "Your Setup"
+                          : slide.title === "Prominence"
                             ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none"
                             : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
