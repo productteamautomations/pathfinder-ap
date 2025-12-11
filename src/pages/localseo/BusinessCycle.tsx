@@ -220,11 +220,7 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative ${
-                slides[currentSlide].title === "Product Journey" 
-                  ? "" 
-                  : "p-10 md:p-12 lg:p-14 overflow-hidden"
-              }`}>
+              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -232,9 +228,7 @@ export default function BusinessCycleLocalSEO() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className={`flex flex-col items-start h-full ${
-                      slides[currentSlide].title === "Product Journey" ? "p-10 md:p-12 lg:p-14 pb-0" : ""
-                    }`}
+                    className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
