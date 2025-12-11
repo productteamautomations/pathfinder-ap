@@ -69,7 +69,7 @@ const slides = [
     content: [
       { label: "Being well-known improves rankings", description: "", icon: EngagementIcon },
       { label: "More external links", description: "Quality backlinks from authoritative sites", icon: LocationIcon },
-      { label: "More reviews", description: "Quantity of customer reviews matters", icon: TrackConversionsIcon },
+      { label: "More reviews", description: "", icon: TrackConversionsIcon },
       { label: "Better review scores", description: "Average rating impacts visibility", icon: MeasureIcon },
       { label: "Increase reputation", description: "", icon: EngagementIcon },
       { label: "Higher map pack ranking", description: "", icon: LocationIcon },
@@ -113,7 +113,12 @@ const slides = [
     timeline: [
       {
         phase: "Welcome Call",
-        points: ["First meeting with onboarding team", "Understand goals", "Implement tracking needs", "Website audit & content plan"],
+        points: [
+          "First meeting with onboarding team",
+          "Understand goals",
+          "Implement tracking needs",
+          "Website audit & content plan",
+        ],
       },
       {
         phase: "Launch Call",
@@ -185,7 +190,7 @@ export default function BusinessCycleLocalSEO() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: '1fr 1fr' }}>
+            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
               <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh]">
                 <AnimatePresence mode="wait">
@@ -250,11 +255,11 @@ export default function BusinessCycleLocalSEO() {
                     </div>
 
                     {/* Main image */}
-                    <div className={`flex-1 flex justify-center w-full overflow-visible ${
-                      slide.title === "Visibility" || slide.title === "Ongoing Service"
-                        ? "items-center"
-                        : "items-end"
-                    }`}>
+                    <div
+                      className={`flex-1 flex justify-center w-full overflow-visible ${
+                        slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"
+                      }`}
+                    >
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
@@ -262,14 +267,14 @@ export default function BusinessCycleLocalSEO() {
                           slide.title === "Lead Management"
                             ? "w-full max-h-[85vh] mb-[-60px]"
                             : slide.title === "Visibility"
-                            ? "w-[108%] max-h-[70vh]"
-                            : slide.title === "Relevance" || slide.title === "Prominence"
-                            ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
-                            : slide.title === "Your Setup"
-                            ? "w-[115%] max-h-[80vh] mb-[-14px]"
-                            : slide.title === "Ongoing Service"
-                            ? "w-[110%] max-h-[70vh]"
-                            : "w-full max-h-[75vh] mb-[-14px]"
+                              ? "w-[108%] max-h-[70vh]"
+                              : slide.title === "Relevance" || slide.title === "Prominence"
+                                ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
+                                : slide.title === "Your Setup"
+                                  ? "w-[115%] max-h-[80vh] mb-[-14px]"
+                                  : slide.title === "Ongoing Service"
+                                    ? "w-[110%] max-h-[70vh]"
+                                    : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
@@ -330,10 +335,10 @@ export default function BusinessCycleLocalSEO() {
                                       slide.title === "Your Setup"
                                         ? "w-[18px] h-[18px]"
                                         : slide.title === "Ongoing Service"
-                                        ? "w-6 h-6"
-                                        : slide.title === "Prominence"
-                                        ? "w-8 h-8"
-                                        : "w-12 h-12"
+                                          ? "w-6 h-6"
+                                          : slide.title === "Prominence"
+                                            ? "w-8 h-8"
+                                            : "w-12 h-12"
                                     }`}
                                   />
                                 ) : (
@@ -348,7 +353,7 @@ export default function BusinessCycleLocalSEO() {
                               </motion.li>
                             ))}
                           </ul>
-                          
+
                           {/* Bottom image for Visibility slide */}
                           {slide.bottomImage && (
                             <motion.div
@@ -369,11 +374,7 @@ export default function BusinessCycleLocalSEO() {
                 {/* Fixed navigation buttons - absolutely positioned */}
                 <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
                   {currentSlide > 0 ? (
-                    <Button
-                      onClick={prevSlide}
-                      variant="outline"
-                      className="flex items-center gap-2 min-w-[120px]"
-                    >
+                    <Button onClick={prevSlide} variant="outline" className="flex items-center gap-2 min-w-[120px]">
                       <ChevronLeft className="w-4 h-4" />
                       Previous
                     </Button>
