@@ -17,7 +17,8 @@ const leadgenReviews = [
   {
     name: "James Crawford",
     company: "Crawford Electrical",
-    review: "The team really understands local SEO. Our Google Business Profile is now fully optimised and generating leads daily.",
+    review:
+      "The team really understands local SEO. Our Google Business Profile is now fully optimised and generating leads daily.",
     rating: 5,
   },
   {
@@ -43,8 +44,7 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-start">
-          
+        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-stretch">
           {/* Left - Main Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -52,49 +52,45 @@ export default function AboutAddPeopleLeadGen() {
             transition={{ duration: 0.5 }}
             className="rounded-2xl overflow-hidden"
           >
-            <img 
-              src={mainImage} 
-              alt="Add People" 
-              className="w-full h-auto object-contain rounded-2xl" 
-            />
+            <img src={mainImage} alt="Add People" className="w-full h-full object-cover rounded-2xl" />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
-          <div className="flex flex-col gap-3 justify-between" style={{ height: 'auto' }}>
+          <div className="flex flex-col gap-4 justify-between h-full">
             {/* Maps Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-3"
+              className="grid grid-cols-2 gap-4 flex-shrink-0"
             >
-              <div className="bg-white rounded-xl p-2 border border-border/30 shadow-sm">
-                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-32 object-contain" />
+              <div className="bg-white rounded-xl p-4 border border-border/30 shadow-sm aspect-square flex items-center justify-center">
+                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-full object-contain" />
               </div>
-              <div className="bg-white rounded-xl p-2 border border-border/30 shadow-sm">
-                <img src={austinMap} alt="Austin Location" className="w-full h-32 object-contain" />
+              <div className="bg-white rounded-xl p-4 border border-border/30 shadow-sm aspect-square flex items-center justify-center">
+                <img src={austinMap} alt="Austin Location" className="w-full h-full object-contain" />
               </div>
             </motion.div>
 
             {/* Reviews */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3 flex-1 justify-center">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-3 border border-border/30 shadow-sm"
+                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm"
                 >
-                  <p className="text-sm text-foreground leading-snug mb-2">"{review.review}"</p>
+                  <p className="text-sm md:text-base text-foreground leading-relaxed mb-3">"{review.review}"</p>
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
-                      <div className="text-xs text-muted-foreground">{review.company}</div>
+                      <div className="text-sm md:text-base font-semibold text-[#173340]">{review.name}</div>
+                      <div className="text-xs md:text-sm text-muted-foreground">{review.company}</div>
                     </div>
                     <div className="flex items-center gap-0.5">
                       {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                        <Star key={i} className="w-4 h-4 md:w-5 md:h-5 fill-amber-400 text-amber-400" />
                       ))}
                     </div>
                   </div>
@@ -107,22 +103,24 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center justify-between bg-white rounded-xl p-4 border border-border/30 shadow-sm flex-shrink-0"
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-white rounded-xl p-4 md:p-6 border border-border/30 shadow-sm flex-shrink-0 gap-4"
             >
               <div className="flex items-center gap-4">
                 <div>
-                  <span className="text-3xl font-display font-bold text-[#173340]">2,000+</span>
-                  <p className="text-xs text-muted-foreground">five-star reviews on Trustpilot, with an 'Excellent' average rating.</p>
+                  <span className="text-3xl md:text-4xl font-display font-bold text-[#173340]">2,000+</span>
+                  <p className="text-xs md:text-sm text-muted-foreground mt-1">
+                    five-star reviews on Trustpilot, with an 'Excellent' average rating.
+                  </p>
                 </div>
                 <div className="flex items-center gap-0.5">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
+                    <Star key={i} className="w-5 h-5 md:w-6 md:h-6 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
               </div>
               <Button
                 onClick={() => navigate("/pricing/leadgen", { state: location.state })}
-                className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center gap-2 font-semibold px-6"
+                className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center gap-2 font-semibold px-6 whitespace-nowrap"
               >
                 View Pricing
               </Button>
