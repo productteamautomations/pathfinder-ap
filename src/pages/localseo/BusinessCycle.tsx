@@ -248,7 +248,7 @@ export default function BusinessCycleLocalSEO() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden w-full h-full"
           style={{
-            aspectRatio: "1.06",
+            aspectRatio: "1.69",
           }}
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
