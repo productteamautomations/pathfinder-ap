@@ -45,6 +45,12 @@ import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
 import MoreReviewsIcon from "@/assets/more-reviews.svg";
 import FiveStarsWideIcon from "@/assets/five-stars-wide.svg";
 import ProductJourneyMainImage from "@/assets/product-journey-main.svg";
+import DedicatedAccountManagerIcon from "@/assets/dedicated-account-manager.svg";
+import MonthlyPerformanceIcon from "@/assets/monthly-performance.svg";
+import AdvancedAIIcon from "@/assets/advanced-ai.svg";
+import InDepthOnboardingIcon from "@/assets/in-depth-onboarding.svg";
+import FullSEOServiceIcon from "@/assets/full-seo-service.svg";
+import YourSetupNewMainImage from "@/assets/your-setup-main-new.svg";
 
 const slides = [
   {
@@ -136,9 +142,21 @@ const slides = [
     ],
   },
   {
+    title: "Features",
+    subtitle: "What's included",
+    mainImage: YourSetupMainImage,
+    content: [
+      { label: "Dedicated Account Manager", description: "", icon: DedicatedAccountManagerIcon },
+      { label: "Monthly performance reporting", description: "", icon: MonthlyPerformanceIcon },
+      { label: "Advanced AI call tracking", description: "", icon: AdvancedAIIcon },
+      { label: "In-depth onboarding", description: "", icon: InDepthOnboardingIcon },
+      { label: "Full SEO service", description: "Optimisation, content creation, directory submissions", icon: FullSEOServiceIcon },
+    ],
+  },
+  {
     title: "Your Setup",
     subtitle: "Getting started",
-    mainImage: YourSetupMainImage,
+    mainImage: YourSetupNewMainImage,
     content: [
       { label: "Strategic onboarding call", description: "", icon: YourSetupIcon },
       { label: "Installation of all tracking tools", description: "", icon: YourSetupIcon },
@@ -233,15 +251,10 @@ export default function BusinessCycleLocalSEO() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    initial={{ opacity: slide.title === "Product Journey" || slide.title === "Your Setup" ? 1 : 0 }}
+                    initial={{ opacity: slide.title === "Product Journey" ? 1 : 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      initial: {
-                        duration: slide.title === "Product Journey" || slide.title === "Your Setup" ? 0 : 0.3,
-                      },
-                    }}
+                    transition={{ duration: 0.3 }}
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
@@ -303,7 +316,7 @@ export default function BusinessCycleLocalSEO() {
                       className={`${
                         slide.title === "Product Journey"
                           ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
-                          : slide.title === "Prominence" || slide.title === "Your Setup"
+                          : slide.title === "Prominence"
                             ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none"
                             : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
