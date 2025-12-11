@@ -45,6 +45,11 @@ import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
 import MoreReviewsIcon from "@/assets/more-reviews.svg";
 import FiveStarsWideIcon from "@/assets/five-stars-wide.svg";
 import ProductJourneyMainImage from "@/assets/product-journey-main.svg";
+import DedicatedAccountManagerIcon from "@/assets/dedicated-account-manager.svg";
+import MonthlyPerformanceIcon from "@/assets/monthly-performance.svg";
+import AdvancedAIIcon from "@/assets/advanced-ai.svg";
+import InDepthOnboardingIcon from "@/assets/in-depth-onboarding.svg";
+import FullSEOServiceIcon from "@/assets/full-seo-service.svg";
 
 const slides = [
   {
@@ -133,6 +138,18 @@ const slides = [
         phase: "Launch Call",
         points: ["Launch newly built campaigns", "Final changes", "Tracking test in real time", "Agree on next steps"],
       },
+    ],
+  },
+  {
+    title: "Features",
+    subtitle: "What's included",
+    mainImage: YourSetupMainImage,
+    content: [
+      { label: "Dedicated Account Manager", description: "", icon: DedicatedAccountManagerIcon },
+      { label: "Monthly performance reporting", description: "", icon: MonthlyPerformanceIcon },
+      { label: "Advanced AI call tracking", description: "", icon: AdvancedAIIcon },
+      { label: "In-depth onboarding", description: "", icon: InDepthOnboardingIcon },
+      { label: "Full SEO service", description: "Optimisation, content creation, directory submissions", icon: FullSEOServiceIcon },
     ],
   },
   {
@@ -236,10 +253,7 @@ export default function BusinessCycleLocalSEO() {
                     initial={{ opacity: slide.title === "Product Journey" ? 1 : 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{
-                      duration: 0.3,
-                      initial: { duration: slide.title === "Product Journey" ? 0 : 0.3 },
-                    }}
+                    transition={{ duration: 0.3 }}
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
