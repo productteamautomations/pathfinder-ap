@@ -73,14 +73,14 @@ export default function AboutAddPeopleLeadGen() {
             </motion.div>
 
             {/* Reviews */}
-            <div className="flex flex-col gap-4 flex-1 min-h-0">
+            <div className="flex flex-col gap-4 flex-shrink-0">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm flex-1"
+                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm"
                 >
                   <p className="text-sm text-[#1a1a1a] leading-relaxed mb-3">"{review.review}"</p>
                   <div className="flex items-center justify-between">
@@ -103,7 +103,7 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center justify-between bg-white rounded-xl p-5 border border-border/30 shadow-sm flex-shrink-0"
+              className="flex items-center justify-between bg-white rounded-xl p-5 border border-border/30 shadow-sm flex-shrink-0 mt-auto"
             >
               <div className="flex items-center gap-6">
                 <div>
