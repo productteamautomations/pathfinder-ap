@@ -230,9 +230,7 @@ export default function BusinessCycleLocalSEO() {
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
               <div
-                className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 ${
-                  slides[currentSlide].title === "Product Journey" ? "overflow-visible" : "overflow-hidden"
-                }`}
+                className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden"
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -299,10 +297,10 @@ export default function BusinessCycleLocalSEO() {
 
                     {/* Main image */}
                     <div
-                      className={`overflow-visible ${
+                      className={`${
                         slide.title === "Product Journey"
-                          ? "flex-1 flex items-end justify-center mt-auto w-[calc(100%+112px)] -ml-14 -mb-14"
-                          : `w-full flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
+                          ? "absolute bottom-0 left-0 right-0 top-[180px] flex items-end justify-center"
+                          : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
                       <motion.img
@@ -320,7 +318,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full object-cover object-bottom max-h-full"
+                                      ? "w-[120%] max-h-full object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
