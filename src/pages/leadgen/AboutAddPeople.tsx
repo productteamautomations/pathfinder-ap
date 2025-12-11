@@ -44,30 +44,14 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-5 py-4 max-w-[1600px] mx-auto w-full h-full">
-          {/* Left Column - Main Image */}
-          <div className="lg:col-span-4 flex flex-col h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl border border-border/30 shadow-sm flex-1 flex items-center justify-center p-4"
-            >
-              <img 
-                src={mainImage} 
-                alt="Add People Team" 
-                className="w-full h-full object-contain" 
-              />
-            </motion.div>
-          </div>
-
-          {/* Middle Column - About + Reviews */}
+        <div className="flex-1 grid lg:grid-cols-12 gap-3 py-3 max-w-[1600px] mx-auto w-full h-full">
+          {/* Left Column - About + Main Image */}
           <div className="lg:col-span-4 flex flex-col gap-3 h-full">
             {/* About Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.5 }}
               className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-5 text-white flex-shrink-0"
             >
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
@@ -77,9 +61,25 @@ export default function AboutAddPeopleLeadGen() {
               </p>
             </motion.div>
 
-            {/* Reviews */}
+            {/* Main Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white/95 backdrop-blur-sm rounded-2xl border border-border/30 shadow-sm flex-1 flex items-center justify-center p-3"
+            >
+              <img 
+                src={mainImage} 
+                alt="Add People Team" 
+                className="w-full h-full object-contain" 
+              />
+            </motion.div>
+          </div>
+
+          {/* Middle Column - Reviews */}
+          <div className="lg:col-span-4 flex flex-col gap-2 h-full">
+            <span className="text-xs font-semibold text-primary uppercase tracking-wider flex-shrink-0">Reviews</span>
             <div className="flex-1 flex flex-col gap-2">
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">Reviews</span>
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
