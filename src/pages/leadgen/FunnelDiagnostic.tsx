@@ -180,8 +180,8 @@ export default function FunnelDiagnostic() {
       <PageHeader onBack={handleBack} currentStep={4} totalSteps={7} showProgress productLabel="Lead Generation" />
 
       {/* Content Area - Split Layout */}
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-5xl">
+      <div className="flex-1 pt-[73px] flex items-center justify-center py-[5vh]">
+        <div className="w-full max-w-5xl px-6 md:px-12">
           {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -206,7 +206,7 @@ export default function FunnelDiagnostic() {
                       <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
                         {question.section}
                       </span>
-                      <h2 className="text-2xl md:text-2xl lg:text-4xl font-display font-bold text-title leading-tight tracking-tight">
+                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-bold text-title leading-tight tracking-tight">
                         {question.question}
                       </h2>
                       <OrangeAccent />
