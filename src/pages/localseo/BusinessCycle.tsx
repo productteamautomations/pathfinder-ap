@@ -150,7 +150,11 @@ const slides = [
       { label: "Monthly performance reporting", description: "", icon: MonthlyPerformanceIcon },
       { label: "Advanced AI call tracking", description: "", icon: AdvancedAIIcon },
       { label: "In-depth onboarding", description: "", icon: InDepthOnboardingIcon },
-      { label: "Full SEO service", description: "Optimisation, content creation, directory submissions", icon: FullSEOServiceIcon },
+      {
+        label: "Full SEO service",
+        description: "Optimisation, content creation, directory submissions",
+        icon: FullSEOServiceIcon,
+      },
     ],
   },
   {
@@ -251,10 +255,15 @@ export default function BusinessCycleLocalSEO() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    initial={{ opacity: slide.title === "Product Journey" ? 1 : 0 }}
+                    initial={{ opacity: slide.title === "Product Journey" || slide.title === "Your Setup" ? 1 : 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{
+                      duration: 0.3,
+                      initial: {
+                        duration: slide.title === "Product Journey" || slide.title === "Your Setup" ? 0 : 0.3,
+                      },
+                    }}
                     className="flex flex-col items-start h-full"
                   >
                     {/* Logo and Title */}
@@ -316,7 +325,7 @@ export default function BusinessCycleLocalSEO() {
                       className={`${
                         slide.title === "Product Journey"
                           ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
-                          : slide.title === "Prominence"
+                          : slide.title === "Prominence" || slide.title === "Your Setup"
                             ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none"
                             : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
