@@ -248,7 +248,7 @@ export default function BusinessCycleLocalSEO() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(50.52vw, calc((100vh - 73px) * 0.9047 * 1.69))",
+            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
             aspectRatio: "1.69",
           }}
         >
