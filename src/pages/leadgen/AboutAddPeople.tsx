@@ -52,13 +52,13 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl flex-1 overflow-hidden"
+              className="relative bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl flex-1 overflow-hidden flex items-center justify-center"
             >
               {/* Main Image */}
               <img 
                 src={mainImage} 
                 alt="Add People Team" 
-                className="absolute inset-0 w-full h-full object-cover opacity-90" 
+                className="w-full h-full object-contain p-4 pb-28" 
               />
               
               {/* About Overlay */}
