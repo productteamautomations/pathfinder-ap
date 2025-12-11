@@ -349,7 +349,7 @@ export default function BusinessCycleLocalSEO() {
                               transition={{ delay: 0.8, duration: 0.4 }}
                               className="mt-4 flex justify-center"
                             >
-                              <img src={slide.bottomImage} alt="" className="w-full" />
+                              <img src={slide.bottomImage} alt="" className="w-[85%]" />
                             </motion.div>
                           )}
                         </div>
