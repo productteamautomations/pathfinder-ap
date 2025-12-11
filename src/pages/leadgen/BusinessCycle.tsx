@@ -5,22 +5,21 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LogoGraphic from "@/assets/logo_graphic.svg";
+// Using existing images as placeholders - replace with SEO-specific images when available
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
 import ConversionsMainImage from "@/assets/conversions-main.svg";
 import SalesMainImage from "@/assets/sales-main.svg";
 import YourSetupMainImage from "@/assets/your-setup-main.svg";
+import OngoingServiceMainImage from "@/assets/ongoing-service-main.svg";
+// Using existing icons as placeholders - replace with SEO-specific icons when available
 import KeywordsIcon from "@/assets/keywords-icon.svg";
 import LocationIcon from "@/assets/location-icon.svg";
-import DeviceIcon from "@/assets/device-icon.svg";
-import TimeIcon from "@/assets/time-icon.svg";
-import DemographicsIcon from "@/assets/demographics-icon.svg";
 import EngagementIcon from "@/assets/engagement-icon.svg";
 import SeeExactlyIcon from "@/assets/see-exactly-icon.svg";
 import TrackConversionsIcon from "@/assets/track-conversions-icon.svg";
 import MeasureIcon from "@/assets/measure-icon.svg";
 import OptimiseIcon from "@/assets/optimise-icon.svg";
-import SayHelloIcon from "@/assets/say-hello-icon.svg";
 import SalesRespondIcon from "@/assets/sales-respond-icon.svg";
 import SalesWaitingIcon from "@/assets/sales-waiting-icon.svg";
 import Sales78PercentIcon from "@/assets/sales-78percent-icon.svg";
@@ -28,55 +27,112 @@ import Sales30MinIcon from "@/assets/sales-30min-icon.svg";
 import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 import YourSetupIcon from "@/assets/your-setup-icon.svg";
 import OngoingServiceIcon from "@/assets/ongoing-service-icon.svg";
-import OngoingServiceMainImage from "@/assets/ongoing-service-main.svg";
+import ProminenceIcon from "@/assets/prominence-icon.svg";
+import ProximityIcon from "@/assets/proximity-icon.svg";
+import RelevanceIcon from "@/assets/relevance-icon.svg";
+import VisibilityBottomImage from "@/assets/visibility-bottom-image.svg";
+import RelevanceMainImage from "@/assets/relevance-main.svg";
+import ContentIcon from "@/assets/content-icon.svg";
+import KeywordsRelevanceIcon from "@/assets/keywords-relevance-icon.svg";
+import UXIcon from "@/assets/ux-icon.svg";
+import LinksIcon from "@/assets/links-icon.svg";
+import SchemaIcon from "@/assets/schema-icon.svg";
+import BeingWellKnownIcon from "@/assets/being-well-known.svg";
+import HigherMapPackIcon from "@/assets/higher-map-pack.svg";
+import IncreaseReputationIcon from "@/assets/increase-reputation.svg";
+import ProminenceMainImage from "@/assets/prominence-main.svg";
+import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
+import MoreReviewsIcon from "@/assets/more-reviews.svg";
+import FiveStarsWideIcon from "@/assets/five-stars-wide.svg";
+import ProductJourneyMainImage from "@/assets/product-journey-main.svg";
+
 const slides = [
   {
     title: "Visibility",
-    subtitle: "Get found by the right customers",
+    subtitle: "Get found by local customers",
+    mainImage: VisibilityMainImage,
     content: [
-      { label: "Keywords They Search", description: "Target the exact terms your customers use", icon: KeywordsIcon },
-      { label: "Their Location", description: "Show ads only in your service area", icon: LocationIcon },
-      { label: "Device Type", description: "Optimise for mobile and desktop users", icon: DeviceIcon },
-      { label: "Time of Day", description: "Appear when customers are most active", icon: TimeIcon },
-      { label: "Demographics & Interests", description: "Reach your ideal audience", icon: DemographicsIcon },
+      { label: "Relevance", description: "How well your business matches search intent", icon: RelevanceIcon },
+      { label: "Proximity", description: "How close you are to the searcher", icon: ProximityIcon },
+      { label: "Prominence", description: "How well-known and reputable your business is", icon: ProminenceIcon },
+    ],
+    bottomImage: VisibilityBottomImage,
+  },
+  {
+    title: "Relevance",
+    subtitle: "Match what customers are searching for",
+    mainImage: RelevanceMainImage,
+    content: [
+      { label: "Content", description: "Quality, relevant content targeting local keywords", icon: ContentIcon },
+      { label: "Keywords", description: "Strategic use of location-based search terms", icon: KeywordsRelevanceIcon },
+      { label: "UX", description: "Fast, mobile-friendly user experience", icon: UXIcon },
+      { label: "Internal/External Links", description: "Strong link profile from local sources", icon: LinksIcon },
+      { label: "Schema Markup", description: "Structured data for better search visibility", icon: SchemaIcon },
     ],
   },
   {
-    title: "Engagement",
-    subtitle: "Make your ads impossible to ignore",
-    mainImage: EngagementMainImage,
+    title: "Prominence",
+    subtitle: "Build your reputation online",
+    mainImage: ProminenceMainImage,
     content: [
-      { label: "Be Relevant", description: "Match your ad to search intent", icon: EngagementIcon },
-      { label: "Be Clear", description: "Communicate your value instantly", icon: EngagementIcon },
-      { label: "Be Tempting", description: "Give them a reason to click", icon: EngagementIcon },
+      { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
       {
-        label: "Example",
-        isExample: true,
+        label: "More external links",
+        description: "Quality backlinks from authoritative sites",
+        icon: MoreExternalLinksIcon,
       },
+      { label: "More reviews", description: "", icon: MoreReviewsIcon },
+      {
+        label: "Better review scores",
+        description: "Average rating impacts visibility",
+        icon: MoreReviewsIcon,
+        rightIcon: FiveStarsWideIcon,
+      },
+      { label: "Increase reputation", description: "", icon: IncreaseReputationIcon },
+      { label: "Higher map pack ranking", description: "", icon: HigherMapPackIcon },
     ],
   },
   {
     title: "Conversions",
-    subtitle: "Track what happens after someone clicks",
+    subtitle: "Turn visitors into customers",
     mainImage: ConversionsMainImage,
     content: [
-      { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
-      { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
-      { label: "Measure ROI", description: "Understand your cost per lead", icon: MeasureIcon },
-      { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: OptimiseIcon },
-      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: SayHelloIcon },
+      { label: "Track what happens after someone clicks", description: "", icon: SeeExactlyIcon },
+      { label: "Measure ROI", description: "Understand cost per acquisition", icon: MeasureIcon },
+      { label: "Optimise using real user behaviour", description: "", icon: OptimiseIcon },
+      { label: "Google Search Console", description: "Helps maintain search performance", icon: TrackConversionsIcon },
     ],
   },
   {
     title: "Lead Management",
-    subtitle: "Speed wins deals",
+    subtitle: "Respond fast, win more",
     mainImage: SalesMainImage,
     content: [
-      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
-      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
-      { label: "78% of sales", description: "Go to the first responder", icon: Sales78PercentIcon },
-      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: Sales30MinIcon },
-      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
+      { label: "Respond within 5 minutes", description: "21× more likely to qualify", icon: SalesRespondIcon },
+      { label: "Waiting >5 minutes", description: "Reduces success by 80%+", icon: SalesWaitingIcon },
+      { label: "78% of sales", description: "Go to first responder", icon: Sales78PercentIcon },
+      { label: "Waiting 30 minutes", description: "100× less likely to connect", icon: Sales30MinIcon },
+      { label: "Slow responses", description: "Cost UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
+    ],
+  },
+  {
+    title: "Product Journey",
+    subtitle: "Your path to success",
+    mainImage: ProductJourneyMainImage,
+    timeline: [
+      {
+        phase: "Welcome Call",
+        points: [
+          "First meeting with onboarding team",
+          "Understand goals",
+          "Implement tracking needs",
+          "Website audit & content plan",
+        ],
+      },
+      {
+        phase: "Launch Call",
+        points: ["Launch newly built campaigns", "Final changes", "Tracking test in real time", "Agree on next steps"],
+      },
     ],
   },
   {
@@ -84,15 +140,27 @@ const slides = [
     subtitle: "Getting started",
     mainImage: YourSetupMainImage,
     content: [
+      { label: "Strategic onboarding call", description: "", icon: YourSetupIcon },
+      { label: "Installation of all tracking tools", description: "", icon: YourSetupIcon },
+      { label: "Local SEO tracking setup", description: "", icon: YourSetupIcon },
+      { label: "Website audit + content plan", description: "", icon: YourSetupIcon },
+      { label: "Google Business Profile optimisation", description: "", icon: YourSetupIcon },
+      { label: "Campaign launch call", description: "", icon: YourSetupIcon },
+    ],
+    timeline: [
       {
-        label: "Strategic onboarding call",
-        description: "Understand your goals and develop strategy",
-        icon: YourSetupIcon,
+        phase: "Welcome Call",
+        points: [
+          "First meeting with onboarding team",
+          "Understand goals",
+          "Implement tracking needs",
+          "Website audit & content plan",
+        ],
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing", icon: YourSetupIcon },
-      { label: "Search campaign creation", description: "Built from scratch", icon: YourSetupIcon },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: YourSetupIcon },
-      { label: "Campaign launch call", description: "Final review and go live", icon: YourSetupIcon },
+      {
+        phase: "Launch Call",
+        points: ["Launch newly built campaigns", "Final changes", "Tracking test in real time", "Agree on next steps"],
+      },
     ],
   },
   {
@@ -100,20 +168,17 @@ const slides = [
     subtitle: "Continuous improvement",
     mainImage: OngoingServiceMainImage,
     content: [
-      { label: "Lead Generation Service team", description: "Dedicated support", icon: OngoingServiceIcon },
-      {
-        label: "Technical team support",
-        description: "Monthly Account optimisations and tracking checks",
-        icon: OngoingServiceIcon,
-      },
-      { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: OngoingServiceIcon },
-      { label: "Call attribution dashboard", description: "Track performance data", icon: OngoingServiceIcon },
-      { label: "Monthly reporting", description: "Detailed campaign performance", icon: OngoingServiceIcon },
+      { label: "Dedicated account manager", description: "", icon: OngoingServiceIcon },
+      { label: "Monthly on-page optimisation", description: "", icon: OngoingServiceIcon },
+      { label: "2+ SEO content pages monthly", description: "", icon: OngoingServiceIcon },
+      { label: "Local SEO dashboard access", description: "", icon: OngoingServiceIcon },
+      { label: "Monthly review calls", description: "", icon: OngoingServiceIcon },
+      { label: "Quarterly strategy call", description: "", icon: OngoingServiceIcon },
     ],
   },
 ];
 
-export default function BusinessCycleLeadGen() {
+export default function BusinessCycleLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -124,7 +189,7 @@ export default function BusinessCycleLeadGen() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      navigate("/about/leadgen", { state: location.state });
+      navigate("/about/localseo", { state: location.state });
     }
   };
 
@@ -147,11 +212,11 @@ export default function BusinessCycleLeadGen() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/funnel-health/leadgen", { state: location.state })}
+        onBack={() => navigate("/funnel-health/localseo", { state: location.state })}
         currentStep={4}
         totalSteps={7}
         showProgress
-        productLabel="Lead Generation"
+        productLabel="Local SEO"
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
@@ -162,9 +227,9 @@ export default function BusinessCycleLeadGen() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: '1fr 1fr' }}>
+            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh]">
+              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -172,7 +237,7 @@ export default function BusinessCycleLeadGen() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col items-start h-full"
+                    className="flex flex-col items-start"
                   >
                     {/* Logo and Title */}
                     <div className="flex items-center gap-5 mb-4">
@@ -187,7 +252,9 @@ export default function BusinessCycleLeadGen() {
                       />
                       <h2
                         className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" || slide.title === "Ongoing Service"
+                          slide.title === "Lead Management" ||
+                          slide.title === "Ongoing Service" ||
+                          slide.title === "Product Journey"
                             ? "text-4xl md:text-5xl"
                             : "text-7xl md:text-7xl"
                         }`}
@@ -225,36 +292,43 @@ export default function BusinessCycleLeadGen() {
                         </motion.div>
                       </div>
                     </div>
-
-                    {/* Main image */}
-                    <div className={`flex-1 flex justify-center w-full overflow-visible ${
-                      slide.title === "Visibility" || slide.title === "Ongoing Service"
-                        ? "items-center"
-                        : "items-end"
-                    }`}>
-                      <motion.img
-                        src={slide.mainImage || VisibilityMainImage}
-                        alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`h-auto object-contain ${
-                          slide.title === "Lead Management"
-                            ? "w-full max-h-[85vh] mb-[-60px]"
-                            : slide.title === "Visibility"
-                            ? "w-[108%] max-h-[70vh]"
-                            : slide.title === "Engagement"
-                            ? "w-[120%] max-h-[80vh] mb-[-30px]"
-                            : slide.title === "Your Setup"
-                            ? "w-[115%] max-h-[80vh] mb-[-14px]"
-                            : slide.title === "Ongoing Service"
-                            ? "w-[110%] max-h-[70vh]"
-                            : "w-full max-h-[75vh] mb-[-14px]"
-                        }`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: imageLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setImageLoaded(true)}
-                      />
-                    </div>
                   </motion.div>
+                </AnimatePresence>
+
+                {/* Main image - outside animated container */}
+                <AnimatePresence mode="wait">
+                  <div
+                    key={`image-${currentSlide}`}
+                    className={`${
+                      slide.title === "Product Journey"
+                        ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
+                        : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
+                    }`}
+                  >
+                    <motion.img
+                      src={slide.mainImage || VisibilityMainImage}
+                      alt={`${slide.title} - ${slide.subtitle}`}
+                      className={`h-auto ${
+                        slide.title === "Lead Management"
+                          ? "object-contain w-full max-h-[85vh] mb-[-60px]"
+                          : slide.title === "Visibility"
+                            ? "object-contain w-[108%] max-h-[70vh]"
+                            : slide.title === "Relevance" || slide.title === "Prominence"
+                              ? "object-contain w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
+                              : slide.title === "Your Setup"
+                                ? "object-contain w-[115%] max-h-[80vh] mb-[-14px]"
+                                : slide.title === "Ongoing Service"
+                                  ? "object-contain w-[110%] max-h-[70vh]"
+                                  : slide.title === "Product Journey"
+                                    ? "w-full object-contain object-bottom"
+                                    : "object-contain w-full max-h-[75vh] mb-[-14px]"
+                      }`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: imageLoaded ? 1 : 0 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  </div>
                 </AnimatePresence>
               </div>
 
@@ -288,59 +362,89 @@ export default function BusinessCycleLeadGen() {
                               style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
                             />
                           )}
-                          <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.isExample
-                                    ? "bg-accent p-4 text-center"
-                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                                }`}
-                              >
-                                {item.isExample ? (
-                                  <div className="space-y-2">
-                                    <p className="text-foreground font-semibold text-base">
-                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                    </p>
-                                    <p className="text-white font-semibold text-base">
-                                      USE:{" "}
-                                      <span className="font-bold">
-                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
-                                      </span>
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <>
-                                    {item.icon ? (
-                                      <img
-                                        src={item.icon}
-                                        alt=""
-                                        className={`flex-shrink-0 ${
-                                          slide.title === "Your Setup"
-                                            ? "w-[18px] h-[18px]"
-                                            : slide.title === "Ongoing Service" || slide.title === "Engagement"
+
+                          {/* Product Journey timeline cards */}
+                          {slide.title === "Product Journey" && slide.timeline ? (
+                            <div className="space-y-4">
+                              {slide.timeline.map((phase, phaseIdx) => (
+                                <motion.div
+                                  key={phaseIdx}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.4 + phaseIdx * 0.15, duration: 0.3, ease: "easeOut" }}
+                                  className="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 p-5"
+                                >
+                                  <h3 className="text-primary font-semibold text-lg mb-3">{phase.phase}</h3>
+                                  <ul className="space-y-2 relative">
+                                    {/* Vertical connecting line */}
+                                    <div
+                                      className="absolute left-[3px] w-[2px] bg-primary z-0"
+                                      style={{ top: "calc(8px + 4px)", bottom: "calc(8px + 4px)" }}
+                                    />
+                                    {phase.points.map((point, pointIdx) => (
+                                      <li key={pointIdx} className="flex items-start gap-3 relative z-10">
+                                        <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
+                                        <span className="text-foreground">{point}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </motion.div>
+                              ))}
+                            </div>
+                          ) : (
+                            <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                              {slide.content?.map((item, idx) => (
+                                <motion.li
+                                  key={idx}
+                                  initial={{ opacity: 0, x: 20 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                                  className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                    item.icon ? "items-center p-3" : "items-start p-4"
+                                  }`}
+                                >
+                                  {item.icon ? (
+                                    <img
+                                      src={item.icon}
+                                      alt=""
+                                      className={`flex-shrink-0 ${
+                                        slide.title === "Your Setup"
+                                          ? "w-[18px] h-[18px]"
+                                          : slide.title === "Ongoing Service"
                                             ? "w-6 h-6"
-                                            : "w-12 h-12"
-                                        }`}
-                                      />
-                                    ) : (
-                                      <span className="text-primary font-bold mt-0.5">•</span>
+                                            : slide.title === "Prominence"
+                                              ? "w-8 h-8"
+                                              : "w-12 h-12"
+                                      }`}
+                                    />
+                                  ) : (
+                                    <span className="text-primary font-bold mt-0.5">•</span>
+                                  )}
+                                  <div className="flex-1">
+                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                    {item.description && (
+                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
                                     )}
-                                    <div className="flex-1">
-                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                      {item.description && (
-                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                      )}
-                                    </div>
-                                  </>
-                                )}
-                              </motion.li>
-                            ))}
-                          </ul>
+                                  </div>
+                                  {item.rightIcon && (
+                                    <img src={item.rightIcon} alt="" className="flex-shrink-0 w-32 h-12" />
+                                  )}
+                                </motion.li>
+                              ))}
+                            </ul>
+                          )}
+
+                          {/* Bottom image for Visibility slide */}
+                          {slide.bottomImage && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.8, duration: 0.4 }}
+                              className="mt-4"
+                            >
+                              <img src={slide.bottomImage} alt="" className="w-[45%]" />
+                            </motion.div>
+                          )}
                         </div>
                       </div>
                     </motion.div>
@@ -349,23 +453,22 @@ export default function BusinessCycleLeadGen() {
 
                 {/* Fixed navigation buttons - absolutely positioned */}
                 <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
-                  <Button
-                    onClick={prevSlide}
-                    disabled={currentSlide === 0}
-                    variant="outline"
-                    className="flex items-center gap-2 min-w-[120px]"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
-                  </Button>
+                  {currentSlide > 0 ? (
+                    <Button onClick={prevSlide} variant="outline" className="flex items-center gap-2 min-w-[120px]">
+                      <ChevronLeft className="w-4 h-4" />
+                      Previous
+                    </Button>
+                  ) : (
+                    <div className="min-w-[120px]" />
+                  )}
 
                   {/* Dot Progress Indicator */}
-                  <div className="flex items-center gap-2">
-                    {slides.map((_, index) => (
+                  <div className="flex gap-1.5">
+                    {slides.map((_, idx) => (
                       <div
-                        key={index}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
+                        key={idx}
+                        className={`h-1.5 rounded-full transition-all ${
+                          idx === currentSlide ? "bg-primary w-6" : "bg-muted w-1.5"
                         }`}
                       />
                     ))}
