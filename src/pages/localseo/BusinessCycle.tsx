@@ -360,15 +360,18 @@ export default function BusinessCycleLocalSEO() {
 
                 {/* Fixed navigation buttons - absolutely positioned */}
                 <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
-                  <Button
-                    onClick={prevSlide}
-                    disabled={currentSlide === 0}
-                    variant="outline"
-                    className="flex items-center gap-2 min-w-[120px]"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
-                  </Button>
+                  {currentSlide > 0 ? (
+                    <Button
+                      onClick={prevSlide}
+                      variant="outline"
+                      className="flex items-center gap-2 min-w-[120px]"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      Previous
+                    </Button>
+                  ) : (
+                    <div className="min-w-[120px]" />
+                  )}
 
                   {/* Dot Progress Indicator */}
                   <div className="flex gap-1.5">
