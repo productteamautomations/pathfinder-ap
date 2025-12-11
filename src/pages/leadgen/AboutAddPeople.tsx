@@ -50,18 +50,15 @@ export default function AboutAddPeopleLeadGen() {
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 max-w-[1400px] mx-auto w-full">
           {/* Left - Main Image */}
-          <motion.div 
-            initial={{ opacity: 0 }} 
-            animate={{ opacity: mainImageLoaded ? 1 : 0 }} 
-            transition={{ duration: 0.4, ease: "easeOut" }}
-          >
+          <div className="relative">
             <img 
               src={mainImage} 
               alt="Add People" 
-              className="w-full h-auto object-contain rounded-2xl"
+              className="w-full h-auto object-contain rounded-2xl transition-opacity duration-500 ease-out"
+              style={{ opacity: mainImageLoaded ? 1 : 0 }}
               onLoad={() => setMainImageLoaded(true)}
             />
-          </motion.div>
+          </div>
 
           {/* Right - Maps and Reviews */}
           <div className="flex flex-col gap-4 self-stretch">
