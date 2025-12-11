@@ -86,7 +86,8 @@ export default function ProductRecommendationLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] flex flex-col">
+      <div className="flex-1 flex flex-col" style={{ paddingTop: "73px" }}>
+        {/* Title and Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,14 +102,19 @@ export default function ProductRecommendationLeadGen() {
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
+        {/* Card Section with 5% margins */}
+        <div className="flex-1 flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] p-8 md:p-12 lg:p-14 max-w-6xl mx-auto shadow-lg border border-border/30"
+            className="bg-white rounded-[2rem] shadow-lg border border-border/30 w-full mx-6 md:mx-12 lg:mx-20"
+            style={{
+              height: "calc((100vh - 73px - 120px) * 0.9)",
+              maxWidth: "1152px",
+            }}
           >
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-12 items-center h-full p-8 md:p-12 lg:p-14">
               <div>
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">
                   Stay Ahead of Competitors In Google Search Results
@@ -138,7 +144,10 @@ export default function ProductRecommendationLeadGen() {
                   ))}
                 </div>
 
-                <Button onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })} className="px-8">
+                <Button
+                  onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
+                  className="px-8"
+                >
                   Start Your Assessment
                 </Button>
               </div>
