@@ -38,12 +38,12 @@ import UXIcon from "@/assets/ux-icon.svg";
 import LinksIcon from "@/assets/links-icon.svg";
 import SchemaIcon from "@/assets/schema-icon.svg";
 import BeingWellKnownIcon from "@/assets/being-well-known.svg";
-import BetterReviewScoresIcon from "@/assets/better-review-scores.svg";
 import HigherMapPackIcon from "@/assets/higher-map-pack.svg";
 import IncreaseReputationIcon from "@/assets/increase-reputation.svg";
 import ProminenceMainImage from "@/assets/prominence-main.svg";
 import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
 import MoreReviewsIcon from "@/assets/more-reviews.svg";
+import FiveStarsWideIcon from "@/assets/five-stars-wide.svg";
 
 const slides = [
   {
@@ -77,7 +77,7 @@ const slides = [
       { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
       { label: "More external links", description: "Quality backlinks from authoritative sites", icon: MoreExternalLinksIcon },
       { label: "More reviews", description: "", icon: MoreReviewsIcon },
-      { label: "Better review scores", description: "Average rating impacts visibility", icon: MoreReviewsIcon, rightIcon: BetterReviewScoresIcon },
+      { label: "Better review scores", description: "Average rating impacts visibility", icon: MoreReviewsIcon, rightIcon: FiveStarsWideIcon },
       { label: "Increase reputation", description: "", icon: IncreaseReputationIcon },
       { label: "Higher map pack ranking", description: "", icon: HigherMapPackIcon },
     ],
