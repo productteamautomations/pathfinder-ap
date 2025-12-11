@@ -44,15 +44,15 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-stretch">
+        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-stretch h-full max-h-[calc(100vh-73px-2rem)]">
           {/* Left - Main Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden bg-white border border-border/30 shadow-sm flex items-center justify-center"
           >
-            <img src={mainImage} alt="Add People" className="w-full h-full object-cover rounded-2xl" />
+            <img src={mainImage} alt="Add People" className="w-full h-full object-contain" />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
@@ -64,16 +64,16 @@ export default function AboutAddPeopleLeadGen() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="grid grid-cols-2 gap-4 flex-shrink-0"
             >
-              <div className="bg-white rounded-xl p-4 border border-border/30 shadow-sm aspect-square flex items-center justify-center">
+              <div className="bg-white rounded-xl border border-border/30 shadow-sm overflow-hidden flex items-center justify-center">
                 <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-full object-contain" />
               </div>
-              <div className="bg-white rounded-xl p-4 border border-border/30 shadow-sm aspect-square flex items-center justify-center">
+              <div className="bg-white rounded-xl border border-border/30 shadow-sm overflow-hidden flex items-center justify-center">
                 <img src={austinMap} alt="Austin Location" className="w-full h-full object-contain" />
               </div>
             </motion.div>
 
             {/* Reviews */}
-            <div className="flex flex-col gap-3 flex-1 justify-center">
+            <div className="flex flex-col gap-3 flex-1 justify-center overflow-auto">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
