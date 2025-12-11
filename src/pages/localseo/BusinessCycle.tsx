@@ -229,9 +229,7 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div
-                className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden"
-              >
+              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -299,9 +297,10 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`${
                         slide.title === "Product Journey"
-                          ? "absolute -bottom-14 -left-14 -right-14 top-0 flex items-end justify-center pointer-events-none"
+                          ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none overflow-hidden"
                           : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
+                      style={slide.title === "Product Journey" ? { height: "70%" } : undefined}
                     >
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
@@ -318,7 +317,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full object-contain object-bottom"
+                                      ? "w-full h-full object-cover object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
