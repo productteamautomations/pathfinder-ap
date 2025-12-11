@@ -2,12 +2,10 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { ChevronRight, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import mainImage from "@/assets/Main-image-about-us.svg";
 import altrinchamMap from "@/assets/altrinham map.svg";
 import austinMap from "@/assets/austin map.svg";
-import logoGraphic from "@/assets/logo_graphic.svg";
-import brightlocalIcon from "@/assets/brightlocal-icon.svg";
 
 const leadgenReviews = [
   {
@@ -30,12 +28,6 @@ const leadgenReviews = [
   },
 ];
 
-const stats = [
-  { value: "60+", label: "countries in which we assist clients, in a range of industries, to make a lasting impact." },
-  { value: "20+", label: "years operating and helping businesses like yours." },
-  { value: "250+", label: "experts in the company, all passionate about marketing." },
-];
-
 export default function AboutAddPeopleLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,55 +43,23 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-2 gap-5 py-4 max-w-[1400px] mx-auto w-full h-full">
+        <div className="flex-1 grid lg:grid-cols-2 gap-6 py-4 max-w-[1400px] mx-auto w-full h-full">
           
-          {/* Left Panel - Dark with image, stats, and partners */}
+          {/* Left - Main Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative rounded-2xl overflow-hidden bg-[#173340]"
+            className="rounded-2xl overflow-hidden"
           >
-            {/* Background Image */}
             <img 
               src={mainImage} 
-              alt="Add People Team" 
-              className="absolute inset-0 w-full h-full object-cover opacity-40" 
+              alt="Add People" 
+              className="w-full h-full object-contain" 
             />
-            
-            {/* Content Overlay */}
-            <div className="relative z-10 h-full flex flex-col p-6">
-              {/* Logo & Title */}
-              <div className="flex items-center gap-2 mb-6">
-                <img src={logoGraphic} alt="Add People" className="w-8 h-8" />
-                <span className="text-2xl font-display font-bold text-white">Add People</span>
-              </div>
-              
-              {/* Stats */}
-              <div className="flex-1 flex flex-col justify-center gap-4">
-                {stats.map((stat, idx) => (
-                  <div key={idx}>
-                    <div className="text-4xl font-display font-bold text-primary">{stat.value}</div>
-                    <p className="text-white/70 text-sm max-w-xs">{stat.label}</p>
-                  </div>
-                ))}
-              </div>
-              
-              {/* Partner Logos Grid */}
-              <div className="grid grid-cols-4 gap-2 mt-4">
-                {["Meta", "Amazon Ads", "Google", "eBay", "Microsoft", "Top 50", "Awards", "BrightLocal"].map((partner, idx) => (
-                  <div 
-                    key={idx} 
-                    className="bg-white rounded-lg p-2 flex items-center justify-center h-12"
-                  >
-                    <span className="text-[10px] font-semibold text-[#173340] text-center leading-tight">{partner}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </motion.div>
 
-          {/* Right Panel - Maps and Reviews */}
+          {/* Right - Maps and Reviews */}
           <div className="flex flex-col gap-4 h-full">
             {/* Maps Row */}
             <motion.div
@@ -109,11 +69,11 @@ export default function AboutAddPeopleLeadGen() {
               className="grid grid-cols-2 gap-4 flex-shrink-0"
             >
               <div className="bg-white rounded-xl p-3 border border-border/30 shadow-sm flex flex-col items-center">
-                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-28 object-contain" />
+                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-24 object-contain" />
                 <span className="text-sm font-semibold text-[#173340] mt-2">Altrincham, UK</span>
               </div>
               <div className="bg-white rounded-xl p-3 border border-border/30 shadow-sm flex flex-col items-center">
-                <img src={austinMap} alt="Austin Location" className="w-full h-28 object-contain" />
+                <img src={austinMap} alt="Austin Location" className="w-full h-24 object-contain" />
                 <span className="text-sm font-semibold text-[#173340] mt-2">Austin, USA</span>
               </div>
             </motion.div>
