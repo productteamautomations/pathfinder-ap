@@ -264,7 +264,7 @@ export default function BusinessCycleLocalSEO() {
                             : slide.title === "Visibility"
                             ? "w-[108%] max-h-[70vh]"
                             : slide.title === "Relevance" || slide.title === "Prominence"
-                            ? "w-[120%] max-h-[80vh] mb-[-30px]"
+                            ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
                             : slide.title === "Your Setup"
                             ? "w-[115%] max-h-[80vh] mb-[-14px]"
                             : slide.title === "Ongoing Service"
