@@ -290,7 +290,7 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "absolute bottom-0 -left-14 -right-24" 
+                          ? "absolute bottom-0 -left-14 -right-32" 
                           : `flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
