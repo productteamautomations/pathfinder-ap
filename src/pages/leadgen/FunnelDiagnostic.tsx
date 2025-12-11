@@ -180,18 +180,18 @@ export default function FunnelDiagnostic() {
       <PageHeader onBack={handleBack} currentStep={4} totalSteps={7} showProgress productLabel="Lead Generation" />
 
       {/* Content Area - Split Layout */}
-      <div className="flex-1 pt-[73px] flex items-center justify-center py-[5vh]">
-        <div className="w-full max-w-5xl px-6 md:px-12">
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
+        <div className="w-[90vw] h-[90vh] max-w-7xl flex items-center justify-center">
           {/* Main Card with soft shadow */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden w-full h-full"
           >
-            <div className="grid md:grid-cols-[0.7fr_1fr]">
+            <div className="grid md:grid-cols-[0.7fr_1fr] h-full">
               {/* Left Side - Question & Options - Fixed height */}
-              <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-[600px]">
+              <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-full">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentQuestion}
@@ -261,7 +261,7 @@ export default function FunnelDiagnostic() {
               </div>
 
               {/* Right Side - Square Image Panel */}
-              <div className="relative bg-white border-l border-border/20 overflow-hidden w-full h-[600px]">
+              <div className="relative bg-white border-l border-border/20 overflow-hidden w-full h-full">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`img-${currentQuestion}`}
