@@ -317,7 +317,7 @@ export default function FunnelHealthLeadGen() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            height: "90vh",
+            height: "calc(100vh - 73px - 10vh)",
             aspectRatio: "1.65",
           }}
         >
