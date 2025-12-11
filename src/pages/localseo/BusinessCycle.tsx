@@ -220,7 +220,9 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
+              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 ${
+                slides[currentSlide].title === "Product Journey" ? "" : "overflow-hidden"
+              }`}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
