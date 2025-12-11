@@ -37,6 +37,13 @@ import KeywordsRelevanceIcon from "@/assets/keywords-relevance-icon.svg";
 import UXIcon from "@/assets/ux-icon.svg";
 import LinksIcon from "@/assets/links-icon.svg";
 import SchemaIcon from "@/assets/schema-icon.svg";
+import BeingWellKnownIcon from "@/assets/being-well-known.svg";
+import BetterReviewScoresIcon from "@/assets/better-review-scores.svg";
+import HigherMapPackIcon from "@/assets/higher-map-pack.svg";
+import IncreaseReputationIcon from "@/assets/increase-reputation.svg";
+import ProminenceMainImage from "@/assets/prominence-main.svg";
+import MoreExternalLinksIcon from "@/assets/more-external-links.svg";
+import MoreReviewsIcon from "@/assets/more-reviews.svg";
 
 const slides = [
   {
@@ -65,14 +72,14 @@ const slides = [
   {
     title: "Prominence",
     subtitle: "Build your reputation online",
-    mainImage: EngagementMainImage,
+    mainImage: ProminenceMainImage,
     content: [
-      { label: "Being well-known improves rankings", description: "", icon: EngagementIcon },
-      { label: "More external links", description: "Quality backlinks from authoritative sites", icon: LocationIcon },
-      { label: "More reviews", description: "", icon: TrackConversionsIcon },
-      { label: "Better review scores", description: "Average rating impacts visibility", icon: MeasureIcon },
-      { label: "Increase reputation", description: "", icon: EngagementIcon },
-      { label: "Higher map pack ranking", description: "", icon: LocationIcon },
+      { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
+      { label: "More external links", description: "Quality backlinks from authoritative sites", icon: MoreExternalLinksIcon },
+      { label: "More reviews", description: "", icon: MoreReviewsIcon },
+      { label: "Better review scores", description: "Average rating impacts visibility", icon: BetterReviewScoresIcon },
+      { label: "Increase reputation", description: "", icon: IncreaseReputationIcon },
+      { label: "Higher map pack ranking", description: "", icon: HigherMapPackIcon },
     ],
   },
   {
