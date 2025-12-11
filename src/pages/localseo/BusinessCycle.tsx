@@ -243,7 +243,7 @@ export default function BusinessCycleLocalSEO() {
                       />
                       <h2
                         className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" || slide.title === "Ongoing Service"
+                          slide.title === "Lead Management" || slide.title === "Ongoing Service" || slide.title === "Product Journey"
                             ? "text-4xl md:text-5xl"
                             : "text-7xl md:text-7xl"
                         }`}
@@ -303,7 +303,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-[95%] max-h-[65vh]"
+                                      ? "w-[95%] max-h-[65vh] mt-[-40px]"
                                       : "w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
@@ -359,9 +359,14 @@ export default function BusinessCycleLocalSEO() {
                                   className="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 p-5"
                                 >
                                   <h3 className="text-primary font-semibold text-lg mb-3">{phase.phase}</h3>
-                                  <ul className="space-y-2">
+                                  <ul className="space-y-2 relative">
+                                    {/* Vertical connecting line */}
+                                    <div 
+                                      className="absolute left-[3px] w-[2px] bg-primary z-0"
+                                      style={{ top: "calc(8px + 4px)", bottom: "calc(8px + 4px)" }}
+                                    />
                                     {phase.points.map((point, pointIdx) => (
-                                      <li key={pointIdx} className="flex items-start gap-3">
+                                      <li key={pointIdx} className="flex items-start gap-3 relative z-10">
                                         <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
                                         <span className="text-foreground">{point}</span>
                                       </li>
