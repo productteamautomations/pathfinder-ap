@@ -160,7 +160,7 @@ const slides = [
   {
     title: "Your Setup",
     subtitle: "Getting started",
-    mainImage: YourSetupMainImage,
+    mainImage: YourSetupNewMainImage,
     content: [
       { label: "Strategic onboarding call", description: "", icon: YourSetupIcon },
       { label: "Installation of all tracking tools", description: "", icon: YourSetupIcon },
@@ -261,7 +261,12 @@ export default function BusinessCycleLocalSEO() {
                   initial={{ opacity: slide.title === "Product Journey" || slide.title === "Your Setup" ? 1 : 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{
+                    duration: 0.3,
+                    initial: {
+                      duration: slide.title === "Product Journey" || slide.title === "Your Setup" ? 0 : 0.3,
+                    },
+                  }}
                   className="flex flex-col items-start h-full"
                 >
                   {/* Logo and Title */}
