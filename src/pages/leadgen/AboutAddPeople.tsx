@@ -43,7 +43,7 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
-        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-stretch">
+        <div className="grid lg:grid-cols-2 gap-6 max-w-[1400px] mx-auto w-full items-start">
           
           {/* Left - Main Image */}
           <motion.div
@@ -60,21 +60,19 @@ export default function AboutAddPeopleLeadGen() {
           </motion.div>
 
           {/* Right - Maps and Reviews */}
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 justify-between" style={{ height: 'auto' }}>
             {/* Maps Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-4 flex-shrink-0"
+              className="grid grid-cols-2 gap-3"
             >
-              <div className="bg-white rounded-xl p-3 border border-border/30 shadow-sm flex flex-col items-center">
-                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-24 object-contain" />
-                <span className="text-sm font-semibold text-[#173340] mt-2">Altrincham, UK</span>
+              <div className="bg-white rounded-xl p-2 border border-border/30 shadow-sm">
+                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-32 object-contain" />
               </div>
-              <div className="bg-white rounded-xl p-3 border border-border/30 shadow-sm flex flex-col items-center">
-                <img src={austinMap} alt="Austin Location" className="w-full h-24 object-contain" />
-                <span className="text-sm font-semibold text-[#173340] mt-2">Austin, USA</span>
+              <div className="bg-white rounded-xl p-2 border border-border/30 shadow-sm">
+                <img src={austinMap} alt="Austin Location" className="w-full h-32 object-contain" />
               </div>
             </motion.div>
 
