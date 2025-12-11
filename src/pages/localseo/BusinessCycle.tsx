@@ -349,7 +349,7 @@ export default function BusinessCycleLocalSEO() {
                               transition={{ delay: 0.8, duration: 0.4 }}
                               className="mt-4"
                             >
-                              <img src={slide.bottomImage} alt="" className="w-[60%]" />
+                              <img src={slide.bottomImage} alt="" className="w-[45%]" />
                             </motion.div>
                           )}
                         </div>
