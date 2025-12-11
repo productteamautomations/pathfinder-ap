@@ -304,24 +304,25 @@ export default function BusinessCycleLocalSEO() {
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`h-auto ${
+                        className={`object-contain ${
                           slide.title === "Lead Management"
-                            ? "object-contain w-full max-h-[85vh] mb-[-60px]"
+                            ? "w-full max-h-[85vh] mb-[-60px]"
                             : slide.title === "Visibility"
-                              ? "object-contain w-[108%] max-h-[70vh]"
+                              ? "w-[108%] max-h-[70vh]"
                               : slide.title === "Relevance" || slide.title === "Prominence"
-                                ? "object-contain w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
+                                ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
                                 : slide.title === "Your Setup"
-                                  ? "object-contain w-[115%] max-h-[80vh] mb-[-14px]"
+                                  ? "w-[115%] max-h-[80vh] mb-[-14px]"
                                   : slide.title === "Ongoing Service"
-                                    ? "object-contain w-[110%] max-h-[70vh]"
+                                    ? "w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full object-contain object-bottom"
-                                      : "object-contain w-full max-h-[75vh] mb-[-14px]"
-                        } ${!imageLoaded ? "invisible" : ""}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: imageLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
+                                      ? "w-full object-bottom"
+                                      : "w-full max-h-[75vh] mb-[-14px]"
+                        }`}
+                        style={{
+                          opacity: imageLoaded ? 1 : 0,
+                          transition: "opacity 0.4s ease-out",
+                        }}
                         onLoad={() => setImageLoaded(true)}
                       />
                     </div>
