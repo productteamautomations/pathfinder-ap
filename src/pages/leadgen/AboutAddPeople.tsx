@@ -45,67 +45,61 @@ export default function AboutAddPeopleLeadGen() {
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
         <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-5 py-4 max-w-[1600px] mx-auto w-full h-full">
-          {/* Left Section - Main Image with About Overlay + Reviews */}
-          <div className="lg:col-span-8 flex flex-col gap-4 h-full">
-            {/* Top Row - Main Image with About Overlay */}
+          {/* Left Column - Main Image */}
+          <div className="lg:col-span-4 flex flex-col h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="relative bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl flex-1 overflow-hidden flex items-center justify-center"
+              className="bg-white/95 backdrop-blur-sm rounded-2xl border border-border/30 shadow-sm flex-1 flex items-center justify-center p-4"
             >
-              {/* Main Image */}
               <img 
                 src={mainImage} 
                 alt="Add People Team" 
-                className="w-full h-full object-contain p-4 pb-28" 
+                className="w-full h-full object-contain" 
               />
-              
-              {/* About Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#173340] via-[#173340]/95 to-transparent p-6 pt-16">
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
-                <h1 className="text-3xl lg:text-4xl font-display font-bold mt-1 leading-tight text-white">Add People</h1>
-                <p className="text-white/80 mt-2 text-sm leading-relaxed max-w-lg">
-                  We're a team of digital marketing specialists based in Altrincham, dedicated to helping local businesses thrive online.
-                </p>
-              </div>
+            </motion.div>
+          </div>
+
+          {/* Middle Column - About + Reviews */}
+          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
+            {/* About Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-5 text-white flex-shrink-0"
+            >
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
+              <h1 className="text-2xl lg:text-3xl font-display font-bold mt-1 leading-tight">Add People</h1>
+              <p className="text-white/80 mt-2 text-sm leading-relaxed">
+                We're a team of digital marketing specialists based in Altrincham, dedicated to helping local businesses thrive online.
+              </p>
             </motion.div>
 
-            {/* Bottom Row - Reviews */}
-            <div className="flex-shrink-0">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="mb-2"
-              >
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-                  What Our Clients Say
-                </span>
-              </motion.div>
-              
-              <div className="grid grid-cols-3 gap-3">
-                {leadgenReviews.map((review, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.15 + idx * 0.1 }}
-                    className="bg-white/95 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm"
-                  >
-                    <div className="flex items-center gap-0.5 mb-2">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <p className="text-xs text-foreground leading-snug mb-2 line-clamp-3">"{review.review}"</p>
-                    <div>
-                      <div className="text-xs font-semibold text-[#173340]">{review.name}</div>
-                      <div className="text-[10px] text-muted-foreground">{review.company}</div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+            {/* Reviews */}
+            <div className="flex-1 flex flex-col gap-2">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">Reviews</span>
+              {leadgenReviews.map((review, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.15 + idx * 0.08 }}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl p-3 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                >
+                  <div className="flex items-center gap-0.5 mb-1">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-xs text-foreground leading-snug mb-1 line-clamp-2">"{review.review}"</p>
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs font-semibold text-[#173340]">{review.name}</span>
+                    <span className="text-[10px] text-muted-foreground">• {review.company}</span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
 
