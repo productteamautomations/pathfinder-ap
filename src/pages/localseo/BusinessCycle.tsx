@@ -50,6 +50,7 @@ import MonthlyPerformanceIcon from "@/assets/monthly-performance.svg";
 import AdvancedAIIcon from "@/assets/advanced-ai.svg";
 import InDepthOnboardingIcon from "@/assets/in-depth-onboarding.svg";
 import FullSEOServiceIcon from "@/assets/full-seo-service.svg";
+import YourSetupNewMainImage from "@/assets/your-setup-main-new.svg";
 
 const slides = [
   {
@@ -155,7 +156,7 @@ const slides = [
   {
     title: "Your Setup",
     subtitle: "Getting started",
-    mainImage: YourSetupMainImage,
+    mainImage: YourSetupNewMainImage,
     content: [
       { label: "Strategic onboarding call", description: "", icon: YourSetupIcon },
       { label: "Installation of all tracking tools", description: "", icon: YourSetupIcon },
