@@ -5,8 +5,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Star } from "lucide-react";
 import mainImage from "@/assets/Main-image-about-us.svg";
-import altrinchamMap from "@/assets/altrincham-map.png";
-import austinMap from "@/assets/altrincham-map.png";
+import altrinchamMap from "@/assets/altrinham-map.svg";
+import austinMap from "@/assets/austin-map.svg";
 
 const leadgenReviews = [
   {
@@ -51,9 +51,9 @@ export default function AboutAddPeopleLeadGen() {
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 max-w-[1400px] mx-auto w-full">
           {/* Left - Main Image */}
           <div className="relative">
-            <img 
-              src={mainImage} 
-              alt="Add People" 
+            <img
+              src={mainImage}
+              alt="Add People"
               className="w-full h-auto object-contain rounded-2xl transition-opacity duration-500 ease-out"
               style={{ opacity: mainImageLoaded ? 1 : 0 }}
               onLoad={() => setMainImageLoaded(true)}
@@ -70,9 +70,9 @@ export default function AboutAddPeopleLeadGen() {
                 transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
                 className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
               >
-                <img 
-                  src={altrinchamMap} 
-                  alt="Altrincham Location" 
+                <img
+                  src={altrinchamMap}
+                  alt="Altrincham Location"
                   className="w-full h-full object-cover"
                   onLoad={() => setMap1Loaded(true)}
                 />
@@ -83,9 +83,9 @@ export default function AboutAddPeopleLeadGen() {
                 transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
                 className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
               >
-                <img 
-                  src={austinMap} 
-                  alt="Austin Location" 
+                <img
+                  src={austinMap}
+                  alt="Austin Location"
                   className="w-full h-full object-cover"
                   onLoad={() => setMap2Loaded(true)}
                 />
