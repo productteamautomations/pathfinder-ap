@@ -50,9 +50,9 @@ export default function AboutAddPeopleLeadGen() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden"
+            className="rounded-2xl overflow-hidden flex items-center justify-center"
           >
-            <img src={mainImage} alt="Add People" className="w-full h-full object-cover rounded-2xl" />
+            <img src={mainImage} alt="Add People" className="w-full h-full object-contain" />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
