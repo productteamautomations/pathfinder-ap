@@ -2,30 +2,41 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { ChevronRight, Star } from "lucide-react";
-import mainImage from "@/assets/leadgen-about-main.svg";
-import altrinchamMap from "@/assets/altrincham-map-new.svg";
-import austinMap from "@/assets/austin-map.svg";
+import { ChevronRight, Users, Award, MapPin, Star, TrendingUp, Shield, Clock, Zap } from "lucide-react";
+import altrinchamMap from "@/assets/altrincham-map.png";
 
 const leadgenReviews = [
   {
-    name: "Sarah Mitchell",
-    company: "Mitchell Plumbing",
-    review: "Within 3 months, we went from page 3 to the top 3 in Google Maps. Our calls have doubled!",
+    name: "David Parker",
+    company: "Parker Construction",
+    review: "Our Google Ads campaigns went from losing money to generating 30+ qualified leads per month. Incredible turnaround!",
     rating: 5,
   },
   {
-    name: "James Crawford",
-    company: "Crawford Electrical",
-    review: "The team really understands local SEO. Our Google Business Profile is now fully optimised and generating leads daily.",
+    name: "Lisa Chen",
+    company: "Chen Dental Practice",
+    review: "The team understood exactly what we needed. Our cost per lead dropped by 60% while quality improved.",
     rating: 5,
   },
   {
-    name: "Emma Thompson",
-    company: "Thompson Roofing",
-    review: "Professional service from start to finish. Our local visibility has improved dramatically.",
+    name: "Michael Roberts",
+    company: "Roberts Law Firm",
+    review: "Professional, data-driven approach. We now have a steady stream of high-quality enquiries every week.",
     rating: 5,
   },
+];
+
+const stats = [
+  { icon: Users, value: "3,000+", label: "Happy Clients" },
+  { icon: Award, value: "250+", label: "Specialists" },
+  { icon: TrendingUp, value: "15+", label: "Years Experience" },
+  { icon: Shield, value: "98%", label: "Retention Rate" },
+];
+
+const highlights = [
+  { icon: Zap, title: "Fast Setup", description: "Campaigns live within 2 weeks" },
+  { icon: Clock, title: "Real-Time Tracking", description: "See every lead as it comes in" },
+  { icon: Users, title: "Dedicated Teams", description: "Your own account manager and support team" },
 ];
 
 export default function AboutAddPeopleLeadGen() {
@@ -33,7 +44,7 @@ export default function AboutAddPeopleLeadGen() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen h-screen flex flex-col overflow-hidden bg-muted/30">
+    <div className="min-h-screen h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={5}
@@ -43,107 +54,155 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-2 gap-4 lg:gap-6 py-4 max-w-[1400px] mx-auto w-full h-full">
+        <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-6 py-4 max-w-[1600px] mx-auto w-full h-full">
           
-          {/* Left Column - Main Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden h-full"
-          >
-            <img
-              src={mainImage}
-              alt="Add People - 60+ countries, 20+ years, 250+ experts"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-          </motion.div>
-
-          {/* Right Column - Maps, Reviews & CTA */}
-          <div className="flex flex-col gap-3 h-full">
-            {/* Maps Row - Side by Side */}
+          {/* Left Column - About & Stats */}
+          <div className="lg:col-span-4 flex flex-col gap-4 h-full">
             <motion.div
-              initial={{ opacity: 0, y: -10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-3 flex-shrink-0"
+              transition={{ duration: 0.5 }}
+              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
             >
-              {/* Altrincham Map */}
-              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm">
-                <img
-                  src={altrinchamMap}
-                  alt="Altrincham, UK office"
-                  className="w-full h-24 lg:h-28 object-cover"
-                />
-                <div className="py-2 px-3 text-center">
-                  <span className="text-sm font-semibold text-[#173340]">Altrincham, UK</span>
-                </div>
-              </div>
-
-              {/* Austin Map */}
-              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm">
-                <img
-                  src={austinMap}
-                  alt="Austin, USA office"
-                  className="w-full h-24 lg:h-28 object-cover"
-                />
-                <div className="py-2 px-3 text-center">
-                  <span className="text-sm font-semibold text-[#173340]">Austin, USA</span>
-                </div>
-              </div>
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
+              <h1 className="text-2xl lg:text-3xl font-display font-bold mt-1 leading-tight">
+                Add People
+              </h1>
+              <p className="text-white/80 mt-2 text-sm leading-relaxed">
+                We're a team of digital marketing specialists based in Altrincham, 
+                dedicated to helping local businesses thrive online.
+              </p>
             </motion.div>
 
-            {/* Reviews */}
-            <div className="flex-1 flex flex-col gap-2">
+            {/* Stats Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="grid grid-cols-2 gap-3 flex-1"
+            >
+              {stats.map((stat, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex flex-col justify-center"
+                >
+                  <stat.icon className="w-5 h-5 text-primary mb-2" />
+                  <div className="text-2xl lg:text-3xl font-bold text-[#173340]">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Map */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex-shrink-0"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <MapPin className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-[#173340]">Based in Altrincham</span>
+              </div>
+              <img
+                src={altrinchamMap}
+                alt="Add People location in Altrincham"
+                className="w-full h-28 lg:h-32 object-cover rounded-lg"
+              />
+            </motion.div>
+          </div>
+
+          {/* Middle Column - Reviews */}
+          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="flex-shrink-0"
+            >
+              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+                Lead Generation Reviews
+              </span>
+            </motion.div>
+            
+            <div className="flex-1 flex flex-col gap-3">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.15 + idx * 0.08 }}
-                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
                 >
-                  <p className="text-sm text-foreground leading-relaxed mb-2">
+                  <div className="flex items-center gap-1 mb-3">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed mb-3">
                     "{review.review}"
                   </p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
-                      <div className="text-xs text-muted-foreground">{review.company}</div>
+                  <div>
+                    <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
+                    <div className="text-xs text-muted-foreground">{review.company}</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column - Highlights & CTA */}
+          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+              className="flex-shrink-0"
+            >
+              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+                Why Choose Us
+              </span>
+            </motion.div>
+
+            <div className="flex-1 flex flex-col gap-3">
+              {highlights.map((highlight, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
+                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex items-center"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <highlight.icon className="w-6 h-6 text-primary" />
                     </div>
-                    <div className="flex items-center gap-0.5">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-                      ))}
+                    <div>
+                      <div className="font-semibold text-[#173340]">{highlight.title}</div>
+                      <div className="text-sm text-muted-foreground mt-1">{highlight.description}</div>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            {/* Trustpilot & CTA Row */}
+            {/* CTA Card */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white rounded-xl p-4 border border-border/30 shadow-sm flex items-center justify-between gap-4 flex-shrink-0"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white flex-shrink-0"
             >
-              <div className="flex items-center gap-4">
-                <div className="text-3xl font-bold text-[#173340]">2,000+</div>
-                <div className="flex items-center gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                  ))}
-                </div>
-              </div>
-              <div className="text-xs text-muted-foreground flex-1">
-                five-star reviews on Trustpilot, with an 'Excellent' average rating.
-              </div>
+              <div className="text-lg font-bold mb-1">Ready to grow?</div>
+              <p className="text-sm text-white/90 mb-4">
+                Join over 3,000 businesses who have grown with Add People.
+              </p>
               <Button
                 onClick={() => navigate("/pricing/leadgen", { state: location.state })}
-                className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center justify-center gap-2 font-semibold px-6"
+                className="w-full bg-white text-primary hover:bg-white/90 flex items-center justify-center gap-2 font-semibold"
               >
                 View Pricing
+                <ChevronRight className="w-4 h-4" />
               </Button>
             </motion.div>
           </div>
