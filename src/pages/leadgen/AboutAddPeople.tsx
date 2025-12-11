@@ -50,7 +50,7 @@ export default function AboutAddPeopleLeadGen() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden h-full flex items-center justify-center bg-muted/20"
+            className="rounded-2xl overflow-hidden h-full"
           >
             <img 
               src={mainImage} 
