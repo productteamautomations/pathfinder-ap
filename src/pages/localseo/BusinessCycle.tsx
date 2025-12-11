@@ -220,11 +220,7 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh] ${
-                slides[currentSlide].title === "Product Journey" 
-                  ? "p-10 md:p-12 lg:p-14 pb-0" 
-                  : "p-10 md:p-12 lg:p-14"
-              }`}>
+              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh] p-10 md:p-12 lg:p-14">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -290,27 +286,27 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`flex-1 w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "relative" 
+                          ? "relative -mx-14 -mb-14 mt-4" 
                           : `flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
                       <motion.img
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`h-auto object-contain ${
+                        className={`h-auto ${
                           slide.title === "Lead Management"
-                            ? "w-full max-h-[85vh] mb-[-60px]"
+                            ? "object-contain w-full max-h-[85vh] mb-[-60px]"
                             : slide.title === "Visibility"
-                              ? "w-[108%] max-h-[70vh]"
+                              ? "object-contain w-[108%] max-h-[70vh]"
                               : slide.title === "Relevance" || slide.title === "Prominence"
-                                ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
+                                ? "object-contain w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
                                 : slide.title === "Your Setup"
-                                  ? "w-[115%] max-h-[80vh] mb-[-14px]"
+                                  ? "object-contain w-[115%] max-h-[80vh] mb-[-14px]"
                                   : slide.title === "Ongoing Service"
-                                    ? "w-[110%] max-h-[70vh]"
+                                    ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full absolute bottom-0 left-[-56px] right-[-56px] w-[calc(100%+112px)]"
-                                      : "w-full max-h-[75vh] mb-[-14px]"
+                                      ? "w-full h-full object-cover object-top"
+                                      : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
