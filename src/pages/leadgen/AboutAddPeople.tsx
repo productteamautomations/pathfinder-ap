@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Star } from "lucide-react";
 import mainImage from "@/assets/Main-image-about-us.svg";
-import altrinchamMap from "@/assets/altrinham map.svg";
-import austinMap from "@/assets/austin map.svg";
+import altrinchamMap from "@/assets/altrincham-map.png";
+import austinMap from "@/assets/altrincham-map.png";
 
 const leadgenReviews = [
   {
@@ -32,6 +33,9 @@ const leadgenReviews = [
 export default function AboutAddPeopleLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mainImageLoaded, setMainImageLoaded] = useState(false);
+  const [map1Loaded, setMap1Loaded] = useState(false);
+  const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
     <div className="min-h-screen h-screen flex flex-col overflow-hidden">
@@ -46,26 +50,50 @@ export default function AboutAddPeopleLeadGen() {
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 max-w-[1400px] mx-auto w-full">
           {/* Left - Main Image */}
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-            <img src={mainImage} alt="Add People" className="w-full h-auto object-contain rounded-2xl" />
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: mainImageLoaded ? 1 : 0 }} 
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <img 
+              src={mainImage} 
+              alt="Add People" 
+              className="w-full h-auto object-contain rounded-2xl"
+              onLoad={() => setMainImageLoaded(true)}
+            />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
           <div className="flex flex-col gap-4 self-stretch">
             {/* Maps Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-3"
-            >
-              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]">
-                <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-full object-cover" />
-              </div>
-              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]">
-                <img src={austinMap} alt="Austin Location" className="w-full h-full object-cover" />
-              </div>
-            </motion.div>
+            <div className="grid grid-cols-2 gap-3">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: map1Loaded ? 1 : 0 }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+                className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+              >
+                <img 
+                  src={altrinchamMap} 
+                  alt="Altrincham Location" 
+                  className="w-full h-full object-cover"
+                  onLoad={() => setMap1Loaded(true)}
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: map2Loaded ? 1 : 0 }}
+                transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+                className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+              >
+                <img 
+                  src={austinMap} 
+                  alt="Austin Location" 
+                  className="w-full h-full object-cover"
+                  onLoad={() => setMap2Loaded(true)}
+                />
+              </motion.div>
+            </div>
 
             {/* Reviews */}
             <div className="flex flex-col gap-4 flex-1">
