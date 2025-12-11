@@ -34,7 +34,7 @@ export default function AboutAddPeopleLeadGen() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen h-screen flex flex-col overflow-hidden bg-[#F5F5F5]">
+    <div className="min-h-screen h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={5}
@@ -46,14 +46,14 @@ export default function AboutAddPeopleLeadGen() {
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden py-8">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 max-w-[1400px] mx-auto w-full h-full">
           {/* Left - Main Image */}
-          <motion.div
+          <motion.img
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-stretch"
-          >
-            <img src={mainImage} alt="Add People" className="w-full h-full object-contain rounded-2xl" />
-          </motion.div>
+            src={mainImage}
+            alt="Add People"
+            className="w-full h-full object-contain rounded-2xl"
+          />
 
           {/* Right - Maps and Reviews */}
           <div className="flex flex-col gap-4 h-full">
@@ -64,10 +64,10 @@ export default function AboutAddPeopleLeadGen() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="grid grid-cols-2 gap-3"
             >
-              <div className="bg-white rounded-xl overflow-hidden">
+              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm">
                 <img src={altrinchamMap} alt="Altrincham Location" className="w-full h-full object-cover" />
               </div>
-              <div className="bg-white rounded-xl overflow-hidden">
+              <div className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm">
                 <img src={austinMap} alt="Austin Location" className="w-full h-full object-cover" />
               </div>
             </motion.div>
@@ -80,7 +80,7 @@ export default function AboutAddPeopleLeadGen() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-4"
+                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm"
                 >
                   <p className="text-sm text-[#1a1a1a] leading-relaxed mb-3">"{review.review}"</p>
                   <div className="flex items-center justify-between">
@@ -103,7 +103,7 @@ export default function AboutAddPeopleLeadGen() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center justify-between bg-white rounded-xl p-5"
+              className="flex items-center justify-between bg-white rounded-xl p-5 border border-border/30 shadow-sm"
             >
               <div className="flex items-center gap-6">
                 <div>
