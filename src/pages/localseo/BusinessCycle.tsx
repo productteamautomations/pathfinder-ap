@@ -31,6 +31,12 @@ import ProminenceIcon from "@/assets/prominence-icon.svg";
 import ProximityIcon from "@/assets/proximity-icon.svg";
 import RelevanceIcon from "@/assets/relevance-icon.svg";
 import VisibilityBottomImage from "@/assets/visibility-bottom-image.svg";
+import RelevanceMainImage from "@/assets/relevance-main.svg";
+import ContentIcon from "@/assets/content-icon.svg";
+import KeywordsRelevanceIcon from "@/assets/keywords-relevance-icon.svg";
+import UXIcon from "@/assets/ux-icon.svg";
+import LinksIcon from "@/assets/links-icon.svg";
+import SchemaIcon from "@/assets/schema-icon.svg";
 
 const slides = [
   {
@@ -47,13 +53,13 @@ const slides = [
   {
     title: "Relevance",
     subtitle: "Match what customers are searching for",
-    mainImage: EngagementMainImage,
+    mainImage: RelevanceMainImage,
     content: [
-      { label: "Content", description: "Quality, relevant content targeting local keywords", icon: KeywordsIcon },
-      { label: "Keywords", description: "Strategic use of location-based search terms", icon: KeywordsIcon },
-      { label: "UX", description: "Fast, mobile-friendly user experience", icon: EngagementIcon },
-      { label: "Internal/External Links", description: "Strong link profile from local sources", icon: LocationIcon },
-      { label: "Schema Markup", description: "Structured data for better search visibility", icon: SeeExactlyIcon },
+      { label: "Content", description: "Quality, relevant content targeting local keywords", icon: ContentIcon },
+      { label: "Keywords", description: "Strategic use of location-based search terms", icon: KeywordsRelevanceIcon },
+      { label: "UX", description: "Fast, mobile-friendly user experience", icon: UXIcon },
+      { label: "Internal/External Links", description: "Strong link profile from local sources", icon: LinksIcon },
+      { label: "Schema Markup", description: "Structured data for better search visibility", icon: SchemaIcon },
     ],
   },
   {
