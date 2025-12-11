@@ -43,24 +43,24 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-2 gap-6 py-4 max-w-[1400px] mx-auto w-full h-full">
+        <div className="flex-1 grid lg:grid-cols-2 gap-6 py-4 max-w-[1400px] mx-auto w-full">
           
           {/* Left - Main Image */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl overflow-hidden h-full"
+            className="bg-white border border-border/30 shadow-sm rounded-2xl overflow-hidden p-2"
           >
             <img 
               src={mainImage} 
               alt="Add People" 
-              className="w-full h-full object-contain rounded-2xl" 
+              className="w-full h-full object-contain rounded-xl" 
             />
           </motion.div>
 
           {/* Right - Maps and Reviews */}
-          <div className="flex flex-col gap-4 h-full">
+          <div className="flex flex-col gap-3">
             {/* Maps Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
