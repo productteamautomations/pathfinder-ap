@@ -77,7 +77,7 @@ const slides = [
       { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
       { label: "More external links", description: "Quality backlinks from authoritative sites", icon: MoreExternalLinksIcon },
       { label: "More reviews", description: "", icon: MoreReviewsIcon },
-      { label: "Better review scores", description: "Average rating impacts visibility", icon: BetterReviewScoresIcon },
+      { label: "Better review scores", description: "", icon: MoreReviewsIcon, rightIcon: BetterReviewScoresIcon },
       { label: "Increase reputation", description: "", icon: IncreaseReputationIcon },
       { label: "Higher map pack ranking", description: "", icon: HigherMapPackIcon },
     ],
@@ -357,6 +357,13 @@ export default function BusinessCycleLocalSEO() {
                                     <p className="text-base text-muted-foreground mt-1">{item.description}</p>
                                   )}
                                 </div>
+                                {item.rightIcon && (
+                                  <img
+                                    src={item.rightIcon}
+                                    alt=""
+                                    className="flex-shrink-0 w-20 h-8"
+                                  />
+                                )}
                               </motion.li>
                             ))}
                           </ul>
