@@ -231,14 +231,16 @@ export default function BusinessCycleLocalSEO() {
               {/* Left side - logo, title, image */}
               <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
-                  <div key={currentSlide} className="flex flex-col items-start h-full">
+                  <motion.div
+                    key={currentSlide}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="flex flex-col items-start h-full"
+                  >
                     {/* Logo and Title */}
-                    <motion.div
-                      className="flex items-center gap-5 mb-4"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
+                    <div className="flex items-center gap-5 mb-4">
                       <motion.img
                         src={LogoGraphic}
                         alt="Add People"
@@ -259,15 +261,8 @@ export default function BusinessCycleLocalSEO() {
                       >
                         {slide.title}
                       </h2>
-                    </motion.div>
-                    <motion.p
-                      className="text-lg text-primary mt-2 leading-relaxed"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
-                    >
-                      {slide.subtitle}
-                    </motion.p>
+                    </div>
+                    <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
 
                     {/* Orange accent dots */}
                     <div className="flex items-center gap-2 mt-4">
@@ -324,13 +319,13 @@ export default function BusinessCycleLocalSEO() {
                                       ? "w-full object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
-                        style={{ opacity: 0 }}
+                        initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
                         onLoad={() => setImageLoaded(true)}
                       />
                     </div>
-                  </div>
+                  </motion.div>
                 </AnimatePresence>
               </div>
 
