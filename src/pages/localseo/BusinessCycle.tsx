@@ -38,10 +38,11 @@ const slides = [
     subtitle: "Get found by local customers",
     mainImage: VisibilityMainImage,
     content: [
-      { label: "Relevance", description: "How well your business matches search intent", icon: KeywordsIcon },
-      { label: "Proximity", description: "How close you are to the searcher", icon: LocationIcon },
-      { label: "Prominence", description: "How well-known and reputable your business is", icon: EngagementIcon },
+      { label: "Relevance", description: "How well your business matches search intent", icon: RelevanceIcon },
+      { label: "Proximity", description: "How close you are to the searcher", icon: ProximityIcon },
+      { label: "Prominence", description: "How well-known and reputable your business is", icon: ProminenceIcon },
     ],
+    bottomImage: BrightLocalIcon,
   },
   {
     title: "Relevance",
@@ -340,18 +341,15 @@ export default function BusinessCycleLocalSEO() {
                             ))}
                           </ul>
                           
-                          {/* Visibility slide icons */}
-                          {slide.title === "Visibility" && (
+                          {/* Bottom image for Visibility slide */}
+                          {slide.bottomImage && (
                             <motion.div
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ opacity: 1, y: 0 }}
                               transition={{ delay: 0.8, duration: 0.4 }}
-                              className="mt-6 flex items-center justify-center gap-4"
+                              className="mt-6 flex justify-center"
                             >
-                              <img src={RelevanceIcon} alt="Relevance" className="w-24 h-24" />
-                              <img src={ProximityIcon} alt="Proximity" className="w-24 h-24" />
-                              <img src={ProminenceIcon} alt="Prominence" className="w-24 h-24" />
-                              <img src={BrightLocalIcon} alt="BrightLocal" className="w-24 h-24" />
+                              <img src={slide.bottomImage} alt="" className="w-full max-w-md" />
                             </motion.div>
                           )}
                         </div>
