@@ -241,17 +241,15 @@ export default function BusinessCycleLocalSEO() {
         productLabel="Local SEO"
       />
 
-      <div className="flex-1 pt-[73px] px-[24.74vw] py-[4.44vh] flex items-center justify-center">
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "100%",
-            maxWidth: "100%",
+            width: "min(50.52vw, calc((100vh - 73px) * 0.9047 * 1.69))",
             aspectRatio: "1.69",
-            maxHeight: "100%",
           }}
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
