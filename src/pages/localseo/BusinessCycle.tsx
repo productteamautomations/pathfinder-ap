@@ -242,16 +242,21 @@ export default function BusinessCycleLocalSEO() {
       />
 
       <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
-        <div className="w-full max-w-7xl">
+        <div className="w-full max-w-7xl flex items-center justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+            style={{
+              width: "min(90vw, calc(82vh * 1.8))",
+              height: "min(calc(90vw / 1.8), 82vh)",
+              aspectRatio: "1.8 / 1",
+            }}
           >
-            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
+            <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 overflow-hidden">
+              <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative p-10 md:p-12 lg:p-14 overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -360,7 +365,7 @@ export default function BusinessCycleLocalSEO() {
               </div>
 
               {/* Right side - content list */}
-              <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-[82vh] overflow-hidden">
+              <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden">
                 <div className="overflow-hidden">
                   <AnimatePresence mode="wait">
                     <motion.div
