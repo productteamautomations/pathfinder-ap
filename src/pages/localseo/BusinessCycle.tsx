@@ -222,7 +222,7 @@ export default function BusinessCycleLocalSEO() {
               {/* Left side - logo, title, image */}
               <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative ${
                 slides[currentSlide].title === "Product Journey" 
-                  ? "p-10 md:p-12 lg:p-14 pb-0 overflow-hidden" 
+                  ? "pt-10 md:pt-12 lg:pt-14 px-10 md:px-12 lg:px-14 pb-0" 
                   : "p-10 md:p-12 lg:p-14 overflow-hidden"
               }`}>
                 <AnimatePresence mode="wait">
@@ -290,7 +290,7 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "absolute -bottom-0 -left-14 -right-14" 
+                          ? "absolute bottom-0 -left-14 -right-14" 
                           : `flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
