@@ -125,7 +125,7 @@ export default function AboutAddPeopleLeadGen() {
               <img
                 src={altrinchamMap}
                 alt="Add People Altrincham office location"
-                className="w-full flex-1 object-cover rounded-lg"
+                className="w-full flex-1 object-contain rounded-xl"
               />
             </motion.div>
 
@@ -143,7 +143,7 @@ export default function AboutAddPeopleLeadGen() {
               <img
                 src={austinMap}
                 alt="Add People Austin office location"
-                className="w-full flex-1 object-cover rounded-lg"
+                className="w-full flex-1 object-contain rounded-xl"
               />
             </motion.div>
 
