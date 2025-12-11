@@ -220,10 +220,10 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative ${
+              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 ${
                 slides[currentSlide].title === "Product Journey" 
-                  ? "" 
-                  : "p-10 md:p-12 lg:p-14 overflow-hidden"
+                  ? "overflow-visible" 
+                  : "overflow-hidden"
               }`}>
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -234,9 +234,8 @@ export default function BusinessCycleLocalSEO() {
                     transition={{ duration: 0.3 }}
                     className="flex flex-col items-start h-full"
                   >
-                    {/* Logo and Title - with padding for Product Journey */}
-                    <div className={slide.title === "Product Journey" ? "p-10 md:p-12 lg:p-14 pb-4" : ""}>
-                      <div className="flex items-center gap-5 mb-4">
+                    {/* Logo and Title */}
+                    <div className="flex items-center gap-5 mb-4">
                       <motion.img
                         src={LogoGraphic}
                         alt="Add People"
@@ -286,13 +285,12 @@ export default function BusinessCycleLocalSEO() {
                         </motion.div>
                       </div>
                     </div>
-                    </div>
 
                     {/* Main image */}
                     <div
                       className={`w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "flex-1 flex items-end mt-auto" 
+                          ? "flex-1 flex items-end mt-auto -mx-14 -mb-14" 
                           : `flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
@@ -311,7 +309,7 @@ export default function BusinessCycleLocalSEO() {
                                   : slide.title === "Ongoing Service"
                                     ? "object-contain w-[110%] max-h-[70vh]"
                                     : slide.title === "Product Journey"
-                                      ? "w-full object-contain object-bottom"
+                                      ? "w-[calc(100%+112px)] object-contain object-bottom"
                                       : "object-contain w-full max-h-[75vh] mb-[-14px]"
                         }`}
                         initial={{ opacity: 0 }}
