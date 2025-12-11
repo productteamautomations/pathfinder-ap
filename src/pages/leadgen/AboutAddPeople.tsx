@@ -46,12 +46,12 @@ export default function AboutAddPeopleLeadGen() {
       <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
         <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-6 py-4 max-w-[1600px] mx-auto w-full h-full">
           {/* Left Column - About & Main Image */}
-          <div className="lg:col-span-4 flex flex-col gap-4 h-full">
+          <div className="lg:col-span-5 flex flex-col gap-4 h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
+              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-5 text-white flex-shrink-0"
             >
               <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
               <h1 className="text-2xl lg:text-3xl font-display font-bold mt-1 leading-tight">Add People</h1>
@@ -73,36 +73,36 @@ export default function AboutAddPeopleLeadGen() {
           </div>
 
           {/* Middle Column - Reviews */}
-          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
+          <div className="lg:col-span-3 flex flex-col gap-2 h-full">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15 }}
               className="flex-shrink-0"
             >
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wider">
                 Lead Generation Reviews
               </span>
             </motion.div>
 
-            <div className="flex-1 flex flex-col gap-3">
+            <div className="flex-1 flex flex-col gap-2">
               {leadgenReviews.map((review, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                  className="bg-white/95 backdrop-blur-sm rounded-lg p-3 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
                 >
-                  <div className="flex items-center gap-1 mb-3">
+                  <div className="flex items-center gap-0.5 mb-1">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                      <Star key={i} className="w-3 h-3 fill-primary text-primary" />
                     ))}
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed mb-3">"{review.review}"</p>
+                  <p className="text-xs text-foreground leading-snug mb-1">"{review.review}"</p>
                   <div>
-                    <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
-                    <div className="text-xs text-muted-foreground">{review.company}</div>
+                    <div className="text-xs font-semibold text-[#173340]">{review.name}</div>
+                    <div className="text-[10px] text-muted-foreground">{review.company}</div>
                   </div>
                 </motion.div>
               ))}
