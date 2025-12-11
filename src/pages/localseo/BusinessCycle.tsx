@@ -76,9 +76,18 @@ const slides = [
     mainImage: ProminenceMainImage,
     content: [
       { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
-      { label: "More external links", description: "Quality backlinks from authoritative sites", icon: MoreExternalLinksIcon },
+      {
+        label: "More external links",
+        description: "Quality backlinks from authoritative sites",
+        icon: MoreExternalLinksIcon,
+      },
       { label: "More reviews", description: "", icon: MoreReviewsIcon },
-      { label: "Better review scores", description: "Average rating impacts visibility", icon: MoreReviewsIcon, rightIcon: FiveStarsWideIcon },
+      {
+        label: "Better review scores",
+        description: "Average rating impacts visibility",
+        icon: MoreReviewsIcon,
+        rightIcon: FiveStarsWideIcon,
+      },
       { label: "Increase reputation", description: "", icon: IncreaseReputationIcon },
       { label: "Higher map pack ranking", description: "", icon: HigherMapPackIcon },
     ],
@@ -220,11 +229,11 @@ export default function BusinessCycleLocalSEO() {
           >
             <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
               {/* Left side - logo, title, image */}
-              <div className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 ${
-                slides[currentSlide].title === "Product Journey" 
-                  ? "overflow-visible" 
-                  : "overflow-hidden"
-              }`}>
+              <div
+                className={`flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-[82vh] relative p-10 md:p-12 lg:p-14 ${
+                  slides[currentSlide].title === "Product Journey" ? "overflow-visible" : "overflow-hidden"
+                }`}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
@@ -247,7 +256,9 @@ export default function BusinessCycleLocalSEO() {
                       />
                       <h2
                         className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" || slide.title === "Ongoing Service" || slide.title === "Product Journey"
+                          slide.title === "Lead Management" ||
+                          slide.title === "Ongoing Service" ||
+                          slide.title === "Product Journey"
                             ? "text-4xl md:text-5xl"
                             : "text-7xl md:text-7xl"
                         }`}
@@ -289,8 +300,8 @@ export default function BusinessCycleLocalSEO() {
                     {/* Main image */}
                     <div
                       className={`overflow-visible ${
-                        slide.title === "Product Journey" 
-                          ? "flex-1 flex items-end mt-auto w-[calc(100%+112px)] -ml-14 -mb-20" 
+                        slide.title === "Product Journey"
+                          ? "flex-1 flex items-end mt-auto w-[calc(100%+112px)] -ml-14 -mb-40"
                           : `w-full flex-1 flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
@@ -352,7 +363,7 @@ export default function BusinessCycleLocalSEO() {
                               style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
                             />
                           )}
-                          
+
                           {/* Product Journey timeline cards */}
                           {slide.title === "Product Journey" && slide.timeline ? (
                             <div className="space-y-4">
@@ -367,7 +378,7 @@ export default function BusinessCycleLocalSEO() {
                                   <h3 className="text-primary font-semibold text-lg mb-3">{phase.phase}</h3>
                                   <ul className="space-y-2 relative">
                                     {/* Vertical connecting line */}
-                                    <div 
+                                    <div
                                       className="absolute left-[3px] w-[2px] bg-primary z-0"
                                       style={{ top: "calc(8px + 4px)", bottom: "calc(8px + 4px)" }}
                                     />
@@ -417,11 +428,7 @@ export default function BusinessCycleLocalSEO() {
                                     )}
                                   </div>
                                   {item.rightIcon && (
-                                    <img
-                                      src={item.rightIcon}
-                                      alt=""
-                                      className="flex-shrink-0 w-32 h-12"
-                                    />
+                                    <img src={item.rightIcon} alt="" className="flex-shrink-0 w-32 h-12" />
                                   )}
                                 </motion.li>
                               ))}
