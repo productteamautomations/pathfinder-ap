@@ -154,232 +154,234 @@ export default function BusinessCycleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-4 md:px-8 flex items-center justify-center">
-        <div className="w-full max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
-          >
-            <div className="grid md:grid-cols-2 h-[82vh]" style={{ gridTemplateColumns: "1fr 1fr" }}>
-              {/* Left side - logo, title, image */}
-              <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-[82vh]">
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          style={{
+            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
+            aspectRatio: "1.69",
+          }}
+        >
+          <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
+            {/* Left side - logo, title, image */}
+            <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-full">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col items-start h-full"
+                >
+                  {/* Logo and Title */}
+                  <div className="flex items-center gap-5 mb-4">
+                    <motion.img
+                      src={LogoGraphic}
+                      alt="Add People"
+                      className="w-16 h-16"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: iconLoaded ? 1 : 0 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      onLoad={() => setIconLoaded(true)}
+                    />
+                    <h2
+                      className={`font-display font-bold text-title leading-tight tracking-tight ${
+                        slide.title === "Lead Management" || slide.title === "Ongoing Service"
+                          ? "text-4xl md:text-5xl"
+                          : "text-7xl md:text-7xl"
+                      }`}
+                    >
+                      {slide.title}
+                    </h2>
+                  </div>
+                  <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
+
+                  {/* Orange accent dots */}
+                  <div className="flex items-center gap-2 mt-4">
+                    <div className="flex items-center gap-1.5">
+                      {[...Array(4)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="w-2 h-2 rounded-full bg-primary"
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 - i * 0.25 }}
+                          transition={{ delay: i * 0.1, duration: 0.3 }}
+                        />
+                      ))}
+                      <motion.div
+                        className="relative h-0.5 w-16 overflow-hidden"
+                        initial={{ scaleX: 0, opacity: 0 }}
+                        animate={{ scaleX: 1, opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.4 }}
+                        style={{ transformOrigin: "left" }}
+                      >
+                        <div
+                          className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
+                          style={{
+                            clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
+                          }}
+                        />
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  {/* Main image */}
+                  <div
+                    className={`flex-1 flex justify-center w-full overflow-visible ${
+                      slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"
+                    }`}
+                  >
+                    <motion.img
+                      src={slide.mainImage || VisibilityMainImage}
+                      alt={`${slide.title} - ${slide.subtitle}`}
+                      className={`h-auto object-contain ${
+                        slide.title === "Lead Management"
+                          ? "w-full max-h-[85vh] mb-[-60px]"
+                          : slide.title === "Visibility"
+                            ? "w-[108%] max-h-[70vh]"
+                            : slide.title === "Engagement"
+                              ? "w-[120%] max-h-[80vh] mb-[-30px]"
+                              : slide.title === "Your Setup"
+                                ? "w-[115%] max-h-[80vh] mb-[-14px]"
+                                : slide.title === "Ongoing Service"
+                                  ? "w-[110%] max-h-[70vh]"
+                                  : "w-full max-h-[75vh] mb-[-14px]"
+                      }`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: imageLoaded ? 1 : 0 }}
+                      transition={{ duration: 0.4, ease: "easeOut" }}
+                      onLoad={() => setImageLoaded(true)}
+                    />
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Right side - content list */}
+            <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden">
+              <div className="overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentSlide}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="flex flex-col items-start h-full"
+                    className="w-full"
                   >
-                    {/* Logo and Title */}
-                    <div className="flex items-center gap-5 mb-4">
-                      <motion.img
-                        src={LogoGraphic}
-                        alt="Add People"
-                        className="w-16 h-16"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: iconLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setIconLoaded(true)}
-                      />
-                      <h2
-                        className={`font-display font-bold text-title leading-tight tracking-tight ${
-                          slide.title === "Lead Management" || slide.title === "Ongoing Service"
-                            ? "text-4xl md:text-5xl"
-                            : "text-7xl md:text-7xl"
-                        }`}
-                      >
-                        {slide.title}
-                      </h2>
-                    </div>
-                    <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
-
-                    {/* Orange accent dots */}
-                    <div className="flex items-center gap-2 mt-4">
-                      <div className="flex items-center gap-1.5">
-                        {[...Array(4)].map((_, i) => (
-                          <motion.div
-                            key={i}
-                            className="w-2 h-2 rounded-full bg-primary"
-                            initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 - i * 0.25 }}
-                            transition={{ delay: i * 0.1, duration: 0.3 }}
-                          />
-                        ))}
-                        <motion.div
-                          className="relative h-0.5 w-16 overflow-hidden"
-                          initial={{ scaleX: 0, opacity: 0 }}
-                          animate={{ scaleX: 1, opacity: 1 }}
-                          transition={{ delay: 0.4, duration: 0.4 }}
-                          style={{ transformOrigin: "left" }}
-                        >
-                          <div
-                            className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
-                            style={{
-                              clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
-                            }}
-                          />
-                        </motion.div>
+                    <div className="mb-8">
+                      <div className="flex items-center gap-4">
+                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
+                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
+                        <span className="text-muted-foreground text-xl">—</span>
+                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
                       </div>
                     </div>
 
-                    {/* Main image */}
-                    <div
-                      className={`flex-1 flex justify-center w-full overflow-visible ${
-                        slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"
-                      }`}
-                    >
-                      <motion.img
-                        src={slide.mainImage || VisibilityMainImage}
-                        alt={`${slide.title} - ${slide.subtitle}`}
-                        className={`h-auto object-contain ${
-                          slide.title === "Lead Management"
-                            ? "w-full max-h-[85vh] mb-[-60px]"
-                            : slide.title === "Visibility"
-                              ? "w-[108%] max-h-[70vh]"
-                              : slide.title === "Engagement"
-                                ? "w-[120%] max-h-[80vh] mb-[-30px]"
-                                : slide.title === "Your Setup"
-                                  ? "w-[115%] max-h-[80vh] mb-[-14px]"
-                                  : slide.title === "Ongoing Service"
-                                    ? "w-[110%] max-h-[70vh]"
-                                    : "w-full max-h-[75vh] mb-[-14px]"
-                        }`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: imageLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setImageLoaded(true)}
-                      />
+                    <div className="flex-1 overflow-hidden">
+                      <div className="relative">
+                        {/* Vertical connecting line for Your Setup */}
+                        {slide.title === "Your Setup" && (
+                          <div
+                            className="absolute left-[22px] w-[2px] bg-primary z-10 -translate-x-1/2"
+                            style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
+                          />
+                        )}
+                        <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                          {slide.content?.map((item, idx) => (
+                            <motion.li
+                              key={idx}
+                              initial={{ opacity: 0, x: 20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                              className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                item.isExample
+                                  ? "bg-accent p-4 text-center"
+                                  : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
+                              }`}
+                            >
+                              {item.isExample ? (
+                                <div className="space-y-2">
+                                  <p className="text-foreground font-semibold text-base">
+                                    INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
+                                  </p>
+                                  <p className="text-white font-semibold text-base">
+                                    USE:{" "}
+                                    <span className="font-bold">
+                                      "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
+                                    </span>
+                                  </p>
+                                </div>
+                              ) : (
+                                <>
+                                  {item.icon ? (
+                                    <img
+                                      src={item.icon}
+                                      alt=""
+                                      className={`flex-shrink-0 ${
+                                        slide.title === "Your Setup"
+                                          ? "w-[18px] h-[18px]"
+                                          : slide.title === "Ongoing Service" || slide.title === "Engagement"
+                                            ? "w-6 h-6"
+                                            : "w-12 h-12"
+                                      }`}
+                                    />
+                                  ) : (
+                                    <span className="text-primary font-bold mt-0.5">•</span>
+                                  )}
+                                  <div className="flex-1">
+                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                    {item.description && (
+                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                    )}
+                                  </div>
+                                </>
+                              )}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Right side - content list */}
-              <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-[82vh] overflow-hidden">
-                <div className="overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentSlide}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className="w-full"
-                    >
-                      <div className="mb-8">
-                        <div className="flex items-center gap-4">
-                          <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                          <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                          <span className="text-muted-foreground text-xl">—</span>
-                          <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
-                        </div>
-                      </div>
+              {/* Fixed navigation buttons - absolutely positioned */}
+              <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
+                <Button
+                  onClick={prevSlide}
+                  disabled={currentSlide === 0}
+                  variant="outline"
+                  className="flex items-center gap-2 min-w-[120px]"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </Button>
 
-                      <div className="flex-1 overflow-hidden">
-                        <div className="relative">
-                          {/* Vertical connecting line for Your Setup */}
-                          {slide.title === "Your Setup" && (
-                            <div
-                              className="absolute left-[22px] w-[2px] bg-primary z-10 -translate-x-1/2"
-                              style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
-                            />
-                          )}
-                          <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.isExample
-                                    ? "bg-accent p-4 text-center"
-                                    : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
-                                }`}
-                              >
-                                {item.isExample ? (
-                                  <div className="space-y-2">
-                                    <p className="text-foreground font-semibold text-base">
-                                      INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
-                                    </p>
-                                    <p className="text-white font-semibold text-base">
-                                      USE:{" "}
-                                      <span className="font-bold">
-                                        "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
-                                      </span>
-                                    </p>
-                                  </div>
-                                ) : (
-                                  <>
-                                    {item.icon ? (
-                                      <img
-                                        src={item.icon}
-                                        alt=""
-                                        className={`flex-shrink-0 ${
-                                          slide.title === "Your Setup"
-                                            ? "w-[18px] h-[18px]"
-                                            : slide.title === "Ongoing Service" || slide.title === "Engagement"
-                                              ? "w-6 h-6"
-                                              : "w-12 h-12"
-                                        }`}
-                                      />
-                                    ) : (
-                                      <span className="text-primary font-bold mt-0.5">•</span>
-                                    )}
-                                    <div className="flex-1">
-                                      <span className="font-semibold text-foreground text-lg">{item.label}</span>
-                                      {item.description && (
-                                        <p className="text-base text-muted-foreground mt-1">{item.description}</p>
-                                      )}
-                                    </div>
-                                  </>
-                                )}
-                              </motion.li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
+                {/* Dot Progress Indicator */}
+                <div className="flex items-center gap-2">
+                  {slides.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
+                      }`}
+                    />
+                  ))}
                 </div>
 
-                {/* Fixed navigation buttons - absolutely positioned */}
-                <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
-                  <Button
-                    onClick={prevSlide}
-                    disabled={currentSlide === 0}
-                    variant="outline"
-                    className="flex items-center gap-2 min-w-[120px]"
-                  >
-                    <ChevronLeft className="w-4 h-4" />
-                    Previous
-                  </Button>
-
-                  {/* Dot Progress Indicator */}
-                  <div className="flex items-center gap-2">
-                    {slides.map((_, index) => (
-                      <div
-                        key={index}
-                        className={`h-2 rounded-full transition-all duration-300 ${
-                          index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
-                        }`}
-                      />
-                    ))}
-                  </div>
-
-                  <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
-                    {isLastSlide ? "About Us" : "Next"}
-                    <ChevronRight className="w-4 h-4" />
-                  </Button>
-                </div>
+                <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
+                  {isLastSlide ? "About Us" : "Next"}
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
