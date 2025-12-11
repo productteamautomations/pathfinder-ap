@@ -286,7 +286,7 @@ export default function BusinessCycleLocalSEO() {
                     <div
                       className={`flex-1 w-full overflow-visible ${
                         slide.title === "Product Journey" 
-                          ? "relative -mx-14 -mb-14 mt-4" 
+                          ? "relative -ml-14 -mr-20 -mb-14 mt-4" 
                           : `flex justify-center ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
                       }`}
                     >
