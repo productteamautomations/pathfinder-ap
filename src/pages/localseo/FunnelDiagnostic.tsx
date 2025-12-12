@@ -174,7 +174,7 @@ export default function FunnelDiagnosticLocalSEO() {
 
   const handleContinue = () => {
     if (isTransitioning) return;
-    
+
     const currentAnswers = (answers[question.id] as string[]) || [];
     if (currentAnswers.length === 0) return;
 
@@ -249,7 +249,7 @@ export default function FunnelDiagnosticLocalSEO() {
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
                       {question.section}
                     </span>
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                    <h2 className="text-2xl md:text-4xl lg:text-4xl font-display font-bold text-title leading-tight tracking-tight">
                       {question.question}
                     </h2>
                     <OrangeAccent />
