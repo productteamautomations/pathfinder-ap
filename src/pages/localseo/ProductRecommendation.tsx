@@ -90,7 +90,8 @@ export default function ProductRecommendationLocalSEO() {
         productLabel="Local SEO"
       />
 
-      <div className="flex-1 pt-[73px] flex flex-col">
+      <div className="flex-1 flex flex-col" style={{ paddingTop: "73px" }}>
+        {/* Title and Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -105,14 +106,19 @@ export default function ProductRecommendationLocalSEO() {
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-12">
+        {/* Card Section with 5% margins */}
+        <div className="flex-1 flex items-center justify-center px-6 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] p-8 md:p-12 lg:p-14 max-w-6xl mx-auto shadow-lg border border-border/30"
+            className="bg-white rounded-[2rem] shadow-lg border border-border/30"
+            style={{
+              height: "calc((100vh - 73px - 140px) * 0.9)",
+              aspectRatio: "2.2",
+            }}
           >
-            <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="grid md:grid-cols-2 gap-12 items-center h-full p-8 md:p-12 lg:p-14">
               <div>
                 <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">
                   Stay Ahead Of Competitors In Local Search Rankings
