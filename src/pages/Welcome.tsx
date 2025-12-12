@@ -292,8 +292,8 @@ export default function Welcome() {
         <div
           className="relative"
           style={{
-            width: "min(90vw, 40vw)",
-            aspectRatio: "0.75",
+            width: "min(90vw, 25vw)",
+            aspectRatio: "0.85",
             display: "flex",
             flexDirection: "column",
             gap: "2vh",
