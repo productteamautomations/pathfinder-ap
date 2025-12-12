@@ -39,7 +39,7 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 relative z-10">
+      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
