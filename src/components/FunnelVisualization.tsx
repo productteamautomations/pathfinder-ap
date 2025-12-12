@@ -39,7 +39,7 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore }
 
       {/* Funnel SVG - centered */}
       <div className="flex items-center justify-center h-full">
-        <svg viewBox="10 40 180 160" className="w-full h-full max-w-xs">
+        <svg viewBox="0 40 240 160" className="w-full h-full max-w-xs">
           <defs>
             {/* Gradients for each segment */}
             <linearGradient id="trafficGradient" x1="0%" y1="0%" x2="0%" y2="100%">
