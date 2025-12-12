@@ -53,7 +53,7 @@ export default function AboutAddPeopleLeadGen() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.86))",
+            width: "min(90vw, calc((100vh - 73px - 10vh) * 1.86))",
             aspectRatio: "1.86",
             containerType: "size",
             padding: "3cqw",
