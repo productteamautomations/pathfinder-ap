@@ -1,31 +1,24 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 
 export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
 
-  const setupFee = 249.0;
-  const monthlyFee6 = 299.0;
-  const monthlyFee12 = 249.0;
-  const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const vat = (setupFee + monthlyFee) * 0.2;
-  const totalFirstMonth = setupFee + monthlyFee + vat;
-  const monthlyAfterVAT = monthlyFee * 1.2;
-  const savings = (monthlyFee6 - monthlyFee12) * 12;
+  const trialFee = 499.0;
+  const vat = trialFee * 0.2;
+  const totalWithVAT = trialFee + vat;
 
   const features = [
     "Google Ads campaign management",
     "Responsive Search Ad creation",
     "Enhanced call tracking",
     "Say Hello access",
-    "Monthly performance reporting",
+    "Weekly performance updates",
   ];
 
   return (
@@ -65,15 +58,23 @@ export default function PricingLeadGen() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <span
-                  className="font-semibold text-primary uppercase tracking-widest block"
+                {/* Trial Badge */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.4, delay: 0.15 }}
+                  className="inline-flex items-center bg-primary/10 text-primary rounded-full font-semibold"
                   style={{
-                    fontSize: "clamp(0.75rem, 1vw, 1rem)",
-                    marginBottom: "clamp(0.75rem, 1.5vw, 1.25rem)",
+                    gap: "clamp(0.5rem, 0.75vw, 0.625rem)",
+                    padding: "clamp(0.5rem, 0.75vw, 0.625rem) clamp(1rem, 1.5vw, 1.25rem)",
+                    fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
+                    marginBottom: "clamp(1rem, 2vw, 1.5rem)",
                   }}
                 >
-                  Recommended for you
-                </span>
+                  <Clock style={{ width: "clamp(1rem, 1.25vw, 1.125rem)", height: "clamp(1rem, 1.25vw, 1.125rem)" }} />
+                  6 Week Trial
+                </motion.div>
+
                 <h1
                   className="font-display font-bold text-title leading-tight tracking-tight"
                   style={{
@@ -90,7 +91,7 @@ export default function PricingLeadGen() {
                     marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
                   }}
                 >
-                  Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
+                  Try our professional Google Ads management with full campaign setup, call tracking, and hands-on optimisation — risk free.
                 </p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.75rem, 1.5vw, 1.25rem)" }}>
@@ -135,94 +136,46 @@ export default function PricingLeadGen() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                {/* Plan Toggle */}
+                {/* Trial Pricing Header */}
                 <div style={{ marginBottom: "clamp(1.5rem, 2.5vw, 2rem)" }}>
                   <p
                     className="font-semibold text-foreground"
                     style={{
-                      fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
-                      marginBottom: "clamp(0.75rem, 1.5vw, 1rem)",
+                      fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
+                      marginBottom: "clamp(0.5rem, 1vw, 0.75rem)",
                     }}
                   >
-                    Choose your plan
+                    Trial Investment
                   </p>
-                  <div className="grid grid-cols-2" style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
-                    <button
-                      onClick={() => setSelectedPlan("6")}
-                      className={`rounded-2xl font-bold transition-all ${
-                        selectedPlan === "6"
-                          ? "bg-primary text-primary-foreground shadow-lg"
-                          : "bg-muted/50 text-foreground hover:bg-muted"
-                      }`}
-                      style={{
-                        padding: "clamp(0.875rem, 1.5vw, 1.25rem) clamp(1rem, 1.5vw, 1.25rem)",
-                        fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
-                      }}
-                    >
-                      6 Months
-                    </button>
-                    <button
-                      onClick={() => setSelectedPlan("12")}
-                      className={`rounded-2xl font-bold transition-all relative ${
-                        selectedPlan === "12"
-                          ? "bg-primary text-primary-foreground shadow-lg"
-                          : "bg-muted/50 text-foreground hover:bg-muted"
-                      }`}
-                      style={{
-                        padding: "clamp(0.875rem, 1.5vw, 1.25rem) clamp(1rem, 1.5vw, 1.25rem)",
-                        fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
-                      }}
-                    >
-                      12 Months
-                      {selectedPlan === "12" && (
-                        <span
-                          className="absolute bg-green-500 text-white font-bold rounded-full whitespace-nowrap"
-                          style={{
-                            top: "clamp(-0.5rem, -1vw, -0.75rem)",
-                            right: "clamp(-0.5rem, -1vw, -0.75rem)",
-                            padding: "clamp(0.25rem, 0.5vw, 0.375rem) clamp(0.5rem, 1vw, 0.75rem)",
-                            fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
-                          }}
-                        >
-                          Save £{savings}
-                        </span>
-                      )}
-                    </button>
-                  </div>
+                  <p
+                    className="text-muted-foreground"
+                    style={{ fontSize: "clamp(0.875rem, 1.1vw, 1rem)" }}
+                  >
+                    One-time payment for 6 weeks of full service
+                  </p>
                 </div>
 
                 {/* Price Breakdown */}
                 <div className="space-y-1" style={{ marginBottom: "clamp(1.5rem, 2.5vw, 2rem)" }}>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
+                    style={{ padding: "clamp(0.875rem, 1.5vw, 1.125rem) 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
-                      Setup Fee
+                    <span className="text-muted-foreground" style={{ fontSize: "clamp(1rem, 1.35vw, 1.25rem)" }}>
+                      6 Week Trial
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
-                      £{setupFee.toFixed(2)}
+                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1.125rem, 1.75vw, 1.5rem)" }}>
+                      £{trialFee.toFixed(2)}
                     </span>
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
+                    style={{ padding: "clamp(0.875rem, 1.5vw, 1.125rem) 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
-                      Monthly Fee
-                    </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
-                      £{monthlyFee.toFixed(2)}
-                    </span>
-                  </div>
-                  <div
-                    className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
-                  >
-                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "clamp(1rem, 1.35vw, 1.25rem)" }}>
                       VAT (20%)
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1.125rem, 1.75vw, 1.5rem)" }}>
                       £{vat.toFixed(2)}
                     </span>
                   </div>
@@ -232,31 +185,34 @@ export default function PricingLeadGen() {
                 <div
                   className="bg-muted/30 rounded-2xl"
                   style={{
-                    padding: "clamp(1.25rem, 2vw, 1.5rem)",
+                    padding: "clamp(1.5rem, 2.5vw, 2rem)",
                     marginBottom: "clamp(1.5rem, 2.5vw, 2rem)",
                   }}
                 >
-                  <div className="flex justify-between items-end" style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
+                  <div className="flex justify-between items-center">
                     <div>
                       <p
                         className="text-muted-foreground"
                         style={{
-                          fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
+                          fontSize: "clamp(0.875rem, 1.1vw, 1rem)",
                           marginBottom: "clamp(0.25rem, 0.5vw, 0.375rem)",
                         }}
                       >
-                        First month total
+                        Total (inc. VAT)
                       </p>
-                      <p className="font-bold text-foreground" style={{ fontSize: "clamp(2rem, 3vw, 2.5rem)" }}>
-                        £{totalFirstMonth.toFixed(2)}
+                      <p className="font-bold text-foreground" style={{ fontSize: "clamp(2.5rem, 4vw, 3.5rem)" }}>
+                        £{totalWithVAT.toFixed(2)}
                       </p>
                     </div>
-                    <p
-                      className="text-muted-foreground text-right"
-                      style={{ fontSize: "clamp(0.75rem, 1vw, 0.875rem)" }}
+                    <div
+                      className="bg-green-100 text-green-700 font-semibold rounded-xl text-center"
+                      style={{
+                        padding: "clamp(0.75rem, 1.25vw, 1rem) clamp(1rem, 1.5vw, 1.25rem)",
+                        fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
+                      }}
                     >
-                      then £{monthlyAfterVAT.toFixed(2)}/mo
-                    </p>
+                      No ongoing<br />commitment
+                    </div>
                   </div>
                 </div>
 
@@ -270,10 +226,10 @@ export default function PricingLeadGen() {
                   fullWidth
                   style={{
                     padding: "clamp(1.25rem, 2vw, 1.5rem)",
-                    fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
+                    fontSize: "clamp(1.125rem, 1.5vw, 1.375rem)",
                   }}
                 >
-                  Start My Campaign
+                  Start My Trial
                 </Button>
               </motion.div>
             </div>
