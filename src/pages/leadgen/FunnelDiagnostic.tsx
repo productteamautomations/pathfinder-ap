@@ -180,23 +180,20 @@ export default function FunnelDiagnostic() {
       <PageHeader onBack={handleBack} currentStep={4} totalSteps={7} showProgress productLabel="Lead Generation" />
 
       {/* Content Area - Split Layout */}
-      <div
-        className="flex-1 flex items-center justify-center"
-        style={{ paddingTop: "calc(73px + 5vh)", paddingBottom: "5vh" }}
-      >
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(66.82vw, calc((100vh - 73px - 10vh) * 1.65))",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.65))",
             aspectRatio: "1.65",
           }}
         >
           <div className="grid md:grid-cols-[0.65fr_1fr] h-full">
             {/* Left Side - Question & Options */}
-            <div className="p-6 md:p-8 lg:p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-full">
+            <div className="p-14 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentQuestion}
@@ -211,7 +208,7 @@ export default function FunnelDiagnostic() {
                     <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
                       {question.section}
                     </span>
-                    <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                    <h2 className="text-5xl font-display font-bold text-title leading-tight tracking-tight">
                       {question.question}
                     </h2>
                     <OrangeAccent />
@@ -237,7 +234,7 @@ export default function FunnelDiagnostic() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.05 }}
                         onClick={() => handleAnswer(option)}
-                        className={`w-full p-4 rounded-2xl border text-left text-base md:text-lg font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                        className={`w-full p-4 rounded-2xl border text-left text-lg font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                           answers[question.id] === option
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                             : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
