@@ -10,22 +10,20 @@ import austinMap from "@/assets/austin-map.svg";
 
 const leadgenReviews = [
   {
-    name: "Sarah Mitchell",
-    company: "Mitchell Plumbing",
-    review: "Within 3 months, we went from page 3 to the top 3 in Google Maps. Our calls have doubled!",
-    rating: 5,
-  },
-  {
-    name: "James Crawford",
-    company: "Crawford Electrical",
+    name: "Christian Woods",
     review:
-      "The team really understands local SEO. Our Google Business Profile is now fully optimised and generating leads daily.",
+      "The support and communication have been consistently strong, and we’ve seen steady improvements in both traffic and lead quality. I highly recommend Add People to any business looking to boost their online presence",
     rating: 5,
   },
   {
-    name: "Emma Thompson",
-    company: "Thompson Roofing",
-    review: "Professional service from start to finish. Our local visibility has improved dramatically.",
+    name: "Josh",
+    review:
+      "Add People have been instrumental in the development of our digital strategy and growth of our business in the last 2 years that we've been working together.",
+    rating: 5,
+  },
+  {
+    name: "Nick Brown",
+    review: "Every individual I've had contact with has been knowledgeable, professional and extremely friendly.",
     rating: 5,
   },
 ];

@@ -23,7 +23,7 @@ const seoReviews = [
   },
   {
     name: "Nick Brown",
-    review: "Every individual I've had contact with has been knowledgeable, professional and extremely friendly. ",
+    review: "Every individual I've had contact with has been knowledgeable, professional and extremely friendly.",
     rating: 5,
   },
 ];
