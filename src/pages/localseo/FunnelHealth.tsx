@@ -364,7 +364,7 @@ export default function FunnelHealthLocalSEO() {
                 </span>
                 <h2
                   className="font-display font-bold text-title leading-tight tracking-tight"
-                  style={{ fontSize: "2.8cqw" }}
+                  style={{ fontSize: "3.2cqw" }}
                 >
                   Your SEO Health Overview
                 </h2>
