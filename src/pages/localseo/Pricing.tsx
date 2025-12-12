@@ -29,28 +29,37 @@ function OrangeAccent() {
   );
 }
 
-export default function PricingLocalSEO() {
+export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
 
-  const setupFee = 349.0;
-  const monthlyFee = 229.0;
-  const vat = 115.6;
-  const totalFirstMonth = 693.6;
-  const monthlyAfterVAT = 274.8;
-  const savings = 600.0;
+  const setupFee = 249.0;
+  const monthlyFee6 = 299.0;
+  const monthlyFee12 = 249.0;
+  const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
+  const vat = (setupFee + monthlyFee) * 0.2;
+  const totalFirstMonth = setupFee + monthlyFee + vat;
+  const monthlyAfterVAT = monthlyFee * 1.2;
+  const savings = (monthlyFee6 - monthlyFee12) * 12;
 
   const features = [
-    "Google Business Profile optimisation",
-    "Local keyword targeting",
-    "Perfectly optimised local content",
-    "Best-practice technical SEO",
+    "Google Ads campaign management",
+    "Responsive Search Ad creation",
+    "Enhanced call tracking",
+    "Say Hello access",
+    "Monthly performance reporting",
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={() => navigate("/about/localseo", { state: location.state })} currentStep={6} totalSteps={7} showProgress productLabel="Local SEO" />
+      <PageHeader
+        onBack={() => navigate("/about/leadgen", { state: location.state })}
+        currentStep={6}
+        totalSteps={7}
+        showProgress
+        productLabel="Lead Generation"
+      />
 
       <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
         <div className="w-full max-w-6xl">
@@ -71,12 +80,12 @@ export default function PricingLocalSEO() {
                     Primary Recommendation
                   </span>
                   <h2 className="text-3xl md:text-4xl font-display font-bold text-title leading-tight tracking-tight">
-                    Local SEO
+                    Lead Generation
                   </h2>
                   <OrangeAccent />
                   <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                    Stay ahead of competitors in search results and Google Maps when customers in your area search for
-                    services like yours.
+                    Professional Google Ads management with full campaign setup, call tracking, and ongoing
+                    optimisation.
                   </p>
                   <div className="mt-4 space-y-2">
                     {features.map((item, index) => (
@@ -129,14 +138,16 @@ export default function PricingLocalSEO() {
                     </button>
                   </div>
 
-                  <div className={`p-2.5 rounded-xl mb-4 text-center border ${
-                    selectedPlan === "12" 
-                      ? "bg-green-50 border-green-200" 
-                      : "bg-transparent border-transparent"
-                  }`}>
-                    <p className={`text-xs font-semibold ${
-                      selectedPlan === "12" ? "text-green-700" : "text-transparent"
-                    }`}>
+                  <div
+                    className={`p-2.5 rounded-xl mb-4 text-center border ${
+                      selectedPlan === "12" ? "bg-green-50 border-green-200" : "bg-transparent border-transparent"
+                    }`}
+                  >
+                    <p
+                      className={`text-xs font-semibold ${
+                        selectedPlan === "12" ? "text-green-700" : "text-transparent"
+                      }`}
+                    >
                       You save £{savings.toFixed(2)} with a 12-month plan!
                     </p>
                   </div>
@@ -166,7 +177,12 @@ export default function PricingLocalSEO() {
                     </p>
                   </div>
 
-                  <Button onClick={() => navigate("/required-info", { state: { ...location.state, product: "Local SEO" } })} fullWidth>
+                  <Button
+                    onClick={() =>
+                      navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })
+                    }
+                    fullWidth
+                  >
                     Start My Campaign
                   </Button>
 
