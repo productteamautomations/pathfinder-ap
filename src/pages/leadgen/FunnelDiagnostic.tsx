@@ -185,11 +185,12 @@ export default function FunnelDiagnostic() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
             width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.65))",
             aspectRatio: "1.65",
             containerType: "size",
+            borderRadius: "2.5cqw",
           }}
         >
           <div className="grid md:grid-cols-[0.65fr_1fr] h-full">
@@ -257,12 +258,12 @@ export default function FunnelDiagnostic() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.05 }}
                         onClick={() => handleAnswer(option)}
-                        className={`w-full rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                        className={`w-full border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                           answers[question.id] === option
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                             : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                         }`}
-                        style={{ fontSize: "1.5cqw", padding: "1.2cqw" }}
+                        style={{ fontSize: "1.5cqw", padding: "1.2cqw", borderRadius: "1.2cqw" }}
                       >
                         <span>{option}</span>
                         <ChevronRight className="transition-transform" style={{ width: "1.5cqw", height: "1.5cqw" }} />
@@ -277,8 +278,8 @@ export default function FunnelDiagnostic() {
                     style={{ fontSize: "1.2cqw", marginTop: "2cqw", gap: "1cqw" }}
                   >
                     <div
-                      className="rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all"
-                      style={{ width: "3.5cqw", height: "3.5cqw" }}
+                      className="bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all"
+                      style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "50%" }}
                     >
                       <ChevronRight
                         className="text-foreground rotate-180"
