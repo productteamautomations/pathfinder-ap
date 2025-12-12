@@ -289,7 +289,10 @@ export default function Welcome() {
 
       <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
-        <div className="w-full max-w-md relative">
+        <div
+          className="w-full max-w-md relative"
+          style={{ transform: "scale(calc(100vw / 1920))", transformOrigin: "center" }}
+        >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
