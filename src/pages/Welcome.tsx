@@ -285,7 +285,7 @@ export default function Welcome() {
       <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
 
-        <div style={{ width: "min(45vw, calc(90vh * 1.1))", aspectRatio: "1.1", containerType: "size" }}>
+        <div style={{ width: "min(22vw, calc(90vh * 1.1))", aspectRatio: "1.1", containerType: "size" }}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
