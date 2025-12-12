@@ -122,9 +122,6 @@ export default function AboutAddPeopleLeadGen() {
                         <div className="font-bold text-[#173340]" style={{ fontSize: "1.1cqw" }}>
                           {review.name}
                         </div>
-                        <div className="text-gray-600" style={{ fontSize: "0.9cqw" }}>
-                          {review.company}
-                        </div>
                       </div>
                       <div className="flex items-center" style={{ gap: "0.2cqw" }}>
                         {[...Array(review.rating)].map((_, i) => (
