@@ -16,7 +16,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
       style={{ height: "7.3vh" }}
     >
       <div className="max-w-7xl mx-auto h-full" style={{ padding: "0 2vw" }}>
-        <div className="flex items-center h-full" style={{ gap: "2vw" }}>
+        <div className="flex items-center justify-between h-full">
           {onBack ? (
             <button
               onClick={onBack}
@@ -30,7 +30,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
             <div style={{ width: "5vw" }} />
           )}
           {showProgress && currentStep && totalSteps && (
-            <div className="flex-1 flex justify-center" style={{ maxWidth: "28vw" }}>
+            <div className="flex-1 flex justify-center" style={{ maxWidth: "28vw", margin: "0 auto" }}>
               <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
             </div>
           )}
