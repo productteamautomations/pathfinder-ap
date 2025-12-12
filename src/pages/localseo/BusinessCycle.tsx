@@ -62,7 +62,6 @@ const slides = [
       { label: "Proximity", description: "How close you are to the searcher", icon: ProximityIcon },
       { label: "Prominence", description: "How well-known and reputable your business is", icon: ProminenceIcon },
     ],
-    bottomImage: VisibilityBottomImage,
   },
   {
     title: "Relevance",
