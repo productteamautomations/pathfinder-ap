@@ -47,13 +47,13 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           style={{
-            width: "min(90vw, calc(((100vh - 73px) * 0.9) * 1.86))",
+            width: "min(90vw, calc(90vh * 1.86))",
             aspectRatio: "1.86",
             containerType: "size",
             padding: "3cqw",
