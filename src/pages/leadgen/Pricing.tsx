@@ -50,7 +50,7 @@ export default function PricingLeadGen() {
           className="bg-white rounded-[clamp(1rem,2vw,2rem)] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden w-full"
           style={{
             maxWidth: "min(1400px, 90vw)",
-            maxHeight: "calc(100vh - 73px - 10vh)", // Subtract header + padding
+            maxHeight: "calc(100vh - 100px - 10vh)", // Subtract header + padding
           }}
         >
           <div className="grid lg:grid-cols-2 w-full h-full">
