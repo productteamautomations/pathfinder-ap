@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
+import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check } from "lucide-react";
 
 export default function PricingLeadGen() {
@@ -28,7 +29,8 @@ export default function PricingLeadGen() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background relative">
+      <TopographicBackground />
       <PageHeader
         onBack={() => navigate("/about/leadgen", { state: location.state })}
         currentStep={6}
@@ -37,7 +39,7 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center px-6" style={{ paddingTop: "73px" }}>
+      <div className="flex-1 flex items-center justify-center px-6 relative z-10" style={{ paddingTop: "73px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,51 +47,49 @@ export default function PricingLeadGen() {
           className="w-full max-w-5xl"
           style={{ height: "calc((100vh - 73px) * 0.88)" }}
         >
-          <div className="grid lg:grid-cols-2 gap-8 h-full">
-            {/* Left Side - Plan Info */}
-            <div className="flex flex-col justify-center">
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 block">
-                  Recommended for you
-                </span>
-                <h1 className="text-5xl lg:text-6xl font-display font-bold text-title leading-[1.1] tracking-tight mb-6">
-                  Lead Generation
-                </h1>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
-                  Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
-                </p>
+          <div className="grid lg:grid-cols-2 gap-6 h-full">
+            {/* Left Side - Plan Info Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="bg-white rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.1)] p-8 lg:p-10 flex flex-col justify-center"
+            >
+              <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 block">
+                Recommended for you
+              </span>
+              <h1 className="text-4xl lg:text-5xl font-display font-bold text-title leading-[1.1] tracking-tight mb-5">
+                Lead Generation
+              </h1>
+              <p className="text-base text-muted-foreground leading-relaxed mb-6">
+                Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
+              </p>
 
-                <div className="space-y-4">
-                  {features.map((item, index) => (
-                    <motion.div
-                      key={item}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
-                      className="flex items-center gap-4"
-                    >
-                      <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4 text-primary-foreground" strokeWidth={3} />
-                      </div>
-                      <span className="text-base text-foreground font-medium">{item}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
+              <div className="space-y-3">
+                {features.map((item, index) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
+                    className="flex items-center gap-3"
+                  >
+                    <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3.5 h-3.5 text-primary-foreground" strokeWidth={3} />
+                    </div>
+                    <span className="text-sm text-foreground font-medium">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
 
             {/* Right Side - Pricing Card */}
-            <div className="flex items-center justify-center">
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: 0.2 }}
-                className="w-full max-w-md bg-white rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.12)] p-8 lg:p-10"
-              >
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="bg-white rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.1)] p-8 lg:p-10 flex flex-col justify-center"
+            >
                 {/* Plan Toggle */}
                 <div className="mb-6">
                   <p className="text-sm font-semibold text-foreground mb-3">Choose your plan</p>
@@ -161,11 +161,11 @@ export default function PricingLeadGen() {
                 >
                   Start My Campaign
                 </Button>
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
     </div>
   );
 }
+
