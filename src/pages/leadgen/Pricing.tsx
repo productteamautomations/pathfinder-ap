@@ -9,7 +9,7 @@ export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const trialFee = 499.0;
+  const trialFee = 649.0;
   const vat = trialFee * 0.2;
   const totalWithVAT = trialFee + vat;
 
