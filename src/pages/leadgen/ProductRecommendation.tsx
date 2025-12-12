@@ -188,26 +188,26 @@ export default function ProductRecommendationLeadGen() {
               <div className="flex flex-col justify-center h-full overflow-hidden">
                 <h2
                   className="font-display font-bold text-title"
-                  style={{ fontSize: "min(3cqw, 8cqh)", marginBottom: "1.5cqh" }}
+                  style={{ fontSize: "min(4cqw, 10cqh)", marginBottom: "2cqh" }}
                 >
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
                 <p
                   className="text-muted-foreground leading-relaxed"
-                  style={{ fontSize: "min(1.3cqw, 2.8cqh)", marginBottom: "2cqh" }}
+                  style={{ fontSize: "min(1.8cqw, 3.8cqh)", marginBottom: "2.8cqh" }}
                 >
                   Get your business in front of customers actively searching for your services. With Google Ads, you
                   appear at the top of search results exactly when potential customers are ready to buy.
                 </p>
 
-                <div style={{ marginBottom: "2.5cqh" }}>
+                <div style={{ marginBottom: "3.5cqh" }}>
                   <h3
                     className="font-semibold text-muted-foreground uppercase tracking-wider"
-                    style={{ fontSize: "min(1cqw, 2cqh)", marginBottom: "1.2cqh" }}
+                    style={{ fontSize: "min(1.4cqw, 2.8cqh)", marginBottom: "1.8cqh" }}
                   >
                     Key Benefits:
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "1cqh" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.4cqh" }}>
                     {benefits.map((benefit, index) => (
                       <motion.div
                         key={benefit}
@@ -215,19 +215,19 @@ export default function ProductRecommendationLeadGen() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: 0.4 + index * 0.1 }}
                         className="flex items-center"
-                        style={{ gap: "1cqw" }}
+                        style={{ gap: "1.2cqw" }}
                       >
                         <div
                           className="bg-green-500 flex items-center justify-center flex-shrink-0"
-                          style={{ width: "min(1.8cqw, 3.5cqh)", height: "min(1.8cqw, 3.5cqh)", borderRadius: "50%" }}
+                          style={{ width: "min(2.5cqw, 4.5cqh)", height: "min(2.5cqw, 4.5cqh)", borderRadius: "50%" }}
                         >
                           <Check
-                            style={{ width: "min(1.1cqw, 2.2cqh)", height: "min(1.1cqw, 2.2cqh)" }}
+                            style={{ width: "min(1.5cqw, 2.8cqh)", height: "min(1.5cqw, 2.8cqh)" }}
                             className="text-white"
                             strokeWidth={3}
                           />
                         </div>
-                        <span className="text-foreground" style={{ fontSize: "min(1.3cqw, 2.8cqh)" }}>
+                        <span className="text-foreground" style={{ fontSize: "min(1.7cqw, 3.6cqh)" }}>
                           {benefit}
                         </span>
                       </motion.div>
@@ -237,7 +237,7 @@ export default function ProductRecommendationLeadGen() {
 
                 <Button
                   onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
-                  style={{ fontSize: "min(1.3cqw, 2.8cqh)", padding: "1cqh 2cqw", borderRadius: "0.8cqw" }}
+                  style={{ fontSize: "min(1.7cqw, 3.6cqh)", padding: "1.4cqh 2.8cqw", borderRadius: "0.8cqw" }}
                 >
                   Start Your Assessment
                 </Button>
