@@ -232,7 +232,7 @@ export default function FactFinder() {
                 Timeline
               </h3>
               <div style={{ paddingLeft: "2.8cqw" }}>
-                <FormField label="Business established" required>
+                <FormField label="Business trading date" required>
                   <div className="grid grid-cols-2" style={{ gap: "1.2cqw", maxWidth: "35cqw" }}>
                     <input
                       type="number"
@@ -323,27 +323,27 @@ export default function FactFinder() {
                 Business Channels
               </h3>
               <div style={{ paddingLeft: "2.8cqw" }}>
-              <FormField label="How do you generate business?" required className="">
-                <div className="flex flex-wrap" style={{ gap: "0.8cqw" }}>
-                  {generationOptions.map((option) => (
-                    <motion.button
-                      key={option}
-                      type="button"
-                      onClick={() => toggleGeneration(option)}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className={`rounded-full border-2 font-medium transition-all duration-200 ${
-                        businessGeneration.includes(option)
-                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                      }`}
-                      style={{ padding: "0.8cqw 1.3cqw", fontSize: "1.3cqw" }}
-                    >
-                      {option}
-                    </motion.button>
-                  ))}
-                </div>
-              </FormField>
+                <FormField label="How do you generate business?" required className="">
+                  <div className="flex flex-wrap" style={{ gap: "0.8cqw" }}>
+                    {generationOptions.map((option) => (
+                      <motion.button
+                        key={option}
+                        type="button"
+                        onClick={() => toggleGeneration(option)}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className={`rounded-full border-2 font-medium transition-all duration-200 ${
+                          businessGeneration.includes(option)
+                            ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                        }`}
+                        style={{ padding: "0.8cqw 1.3cqw", fontSize: "1.3cqw" }}
+                      >
+                        {option}
+                      </motion.button>
+                    ))}
+                  </div>
+                </FormField>
               </div>
             </div>
 
