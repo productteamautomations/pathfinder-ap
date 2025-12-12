@@ -13,53 +13,109 @@ const benefits = [
 
 function LSAIllustration() {
   return (
-    <div className="relative w-full max-w-sm mx-auto">
+    <div className="relative w-full mx-auto" style={{ padding: "1.5cqw 2cqw 1cqw 0" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-2">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
-              <BadgeCheck className="w-5 h-5 text-green-500" />
+        <div
+          className="bg-white border border-border/20"
+          style={{
+            borderRadius: "1.2cqw",
+            padding: "1.5cqw",
+            marginBottom: "1cqw",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+          }}
+        >
+          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
+            <div
+              className="bg-green-500/10 flex items-center justify-center"
+              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
+            >
+              <BadgeCheck style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Google Guaranteed</p>
-              <p className="text-xs text-muted-foreground">Verified & Trusted</p>
+              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
+                Google Guaranteed
+              </p>
+              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
+                Verified & Trusted
+              </p>
             </div>
-            <div className="flex items-center gap-0.5">
+            <div className="flex items-center" style={{ gap: "0.2cqw" }}>
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                <Star key={i} className="fill-yellow-400 text-yellow-400" style={{ width: "1cqw", height: "1cqw" }} />
               ))}
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3 ml-6">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
-              <Shield className="w-5 h-5 text-blue-500" />
+        <div
+          className="bg-white border border-border/20"
+          style={{
+            borderRadius: "1.2cqw",
+            padding: "1.5cqw",
+            marginBottom: "1cqw",
+            marginLeft: "2cqw",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+          }}
+        >
+          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
+            <div
+              className="bg-blue-500/10 flex items-center justify-center"
+              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
+            >
+              <Shield style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Background Checked</p>
-              <p className="text-xs text-muted-foreground">Fully verified business</p>
+              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
+                Background Checked
+              </p>
+              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
+                Fully verified business
+              </p>
             </div>
-            <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Secure</span>
+            <span
+              className="font-bold text-blue-500 bg-blue-50"
+              style={{ fontSize: "1cqw", padding: "0.3cqw 0.6cqw", borderRadius: "999px" }}
+            >
+              Secure
+            </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-3">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-              <Phone className="w-5 h-5 text-primary" />
+        <div
+          className="bg-white border border-border/20"
+          style={{
+            borderRadius: "1.2cqw",
+            padding: "1.5cqw",
+            marginLeft: "1cqw",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+          }}
+        >
+          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
+            <div
+              className="bg-primary/10 flex items-center justify-center"
+              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
+            >
+              <Phone style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-primary" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-semibold text-foreground">Pay Per Lead</p>
-              <p className="text-xs text-muted-foreground">Only valid enquiries</p>
+              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
+                Pay Per Lead
+              </p>
+              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
+                Only valid enquiries
+              </p>
             </div>
-            <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Smart</span>
+            <span
+              className="font-bold text-primary bg-primary/10"
+              style={{ fontSize: "1cqw", padding: "0.3cqw 0.6cqw", borderRadius: "999px" }}
+            >
+              Smart
+            </span>
           </div>
         </div>
 
@@ -67,9 +123,10 @@ function LSAIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-green-500 shadow-lg flex items-center justify-center"
+          className="absolute bg-green-500 shadow-lg flex items-center justify-center"
+          style={{ top: "-1cqw", right: "-1cqw", width: "4.5cqw", height: "4.5cqw", borderRadius: "50%" }}
         >
-          <Check className="w-7 h-7 text-white" strokeWidth={3} />
+          <Check style={{ width: "2.5cqw", height: "2.5cqw" }} className="text-white" strokeWidth={3} />
         </motion.div>
       </motion.div>
     </div>
@@ -81,76 +138,106 @@ export default function ProductRecommendationLSA() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/fact-finder", { state: location.state })}
-        currentStep={3}
-        totalSteps={4}
+        currentStep={1}
+        totalSteps={3}
         showProgress
         productLabel="LSAs"
       />
 
-      <div className="flex-1 pt-[73px] flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>
+        {/* Title and Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center px-6 py-6 md:py-8"
+          className="text-center flex-shrink-0"
+          style={{ padding: "1.5vh 2vw" }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title tracking-tight">
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5vw" }}>
             Local Services Ads
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
+          <p
+            className="text-muted-foreground"
+            style={{ fontSize: "1.3vw", marginTop: "0.5vh", maxWidth: "50vw", marginLeft: "auto", marginRight: "auto" }}
+          >
             Why LSAs are the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
-        <div className="flex-1 px-6 md:px-12 lg:px-20 pb-2">
+        {/* Card Section with max 2.18:1 aspect ratio, 5% bottom margin */}
+        <div className="flex-1 flex items-start justify-center overflow-hidden" style={{ padding: "1vh 0 5vh 0" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white rounded-[2rem] p-8 md:p-12 lg:p-14 max-w-6xl mx-auto shadow-lg border border-border/30"
+            className="bg-white border border-border/30 shadow-lg overflow-hidden"
+            style={{
+              height: "100%",
+              aspectRatio: "2.18 / 1",
+              maxWidth: "100vw",
+              containerType: "size",
+              borderRadius: "2.5cqh",
+              padding: "3cqh 3cqw",
+            }}
           >
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted border border-border/30 mb-4 -mt-2"
+            <div className="grid md:grid-cols-2 items-center h-full overflow-hidden" style={{ gap: "4cqw" }}>
+              <div className="flex flex-col justify-center h-full overflow-hidden">
+                <h2
+                  className="font-display font-bold text-title"
+                  style={{ fontSize: "min(3.3cqw, 8.5cqh)", marginBottom: "1.6cqh" }}
                 >
-                  <div className="w-2 h-2 rounded-full bg-green-500" />
-                  <span className="text-sm font-medium text-foreground">Google Guaranteed</span>
-                </motion.div>
-
-                <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">Google's Most Trusted Ad Format</h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
+                  Google's Most Trusted Ad Format
+                </h2>
+                <p
+                  className="text-muted-foreground leading-relaxed"
+                  style={{ fontSize: "min(1.5cqw, 3.2cqh)", marginBottom: "2.2cqh" }}
+                >
                   Local Services Ads put your business at the very top of Google with the Google Guaranteed badge. You
                   only pay for valid leads, and customers trust you because Google has verified your business.
                 </p>
 
-                <div className="space-y-4 mb-10">
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                <div style={{ marginBottom: "2.8cqh" }}>
+                  <h3
+                    className="font-semibold text-muted-foreground uppercase tracking-wider"
+                    style={{ fontSize: "min(1.1cqw, 2.2cqh)", marginBottom: "1.4cqh" }}
+                  >
                     Key Benefits:
                   </h3>
-                  {benefits.map((benefit, index) => (
-                    <motion.div
-                      key={benefit}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-3"
-                    >
-                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-foreground text-sm">{benefit}</span>
-                    </motion.div>
-                  ))}
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.1cqh" }}>
+                    {benefits.map((benefit, index) => (
+                      <motion.div
+                        key={benefit}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + index * 0.1 }}
+                        className="flex items-center"
+                        style={{ gap: "1cqw" }}
+                      >
+                        <div
+                          className="bg-green-500 flex items-center justify-center flex-shrink-0"
+                          style={{ width: "min(2cqw, 3.8cqh)", height: "min(2cqw, 3.8cqh)", borderRadius: "50%" }}
+                        >
+                          <Check
+                            style={{ width: "min(1.2cqw, 2.4cqh)", height: "min(1.2cqw, 2.4cqh)" }}
+                            className="text-white"
+                            strokeWidth={3}
+                          />
+                        </div>
+                        <span className="text-foreground" style={{ fontSize: "min(1.4cqw, 3cqh)" }}>
+                          {benefit}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
 
-                <Button onClick={() => navigate("/about/lsa", { state: location.state })} className="px-8">
+                <Button
+                  onClick={() => navigate("/about/lsa", { state: location.state })}
+                  style={{ fontSize: "min(1.4cqw, 3cqh)", padding: "1.1cqh 2.4cqw", borderRadius: "0.8cqw" }}
+                >
                   Continue
                 </Button>
               </div>
