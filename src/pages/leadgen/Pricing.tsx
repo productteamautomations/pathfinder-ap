@@ -3,31 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { Check, ChevronRight } from "lucide-react";
-
-function OrangeAccent() {
-  return (
-    <div className="flex items-center gap-2 mt-6">
-      <div className="flex gap-1.5">
-        {[...Array(4)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="w-2 h-2 rounded-full bg-primary"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 - i * 0.2 }}
-            transition={{ delay: i * 0.1, duration: 0.3 }}
-          />
-        ))}
-      </div>
-      <motion.div
-        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 0.4, duration: 0.4 }}
-      />
-    </div>
-  );
-}
+import { Check } from "lucide-react";
 
 export default function PricingLeadGen() {
   const navigate = useNavigate();
@@ -52,7 +28,7 @@ export default function PricingLeadGen() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <PageHeader
         onBack={() => navigate("/about/leadgen", { state: location.state })}
         currentStep={6}
@@ -61,137 +37,130 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "73px" }}>
+      <div className="flex-1 flex items-center justify-center px-6" style={{ paddingTop: "73px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
-          style={{
-            height: "calc((100vh - 73px) * 0.9)",
-            aspectRatio: "2.89",
-          }}
+          className="w-full max-w-5xl"
+          style={{ height: "calc((100vh - 73px) * 0.88)" }}
         >
-          <div className="grid md:grid-cols-2 h-full">
-            <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20 h-full">
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
-                  PRIMARY RECOMMENDATION
+          <div className="grid lg:grid-cols-2 gap-8 h-full">
+            {/* Left Side - Plan Info */}
+            <div className="flex flex-col justify-center">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+              >
+                <span className="text-sm font-semibold text-primary uppercase tracking-widest mb-4 block">
+                  Recommended for you
                 </span>
-                <h2 className="text-3xl md:text-4xl font-display font-bold text-title leading-tight tracking-tight">
+                <h1 className="text-5xl lg:text-6xl font-display font-bold text-title leading-[1.1] tracking-tight mb-6">
                   Lead Generation
-                </h2>
-                <OrangeAccent />
-                <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                  Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation
-                  to maximise your ROI.
+                </h1>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-md">
+                  Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
                 </p>
-                <div className="mt-4 space-y-2">
+
+                <div className="space-y-4">
                   {features.map((item, index) => (
                     <motion.div
                       key={item}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-2"
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
+                      className="flex items-center gap-4"
                     >
-                      <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <Check className="w-3 h-3 text-primary-foreground" />
+                      <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                        <Check className="w-4 h-4 text-primary-foreground" strokeWidth={3} />
                       </div>
-                      <span className="text-xs text-foreground">{item}</span>
+                      <span className="text-base text-foreground font-medium">{item}</span>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
             </div>
 
-            <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
+            {/* Right Side - Pricing Card */}
+            <div className="flex items-center justify-center">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                className="w-full"
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="w-full max-w-md bg-white rounded-3xl shadow-[0_25px_80px_rgba(0,0,0,0.12)] p-8 lg:p-10"
               >
-                <h3 className="text-base font-bold text-foreground mb-4">Transparent Pricing</h3>
-
-                <div className="grid grid-cols-2 gap-2 mb-4">
-                  <button
-                    onClick={() => setSelectedPlan("6")}
-                    className={`py-2 px-3 rounded-xl font-semibold text-xs transition-all ${
-                      selectedPlan === "6"
-                        ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
-                        : "bg-white text-foreground border border-border/30 hover:border-primary/40"
-                    }`}
-                  >
-                    6 Months
-                  </button>
-                  <button
-                    onClick={() => setSelectedPlan("12")}
-                    className={`py-2 px-3 rounded-xl font-semibold text-xs transition-all ${
-                      selectedPlan === "12"
-                        ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
-                        : "bg-white text-foreground border border-border/30 hover:border-primary/40"
-                    }`}
-                  >
-                    12 Months
-                  </button>
-                </div>
-
-                <div
-                  className={`p-2.5 rounded-xl mb-4 text-center border ${
-                    selectedPlan === "12" ? "bg-green-50 border-green-200" : "bg-transparent border-transparent"
-                  }`}
-                >
-                  <p
-                    className={`text-xs font-semibold ${selectedPlan === "12" ? "text-green-700" : "text-transparent"}`}
-                  >
-                    You save £{savings.toFixed(2)} with a 12-month plan!
-                  </p>
-                </div>
-
-                <div className="space-y-1.5 mb-4">
-                  <div className="flex justify-between items-center py-2 border-b border-border/30">
-                    <span className="text-xs text-foreground">Setup Fee</span>
-                    <span className="font-bold text-sm text-foreground">£{setupFee.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-border/30">
-                    <span className="text-xs text-foreground">Monthly Fee</span>
-                    <span className="font-bold text-sm text-foreground">£{monthlyFee.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-border/30">
-                    <span className="text-xs text-foreground">VAT</span>
-                    <span className="font-bold text-sm text-foreground">£{vat.toFixed(2)}</span>
+                {/* Plan Toggle */}
+                <div className="mb-6">
+                  <p className="text-sm font-semibold text-foreground mb-3">Choose your plan</p>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      onClick={() => setSelectedPlan("6")}
+                      className={`py-4 px-4 rounded-2xl font-bold text-base transition-all ${
+                        selectedPlan === "6"
+                          ? "bg-primary text-primary-foreground shadow-lg"
+                          : "bg-muted/50 text-foreground hover:bg-muted"
+                      }`}
+                    >
+                      6 Months
+                    </button>
+                    <button
+                      onClick={() => setSelectedPlan("12")}
+                      className={`py-4 px-4 rounded-2xl font-bold text-base transition-all relative ${
+                        selectedPlan === "12"
+                          ? "bg-primary text-primary-foreground shadow-lg"
+                          : "bg-muted/50 text-foreground hover:bg-muted"
+                      }`}
+                    >
+                      12 Months
+                      {selectedPlan === "12" && (
+                        <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                          Save £{savings}
+                        </span>
+                      )}
+                    </button>
                   </div>
                 </div>
 
-                <div className="bg-white border-2 border-border/30 p-4 rounded-xl mb-4">
-                  <div className="flex justify-between items-center">
-                    <span className="font-bold text-sm text-foreground">Total First Month</span>
-                    <span className="text-xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</span>
+                {/* Price Breakdown */}
+                <div className="space-y-4 mb-6">
+                  <div className="flex justify-between items-center py-3 border-b border-border/40">
+                    <span className="text-base text-muted-foreground">Setup Fee</span>
+                    <span className="font-bold text-lg text-foreground">£{setupFee.toFixed(2)}</span>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-1 text-right">
-                    (then £{monthlyAfterVAT.toFixed(2)}/month inc. VAT)
-                  </p>
+                  <div className="flex justify-between items-center py-3 border-b border-border/40">
+                    <span className="text-base text-muted-foreground">Monthly Fee</span>
+                    <span className="font-bold text-lg text-foreground">£{monthlyFee.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between items-center py-3 border-b border-border/40">
+                    <span className="text-base text-muted-foreground">VAT (20%)</span>
+                    <span className="font-bold text-lg text-foreground">£{vat.toFixed(2)}</span>
+                  </div>
                 </div>
 
+                {/* Total */}
+                <div className="bg-muted/30 rounded-2xl p-5 mb-6">
+                  <div className="flex justify-between items-end">
+                    <div>
+                      <p className="text-sm text-muted-foreground mb-1">First month total</p>
+                      <p className="text-3xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</p>
+                    </div>
+                    <p className="text-sm text-muted-foreground text-right">
+                      then £{monthlyAfterVAT.toFixed(2)}/mo
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA Button */}
                 <Button
                   onClick={() =>
                     navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })
                   }
                   fullWidth
+                  className="py-5 text-lg"
                 >
                   Start My Campaign
                 </Button>
-
-                <button
-                  onClick={() => navigate(-1)}
-                  className="mt-4 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2 group"
-                >
-                  <div className="w-8 h-8 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
-                    <ChevronRight className="w-3 h-3 text-foreground rotate-180" />
-                  </div>
-                  <span className="uppercase tracking-wider">Back</span>
-                </button>
               </motion.div>
             </div>
           </div>
