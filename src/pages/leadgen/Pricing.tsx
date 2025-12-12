@@ -6,14 +6,14 @@ import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check } from "lucide-react";
 
-export default function PricingLocalSEO() {
+export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
 
-  const setupFee = 349.0;
-  const monthlyFee6 = 279.0;
-  const monthlyFee12 = 229.0;
+  const setupFee = 249.0;
+  const monthlyFee6 = 299.0;
+  const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const vat = (setupFee + monthlyFee) * 0.2;
   const totalFirstMonth = setupFee + monthlyFee + vat;
@@ -21,21 +21,22 @@ export default function PricingLocalSEO() {
   const savings = (monthlyFee6 - monthlyFee12) * 12;
 
   const features = [
-    "Google Business Profile optimisation",
-    "Local keyword targeting",
-    "Perfectly optimised local content",
-    "Best-practice technical SEO",
+    "Google Ads campaign management",
+    "Responsive Search Ad creation",
+    "Enhanced call tracking",
+    "Say Hello access",
+    "Monthly performance reporting",
   ];
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
       <TopographicBackground />
       <PageHeader
-        onBack={() => navigate("/about/localseo", { state: location.state })}
+        onBack={() => navigate("/about/leadgen", { state: location.state })}
         currentStep={6}
         totalSteps={7}
         showProgress
-        productLabel="Local SEO"
+        productLabel="Lead Generation"
       />
 
       <div
@@ -80,7 +81,7 @@ export default function PricingLocalSEO() {
                     marginBottom: "clamp(1rem, 2vw, 1.5rem)",
                   }}
                 >
-                  Local SEO
+                  Lead Generation
                 </h1>
                 <p
                   className="text-muted-foreground leading-relaxed"
@@ -89,8 +90,7 @@ export default function PricingLocalSEO() {
                     marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
                   }}
                 >
-                  Stay ahead of competitors in search results and Google Maps when customers in your area search for
-                  services like yours.
+                  Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
                 </p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.75rem, 1.5vw, 1.25rem)" }}>
@@ -184,7 +184,7 @@ export default function PricingLocalSEO() {
                             fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
                           }}
                         >
-                          Save £{savings.toFixed(2)}
+                          Save £{savings}
                         </span>
                       )}
                     </button>
@@ -264,7 +264,7 @@ export default function PricingLocalSEO() {
                 <Button
                   onClick={() =>
                     navigate("/required-info", {
-                      state: { ...location.state, product: "Local SEO" },
+                      state: { ...location.state, product: "Lead Generation" },
                     })
                   }
                   fullWidth
