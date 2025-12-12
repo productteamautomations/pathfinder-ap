@@ -11,19 +11,22 @@ import austinMap from "@/assets/austin-map.svg";
 const seoReviews = [
   {
     name: "Joanne Nicholson",
+    company: "Nicholson Design",
     review:
       "Thank you to the Add People Team. It's always daunting choosing the right company to entrust with SEO for any online business. I recommend Add People who are professional and consistent giving my business great results.",
     rating: 5,
   },
   {
     name: "Victoria Anderson",
+    company: "Anderson Consulting",
     review:
       "Add people have been super impactful for my small business. We are hugely grateful for their support over the past 3-4 years.",
     rating: 5,
   },
   {
     name: "Nick Brown",
-    review: "Every individual I’ve had contact with has been knowledgeable, professional and extremely friendly. ",
+    company: "Brown & Associates",
+    review: "Every individual I've had contact with has been knowledgeable, professional and extremely friendly. ",
     rating: 5,
   },
 ];
