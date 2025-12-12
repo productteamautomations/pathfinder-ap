@@ -47,7 +47,7 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
         <div
           style={{
             width: "min(68vw, calc((100vh - 73px) * 0.68 * 2.2))",
