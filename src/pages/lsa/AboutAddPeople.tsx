@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
-import { ChevronRight, Users, Award, MapPin, Star, TrendingUp, Shield, Clock, BadgeCheck } from "lucide-react";
+import { Star } from "lucide-react";
+import mainImage from "@/assets/Main-image-about-us.svg";
 import altrinchamMap from "@/assets/altrinham-map.svg";
+import austinMap from "@/assets/austin-map.svg";
 
 const lsaReviews = [
   {
@@ -26,25 +29,15 @@ const lsaReviews = [
   },
 ];
 
-const stats = [
-  { icon: Users, value: "3,000+", label: "Happy Clients" },
-  { icon: Award, value: "250+", label: "Specialists" },
-  { icon: TrendingUp, value: "15+", label: "Years Experience" },
-  { icon: Shield, value: "98%", label: "Retention Rate" },
-];
-
-const highlights = [
-  { icon: BadgeCheck, title: "Google Guaranteed", description: "We handle your verification process" },
-  { icon: Clock, title: "Pay Per Lead", description: "Only pay for genuine customer enquiries" },
-  { icon: Users, title: "Dedicated Teams", description: "Your own account manager and support team" },
-];
-
 export default function AboutAddPeopleLSA() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [mainImageLoaded, setMainImageLoaded] = useState(false);
+  const [map1Loaded, setMap1Loaded] = useState(false);
+  const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
-    <div className="min-h-screen h-screen flex flex-col overflow-hidden">
+    <div className="min-h-screen flex flex-col">
       <PageHeader
         onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
         currentStep={2}
@@ -53,151 +46,139 @@ export default function AboutAddPeopleLSA() {
         productLabel="LSA's"
       />
 
-      <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex flex-col overflow-hidden">
-        <div className="flex-1 grid lg:grid-cols-12 gap-4 lg:gap-6 py-4 max-w-[1600px] mx-auto w-full h-full">
-          {/* Left Column - About & Stats */}
-          <div className="lg:col-span-4 flex flex-col gap-4 h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-gradient-to-br from-[#173340] to-[#1e4455] rounded-2xl p-6 text-white flex-shrink-0"
-            >
-              <span className="text-xs font-semibold text-primary uppercase tracking-wider">About</span>
-              <h1 className="text-2xl lg:text-3xl font-display font-bold mt-1 leading-tight">Add People</h1>
-              <p className="text-white/80 mt-2 text-sm leading-relaxed">
-                We're a team of digital marketing specialists based in Altrincham, dedicated to helping local businesses
-                thrive online.
-              </p>
-            </motion.div>
-
-            {/* Stats Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="grid grid-cols-2 gap-3 flex-1"
-            >
-              {stats.map((stat, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex flex-col justify-center"
-                >
-                  <stat.icon className="w-5 h-5 text-primary mb-2" />
-                  <div className="text-2xl lg:text-3xl font-bold text-[#173340]">{stat.value}</div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-
-            {/* Map */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white/90 backdrop-blur-sm rounded-xl p-4 border border-border/30 shadow-sm flex-shrink-0"
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <MapPin className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-[#173340]">Based in Altrincham</span>
-              </div>
+      <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          style={{
+            width: "min(92vw, calc((100vh - 73px - 2rem) * 1.8))",
+            height: "min(calc(100vh - 73px - 2rem), calc(92vw / 1.8))",
+            containerType: "size",
+            padding: "2cqw",
+          }}
+        >
+          <div className="grid h-full" style={{ gridTemplateColumns: "1.3fr 1fr", gap: "2cqw" }}>
+            {/* Left - Main Image */}
+            <div className="flex items-stretch h-full">
               <img
-                src={altrinchamMap}
-                alt="Add People location in Altrincham"
-                className="w-full h-28 lg:h-32 object-cover rounded-lg"
+                src={mainImage}
+                alt="Add People"
+                className="w-full h-full object-contain transition-opacity duration-500 ease-out"
+                style={{ opacity: mainImageLoaded ? 1 : 0, borderRadius: "1.5cqw" }}
+                onLoad={() => setMainImageLoaded(true)}
               />
-            </motion.div>
-          </div>
+            </div>
 
-          {/* Middle Column - Reviews */}
-          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="flex-shrink-0"
-            >
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-                Local Services Ads Reviews
-              </span>
-            </motion.div>
-
-            <div className="flex-1 flex flex-col gap-3">
-              {lsaReviews.map((review, idx) => (
+            {/* Right - Maps and Reviews */}
+            <div className="flex flex-col h-full" style={{ gap: "1cqw" }}>
+              {/* Maps Row */}
+              <div className="grid grid-cols-2" style={{ gap: "1cqw" }}>
                 <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: map1Loaded ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+                  className="bg-white overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+                  style={{ borderRadius: "1cqw" }}
                 >
-                  <div className="flex items-center gap-1 mb-3">
-                    {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                  <img
+                    src={altrinchamMap}
+                    alt="Altrincham Location"
+                    className="w-full h-full object-cover"
+                    onLoad={() => setMap1Loaded(true)}
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: map2Loaded ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+                  className="bg-white overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+                  style={{ borderRadius: "1cqw" }}
+                >
+                  <img
+                    src={austinMap}
+                    alt="Austin Location"
+                    className="w-full h-full object-cover"
+                    onLoad={() => setMap2Loaded(true)}
+                  />
+                </motion.div>
+              </div>
+
+              {/* Reviews */}
+              <div className="flex flex-col flex-1" style={{ gap: "0.8cqw" }}>
+                {lsaReviews.map((review, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                    className="bg-white border border-border/30 shadow-sm flex-1 flex flex-col justify-center"
+                    style={{ borderRadius: "1cqw", padding: "1cqw" }}
+                  >
+                    <p className="text-[#1a1a1a] leading-snug" style={{ fontSize: "1.1cqw", marginBottom: "0.6cqw" }}>
+                      "{review.review}"
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-bold text-[#173340]" style={{ fontSize: "1.1cqw" }}>
+                          {review.name}
+                        </div>
+                        <div className="text-gray-600" style={{ fontSize: "0.9cqw" }}>
+                          {review.company}
+                        </div>
+                      </div>
+                      <div className="flex items-center" style={{ gap: "0.2cqw" }}>
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="fill-amber-400 text-amber-400"
+                            style={{ width: "1.3cqw", height: "1.3cqw" }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom CTA Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex items-center justify-between bg-white border border-border/30 shadow-sm"
+                style={{ borderRadius: "1cqw", padding: "1.2cqw" }}
+              >
+                <div className="flex items-center" style={{ gap: "1.5cqw" }}>
+                  <div>
+                    <span className="font-display font-bold text-[#173340]" style={{ fontSize: "2.5cqw" }}>
+                      2,000+
+                    </span>
+                    <p className="text-gray-600" style={{ fontSize: "0.9cqw", marginTop: "0.2cqw", maxWidth: "18cqw" }}>
+                      five-star reviews on Trustpilot, with an 'Excellent' average rating.
+                    </p>
+                  </div>
+                  <div className="flex items-center" style={{ gap: "0.2cqw", marginRight: "1cqw" }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="fill-amber-400 text-amber-400"
+                        style={{ width: "1.5cqw", height: "1.5cqw" }}
+                      />
                     ))}
                   </div>
-                  <p className="text-sm text-foreground leading-relaxed mb-3">"{review.review}"</p>
-                  <div>
-                    <div className="text-sm font-semibold text-[#173340]">{review.name}</div>
-                    <div className="text-xs text-muted-foreground">{review.company}</div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column - Highlights & CTA */}
-          <div className="lg:col-span-4 flex flex-col gap-3 h-full">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 }}
-              className="flex-shrink-0"
-            >
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">Why Choose Us</span>
-            </motion.div>
-
-            <div className="flex-1 flex flex-col gap-3">
-              {highlights.map((highlight, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.1 }}
-                  className="bg-white/95 backdrop-blur-sm rounded-xl p-5 border border-border/30 shadow-sm flex-1 flex items-center"
+                </div>
+                <Button
+                  onClick={() => navigate("/pricing/lsa", { state: location.state })}
+                  className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center font-semibold whitespace-nowrap"
+                  style={{ gap: "0.5cqw", fontSize: "1.1cqw", padding: "1cqw 2cqw", borderRadius: "0.7cqw" }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <highlight.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-[#173340]">{highlight.title}</div>
-                      <div className="text-sm text-muted-foreground mt-1">{highlight.description}</div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  View Pricing
+                </Button>
+              </motion.div>
             </div>
-
-            {/* CTA Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="bg-gradient-to-br from-primary to-primary/80 rounded-xl p-5 text-white flex-shrink-0"
-            >
-              <div className="text-lg font-bold mb-1">Ready to grow?</div>
-              <p className="text-sm text-white/90 mb-4">Join over 3,000 businesses who have grown with Add People.</p>
-              <Button
-                onClick={() => navigate("/pricing/lsa", { state: location.state })}
-                className="w-full bg-white text-primary hover:bg-white/90 flex items-center justify-center gap-2 font-semibold"
-              >
-                View Pricing
-                <ChevronRight className="w-4 h-4" />
-              </Button>
-            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
