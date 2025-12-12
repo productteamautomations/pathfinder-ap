@@ -77,15 +77,15 @@ export default function PricingLeadGen() {
                   transition={{ duration: 0.3 }}
                 >
                   <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
-                    Lead Generation
+                    PRIMARY RECOMMENDATION
                   </span>
                   <h2 className="text-3xl md:text-4xl font-display font-bold text-title leading-tight tracking-tight">
-                    Google Ads Management
+                    Lead Generation
                   </h2>
                   <OrangeAccent />
                   <p className="text-sm text-muted-foreground mt-4 leading-relaxed">
-                    Professional Google Ads management with full campaign setup, 
-                    call tracking, and ongoing optimisation to maximise your ROI.
+                    Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation
+                    to maximise your ROI.
                   </p>
                   <div className="mt-4 space-y-2">
                     {features.map((item, index) => (
@@ -138,14 +138,16 @@ export default function PricingLeadGen() {
                     </button>
                   </div>
 
-                  <div className={`p-2.5 rounded-xl mb-4 text-center border ${
-                    selectedPlan === "12" 
-                      ? "bg-green-50 border-green-200" 
-                      : "bg-transparent border-transparent"
-                  }`}>
-                    <p className={`text-xs font-semibold ${
-                      selectedPlan === "12" ? "text-green-700" : "text-transparent"
-                    }`}>
+                  <div
+                    className={`p-2.5 rounded-xl mb-4 text-center border ${
+                      selectedPlan === "12" ? "bg-green-50 border-green-200" : "bg-transparent border-transparent"
+                    }`}
+                  >
+                    <p
+                      className={`text-xs font-semibold ${
+                        selectedPlan === "12" ? "text-green-700" : "text-transparent"
+                      }`}
+                    >
                       You save £{savings.toFixed(2)} with a 12-month plan!
                     </p>
                   </div>
@@ -176,7 +178,9 @@ export default function PricingLeadGen() {
                   </div>
 
                   <Button
-                    onClick={() => navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })}
+                    onClick={() =>
+                      navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })
+                    }
                     fullWidth
                   >
                     Start My Campaign
