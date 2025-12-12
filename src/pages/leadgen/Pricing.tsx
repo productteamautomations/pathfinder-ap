@@ -49,8 +49,8 @@ export default function PricingLeadGen() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
           style={{
-            width: "1200px",
-            height: "675px",
+            width: "62.5vw",
+            height: "35.16vw",
           }}
         >
           <div className="grid lg:grid-cols-2 h-full w-full">
