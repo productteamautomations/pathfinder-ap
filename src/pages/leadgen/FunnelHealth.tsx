@@ -320,7 +320,7 @@ export default function FunnelHealthLeadGen() {
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left Side - Results Overview */}
-            <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
+            <div className="p-14 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
               {/* Fixed Title Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -329,7 +329,7 @@ export default function FunnelHealthLeadGen() {
                 className="flex-shrink-0"
               >
                 <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">Results</span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                <h2 className="text-5xl font-display font-bold text-title leading-tight tracking-tight">
                   Your Funnel Health Overview
                 </h2>
                 <OrangeAccent />
@@ -348,7 +348,7 @@ export default function FunnelHealthLeadGen() {
             </div>
 
             {/* Right Side - Visualization */}
-            <div className="p-10 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
+            <div className="p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
