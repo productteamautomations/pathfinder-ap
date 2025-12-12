@@ -59,7 +59,7 @@ export default function AboutAddPeopleLeadGen() {
             padding: "3cqw",
           }}
         >
-          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw" }}>
+          <div className="grid h-full" style={{ gridTemplateColumns: "1.5fr 1fr", gap: "2cqw" }}>
             {/* Left - Main Image */}
             <div className="flex items-stretch h-full">
               <img
