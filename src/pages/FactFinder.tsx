@@ -322,7 +322,8 @@ export default function FactFinder() {
                 </span>
                 Business Channels
               </h3>
-              <FormField label="How do you generate business?" required className="" style={{ paddingLeft: "2.8cqw" }}>
+              <div style={{ paddingLeft: "2.8cqw" }}>
+              <FormField label="How do you generate business?" required className="">
                 <div className="flex flex-wrap" style={{ gap: "0.8cqw" }}>
                   {generationOptions.map((option) => (
                     <motion.button
@@ -343,6 +344,7 @@ export default function FactFinder() {
                   ))}
                 </div>
               </FormField>
+              </div>
             </div>
 
             {/* Submit Button */}
