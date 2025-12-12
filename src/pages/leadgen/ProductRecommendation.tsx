@@ -139,7 +139,7 @@ export default function ProductRecommendationLeadGen() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/fact-finder", { state: location.state })}
         currentStep={3}
@@ -148,37 +148,35 @@ export default function ProductRecommendationLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex flex-col" style={{ paddingTop: "73px" }}>
+      <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>
         {/* Title and Subtitle Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center"
-          style={{ padding: "2vh 2vw" }}
+          className="text-center flex-shrink-0"
+          style={{ padding: "1.5vh 2vw" }}
         >
-          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4vw" }}>
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5vw" }}>
             Lead Generation
           </h1>
           <p
             className="text-muted-foreground"
-            style={{ fontSize: "1.5vw", marginTop: "1vh", maxWidth: "50vw", marginLeft: "auto", marginRight: "auto" }}
+            style={{ fontSize: "1.3vw", marginTop: "0.5vh", maxWidth: "50vw", marginLeft: "auto", marginRight: "auto" }}
           >
             Why Google Ads is the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
         {/* Card Section with max 5% bottom margin */}
-        <div className="flex-1 flex items-center justify-center" style={{ paddingBottom: "5vh" }}>
+        <div className="flex-1 flex items-start justify-center overflow-hidden" style={{ padding: "1vh 2vw 5vh 2vw" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white border border-border/30 shadow-lg"
+            className="bg-white border border-border/30 shadow-lg w-full h-full"
             style={{
-              width: "min(90vw, calc((100vh - 73px - 12vh) * 2.2))",
-              height: "calc(100vh - 73px - 12vh - 5vh)",
-              maxHeight: "calc(100vh - 73px - 12vh - 5vh)",
+              maxWidth: "90vw",
               containerType: "size",
               borderRadius: "2.5cqw",
               padding: "3cqw",
