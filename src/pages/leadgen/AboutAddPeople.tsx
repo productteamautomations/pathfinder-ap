@@ -1,4 +1,4 @@
-import { useState } from "react";
+4import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
@@ -132,7 +132,7 @@ export default function AboutAddPeopleLeadGen() {
                     five-star reviews on Trustpilot, with an 'Excellent' average rating.
                   </p>
                 </div>
-                <div className="flex items-center gap-0.5 mr-2">
+                <div className="flex items-center gap-0.5 mr-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-6 h-6 fill-amber-400 text-amber-400" />
                   ))}
