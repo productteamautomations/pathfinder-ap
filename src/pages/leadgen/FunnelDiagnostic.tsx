@@ -212,13 +212,13 @@ export default function FunnelDiagnostic() {
                   <div className="flex-shrink-0" style={{ marginBottom: "2cqw" }}>
                     <span
                       className="font-semibold text-primary uppercase tracking-wider block"
-                      style={{ fontSize: "1cqw", marginBottom: "0.5cqw" }}
+                      style={{ fontSize: "1.2cqw", marginBottom: "0.5cqw" }}
                     >
                       {question.section}
                     </span>
                     <h2
                       className="font-display font-bold text-title leading-tight tracking-tight"
-                      style={{ fontSize: "4cqw" }}
+                      style={{ fontSize: "3.2cqw" }}
                     >
                       {question.question}
                     </h2>
