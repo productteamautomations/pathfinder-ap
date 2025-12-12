@@ -266,7 +266,7 @@ export default function Welcome() {
           backdrop-filter: blur(3px) saturate(100%);
           -webkit-backdrop-filter: blur(3px) saturate(100%);
           background: rgba(255, 255, 255, 0.25);
-          border-radius: 2vw;
+          border-radius: 1.5rem;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
           position: relative;
@@ -287,25 +287,17 @@ export default function Welcome() {
 
       <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 1 }} />
 
-      <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
+      <div className="relative z-20 min-h-screen flex items-center justify-center" style={{ padding: "2vw" }}>
         <div className="backdrop-overlay"></div>
-        <div
-          className="relative"
-          style={{
-            width: "min(90vw, 25vw)",
-            aspectRatio: "0.85",
-            display: "flex",
-            flexDirection: "column",
-            gap: "2vh",
-          }}
-        >
+        <div className="w-full relative" style={{ maxWidth: "28vw" }}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="text-center"
+            style={{ marginBottom: "3vh" }}
           >
-            <h1 className="font-display font-bold text-title" style={{ fontSize: "4vw", marginBottom: "0.5vh" }}>
+            <h1 className="font-display font-bold text-title" style={{ fontSize: "4.5vw", marginBottom: "1vh" }}>
               Pathfinder
             </h1>
             <p className="text-deep-blue/70" style={{ fontSize: "1.5vw" }}>
@@ -317,49 +309,43 @@ export default function Welcome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass flex-1"
-            style={{
-              containerType: "size",
-              padding: "3cqw",
-            }}
+            className="glass"
+            style={{ padding: "2.5vw" }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: "2cqw", height: "100%" }}>
-              <div style={{ marginBottom: "1cqw" }}>
-                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
+            <div className="space-y-6">
+              <div className="space-y-1" style={{ marginBottom: "3vh" }}>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "1.8vw" }}>
                   Get Started
                 </h2>
-                <p className="text-deep-blue/50" style={{ fontSize: "1.3cqw" }}>
+                <p className="text-deep-blue/50" style={{ fontSize: "1vw" }}>
                   Enter your details to begin your personalised path
                 </p>
               </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "2cqw" }}>
+              <Input
+                label="Name"
+                value={name}
+                placeholder="Enter your business name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <div className="space-y-1">
                 <Input
-                  label="Name"
-                  value={name}
-                  placeholder="Enter your business name"
-                  onChange={(e) => setName(e.target.value)}
+                  label="Website URL"
+                  value={url}
+                  onChange={(e) => handleUrlChange(e.target.value)}
+                  placeholder="https://yourwebsite.com"
+                  type="url"
                   required
                 />
-                <div className="space-y-1">
-                  <Input
-                    label="Website URL"
-                    value={url}
-                    onChange={(e) => handleUrlChange(e.target.value)}
-                    placeholder="https://yourwebsite.com"
-                    type="url"
-                    required
-                  />
-                  {urlError && (
-                    <p style={{ fontSize: "1.2cqw" }} className="text-destructive">
-                      {urlError}
-                    </p>
-                  )}
-                </div>
-                <Button onClick={handleContinue} disabled={!isValid} fullWidth>
-                  Continue
-                </Button>
+                {urlError && (
+                  <p className="text-destructive" style={{ fontSize: "0.9vw" }}>
+                    {urlError}
+                  </p>
+                )}
               </div>
+              <Button onClick={handleContinue} disabled={!isValid} fullWidth>
+                Continue
+              </Button>
             </div>
           </motion.div>
         </div>
