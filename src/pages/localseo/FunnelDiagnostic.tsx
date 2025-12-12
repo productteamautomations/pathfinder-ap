@@ -89,7 +89,7 @@ const questions: Question[] = [
   {
     id: "locationTargeting",
     section: "Conversions",
-    question: "Is your site correctly targeting your core location in key areas like page titles and header tags?",
+    question: "Is your site correctly targeting your location in key areas like page titles and header tags?",
     options: ["Yes - Throughout the site", "Yes - Just the homepage/main pages", "No", "Unsure"],
     image: imgServicePages,
   },
