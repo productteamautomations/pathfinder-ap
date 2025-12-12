@@ -5,13 +5,15 @@ import { PageHeader } from "@/components/PageHeader";
 import { ChevronRight, Check } from "lucide-react";
 
 // Import question images
-import imgCTR from "@/assets/leadgen-ctr.svg";
-import imgConversions from "@/assets/leadgen-tracking.svg";
-import imgCPC from "@/assets/leadgen-cpc.svg";
-import imgCTA from "@/assets/leadgen-cta.svg";
-import imgServicePages from "@/assets/leadgen-dedicated-service-pages.svg";
-import imgLeadManagement from "@/assets/leadgen-lead-management.svg";
-import imgResponseTime from "@/assets/leadgen-response-time.svg";
+import imgTop10 from "@/assets/seo-top10.svg";
+import imgVisibilityStats from "@/assets/seo-key-visibility-stats.svg";
+import imgActionStats from "@/assets/seo-key-action-stats.svg";
+import imgCTA from "@/assets/seo-cta.svg";
+import imgDedicatedPages from "@/assets/seo-dedicated-pages.svg";
+import imgLocationTargeting from "@/assets/seo-correctly-targeting-location.svg";
+import imgKeyConversions from "@/assets/seo-key-conversions.svg";
+import imgLeadManagement from "@/assets/seo-lead-management.svg";
+import imgResponseTime from "@/assets/seo-average-response-time.svg";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -56,21 +58,21 @@ const questions: Question[] = [
     section: "Traffic",
     question: "Do you know the average ranking of your top 10 most important search terms?",
     options: ["1-10", "10-20", ">20", "Unsure"],
-    image: imgCTR,
+    image: imgTop10,
   },
   {
     id: "visibilityTracking",
     section: "Traffic",
     question: "Are you tracking your key visibility stats in GSC and your GBP?",
     options: ["Both", "GSC", "GBP", "Neither"],
-    image: imgConversions,
+    image: imgVisibilityStats,
   },
   {
     id: "actionStatsTracking",
     section: "Traffic",
     question: "Are you tracking your key action stats in GSC, GBP and GA4?",
     options: ["GA4", "GSC", "GBP"],
-    image: imgCPC,
+    image: imgActionStats,
     multiSelect: true,
   },
   // Conversion Questions
@@ -86,14 +88,14 @@ const questions: Question[] = [
     section: "Conversions",
     question: "Does your site have dedicated pages for each service?",
     options: ["Yes - For all services", "Yes - For some services", "No"],
-    image: imgServicePages,
+    image: imgDedicatedPages,
   },
   {
     id: "locationTargeting",
     section: "Conversions",
     question: "Is your site correctly targeting your location in key areas like page titles and header tags?",
     options: ["Yes - Throughout the site", "Yes - Just the homepage/main pages", "No", "Unsure"],
-    image: imgServicePages,
+    image: imgLocationTargeting,
   },
   // Lead Management Questions
   {
@@ -101,7 +103,7 @@ const questions: Question[] = [
     section: "Lead Management",
     question: "Are you tracking your key conversions in your analytics?",
     options: ["Calls", "Form fills and/or emails", "Both", "None"],
-    image: imgConversions,
+    image: imgKeyConversions,
   },
   {
     id: "leadManagementSystem",
