@@ -38,7 +38,7 @@ export default function AboutAddPeopleLeadGen() {
   const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
-    <div className="min-h-screen h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={5}
