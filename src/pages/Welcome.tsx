@@ -266,7 +266,7 @@ export default function Welcome() {
           backdrop-filter: blur(3px) saturate(100%);
           -webkit-backdrop-filter: blur(3px) saturate(100%);
           background: rgba(255, 255, 255, 0.25);
-          border-radius: clamp(1rem, 2vw, 1.5rem);
+          border-radius: 2vw;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
           position: relative;
@@ -296,13 +296,10 @@ export default function Welcome() {
             transition={{ duration: 0.6 }}
             className="text-center mb-8"
           >
-            <h1
-              className="font-display font-bold text-title"
-              style={{ fontSize: "clamp(3rem, 6vw, 4rem)", marginBottom: "0.75rem" }}
-            >
+            <h1 className="font-display font-bold text-title" style={{ fontSize: "6vw", marginBottom: "0.75rem" }}>
               Pathfinder
             </h1>
-            <p className="text-deep-blue/70" style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}>
+            <p className="text-deep-blue/70" style={{ fontSize: "2vw" }}>
               Find the right path for you
             </p>
           </motion.div>
@@ -312,14 +309,14 @@ export default function Welcome() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass"
-            style={{ padding: "clamp(1.5rem, 3vw, 2rem)" }}
+            style={{ padding: "3vw" }}
           >
             <div className="space-y-6">
               <div className="space-y-1 mb-8">
-                <h2 className="font-display font-bold text-title" style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.5rem)" }}>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5vw" }}>
                   Get Started
                 </h2>
-                <p className="text-deep-blue/50" style={{ fontSize: "clamp(0.75rem, 1.5vw, 0.875rem)" }}>
+                <p className="text-deep-blue/50" style={{ fontSize: "1.5vw" }}>
                   Enter your details to begin your personalised path
                 </p>
               </div>
