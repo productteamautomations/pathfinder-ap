@@ -205,10 +205,16 @@ export default function FunnelDiagnostic() {
                 >
                   {/* Question Title at Top */}
                   <div className="flex-shrink-0 mb-6">
-                    <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-2 block">
+                    <span
+                      className="font-semibold text-primary uppercase tracking-wider mb-2 block"
+                      style={{ fontSize: "clamp(12px, 0.9vw, 16px)" }}
+                    >
                       {question.section}
                     </span>
-                    <h2 className="text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                    <h2
+                      className="font-display font-bold text-title leading-tight tracking-tight"
+                      style={{ fontSize: "clamp(32px, 3.2vw, 64px)" }}
+                    >
                       {question.question}
                     </h2>
                     <OrangeAccent />
@@ -217,12 +223,28 @@ export default function FunnelDiagnostic() {
                   {/* Step Indicator */}
                   <div className="mb-6 flex-shrink-0">
                     <div className="flex items-center gap-3">
-                      <span className="text-sm font-semibold text-primary uppercase tracking-wider">Question</span>
-                      <span className="text-2xl font-bold text-foreground">{currentQuestion + 1}</span>
-                      <span className="text-muted-foreground text-lg">—</span>
-                      <span className="text-2xl font-bold text-muted-foreground">{totalSteps}</span>
+                      <span
+                        className="font-semibold text-primary uppercase tracking-wider"
+                        style={{ fontSize: "clamp(12px, 0.9vw, 16px)" }}
+                      >
+                        Question
+                      </span>
+                      <span className="font-bold text-foreground" style={{ fontSize: "clamp(20px, 1.6vw, 32px)" }}>
+                        {currentQuestion + 1}
+                      </span>
+                      <span className="text-muted-foreground" style={{ fontSize: "clamp(16px, 1.2vw, 24px)" }}>
+                        —
+                      </span>
+                      <span
+                        className="font-bold text-muted-foreground"
+                        style={{ fontSize: "clamp(20px, 1.6vw, 32px)" }}
+                      >
+                        {totalSteps}
+                      </span>
                     </div>
-                    <p className="text-base text-muted-foreground mt-2">Select one option</p>
+                    <p className="text-muted-foreground mt-2" style={{ fontSize: "clamp(14px, 1vw, 18px)" }}>
+                      Select one option
+                    </p>
                   </div>
 
                   {/* Options */}
@@ -234,11 +256,12 @@ export default function FunnelDiagnostic() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.05 }}
                         onClick={() => handleAnswer(option)}
-                        className={`w-full p-4 rounded-2xl border text-left text-lg font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
+                        className={`w-full p-4 rounded-2xl border text-left font-medium transition-all duration-200 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.04)] ${
                           answers[question.id] === option
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                             : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                         }`}
+                        style={{ fontSize: "clamp(16px, 1.2vw, 22px)" }}
                       >
                         <span>{option}</span>
                         <ChevronRight
@@ -251,7 +274,8 @@ export default function FunnelDiagnostic() {
                   {/* Back Button */}
                   <button
                     onClick={handleBack}
-                    className="mt-6 flex-shrink-0 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    className="mt-6 flex-shrink-0 font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    style={{ fontSize: "clamp(12px, 0.9vw, 16px)" }}
                   >
                     <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                       <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
