@@ -266,6 +266,7 @@ export default function Welcome() {
           backdrop-filter: blur(3px) saturate(100%);
           -webkit-backdrop-filter: blur(3px) saturate(100%);
           background: rgba(255, 255, 255, 0.25);
+          border-radius: 1.5rem;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
           position: relative;
@@ -288,39 +289,27 @@ export default function Welcome() {
 
       <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
-
-        {/* Wrapper container that scales as one unit */}
-        <div style={{ width: "28vw", containerType: "size" }}>
+        <div className="w-full max-w-md relative">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
-            style={{ marginBottom: "4cqw" }}
+            className="text-center mb-8"
           >
-            <h1 className="font-display font-bold text-title" style={{ fontSize: "15cqw", marginBottom: "2cqw" }}>
-              Pathfinder
-            </h1>
-            <p className="text-deep-blue/70" style={{ fontSize: "5cqw" }}>
-              Find the right path for you
-            </p>
+            <h1 className="text-6xl font-display font-bold text-title mb-3">Pathfinder</h1>
+            <p className="text-xl text-deep-blue/70">Find the right path for you</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass"
-            style={{ padding: "6cqw", borderRadius: "4cqw" }}
+            className="glass p-8"
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: "4cqw" }}>
-              <div style={{ marginBottom: "2cqw" }}>
-                <h2 className="font-display font-bold text-title" style={{ fontSize: "5cqw" }}>
-                  Get Started
-                </h2>
-                <p className="text-deep-blue/50" style={{ fontSize: "3cqw" }}>
-                  Enter your details to begin your personalised path
-                </p>
+            <div className="space-y-6">
+              <div className="space-y-1 mb-8">
+                <h2 className="text-2xl font-display font-bold text-title">Get Started</h2>
+                <p className="text-deep-blue/50 text-sm">Enter your details to begin your personalised path</p>
               </div>
               <Input
                 label="Name"
@@ -338,11 +327,7 @@ export default function Welcome() {
                   type="url"
                   required
                 />
-                {urlError && (
-                  <p className="text-destructive" style={{ fontSize: "2.5cqw", marginTop: "1cqw" }}>
-                    {urlError}
-                  </p>
-                )}
+                {urlError && <p className="text-sm text-destructive">{urlError}</p>}
               </div>
               <Button onClick={handleContinue} disabled={!isValid} fullWidth>
                 Continue
