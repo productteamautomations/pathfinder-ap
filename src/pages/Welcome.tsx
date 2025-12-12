@@ -266,6 +266,7 @@ export default function Welcome() {
           backdrop-filter: blur(3px) saturate(100%);
           -webkit-backdrop-filter: blur(3px) saturate(100%);
           background: rgba(255, 255, 255, 0.25);
+          border-radius: clamp(1rem, 2vw, 1.5rem);
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
           position: relative;
@@ -286,97 +287,63 @@ export default function Welcome() {
 
       <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 1 }} />
 
-      <div className="relative z-20 min-h-screen flex items-center justify-center">
+      <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
-
-        {/* Title above card */}
-        <div className="flex flex-col items-center" style={{ gap: "3vh" }}>
+        <div className="w-full max-w-md relative">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center"
+            className="text-center mb-8"
           >
-            <h1 className="font-display font-bold text-title" style={{ fontSize: "5vw", marginBottom: "1vh" }}>
+            <h1
+              className="font-display font-bold text-title"
+              style={{ fontSize: "clamp(3rem, 6vw, 4rem)", marginBottom: "0.75rem" }}
+            >
               Pathfinder
             </h1>
-            <p className="text-deep-blue/70" style={{ fontSize: "1.8vw" }}>
+            <p className="text-deep-blue/70" style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)" }}>
               Find the right path for you
             </p>
           </motion.div>
 
-          {/* Card with gold standard */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="glass"
-            style={{
-              width: "min(90vw, calc(90vh * 0.7))",
-              aspectRatio: "0.7",
-              containerType: "size",
-              borderRadius: "2cqw",
-              padding: "4cqw",
-            }}
+            style={{ padding: "clamp(1.5rem, 3vw, 2rem)" }}
           >
-            <div style={{ display: "flex", flexDirection: "column", gap: "3cqw" }}>
-              <div style={{ marginBottom: "2cqw" }}>
-                <h2 className="font-display font-bold text-title" style={{ fontSize: "3cqw" }}>
+            <div className="space-y-6">
+              <div className="space-y-1 mb-8">
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.5rem)" }}>
                   Get Started
                 </h2>
-                <p className="text-deep-blue/50" style={{ fontSize: "1.3cqw" }}>
+                <p className="text-deep-blue/50" style={{ fontSize: "clamp(0.75rem, 1.5vw, 0.875rem)" }}>
                   Enter your details to begin your personalised path
                 </p>
               </div>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: "2.5cqw" }}>
-                <div>
-                  <label
-                    className="block font-semibold text-[#173340]"
-                    style={{ fontSize: "1.4cqw", marginBottom: "0.8cqw" }}
-                  >
-                    Name<span className="text-primary">*</span>
-                  </label>
-                  <input
-                    value={name}
-                    placeholder="Enter your business name"
-                    onChange={(e) => setName(e.target.value)}
-                    className="w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200"
-                    style={{ padding: "1.2cqw", borderRadius: "1cqw", fontSize: "1.4cqw" }}
-                  />
-                </div>
-
-                <div>
-                  <label
-                    className="block font-semibold text-[#173340]"
-                    style={{ fontSize: "1.4cqw", marginBottom: "0.8cqw" }}
-                  >
-                    Website URL<span className="text-primary">*</span>
-                  </label>
-                  <input
-                    value={url}
-                    onChange={(e) => handleUrlChange(e.target.value)}
-                    placeholder="https://yourwebsite.com"
-                    type="url"
-                    className="w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200"
-                    style={{ padding: "1.2cqw", borderRadius: "1cqw", fontSize: "1.4cqw" }}
-                  />
-                  {urlError && (
-                    <p className="text-destructive" style={{ fontSize: "1.2cqw", marginTop: "0.5cqw" }}>
-                      {urlError}
-                    </p>
-                  )}
-                </div>
-
-                <Button
-                  onClick={handleContinue}
-                  disabled={!isValid}
-                  className="w-full"
-                  style={{ fontSize: "1.4cqw", padding: "1.3cqw", borderRadius: "0.8cqw", marginTop: "1cqw" }}
-                >
-                  Continue
-                </Button>
+              <Input
+                label="Name"
+                value={name}
+                placeholder="Enter your business name"
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <div className="space-y-1">
+                <Input
+                  label="Website URL"
+                  value={url}
+                  onChange={(e) => handleUrlChange(e.target.value)}
+                  placeholder="https://yourwebsite.com"
+                  type="url"
+                  required
+                />
+                {urlError && <p className="text-sm text-destructive">{urlError}</p>}
               </div>
+              <Button onClick={handleContinue} disabled={!isValid} fullWidth>
+                Continue
+              </Button>
             </div>
           </motion.div>
         </div>
