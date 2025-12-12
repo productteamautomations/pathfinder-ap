@@ -174,38 +174,38 @@ export default function ProductRecommendationLeadGen() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white border border-border/30 shadow-lg w-full h-full"
+            className="bg-white border border-border/30 shadow-lg w-full h-full overflow-hidden"
             style={{
               maxWidth: "90vw",
               containerType: "size",
-              borderRadius: "2.5cqw",
-              padding: "3cqw",
+              borderRadius: "2.5cqh",
+              padding: "3cqh 3cqw",
             }}
           >
-            <div className="grid md:grid-cols-2 items-center h-full" style={{ gap: "4cqw" }}>
-              <div>
+            <div className="grid md:grid-cols-2 items-center h-full overflow-hidden" style={{ gap: "4cqw" }}>
+              <div className="flex flex-col justify-center h-full overflow-hidden">
                 <h2
                   className="font-display font-bold text-title"
-                  style={{ fontSize: "2.5cqw", marginBottom: "1.5cqw" }}
+                  style={{ fontSize: "min(2.5cqw, 5cqh)", marginBottom: "1.5cqh" }}
                 >
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
                 <p
                   className="text-muted-foreground leading-relaxed"
-                  style={{ fontSize: "1.3cqw", marginBottom: "2.5cqw" }}
+                  style={{ fontSize: "min(1.3cqw, 2.8cqh)", marginBottom: "2cqh" }}
                 >
                   Get your business in front of customers actively searching for your services. With Google Ads, you
                   appear at the top of search results exactly when potential customers are ready to buy.
                 </p>
 
-                <div style={{ marginBottom: "3cqw" }}>
+                <div style={{ marginBottom: "2.5cqh" }}>
                   <h3
                     className="font-semibold text-muted-foreground uppercase tracking-wider"
-                    style={{ fontSize: "1cqw", marginBottom: "1.5cqw" }}
+                    style={{ fontSize: "min(1cqw, 2cqh)", marginBottom: "1.2cqh" }}
                   >
                     Key Benefits:
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1cqh" }}>
                     {benefits.map((benefit, index) => (
                       <motion.div
                         key={benefit}
@@ -217,11 +217,11 @@ export default function ProductRecommendationLeadGen() {
                       >
                         <div
                           className="bg-green-500 flex items-center justify-center flex-shrink-0"
-                          style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "50%" }}
+                          style={{ width: "min(1.8cqw, 3.5cqh)", height: "min(1.8cqw, 3.5cqh)", borderRadius: "50%" }}
                         >
-                          <Check style={{ width: "1.1cqw", height: "1.1cqw" }} className="text-white" strokeWidth={3} />
+                          <Check style={{ width: "min(1.1cqw, 2.2cqh)", height: "min(1.1cqw, 2.2cqh)" }} className="text-white" strokeWidth={3} />
                         </div>
-                        <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
+                        <span className="text-foreground" style={{ fontSize: "min(1.3cqw, 2.8cqh)" }}>
                           {benefit}
                         </span>
                       </motion.div>
@@ -231,7 +231,7 @@ export default function ProductRecommendationLeadGen() {
 
                 <Button
                   onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
-                  style={{ fontSize: "1.3cqw", padding: "1.2cqw 2.5cqw", borderRadius: "0.8cqw" }}
+                  style={{ fontSize: "min(1.3cqw, 2.8cqh)", padding: "1cqh 2cqw", borderRadius: "0.8cqw" }}
                 >
                   Start Your Assessment
                 </Button>
