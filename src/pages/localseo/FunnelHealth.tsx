@@ -327,7 +327,7 @@ export default function FunnelHealthLocalSEO() {
     <div className="min-h-screen flex flex-col">
       <PageHeader
         onBack={() => navigate("/funnel-diagnostic/localseo", { state: location.state })}
-        currentStep={5}
+        currentStep={4}
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
