@@ -312,11 +312,10 @@ export default function BusinessCycleLocalSEO() {
                       ))}
                       <motion.div
                         className="relative overflow-hidden"
-                        style={{ height: "0.15cqw", width: "4cqw" }}
+                        style={{ height: "0.15cqw", width: "4cqw", transformOrigin: "left" }}
                         initial={{ scaleX: 0, opacity: 0 }}
                         animate={{ scaleX: 1, opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.4 }}
-                        style={{ transformOrigin: "left" }}
                       >
                         <div
                           className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
