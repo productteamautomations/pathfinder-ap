@@ -54,8 +54,8 @@ export default function AboutAddPeopleLeadGen() {
           transition={{ duration: 0.5 }}
           className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
           style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.8))",
-            aspectRatio: "1.8",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.4))",
+            aspectRatio: "1.4",
             containerType: "size",
             borderRadius: "2.5cqw",
             padding: "3cqw",
