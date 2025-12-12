@@ -307,20 +307,20 @@ export default function FunnelHealthLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "73px" }}>
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            height: "calc((100vh - 73px) * 0.9)",
-            aspectRatio: "1.65",
+            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
+            aspectRatio: "1.69",
           }}
         >
-          <div className="grid md:grid-cols-2 h-full">
+          <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left Side - Results Overview */}
-            <div className="p-10 md:p-14 lg:p-16 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
+            <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
               {/* Fixed Title Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -348,7 +348,7 @@ export default function FunnelHealthLeadGen() {
             </div>
 
             {/* Right Side - Visualization */}
-            <div className="p-10 md:p-14 lg:p-16 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
+            <div className="p-10 md:p-12 lg:p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
