@@ -10,12 +10,13 @@ import AttentionIcon from "@/assets/attention-icon.svg";
 // Orange accent motif component
 function OrangeAccent() {
   return (
-    <div className="flex items-center gap-2 mt-6">
-      <div className="flex gap-1.5">
+    <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1.5cqw" }}>
+      <div className="flex" style={{ gap: "0.4cqw" }}>
         {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
-            className="w-2 h-2 rounded-full bg-primary"
+            className="rounded-full bg-primary"
+            style={{ width: "0.5cqw", height: "0.5cqw" }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 - i * 0.2 }}
             transition={{ delay: i * 0.1, duration: 0.3 }}
@@ -23,7 +24,8 @@ function OrangeAccent() {
         ))}
       </div>
       <motion.div
-        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        className="bg-gradient-to-r from-primary to-transparent rounded-full"
+        style={{ height: "0.15cqw", width: "4cqw" }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.4, duration: 0.4 }}
@@ -56,7 +58,7 @@ function OverallScoreRing({ score }: { score: number }) {
       transition={{ duration: 0.5 }}
       className="relative flex flex-col items-center"
     >
-      <div className="relative w-36 h-36">
+      <div className="relative" style={{ width: "12cqw", height: "12cqw" }}>
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" className="text-muted/30" />
           <motion.circle
@@ -75,7 +77,8 @@ function OverallScoreRing({ score }: { score: number }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <motion.span
-            className="text-4xl font-bold text-foreground"
+            className="font-bold text-foreground"
+            style={{ fontSize: "3.5cqw" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
@@ -85,18 +88,21 @@ function OverallScoreRing({ score }: { score: number }) {
         </div>
       </div>
       <motion.div
-        className="text-center mt-3"
+        className="text-center"
+        style={{ marginTop: "1cqw" }}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
       >
-        <div className="flex items-center justify-center gap-2">
-          {score < 40 && <img src={AttentionIcon} alt="" className="w-5 h-5" />}
-          <p className="text-lg font-semibold" style={{ color: getHealthColor(score) }}>
+        <div className="flex items-center justify-center" style={{ gap: "0.6cqw" }}>
+          {score < 40 && <img src={AttentionIcon} alt="" style={{ width: "1.5cqw", height: "1.5cqw" }} />}
+          <p className="font-semibold" style={{ fontSize: "1.5cqw", color: getHealthColor(score) }}>
             {getHealthLabel(score)}
           </p>
         </div>
-        <p className="text-sm text-muted-foreground">Overall Health</p>
+        <p className="text-muted-foreground" style={{ fontSize: "1.2cqw" }}>
+          Overall Health
+        </p>
       </motion.div>
     </motion.div>
   );
@@ -312,15 +318,17 @@ export default function FunnelHealthLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.69))",
             aspectRatio: "1.69",
+            containerType: "size",
+            borderRadius: "2.5cqw",
           }}
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left Side - Results Overview */}
-            <div className="p-14 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
+            <div className="flex flex-col bg-gradient-to-br from-white to-muted/20 h-full" style={{ padding: "3cqw" }}>
               {/* Fixed Title Section */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -328,19 +336,30 @@ export default function FunnelHealthLeadGen() {
                 transition={{ duration: 0.3 }}
                 className="flex-shrink-0"
               >
-                <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">Results</span>
-                <h2 className="text-5xl font-display font-bold text-title leading-tight tracking-tight">
+                <span
+                  className="font-semibold text-primary uppercase tracking-wider block"
+                  style={{ fontSize: "1.2cqw", marginBottom: "1.5cqw" }}
+                >
+                  Results
+                </span>
+                <h2
+                  className="font-display font-bold text-title leading-tight tracking-tight"
+                  style={{ fontSize: "3.2cqw" }}
+                >
                   Your Funnel Health Overview
                 </h2>
                 <OrangeAccent />
               </motion.div>
 
               {/* Improvement Carousel fills remaining space */}
-              <div className="flex-1 flex flex-col mt-6 min-h-0">
+              <div className="flex-1 flex flex-col min-h-0" style={{ marginTop: "2cqw" }}>
                 {improvementAreas.length > 0 ? (
                   <ImprovementCarousel areas={improvementAreas} />
                 ) : (
-                  <p className="text-muted-foreground mt-4 text-lg leading-relaxed">
+                  <p
+                    className="text-muted-foreground leading-relaxed"
+                    style={{ fontSize: "1.3cqw", marginTop: "1.5cqw" }}
+                  >
                     Great work! Your funnel is performing well across all key areas.
                   </p>
                 )}
@@ -348,7 +367,10 @@ export default function FunnelHealthLeadGen() {
             </div>
 
             {/* Right Side - Visualization */}
-            <div className="p-14 flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full">
+            <div
+              className="flex flex-col justify-center bg-muted/30 border-l border-border/20 h-full"
+              style={{ padding: "3cqw" }}
+            >
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -358,7 +380,8 @@ export default function FunnelHealthLeadGen() {
                 <OverallScoreRing score={overallScore} />
 
                 <motion.div
-                  className="w-full h-40 mt-8 mb-8"
+                  className="w-full"
+                  style={{ height: "12cqw", marginTop: "2.5cqw", marginBottom: "2.5cqw" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
@@ -370,15 +393,24 @@ export default function FunnelHealthLeadGen() {
                   />
                 </motion.div>
 
-                <Button onClick={handleContinue} fullWidth className="group">
-                  <span className="flex items-center justify-center gap-2">
+                <Button
+                  onClick={handleContinue}
+                  fullWidth
+                  className="group"
+                  style={{ fontSize: "1.3cqw", padding: "1.2cqw", borderRadius: "0.8cqw" }}
+                >
+                  <span className="flex items-center justify-center" style={{ gap: "0.8cqw" }}>
                     See How We Can Help
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight
+                      style={{ width: "1.3cqw", height: "1.3cqw" }}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
                   </span>
                 </Button>
 
                 <motion.p
-                  className="text-sm text-muted-foreground text-center mt-6 max-w-xs"
+                  className="text-muted-foreground text-center"
+                  style={{ fontSize: "1.2cqw", marginTop: "2cqw", maxWidth: "80%" }}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 1.2 }}
