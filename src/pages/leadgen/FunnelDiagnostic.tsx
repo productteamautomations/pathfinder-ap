@@ -189,6 +189,7 @@ export default function FunnelDiagnostic() {
           style={{
             width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.65))",
             aspectRatio: "1.65",
+            containerType: "size",
           }}
         >
           <div className="grid md:grid-cols-[0.65fr_1fr] h-full">
@@ -207,13 +208,13 @@ export default function FunnelDiagnostic() {
                   <div className="flex-shrink-0 mb-6">
                     <span
                       className="font-semibold text-primary uppercase tracking-wider mb-2 block"
-                      style={{ fontSize: "0.9vw" }}
+                      style={{ fontSize: "1.4cqw" }}
                     >
                       {question.section}
                     </span>
                     <h2
                       className="font-display font-bold text-title leading-tight tracking-tight"
-                      style={{ fontSize: "3.2vw" }}
+                      style={{ fontSize: "5cqw" }}
                     >
                       {question.question}
                     </h2>
@@ -225,21 +226,21 @@ export default function FunnelDiagnostic() {
                     <div className="flex items-center gap-3">
                       <span
                         className="font-semibold text-primary uppercase tracking-wider"
-                        style={{ fontSize: "0.9vw" }}
+                        style={{ fontSize: "1.4cqw" }}
                       >
                         Question
                       </span>
-                      <span className="font-bold text-foreground" style={{ fontSize: "1.6vw" }}>
+                      <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
                         {currentQuestion + 1}
                       </span>
-                      <span className="text-muted-foreground" style={{ fontSize: "1.2vw" }}>
+                      <span className="text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
                         —
                       </span>
-                      <span className="font-bold text-muted-foreground" style={{ fontSize: "1.6vw" }}>
+                      <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
                         {totalSteps}
                       </span>
                     </div>
-                    <p className="text-muted-foreground mt-2" style={{ fontSize: "1vw" }}>
+                    <p className="text-muted-foreground mt-2" style={{ fontSize: "1.5cqw" }}>
                       Select one option
                     </p>
                   </div>
@@ -258,10 +259,10 @@ export default function FunnelDiagnostic() {
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                             : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                         }`}
-                        style={{ fontSize: "1.2vw" }}
+                        style={{ fontSize: "1.8cqw" }}
                       >
                         <span>{option}</span>
-                        <ChevronRight className="transition-transform" style={{ width: "1.2vw", height: "1.2vw" }} />
+                        <ChevronRight className="transition-transform" style={{ width: "1.8cqw", height: "1.8cqw" }} />
                       </motion.button>
                     ))}
                   </div>
@@ -270,13 +271,16 @@ export default function FunnelDiagnostic() {
                   <button
                     onClick={handleBack}
                     className="mt-6 flex-shrink-0 font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
-                    style={{ fontSize: "0.9vw" }}
+                    style={{ fontSize: "1.4cqw" }}
                   >
                     <div
                       className="rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all"
-                      style={{ width: "2.5vw", height: "2.5vw" }}
+                      style={{ width: "4cqw", height: "4cqw" }}
                     >
-                      <ChevronRight className="text-foreground rotate-180" style={{ width: "1vw", height: "1vw" }} />
+                      <ChevronRight
+                        className="text-foreground rotate-180"
+                        style={{ width: "1.5cqw", height: "1.5cqw" }}
+                      />
                     </div>
                     <span className="uppercase tracking-wider">{currentQuestion > 0 ? "Back" : "Cancel"}</span>
                   </button>
