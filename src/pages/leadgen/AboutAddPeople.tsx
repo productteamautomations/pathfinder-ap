@@ -47,16 +47,18 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] flex items-center justify-center" style={{ padding: "3cqw" }}>
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
         <div
-          className="w-full h-full"
+          className="w-full"
           style={{
+            maxWidth: "90vw",
+            maxHeight: "calc((100vh - 73px) * 0.9)",
             containerType: "size",
           }}
         >
-          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw" }}>
+          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw", padding: "3cqw" }}>
             {/* Left - Main Image */}
-            <div className="relative h-full flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <img
                 src={mainImage}
                 alt="Add People"
@@ -67,7 +69,7 @@ export default function AboutAddPeopleLeadGen() {
             </div>
 
             {/* Right - Maps and Reviews */}
-            <div className="flex flex-col h-full" style={{ gap: "1.5cqw" }}>
+            <div className="flex flex-col" style={{ gap: "1.5cqw" }}>
               {/* Maps Row */}
               <div className="grid grid-cols-2" style={{ gap: "1cqw" }}>
                 <motion.div
