@@ -206,7 +206,9 @@ function getImprovementAreas(
     }
 
     if (explanations.length === 0) {
-      explanations.push("Your visibility tracking and keyword rankings need improvement to drive more organic traffic.");
+      explanations.push(
+        "Your visibility tracking and keyword rankings need improvement to drive more organic traffic.",
+      );
     }
 
     areas.push({
@@ -271,19 +273,14 @@ function getImprovementAreas(
       explanations.push(
         "You're not tracking any conversions, so you can't measure which marketing efforts generate actual leads.",
       );
-    } else if (
-      answers.conversionTracking === "Calls" ||
-      answers.conversionTracking === "Form fills and/or emails"
-    ) {
+    } else if (answers.conversionTracking === "Calls" || answers.conversionTracking === "Form fills and/or emails") {
       explanations.push("You're only tracking one type of conversion. Leads come through multiple channels.");
     }
 
     if (answers.leadManagementSystem === "No system in place") {
       explanations.push("Without a lead management system, enquiries can easily fall through the cracks.");
     } else if (answers.leadManagementSystem === "Self dedicated admin time") {
-      explanations.push(
-        "Managing leads yourself takes time away from running your business and can delay responses.",
-      );
+      explanations.push("Managing leads yourself takes time away from running your business and can delay responses.");
     }
 
     if (answers.responseTime === "When I can" || answers.responseTime === "Same week") {
@@ -367,7 +364,7 @@ export default function FunnelHealthLocalSEO() {
                 </span>
                 <h2
                   className="font-display font-bold text-title leading-tight tracking-tight"
-                  style={{ fontSize: "3.2cqw" }}
+                  style={{ fontSize: "2.8cqw" }}
                 >
                   Your SEO Health Overview
                 </h2>
