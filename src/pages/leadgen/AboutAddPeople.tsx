@@ -48,17 +48,22 @@ export default function AboutAddPeopleLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center">
-        <div
-          className="w-full"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
           style={{
-            maxWidth: "90vw",
-            maxHeight: "calc((100vh - 73px) * 0.9)",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.5))",
+            aspectRatio: "1.5",
             containerType: "size",
+            borderRadius: "2.5cqw",
+            padding: "3cqw",
           }}
         >
-          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw", padding: "3cqw" }}>
+          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw" }}>
             {/* Left - Main Image */}
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-center h-full">
               <img
                 src={mainImage}
                 alt="Add People"
@@ -69,7 +74,7 @@ export default function AboutAddPeopleLeadGen() {
             </div>
 
             {/* Right - Maps and Reviews */}
-            <div className="flex flex-col" style={{ gap: "1.5cqw" }}>
+            <div className="flex flex-col h-full" style={{ gap: "1.5cqw" }}>
               {/* Maps Row */}
               <div className="grid grid-cols-2" style={{ gap: "1cqw" }}>
                 <motion.div
@@ -176,7 +181,7 @@ export default function AboutAddPeopleLeadGen() {
               </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
