@@ -73,11 +73,11 @@ const slides = [
     subtitle: "Speed wins deals",
     mainImage: SalesMainImage,
     content: [
-      { label: "Respond within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
-      { label: "Waiting >5 minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
-      { label: "78% of sales", description: "Go to the first responder", icon: Sales78PercentIcon },
-      { label: "30 minute delay", description: "Makes you 100× less likely to connect", icon: Sales30MinIcon },
-      { label: "Missed leads cost", description: "UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
+      { label: "Respond Within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
+      { label: "Waiting >5 Minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
+      { label: "78% of Sales", description: "Go to the first responder", icon: Sales78PercentIcon },
+      { label: "30 Minute Delay", description: "Makes you 100× less likely to connect", icon: Sales30MinIcon },
+      { label: "Missed Leads cost", description: "UK businesses £20k–£22k monthly", icon: SalesMissedIcon },
     ],
   },
   {
@@ -86,14 +86,14 @@ const slides = [
     mainImage: YourSetupMainImage,
     content: [
       {
-        label: "Strategic onboarding call",
-        description: "Understand your goals and develop strategy",
+        label: "Data Gathering",
+        description: "Understand your audience and develop strategy",
         icon: YourSetupIcon,
       },
-      { label: "Google Ads account setup", description: "New account or optimise existing", icon: YourSetupIcon },
-      { label: "Search campaign creation", description: "Built from scratch", icon: YourSetupIcon },
-      { label: "Conversion tracking setup", description: "Enhanced attribution solution", icon: YourSetupIcon },
-      { label: "Campaign launch call", description: "Final review and go live", icon: YourSetupIcon },
+      { label: "Google Ads Account Setup", description: "New account or optimise existing", icon: YourSetupIcon },
+      { label: "Search Campaign Creation", description: "Built from scratch", icon: YourSetupIcon },
+      { label: "Conversion Tracking Set up", description: "Enhanced attribution solution", icon: YourSetupIcon },
+      { label: "Campaign Launch Call", description: "Final review and go live", icon: YourSetupIcon },
     ],
   },
   {
@@ -101,15 +101,15 @@ const slides = [
     subtitle: "Continuous improvement",
     mainImage: OngoingServiceMainImage,
     content: [
-      { label: "Lead Generation Service team", description: "Dedicated support", icon: OngoingServiceIcon },
+      { label: "Lead Generation Service Team", description: "Dedicated support", icon: OngoingServiceIcon },
       {
-        label: "Technical team support",
+        label: "Technical Team Support",
         description: "Monthly Account optimisations and tracking checks",
         icon: OngoingServiceIcon,
       },
-      { label: "Campaign monitoring", description: "Continuous oversight and refinement", icon: OngoingServiceIcon },
-      { label: "Call attribution dashboard", description: "Track performance data", icon: OngoingServiceIcon },
-      { label: "Monthly reporting", description: "Detailed campaign performance", icon: OngoingServiceIcon },
+      { label: "Campaign Monitoring", description: "Continuous oversight and refinement", icon: OngoingServiceIcon },
+      { label: "Call Attribution Dashboard", description: "Track performance data", icon: OngoingServiceIcon },
+      { label: "Monthly Reporting", description: "Detailed campaign performance", icon: OngoingServiceIcon },
     ],
   },
 ];
