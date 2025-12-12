@@ -69,7 +69,7 @@ const questions: Question[] = [
     id: "actionStatsTracking",
     section: "Traffic",
     question: "Are you tracking your key action stats in GSC, GBP and GA4?",
-    options: ["GA4", "GSC", "GBP", "None of the above"],
+    options: ["GA4", "GSC", "GBP"],
     image: imgCPC,
     multiSelect: true,
   },
@@ -176,9 +176,6 @@ export default function FunnelDiagnosticLocalSEO() {
 
   const handleContinue = () => {
     if (isTransitioning) return;
-
-    const currentAnswers = (answers[question.id] as string[]) || [];
-    if (currentAnswers.length === 0) return;
 
     setIsTransitioning(true);
 
@@ -346,12 +343,7 @@ export default function FunnelDiagnosticLocalSEO() {
                   {question.multiSelect && (
                     <motion.button
                       onClick={handleContinue}
-                      disabled={!isMultiSelectAnswered}
-                      className={`w-full font-semibold transition-all duration-200 ${
-                        isMultiSelectAnswered
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
-                          : "bg-muted text-muted-foreground cursor-not-allowed"
-                      }`}
+                      className="w-full font-semibold transition-all duration-200 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                       style={{ marginTop: "1cqw", padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.5cqw" }}
                     >
                       Continue
