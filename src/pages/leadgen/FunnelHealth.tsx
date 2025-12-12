@@ -322,7 +322,12 @@ export default function FunnelHealthLeadGen() {
             {/* Left Side - Results Overview */}
             <div className="p-10 md:p-14 lg:p-16 flex flex-col bg-gradient-to-br from-white to-muted/20 h-full">
               {/* Fixed Title Section */}
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className="flex-shrink-0">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="flex-shrink-0"
+              >
                 <span className="text-sm font-semibold text-primary uppercase tracking-wider mb-4 block">Results</span>
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-title leading-tight tracking-tight">
                   Your Funnel Health Overview

@@ -40,17 +40,18 @@ export default function PricingLeadGen() {
       />
 
       <div
-        className="flex-1 flex items-center justify-center relative z-10"
-        style={{ paddingTop: "5vh", paddingBottom: "5vh", paddingLeft: "1.5rem", paddingRight: "1.5rem" }}
+        className="flex items-center justify-center relative z-10"
+        style={{ paddingTop: "73px", minHeight: "100vh" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[clamp(1rem,2vw,2rem)] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden w-full"
+          className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            maxWidth: "min(1400px, 90vw)",
-            maxHeight: "90vh",
+            height: "calc((100vh - 73px) * 0.9)",
+            aspectRatio: "1.65",
+            maxWidth: "90vw",
           }}
         >
           <div className="grid lg:grid-cols-2 w-full h-full">
