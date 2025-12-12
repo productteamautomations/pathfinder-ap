@@ -49,8 +49,9 @@ export default function PricingLeadGen() {
           transition={{ duration: 0.5 }}
           className="bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
           style={{
-            width: "min(62.5vw, calc((90vh - 73px) * 16 / 9))",
-            height: "calc(90vh - 73px)",
+            maxWidth: "calc((90vh - 73px) * 16 / 9)",
+            maxHeight: "calc(90vh - 73px)",
+            width: "90vw",
             aspectRatio: "16/9",
           }}
         >
