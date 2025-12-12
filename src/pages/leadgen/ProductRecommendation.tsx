@@ -188,7 +188,7 @@ export default function ProductRecommendationLeadGen() {
               <div className="flex flex-col justify-center h-full overflow-hidden">
                 <h2
                   className="font-display font-bold text-title"
-                  style={{ fontSize: "min(2.5cqw, 5cqh)", marginBottom: "1.5cqh" }}
+                  style={{ fontSize: "min(3cqw, 8cqh)", marginBottom: "1.5cqh" }}
                 >
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
@@ -221,7 +221,11 @@ export default function ProductRecommendationLeadGen() {
                           className="bg-green-500 flex items-center justify-center flex-shrink-0"
                           style={{ width: "min(1.8cqw, 3.5cqh)", height: "min(1.8cqw, 3.5cqh)", borderRadius: "50%" }}
                         >
-                          <Check style={{ width: "min(1.1cqw, 2.2cqh)", height: "min(1.1cqw, 2.2cqh)" }} className="text-white" strokeWidth={3} />
+                          <Check
+                            style={{ width: "min(1.1cqw, 2.2cqh)", height: "min(1.1cqw, 2.2cqh)" }}
+                            className="text-white"
+                            strokeWidth={3}
+                          />
                         </div>
                         <span className="text-foreground" style={{ fontSize: "min(1.3cqw, 2.8cqh)" }}>
                           {benefit}
