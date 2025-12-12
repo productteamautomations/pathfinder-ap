@@ -41,7 +41,7 @@ export default function PricingLeadGen() {
 
       <div
         className="flex-1 flex items-center justify-center px-6 relative z-10"
-        style={{ paddingTop: "calc(73px + 5vh)", paddingBottom: "5vh" }}
+        style={{ paddingTop: "5vh", paddingBottom: "5vh" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
