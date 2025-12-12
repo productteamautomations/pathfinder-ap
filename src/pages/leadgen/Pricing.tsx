@@ -39,7 +39,10 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center p-6 relative z-10" style={{ paddingTop: "73px" }}>
+      <div
+        className="flex-1 flex items-center justify-center px-6 relative z-10"
+        style={{ paddingTop: "calc(73px + 5vh)", paddingBottom: "5vh" }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -48,7 +51,7 @@ export default function PricingLeadGen() {
           style={{
             maxWidth: "1200px",
             aspectRatio: "16/9",
-            maxHeight: "calc(100vh - 73px - 3rem)",
+            maxHeight: "calc(100vh - 73px - 10vh)",
           }}
         >
           <div className="grid lg:grid-cols-2 h-full w-full">
