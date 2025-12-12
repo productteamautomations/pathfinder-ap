@@ -25,7 +25,7 @@ export default function PricingLeadGen() {
       <TopographicBackground />
       <PageHeader
         onBack={() => navigate("/about/leadgen", { state: location.state })}
-        currentStep={6}
+        currentStep={7}
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"

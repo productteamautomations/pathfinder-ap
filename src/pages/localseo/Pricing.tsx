@@ -32,7 +32,7 @@ export default function PricingLocalSEO() {
       <TopographicBackground />
       <PageHeader
         onBack={() => navigate("/about/localseo", { state: location.state })}
-        currentStep={6}
+        currentStep={7}
         totalSteps={7}
         showProgress
         productLabel="Local SEO"

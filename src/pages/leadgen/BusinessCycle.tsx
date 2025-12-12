@@ -149,7 +149,7 @@ export default function BusinessCycleLeadGen() {
     <div className="min-h-screen flex flex-col">
       <PageHeader
         onBack={() => navigate("/funnel-health/leadgen", { state: location.state })}
-        currentStep={4}
+        currentStep={5}
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"

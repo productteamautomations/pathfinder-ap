@@ -141,7 +141,7 @@ export default function ProductRecommendationLocalSEO() {
     <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
         onBack={() => navigate("/fact-finder", { state: location.state })}
-        currentStep={3}
+        currentStep={2}
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
