@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Check, MousePointerClick, TrendingUp, Target, Zap } from "lucide-react";
+import LogoGraphic from "@/assets/logo_graphic.svg";
 
 const benefits = [
   "Appear at the top of Google Search results",
@@ -149,76 +150,97 @@ export default function ProductRecommendationLeadGen() {
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
-          style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.9 * 2.2))",
-            aspectRatio: "2.2",
-            containerType: "size",
-            borderRadius: "2.5cqw",
-            padding: "3cqw",
-          }}
-        >
-          <div className="grid md:grid-cols-2 items-center h-full" style={{ gap: "4cqw" }}>
-            <div className="flex flex-col h-full justify-center">
-              <h2 className="font-display font-bold text-title" style={{ fontSize: "3.2cqw", marginBottom: "1.5cqw" }}>
-                Stay Ahead of Competitors In Google Search Results
-              </h2>
-              <p
-                className="text-muted-foreground leading-relaxed"
-                style={{ fontSize: "1.3cqw", marginBottom: "2.5cqw" }}
-              >
-                Get your business in front of customers actively searching for your services. With Google Ads, you
-                appear at the top of search results exactly when potential customers are ready to buy.
-              </p>
+        <div className="flex flex-col items-center" style={{ gap: "2vh" }}>
+          {/* Title Section Above Card */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center"
+          >
+            <h1 className="font-display font-bold text-title" style={{ fontSize: "3.5vw", marginBottom: "1vh" }}>
+              Lead Generation
+            </h1>
+            <p className="text-muted-foreground" style={{ fontSize: "1.5vw" }}>
+              Why Lead Generation (PPC) is the <span className="text-green-600 font-semibold">right fit</span> for you
+            </p>
+          </motion.div>
 
-              <div style={{ marginBottom: "3cqw" }}>
-                <h3
-                  className="font-semibold text-muted-foreground uppercase tracking-wider"
-                  style={{ fontSize: "1cqw", marginBottom: "1.5cqw" }}
+          {/* Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
+            style={{
+              width: "min(90vw, calc((100vh - 73px - 15vh) * 2.2))",
+              aspectRatio: "2.2",
+              containerType: "size",
+              borderRadius: "2.5cqw",
+              padding: "3cqw",
+            }}
+          >
+            <div className="grid md:grid-cols-2 items-center h-full" style={{ gap: "4cqw" }}>
+              <div className="flex flex-col h-full justify-center">
+                <h2
+                  className="font-display font-bold text-title"
+                  style={{ fontSize: "3.2cqw", marginBottom: "1.5cqw" }}
                 >
-                  Key Benefits:
-                </h3>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
-                  {benefits.map((benefit, index) => (
-                    <motion.div
-                      key={benefit}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.4 + index * 0.1 }}
-                      className="flex items-center"
-                      style={{ gap: "1cqw" }}
-                    >
-                      <div
-                        className="bg-green-500 flex items-center justify-center flex-shrink-0"
-                        style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "50%" }}
+                  Stay Ahead of Competitors In Google Search Results
+                </h2>
+                <p
+                  className="text-muted-foreground leading-relaxed"
+                  style={{ fontSize: "1.3cqw", marginBottom: "2.5cqw" }}
+                >
+                  Get your business in front of customers actively searching for your services. With Google Ads, you
+                  appear at the top of search results exactly when potential customers are ready to buy.
+                </p>
+
+                <div style={{ marginBottom: "3cqw" }}>
+                  <h3
+                    className="font-semibold text-muted-foreground uppercase tracking-wider"
+                    style={{ fontSize: "1cqw", marginBottom: "1.5cqw" }}
+                  >
+                    Key Benefits:
+                  </h3>
+                  <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
+                    {benefits.map((benefit, index) => (
+                      <motion.div
+                        key={benefit}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + index * 0.1 }}
+                        className="flex items-center"
+                        style={{ gap: "1cqw" }}
                       >
-                        <Check style={{ width: "1.1cqw", height: "1.1cqw" }} className="text-white" strokeWidth={3} />
-                      </div>
-                      <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
-                        {benefit}
-                      </span>
-                    </motion.div>
-                  ))}
+                        <div
+                          className="bg-green-500 flex items-center justify-center flex-shrink-0"
+                          style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "50%" }}
+                        >
+                          <Check style={{ width: "1.1cqw", height: "1.1cqw" }} className="text-white" strokeWidth={3} />
+                        </div>
+                        <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
+                          {benefit}
+                        </span>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
+
+                <Button
+                  onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
+                  style={{ fontSize: "1.3cqw", padding: "1.2cqw 2.5cqw", borderRadius: "0.8cqw", width: "fit-content" }}
+                >
+                  Start Your Assessment
+                </Button>
               </div>
 
-              <Button
-                onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
-                style={{ fontSize: "1.3cqw", padding: "1.2cqw 2.5cqw", borderRadius: "0.8cqw", width: "fit-content" }}
-              >
-                Start Your Assessment
-              </Button>
+              <div className="hidden md:block h-full flex items-center justify-center">
+                <LeadGenIllustration />
+              </div>
             </div>
-
-            <div className="hidden md:block h-full flex items-center justify-center">
-              <LeadGenIllustration />
-            </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
