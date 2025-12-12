@@ -47,27 +47,20 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
+      <div className="flex-1 pt-[73px] flex items-center justify-center" style={{ padding: "3cqw" }}>
+        <div
+          className="w-full h-full"
           style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.4))",
-            aspectRatio: "1.4",
             containerType: "size",
-            borderRadius: "2.5cqw",
-            padding: "3cqw",
           }}
         >
-          <div className="grid lg:grid-cols-[1.2fr_1fr] h-full" style={{ gap: "2cqw" }}>
+          <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw" }}>
             {/* Left - Main Image */}
             <div className="relative h-full flex items-center justify-center">
               <img
                 src={mainImage}
                 alt="Add People"
-                className="w-full h-auto object-contain transition-opacity duration-500 ease-out"
+                className="w-full h-full object-contain transition-opacity duration-500 ease-out"
                 style={{ opacity: mainImageLoaded ? 1 : 0, borderRadius: "1.5cqw" }}
                 onLoad={() => setMainImageLoaded(true)}
               />
@@ -181,7 +174,7 @@ export default function AboutAddPeopleLeadGen() {
               </motion.div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );
