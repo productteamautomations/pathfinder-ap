@@ -38,7 +38,7 @@ export default function AboutAddPeopleLeadGen() {
   const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
-    <div className="min-h-screen h-screen flex flex-col overflow-hidden">
+    <div className="min-h-screen flex flex-col">
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={5}
@@ -47,106 +47,141 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] px-4 md:px-8 lg:px-12 flex items-center justify-center overflow-hidden">
-        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 max-w-[1400px] mx-auto w-full">
-          {/* Left - Main Image */}
-          <div className="relative">
-            <img
-              src={mainImage}
-              alt="Add People"
-              className="w-full h-auto object-contain rounded-2xl transition-opacity duration-500 ease-out"
-              style={{ opacity: mainImageLoaded ? 1 : 0 }}
-              onLoad={() => setMainImageLoaded(true)}
-            />
-          </div>
-
-          {/* Right - Maps and Reviews */}
-          <div className="flex flex-col gap-4 self-stretch">
-            {/* Maps Row */}
-            <div className="grid grid-cols-2 gap-3">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: map1Loaded ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
-                className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
-              >
-                <img
-                  src={altrinchamMap}
-                  alt="Altrincham Location"
-                  className="w-full h-full object-cover"
-                  onLoad={() => setMap1Loaded(true)}
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: map2Loaded ? 1 : 0 }}
-                transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
-                className="bg-white rounded-xl overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
-              >
-                <img
-                  src={austinMap}
-                  alt="Austin Location"
-                  className="w-full h-full object-cover"
-                  onLoad={() => setMap2Loaded(true)}
-                />
-              </motion.div>
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
+          style={{
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.8))",
+            aspectRatio: "1.8",
+            containerType: "size",
+            borderRadius: "2.5cqw",
+            padding: "3cqw",
+          }}
+        >
+          <div className="grid lg:grid-cols-[1.2fr_1fr] h-full" style={{ gap: "2cqw" }}>
+            {/* Left - Main Image */}
+            <div className="relative h-full flex items-center justify-center">
+              <img
+                src={mainImage}
+                alt="Add People"
+                className="w-full h-auto object-contain transition-opacity duration-500 ease-out"
+                style={{ opacity: mainImageLoaded ? 1 : 0, borderRadius: "1.5cqw" }}
+                onLoad={() => setMainImageLoaded(true)}
+              />
             </div>
 
-            {/* Reviews */}
-            <div className="flex flex-col gap-4 flex-1">
-              {leadgenReviews.map((review, idx) => (
+            {/* Right - Maps and Reviews */}
+            <div className="flex flex-col h-full" style={{ gap: "1.5cqw" }}>
+              {/* Maps Row */}
+              <div className="grid grid-cols-2" style={{ gap: "1cqw" }}>
                 <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
-                  className="bg-white rounded-xl p-4 border border-border/30 shadow-sm"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: map1Loaded ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.1 }}
+                  className="bg-white overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+                  style={{ borderRadius: "1.2cqw" }}
                 >
-                  <p className="text-sm text-[#1a1a1a] leading-relaxed mb-3">"{review.review}"</p>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="text-sm font-bold text-[#173340]">{review.name}</div>
-                      <div className="text-xs text-gray-600">{review.company}</div>
-                    </div>
-                    <div className="flex items-center gap-0.5">
-                      {[...Array(review.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
-                  </div>
+                  <img
+                    src={altrinchamMap}
+                    alt="Altrincham Location"
+                    className="w-full h-full object-cover"
+                    onLoad={() => setMap1Loaded(true)}
+                  />
                 </motion.div>
-              ))}
-            </div>
-
-            {/* Bottom CTA Row */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex items-center justify-between bg-white rounded-xl p-5 border border-border/30 shadow-sm"
-            >
-              <div className="flex items-center gap-6">
-                <div>
-                  <span className="text-4xl font-display font-bold text-[#173340]">2,000+</span>
-                  <p className="text-xs text-gray-600 mt-1 max-w-[280px]">
-                    five-star reviews on Trustpilot, with an 'Excellent' average rating.
-                  </p>
-                </div>
-                <div className="flex items-center gap-0.5 mr-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-6 h-6 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: map2Loaded ? 1 : 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut", delay: 0.15 }}
+                  className="bg-white overflow-hidden border border-border/30 shadow-sm aspect-[4/3]"
+                  style={{ borderRadius: "1.2cqw" }}
+                >
+                  <img
+                    src={austinMap}
+                    alt="Austin Location"
+                    className="w-full h-full object-cover"
+                    onLoad={() => setMap2Loaded(true)}
+                  />
+                </motion.div>
               </div>
-              <Button
-                onClick={() => navigate("/pricing/leadgen", { state: location.state })}
-                className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center gap-2 font-semibold px-8 py-6 text-base whitespace-nowrap"
+
+              {/* Reviews */}
+              <div className="flex flex-col flex-1" style={{ gap: "1.2cqw" }}>
+                {leadgenReviews.map((review, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                    className="bg-white border border-border/30 shadow-sm"
+                    style={{ borderRadius: "1.2cqw", padding: "1.2cqw" }}
+                  >
+                    <p className="text-[#1a1a1a] leading-relaxed" style={{ fontSize: "1.2cqw", marginBottom: "1cqw" }}>
+                      "{review.review}"
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-bold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
+                          {review.name}
+                        </div>
+                        <div className="text-gray-600" style={{ fontSize: "1cqw" }}>
+                          {review.company}
+                        </div>
+                      </div>
+                      <div className="flex items-center" style={{ gap: "0.2cqw" }}>
+                        {[...Array(review.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="fill-amber-400 text-amber-400"
+                            style={{ width: "1.5cqw", height: "1.5cqw" }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Bottom CTA Row */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex items-center justify-between bg-white border border-border/30 shadow-sm"
+                style={{ borderRadius: "1.2cqw", padding: "1.5cqw" }}
               >
-                View Pricing
-              </Button>
-            </motion.div>
+                <div className="flex items-center" style={{ gap: "2cqw" }}>
+                  <div>
+                    <span className="font-display font-bold text-[#173340]" style={{ fontSize: "3cqw" }}>
+                      2,000+
+                    </span>
+                    <p className="text-gray-600" style={{ fontSize: "1cqw", marginTop: "0.3cqw", maxWidth: "20cqw" }}>
+                      five-star reviews on Trustpilot, with an 'Excellent' average rating.
+                    </p>
+                  </div>
+                  <div className="flex items-center" style={{ gap: "0.2cqw", marginRight: "1.5cqw" }}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="fill-amber-400 text-amber-400"
+                        style={{ width: "1.8cqw", height: "1.8cqw" }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <Button
+                  onClick={() => navigate("/pricing/leadgen", { state: location.state })}
+                  className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center font-semibold whitespace-nowrap"
+                  style={{ gap: "0.6cqw", fontSize: "1.2cqw", padding: "1.2cqw 2.5cqw", borderRadius: "0.8cqw" }}
+                >
+                  View Pricing
+                </Button>
+              </motion.div>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
