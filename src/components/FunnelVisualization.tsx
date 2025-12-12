@@ -18,15 +18,21 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore }
     <div className="relative w-full h-full">
       {/* Legend/Key - positioned absolutely to the left */}
       <motion.div
-        className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col gap-2"
+        className="absolute left-0 top-1/2 -translate-y-1/2 flex flex-col"
+        style={{ gap: "0.6cqw" }}
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 1.8, duration: 0.5 }}
       >
         {legendItems.map((item) => (
-          <div key={item.label} className="flex items-center gap-2">
-            <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ backgroundColor: item.color }} />
-            <span className="text-[#173340] text-xs font-medium whitespace-nowrap">{item.label}</span>
+          <div key={item.label} className="flex items-center" style={{ gap: "0.6cqw" }}>
+            <div
+              className="rounded-sm flex-shrink-0"
+              style={{ width: "0.8cqw", height: "0.8cqw", backgroundColor: item.color }}
+            />
+            <span className="text-[#173340] font-medium whitespace-nowrap" style={{ fontSize: "1.1cqw" }}>
+              {item.label}
+            </span>
           </div>
         ))}
       </motion.div>
