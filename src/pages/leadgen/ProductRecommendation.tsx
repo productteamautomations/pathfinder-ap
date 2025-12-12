@@ -13,110 +13,49 @@ const benefits = [
 
 function LeadGenIllustration() {
   return (
-    <div className="relative w-full mx-auto">
+    <div className="relative w-full max-w-sm mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
         className="relative"
       >
-        <div
-          className="bg-white border border-border/20"
-          style={{
-            borderRadius: "1.2cqw",
-            padding: "1.5cqw",
-            marginBottom: "1cqw",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-          }}
-        >
-          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
-            <div
-              className="bg-primary/10 flex items-center justify-center"
-              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
-            >
-              <MousePointerClick style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-primary" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <MousePointerClick className="w-5 h-5 text-primary" />
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
-                Sponsored Search Ads
-              </p>
-              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
-                Top of Google Results
-              </p>
+              <p className="text-sm font-semibold text-foreground">Sponsored Search Ads</p>
+              <p className="text-xs text-muted-foreground">Top of Google Results</p>
             </div>
-            <span
-              className="font-bold text-primary bg-primary/10"
-              style={{ fontSize: "1cqw", padding: "0.3cqw 0.6cqw", borderRadius: "999px" }}
-            >
-              Ad
-            </span>
+            <span className="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded-full">Ad</span>
           </div>
         </div>
 
-        <div
-          className="bg-white border border-border/20"
-          style={{
-            borderRadius: "1.2cqw",
-            padding: "1.5cqw",
-            marginBottom: "1cqw",
-            marginLeft: "2cqw",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-          }}
-        >
-          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
-            <div
-              className="bg-green-500/10 flex items-center justify-center"
-              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
-            >
-              <TrendingUp style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-green-500" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 mb-3 ml-6">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center">
+              <TrendingUp className="w-5 h-5 text-green-500" />
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
-                Click-Through Rate
-              </p>
-              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
-                Industry-leading CTR
-              </p>
+              <p className="text-sm font-semibold text-foreground">Click-Through Rate</p>
+              <p className="text-xs text-muted-foreground">Industry-leading CTR</p>
             </div>
-            <span
-              className="font-bold text-green-500 bg-green-50"
-              style={{ fontSize: "1cqw", padding: "0.3cqw 0.6cqw", borderRadius: "999px" }}
-            >
-              +45%
-            </span>
+            <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded-full">+45%</span>
           </div>
         </div>
 
-        <div
-          className="bg-white border border-border/20"
-          style={{
-            borderRadius: "1.2cqw",
-            padding: "1.5cqw",
-            marginLeft: "1cqw",
-            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-          }}
-        >
-          <div className="flex items-center" style={{ gap: "1.2cqw" }}>
-            <div
-              className="bg-blue-500/10 flex items-center justify-center"
-              style={{ width: "3cqw", height: "3cqw", borderRadius: "0.8cqw" }}
-            >
-              <Target style={{ width: "1.5cqw", height: "1.5cqw" }} className="text-blue-500" />
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-border/20 ml-3">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center">
+              <Target className="w-5 h-5 text-blue-500" />
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-foreground" style={{ fontSize: "1.3cqw" }}>
-                Precise Targeting
-              </p>
-              <p className="text-muted-foreground" style={{ fontSize: "1cqw" }}>
-                Location, device, demographics
-              </p>
+              <p className="text-sm font-semibold text-foreground">Precise Targeting</p>
+              <p className="text-xs text-muted-foreground">Location, device, demographics</p>
             </div>
-            <span
-              className="font-bold text-blue-500 bg-blue-50"
-              style={{ fontSize: "1cqw", padding: "0.3cqw 0.6cqw", borderRadius: "999px" }}
-            >
-              Smart
-            </span>
+            <span className="text-xs font-bold text-blue-500 bg-blue-50 px-2 py-1 rounded-full">Smart</span>
           </div>
         </div>
 
@@ -124,10 +63,9 @@ function LeadGenIllustration() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.6, type: "spring" }}
-          className="absolute bg-primary shadow-lg flex items-center justify-center"
-          style={{ top: "-1cqw", right: "-1cqw", width: "4.5cqw", height: "4.5cqw", borderRadius: "50%" }}
+          className="absolute -top-3 -right-3 w-14 h-14 rounded-full bg-primary shadow-lg flex items-center justify-center"
         >
-          <Zap style={{ width: "2.5cqw", height: "2.5cqw" }} className="text-white" strokeWidth={2} />
+          <Zap className="w-7 h-7 text-white" strokeWidth={2} />
         </motion.div>
       </motion.div>
     </div>
@@ -154,85 +92,61 @@ export default function ProductRecommendationLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center"
-          style={{ padding: "2vh 2vw" }}
+          className="text-center px-6 py-6 md:py-8"
         >
-          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4vw" }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-title tracking-tight">
             Lead Generation
           </h1>
-          <p
-            className="text-muted-foreground"
-            style={{ fontSize: "1.5vw", marginTop: "1vh", maxWidth: "50vw", marginLeft: "auto", marginRight: "auto" }}
-          >
+          <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl mx-auto">
             Why Google Ads is the <span className="text-green-600 font-semibold">Right Fit</span> for you.
           </p>
         </motion.div>
 
         {/* Card Section with 5% margins */}
-        <div className="flex-1 flex items-center justify-center">
+        <div className="flex-1 flex items-center justify-center px-6 md:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white border border-border/30 shadow-lg"
+            className="bg-white rounded-[2rem] shadow-lg border border-border/30"
             style={{
-              width: "min(90vw, calc((100vh - 73px - 14vh) * 2.2))",
+              height: "calc((100vh - 73px - 140px) * 0.9)",
               aspectRatio: "2.2",
-              containerType: "size",
-              borderRadius: "2.5cqw",
-              padding: "3cqw",
             }}
           >
-            <div className="grid md:grid-cols-2 items-center h-full" style={{ gap: "4cqw" }}>
+            <div className="grid md:grid-cols-2 gap-12 items-center h-full p-8 md:p-12 lg:p-14">
               <div>
-                <h2
-                  className="font-display font-bold text-title"
-                  style={{ fontSize: "2.5cqw", marginBottom: "1.5cqw" }}
-                >
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-title mb-4">
                   Stay Ahead of Competitors In Google Search Results
                 </h2>
-                <p
-                  className="text-muted-foreground leading-relaxed"
-                  style={{ fontSize: "1.3cqw", marginBottom: "2.5cqw" }}
-                >
+                <p className="text-muted-foreground leading-relaxed mb-8">
                   Get your business in front of customers actively searching for your services. With Google Ads, you
                   appear at the top of search results exactly when potential customers are ready to buy.
                 </p>
 
-                <div style={{ marginBottom: "3cqw" }}>
-                  <h3
-                    className="font-semibold text-muted-foreground uppercase tracking-wider"
-                    style={{ fontSize: "1cqw", marginBottom: "1.5cqw" }}
-                  >
+                <div className="space-y-4 mb-10">
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     Key Benefits:
                   </h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
-                    {benefits.map((benefit, index) => (
-                      <motion.div
-                        key={benefit}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.4 + index * 0.1 }}
-                        className="flex items-center"
-                        style={{ gap: "1cqw" }}
-                      >
-                        <div
-                          className="bg-green-500 flex items-center justify-center flex-shrink-0"
-                          style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "50%" }}
-                        >
-                          <Check style={{ width: "1.1cqw", height: "1.1cqw" }} className="text-white" strokeWidth={3} />
-                        </div>
-                        <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
-                          {benefit}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {benefits.map((benefit, index) => (
+                    <motion.div
+                      key={benefit}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.4 + index * 0.1 }}
+                      className="flex items-center gap-3"
+                    >
+                      <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                      </div>
+                      <span className="text-foreground text-sm">{benefit}</span>
+                    </motion.div>
+                  ))}
                 </div>
 
                 <Button
                   onClick={() => navigate("/funnel-diagnostic/leadgen", { state: location.state })}
-                  style={{ fontSize: "1.3cqw", padding: "1.2cqw 2.5cqw", borderRadius: "0.8cqw" }}
+                  className="px-8"
                 >
                   Start Your Assessment
                 </Button>
