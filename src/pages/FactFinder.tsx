@@ -19,12 +19,13 @@ const generationOptions = [
 // Orange accent motif component
 function OrangeAccent() {
   return (
-    <div className="flex items-center gap-2 mt-3">
-      <div className="flex gap-1.5">
+    <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
+      <div className="flex" style={{ gap: "0.4cqw" }}>
         {[...Array(4)].map((_, i) => (
           <motion.div
             key={i}
-            className="w-2 h-2 rounded-full bg-primary"
+            className="rounded-full bg-primary"
+            style={{ width: "0.5cqw", height: "0.5cqw" }}
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 - i * 0.2 }}
             transition={{ delay: i * 0.1, duration: 0.3 }}
@@ -32,7 +33,8 @@ function OrangeAccent() {
         ))}
       </div>
       <motion.div
-        className="h-[2px] w-16 bg-gradient-to-r from-primary to-transparent rounded-full"
+        className="bg-gradient-to-r from-primary to-transparent rounded-full"
+        style={{ height: "0.15cqw", width: "4cqw" }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.4, duration: 0.4 }}
@@ -55,9 +57,13 @@ function FormField({
 }) {
   return (
     <div className={className}>
-      <label className="block text-sm font-semibold text-[#173340] mb-2">
+      <label className="block font-semibold text-[#173340]" style={{ fontSize: "1.2cqw", marginBottom: "0.6cqw" }}>
         {label}
-        {required && <span className="text-primary ml-0.5">*</span>}
+        {required && (
+          <span className="text-primary" style={{ marginLeft: "0.2cqw" }}>
+            *
+          </span>
+        )}
       </label>
       {children}
     </div>
@@ -102,7 +108,7 @@ export default function FactFinder() {
         LeadGen: "/product-recommendation/leadgen",
         LSA: "/product-recommendation/lsa",
       };
-      
+
       const newState = {
         ...location.state,
         monthEstablished,
@@ -111,7 +117,7 @@ export default function FactFinder() {
         monthlyLeads,
         hasGMB,
       };
-      
+
       if (productRoutes[recommendation.product]) {
         navigate(productRoutes[recommendation.product], { state: newState });
       }
@@ -128,7 +134,7 @@ export default function FactFinder() {
         LeadGen: "/product-recommendation/leadgen",
         LSA: "/product-recommendation/lsa",
       };
-      
+
       const newState = {
         ...location.state,
         monthEstablished,
@@ -137,7 +143,7 @@ export default function FactFinder() {
         monthlyLeads,
         hasGMB,
       };
-      
+
       if (productRoutes[recommendation.product]) {
         navigate(productRoutes[recommendation.product], { state: newState });
       }
@@ -169,176 +175,209 @@ export default function FactFinder() {
   const showError = retryError;
 
   const inputStyles =
-    "w-full px-4 py-3 rounded-xl border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
+    "w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader onBack={() => navigate("/")} currentStep={1} totalSteps={7} showProgress />
 
       {/* Content Area */}
-      <div className="flex-1 pt-[73px] px-6 md:px-12 flex items-center justify-center">
-        <div className="w-full max-w-4xl">
-          {/* Main Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-white/95 backdrop-blur-sm rounded-[2rem] shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 p-6 md:p-8"
-          >
-            {/* Header */}
-            <div className="mb-5">
-              <motion.span
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="inline-block text-xs font-semibold tracking-widest text-primary uppercase mb-2"
+      <div className="flex-1 pt-[73px] flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="bg-white/95 backdrop-blur-sm shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20"
+          style={{
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.5))",
+            aspectRatio: "1.5",
+            containerType: "size",
+            borderRadius: "2.5cqw",
+            padding: "3cqw",
+          }}
+        >
+          {/* Header */}
+          <div style={{ marginBottom: "2cqw" }}>
+            <motion.span
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="inline-block font-semibold tracking-widest text-primary uppercase"
+              style={{ fontSize: "0.9cqw", marginBottom: "0.6cqw" }}
+            >
+              Step 1 of 7
+            </motion.span>
+            <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
+              Business Information
+            </h2>
+            <p className="text-muted-foreground" style={{ marginTop: "0.4cqw", fontSize: "1.2cqw" }}>
+              Help us understand your business better
+            </p>
+            <OrangeAccent />
+          </div>
+
+          {/* Form Grid */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "2cqw" }}>
+            {/* Section 1: Timeline */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1cqw" }}>
+              <h3
+                className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
               >
-                Step 1 of 7
-              </motion.span>
-              <h2 className="text-2xl md:text-3xl font-display font-bold text-title">Business Information</h2>
-              <p className="text-muted-foreground mt-1 text-sm">Help us understand your business better</p>
-              <OrangeAccent />
-            </div>
-
-            {/* Form Grid */}
-            <div className="space-y-5">
-              {/* Section 1: Timeline */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">
-                    1
-                  </span>
-                  Timeline
-                </h3>
-                <div className="pl-7">
-                  <FormField label="Business established" required>
-                    <div className="grid grid-cols-2 gap-3 max-w-xs">
-                      <input
-                        type="number"
-                        min="1"
-                        max="12"
-                        placeholder="Month"
-                        value={monthEstablished}
-                        onChange={(e) => setMonthEstablished(e.target.value)}
-                        className={inputStyles}
-                      />
-                      <input
-                        type="number"
-                        min="1900"
-                        max={new Date().getFullYear()}
-                        placeholder="Year"
-                        value={yearEstablished}
-                        onChange={(e) => setYearEstablished(e.target.value)}
-                        className={inputStyles}
-                      />
-                    </div>
-                  </FormField>
-                </div>
-              </div>
-
-              {/* Section 2: Lead Generation */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">
-                    2
-                  </span>
-                  Lead Generation
-                </h3>
-                <div className="grid md:grid-cols-2 gap-4 pl-7">
-                  <FormField label="Monthly leads" required>
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "1.5cqw", height: "1.5cqw", fontSize: "0.8cqw" }}
+                >
+                  1
+                </span>
+                Timeline
+              </h3>
+              <div style={{ paddingLeft: "2.1cqw" }}>
+                <FormField label="Business established" required>
+                  <div className="grid grid-cols-2" style={{ gap: "1cqw", maxWidth: "30cqw" }}>
                     <input
                       type="number"
-                      min="0"
-                      placeholder="Enter number"
-                      value={monthlyLeads}
-                      onChange={(e) => setMonthlyLeads(e.target.value)}
+                      min="1"
+                      max="12"
+                      placeholder="Month"
+                      value={monthEstablished}
+                      onChange={(e) => setMonthEstablished(e.target.value)}
                       className={inputStyles}
+                      style={{ padding: "1cqw", borderRadius: "1cqw", fontSize: "1.1cqw" }}
                     />
-                  </FormField>
-
-                  <FormField label="Do you have a GMB account?" required>
-                    <div className="flex gap-2">
-                      {["Yes", "No"].map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() => setHasGMB(option)}
-                          className={`flex-1 px-4 py-3 rounded-xl border-2 font-medium transition-all duration-200 ${
-                            hasGMB === option
-                              ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                              : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                          }`}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  </FormField>
-                </div>
+                    <input
+                      type="number"
+                      min="1900"
+                      max={new Date().getFullYear()}
+                      placeholder="Year"
+                      value={yearEstablished}
+                      onChange={(e) => setYearEstablished(e.target.value)}
+                      className={inputStyles}
+                      style={{ padding: "1cqw", borderRadius: "1cqw", fontSize: "1.1cqw" }}
+                    />
+                  </div>
+                </FormField>
               </div>
+            </div>
 
-              {/* Section 3: Business Channels */}
-              <div className="space-y-3">
-                <h3 className="text-xs font-semibold tracking-wider text-muted-foreground uppercase flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">
-                    3
-                  </span>
-                  Business Channels
-                </h3>
-                <FormField label="How do you generate business?" required className="pl-7">
-                  <div className="flex flex-wrap gap-2">
-                    {generationOptions.map((option) => (
-                      <motion.button
+            {/* Section 2: Lead Generation */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1cqw" }}>
+              <h3
+                className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
+              >
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "1.5cqw", height: "1.5cqw", fontSize: "0.8cqw" }}
+                >
+                  2
+                </span>
+                Lead Generation
+              </h3>
+              <div className="grid md:grid-cols-2" style={{ gap: "1.5cqw", paddingLeft: "2.1cqw" }}>
+                <FormField label="Monthly leads" required>
+                  <input
+                    type="number"
+                    min="0"
+                    placeholder="Enter number"
+                    value={monthlyLeads}
+                    onChange={(e) => setMonthlyLeads(e.target.value)}
+                    className={inputStyles}
+                    style={{ padding: "1cqw", borderRadius: "1cqw", fontSize: "1.1cqw" }}
+                  />
+                </FormField>
+
+                <FormField label="Do you have a GMB account?" required>
+                  <div className="flex" style={{ gap: "0.6cqw" }}>
+                    {["Yes", "No"].map((option) => (
+                      <button
                         key={option}
                         type="button"
-                        onClick={() => toggleGeneration(option)}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`px-3 py-2 rounded-full border-2 text-sm font-medium transition-all duration-200 ${
-                          businessGeneration.includes(option)
-                            ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                        onClick={() => setHasGMB(option)}
+                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
+                          hasGMB === option
+                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                             : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                         }`}
+                        style={{ padding: "1cqw", borderRadius: "1cqw", fontSize: "1.1cqw" }}
                       >
                         {option}
-                      </motion.button>
+                      </button>
                     ))}
                   </div>
                 </FormField>
               </div>
-
-              {/* Submit Button */}
-              <div className="flex flex-col items-end pt-4 border-t border-border/20">
-                <Button 
-                  onClick={handleSubmit} 
-                  disabled={!isFormValid() || isWaitingForRecommendation} 
-                  className="px-10"
-                >
-                  <span className="flex items-center gap-2">
-                    {isWaitingForRecommendation ? (
-                      <>
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Analyzing...
-                      </>
-                    ) : (
-                      "Continue"
-                    )}
-                  </span>
-                </Button>
-                
-                {showError && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2 text-sm text-destructive mt-3"
-                  >
-                    <AlertCircle className="w-4 h-4" />
-                    <span>Unable to get recommendation. Please try again.</span>
-                  </motion.div>
-                )}
-              </div>
             </div>
-          </motion.div>
-        </div>
+
+            {/* Section 3: Business Channels */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "1cqw" }}>
+              <h3
+                className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
+              >
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "1.5cqw", height: "1.5cqw", fontSize: "0.8cqw" }}
+                >
+                  3
+                </span>
+                Business Channels
+              </h3>
+              <FormField label="How do you generate business?" required className="" style={{ paddingLeft: "2.1cqw" }}>
+                <div className="flex flex-wrap" style={{ gap: "0.6cqw" }}>
+                  {generationOptions.map((option) => (
+                    <motion.button
+                      key={option}
+                      type="button"
+                      onClick={() => toggleGeneration(option)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`rounded-full border-2 font-medium transition-all duration-200 ${
+                        businessGeneration.includes(option)
+                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                      }`}
+                      style={{ padding: "0.6cqw 1cqw", fontSize: "1.1cqw" }}
+                    >
+                      {option}
+                    </motion.button>
+                  ))}
+                </div>
+              </FormField>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex flex-col items-end border-t border-border/20" style={{ paddingTop: "1.5cqw" }}>
+              <Button
+                onClick={handleSubmit}
+                disabled={!isFormValid() || isWaitingForRecommendation}
+                style={{ fontSize: "1.2cqw", padding: "1cqw 3cqw", borderRadius: "0.8cqw" }}
+              >
+                <span className="flex items-center" style={{ gap: "0.6cqw" }}>
+                  {isWaitingForRecommendation ? (
+                    <>
+                      <Loader2 style={{ width: "1.2cqw", height: "1.2cqw" }} className="animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    "Continue"
+                  )}
+                </span>
+              </Button>
+
+              {showError && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center text-destructive"
+                  style={{ gap: "0.6cqw", fontSize: "1.1cqw", marginTop: "1cqw" }}
+                >
+                  <AlertCircle style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                  <span>Unable to get recommendation. Please try again.</span>
+                </motion.div>
+              )}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
