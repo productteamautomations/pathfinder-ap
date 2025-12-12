@@ -39,44 +39,85 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center px-4 sm:px-6 py-6 sm:py-8 relative z-10">
+      <div className="flex-1 flex items-center justify-center p-4 sm:p-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-2xl sm:rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden w-full max-w-7xl"
+          className="bg-white rounded-[clamp(1rem,2vw,2rem)] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden w-full"
+          style={{
+            maxWidth: "min(1400px, 90vw)",
+            maxHeight: "85vh",
+          }}
         >
-          <div className="grid lg:grid-cols-2 w-full">
+          <div className="grid lg:grid-cols-2 w-full h-full">
             {/* Left Side - Plan Info */}
-            <div className="bg-[#f7f5f2] p-6 sm:p-8 lg:p-12 xl:p-14 flex flex-col justify-center">
+            <div
+              className="bg-[#f7f5f2] flex flex-col justify-center"
+              style={{ padding: "clamp(1.5rem, 4vw, 3.5rem)" }}
+            >
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                <span className="text-sm sm:text-base font-semibold text-primary uppercase tracking-widest mb-3 sm:mb-5 block">
+                <span
+                  className="font-semibold text-primary uppercase tracking-widest block"
+                  style={{
+                    fontSize: "clamp(0.75rem, 1vw, 1rem)",
+                    marginBottom: "clamp(0.75rem, 1.5vw, 1.25rem)",
+                  }}
+                >
                   Recommended for you
                 </span>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-display font-bold text-title leading-tight tracking-tight mb-4 sm:mb-6">
+                <h1
+                  className="font-display font-bold text-title leading-tight tracking-tight"
+                  style={{
+                    fontSize: "clamp(2rem, 4.5vw, 4rem)",
+                    marginBottom: "clamp(1rem, 2vw, 1.5rem)",
+                  }}
+                >
                   Lead Generation
                 </h1>
-                <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-6 sm:mb-8 lg:mb-10">
+                <p
+                  className="text-muted-foreground leading-relaxed"
+                  style={{
+                    fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
+                    marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
+                  }}
+                >
                   Professional Google Ads management with full campaign setup, call tracking, and ongoing optimisation.
                 </p>
 
-                <div className="space-y-3 sm:space-y-4 lg:space-y-5">
+                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.75rem, 1.5vw, 1.25rem)" }}>
                   {features.map((item, index) => (
                     <motion.div
                       key={item}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.4, delay: 0.3 + index * 0.08 }}
-                      className="flex items-center gap-3 sm:gap-4"
+                      className="flex items-center"
+                      style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}
                     >
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                        <Check className="w-4 h-4 text-primary-foreground" strokeWidth={3} />
+                      <div
+                        className="rounded-full bg-primary flex items-center justify-center flex-shrink-0"
+                        style={{
+                          width: "clamp(1.75rem, 2.5vw, 2rem)",
+                          height: "clamp(1.75rem, 2.5vw, 2rem)",
+                        }}
+                      >
+                        <Check
+                          className="text-primary-foreground"
+                          strokeWidth={3}
+                          style={{ width: "clamp(0.875rem, 1.25vw, 1rem)", height: "clamp(0.875rem, 1.25vw, 1rem)" }}
+                        />
                       </div>
-                      <span className="text-base sm:text-lg text-foreground font-medium">{item}</span>
+                      <span
+                        className="text-foreground font-medium"
+                        style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}
+                      >
+                        {item}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -84,37 +125,61 @@ export default function PricingLeadGen() {
             </div>
 
             {/* Right Side - Pricing */}
-            <div className="bg-white p-6 sm:p-8 lg:p-12 xl:p-14 flex flex-col justify-center">
+            <div className="bg-white flex flex-col justify-center" style={{ padding: "clamp(1.5rem, 4vw, 3.5rem)" }}>
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
                 {/* Plan Toggle */}
-                <div className="mb-6 sm:mb-8">
-                  <p className="text-base sm:text-lg font-semibold text-foreground mb-3 sm:mb-4">Choose your plan</p>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                <div style={{ marginBottom: "clamp(1.5rem, 2.5vw, 2rem)" }}>
+                  <p
+                    className="font-semibold text-foreground"
+                    style={{
+                      fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
+                      marginBottom: "clamp(0.75rem, 1.5vw, 1rem)",
+                    }}
+                  >
+                    Choose your plan
+                  </p>
+                  <div className="grid grid-cols-2" style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
                     <button
                       onClick={() => setSelectedPlan("6")}
-                      className={`py-4 sm:py-5 px-4 sm:px-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all ${
+                      className={`rounded-2xl font-bold transition-all ${
                         selectedPlan === "6"
                           ? "bg-primary text-primary-foreground shadow-lg"
                           : "bg-muted/50 text-foreground hover:bg-muted"
                       }`}
+                      style={{
+                        padding: "clamp(0.875rem, 1.5vw, 1.25rem) clamp(1rem, 1.5vw, 1.25rem)",
+                        fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
+                      }}
                     >
                       6 Months
                     </button>
                     <button
                       onClick={() => setSelectedPlan("12")}
-                      className={`py-4 sm:py-5 px-4 sm:px-5 rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg transition-all relative ${
+                      className={`rounded-2xl font-bold transition-all relative ${
                         selectedPlan === "12"
                           ? "bg-primary text-primary-foreground shadow-lg"
                           : "bg-muted/50 text-foreground hover:bg-muted"
                       }`}
+                      style={{
+                        padding: "clamp(0.875rem, 1.5vw, 1.25rem) clamp(1rem, 1.5vw, 1.25rem)",
+                        fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)",
+                      }}
                     >
                       12 Months
                       {selectedPlan === "12" && (
-                        <span className="absolute -top-2 sm:-top-3 -right-2 sm:-right-3 bg-green-500 text-white text-xs sm:text-sm font-bold px-2 sm:px-3 py-1 rounded-full whitespace-nowrap">
+                        <span
+                          className="absolute bg-green-500 text-white font-bold rounded-full whitespace-nowrap"
+                          style={{
+                            top: "clamp(-0.5rem, -1vw, -0.75rem)",
+                            right: "clamp(-0.5rem, -1vw, -0.75rem)",
+                            padding: "clamp(0.25rem, 0.5vw, 0.375rem) clamp(0.5rem, 1vw, 0.75rem)",
+                            fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
+                          }}
+                        >
                           Save £{savings}
                         </span>
                       )}
@@ -123,29 +188,69 @@ export default function PricingLeadGen() {
                 </div>
 
                 {/* Price Breakdown */}
-                <div className="space-y-1 mb-6 sm:mb-8">
-                  <div className="flex justify-between items-center py-3 sm:py-4 border-b border-border/40">
-                    <span className="text-base sm:text-lg text-muted-foreground">Setup Fee</span>
-                    <span className="font-bold text-lg sm:text-xl text-foreground">£{setupFee.toFixed(2)}</span>
+                <div className="space-y-1" style={{ marginBottom: "clamp(1.5rem, 2.5vw, 2rem)" }}>
+                  <div
+                    className="flex justify-between items-center border-b border-border/40"
+                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
+                  >
+                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
+                      Setup Fee
+                    </span>
+                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
+                      £{setupFee.toFixed(2)}
+                    </span>
                   </div>
-                  <div className="flex justify-between items-center py-3 sm:py-4 border-b border-border/40">
-                    <span className="text-base sm:text-lg text-muted-foreground">Monthly Fee</span>
-                    <span className="font-bold text-lg sm:text-xl text-foreground">£{monthlyFee.toFixed(2)}</span>
+                  <div
+                    className="flex justify-between items-center border-b border-border/40"
+                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
+                  >
+                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
+                      Monthly Fee
+                    </span>
+                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
+                      £{monthlyFee.toFixed(2)}
+                    </span>
                   </div>
-                  <div className="flex justify-between items-center py-3 sm:py-4 border-b border-border/40">
-                    <span className="text-base sm:text-lg text-muted-foreground">VAT (20%)</span>
-                    <span className="font-bold text-lg sm:text-xl text-foreground">£{vat.toFixed(2)}</span>
+                  <div
+                    className="flex justify-between items-center border-b border-border/40"
+                    style={{ padding: "clamp(0.75rem, 1.5vw, 1rem) 0" }}
+                  >
+                    <span className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.25vw, 1.125rem)" }}>
+                      VAT (20%)
+                    </span>
+                    <span className="font-bold text-foreground" style={{ fontSize: "clamp(1rem, 1.5vw, 1.25rem)" }}>
+                      £{vat.toFixed(2)}
+                    </span>
                   </div>
                 </div>
 
                 {/* Total */}
-                <div className="bg-muted/30 rounded-xl sm:rounded-2xl p-5 sm:p-6 mb-6 sm:mb-8">
-                  <div className="flex justify-between items-end gap-4">
+                <div
+                  className="bg-muted/30 rounded-2xl"
+                  style={{
+                    padding: "clamp(1.25rem, 2vw, 1.5rem)",
+                    marginBottom: "clamp(1.5rem, 2.5vw, 2rem)",
+                  }}
+                >
+                  <div className="flex justify-between items-end" style={{ gap: "clamp(0.75rem, 1.5vw, 1rem)" }}>
                     <div>
-                      <p className="text-sm sm:text-base text-muted-foreground mb-1">First month total</p>
-                      <p className="text-3xl sm:text-4xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</p>
+                      <p
+                        className="text-muted-foreground"
+                        style={{
+                          fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
+                          marginBottom: "clamp(0.25rem, 0.5vw, 0.375rem)",
+                        }}
+                      >
+                        First month total
+                      </p>
+                      <p className="font-bold text-foreground" style={{ fontSize: "clamp(2rem, 3vw, 2.5rem)" }}>
+                        £{totalFirstMonth.toFixed(2)}
+                      </p>
                     </div>
-                    <p className="text-sm sm:text-base text-muted-foreground text-right">
+                    <p
+                      className="text-muted-foreground text-right"
+                      style={{ fontSize: "clamp(0.75rem, 1vw, 0.875rem)" }}
+                    >
                       then £{monthlyAfterVAT.toFixed(2)}/mo
                     </p>
                   </div>
@@ -159,7 +264,10 @@ export default function PricingLeadGen() {
                     })
                   }
                   fullWidth
-                  className="py-5 sm:py-6 text-lg sm:text-xl"
+                  style={{
+                    padding: "clamp(1.25rem, 2vw, 1.5rem)",
+                    fontSize: "clamp(1rem, 1.5vw, 1.25rem)",
+                  }}
                 >
                   Start My Campaign
                 </Button>
