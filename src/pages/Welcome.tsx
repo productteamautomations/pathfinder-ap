@@ -289,17 +289,26 @@ export default function Welcome() {
 
       <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
         <div className="backdrop-overlay"></div>
-        <div className="relative" style={{ width: "28vw" }}>
+        <div
+          className="relative"
+          style={{
+            width: "min(90vw, 40vw)",
+            aspectRatio: "0.75",
+            display: "flex",
+            flexDirection: "column",
+            gap: "2vh",
+          }}
+        >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center"
           >
-            <h1 className="font-display font-bold text-title" style={{ fontSize: "6vw", marginBottom: "0.75rem" }}>
+            <h1 className="font-display font-bold text-title" style={{ fontSize: "4vw", marginBottom: "0.5vh" }}>
               Pathfinder
             </h1>
-            <p className="text-deep-blue/70" style={{ fontSize: "2vw" }}>
+            <p className="text-deep-blue/70" style={{ fontSize: "1.5vw" }}>
               Find the right path for you
             </p>
           </motion.div>
@@ -308,39 +317,49 @@ export default function Welcome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass"
-            style={{ padding: "3vw" }}
+            className="glass flex-1"
+            style={{
+              containerType: "size",
+              padding: "3cqw",
+            }}
           >
-            <div className="space-y-6">
-              <div className="space-y-1 mb-8">
-                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5vw" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "2cqw", height: "100%" }}>
+              <div style={{ marginBottom: "1cqw" }}>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
                   Get Started
                 </h2>
-                <p className="text-deep-blue/50" style={{ fontSize: "1.5vw" }}>
+                <p className="text-deep-blue/50" style={{ fontSize: "1.3cqw" }}>
                   Enter your details to begin your personalised path
                 </p>
               </div>
-              <Input
-                label="Name"
-                value={name}
-                placeholder="Enter your business name"
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <div className="space-y-1">
+
+              <div style={{ display: "flex", flexDirection: "column", gap: "2cqw" }}>
                 <Input
-                  label="Website URL"
-                  value={url}
-                  onChange={(e) => handleUrlChange(e.target.value)}
-                  placeholder="https://yourwebsite.com"
-                  type="url"
+                  label="Name"
+                  value={name}
+                  placeholder="Enter your business name"
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
-                {urlError && <p className="text-sm text-destructive">{urlError}</p>}
+                <div className="space-y-1">
+                  <Input
+                    label="Website URL"
+                    value={url}
+                    onChange={(e) => handleUrlChange(e.target.value)}
+                    placeholder="https://yourwebsite.com"
+                    type="url"
+                    required
+                  />
+                  {urlError && (
+                    <p style={{ fontSize: "1.2cqw" }} className="text-destructive">
+                      {urlError}
+                    </p>
+                  )}
+                </div>
+                <Button onClick={handleContinue} disabled={!isValid} fullWidth>
+                  Continue
+                </Button>
               </div>
-              <Button onClick={handleContinue} disabled={!isValid} fullWidth>
-                Continue
-              </Button>
             </div>
           </motion.div>
         </div>
