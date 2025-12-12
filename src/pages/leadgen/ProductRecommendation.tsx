@@ -168,16 +168,17 @@ export default function ProductRecommendationLeadGen() {
           </p>
         </motion.div>
 
-        {/* Card Section with 5% margins */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Card Section with max 5% bottom margin */}
+        <div className="flex-1 flex items-center justify-center" style={{ paddingBottom: "5vh" }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
             className="bg-white border border-border/30 shadow-lg"
             style={{
-              width: "min(90vw, calc((100vh - 73px - 14vh) * 2.2))",
-              aspectRatio: "2.2",
+              width: "min(90vw, calc((100vh - 73px - 12vh) * 2.2))",
+              height: "calc(100vh - 73px - 12vh - 5vh)",
+              maxHeight: "calc(100vh - 73px - 12vh - 5vh)",
               containerType: "size",
               borderRadius: "2.5cqw",
               padding: "3cqw",
