@@ -194,7 +194,7 @@ export default function FunnelDiagnostic() {
         >
           <div className="grid md:grid-cols-[0.65fr_1fr] h-full">
             {/* Left Side - Question & Options */}
-            <div className="p-14 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-full">
+            <div className="p-10 flex flex-col bg-muted/30 relative z-10 shadow-[8px_0_30px_-5px_rgba(0,0,0,0.15)] h-full">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentQuestion}
@@ -208,13 +208,13 @@ export default function FunnelDiagnostic() {
                   <div className="flex-shrink-0 mb-6">
                     <span
                       className="font-semibold text-primary uppercase tracking-wider mb-2 block"
-                      style={{ fontSize: "1.4cqw" }}
+                      style={{ fontSize: "1cqw" }}
                     >
                       {question.section}
                     </span>
                     <h2
                       className="font-display font-bold text-title leading-tight tracking-tight"
-                      style={{ fontSize: "5cqw" }}
+                      style={{ fontSize: "3.5cqw" }}
                     >
                       {question.question}
                     </h2>
@@ -226,21 +226,21 @@ export default function FunnelDiagnostic() {
                     <div className="flex items-center gap-3">
                       <span
                         className="font-semibold text-primary uppercase tracking-wider"
-                        style={{ fontSize: "1.4cqw" }}
+                        style={{ fontSize: "1cqw" }}
                       >
                         Question
                       </span>
-                      <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
+                      <span className="font-bold text-foreground" style={{ fontSize: "1.8cqw" }}>
                         {currentQuestion + 1}
                       </span>
-                      <span className="text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
+                      <span className="text-muted-foreground" style={{ fontSize: "1.4cqw" }}>
                         —
                       </span>
-                      <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
+                      <span className="font-bold text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
                         {totalSteps}
                       </span>
                     </div>
-                    <p className="text-muted-foreground mt-2" style={{ fontSize: "1.5cqw" }}>
+                    <p className="text-muted-foreground mt-2" style={{ fontSize: "1.1cqw" }}>
                       Select one option
                     </p>
                   </div>
@@ -259,10 +259,10 @@ export default function FunnelDiagnostic() {
                             ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                             : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                         }`}
-                        style={{ fontSize: "1.8cqw" }}
+                        style={{ fontSize: "1.3cqw" }}
                       >
                         <span>{option}</span>
-                        <ChevronRight className="transition-transform" style={{ width: "1.8cqw", height: "1.8cqw" }} />
+                        <ChevronRight className="transition-transform" style={{ width: "1.3cqw", height: "1.3cqw" }} />
                       </motion.button>
                     ))}
                   </div>
@@ -271,15 +271,15 @@ export default function FunnelDiagnostic() {
                   <button
                     onClick={handleBack}
                     className="mt-6 flex-shrink-0 font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
-                    style={{ fontSize: "1.4cqw" }}
+                    style={{ fontSize: "1cqw" }}
                   >
                     <div
                       className="rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all"
-                      style={{ width: "4cqw", height: "4cqw" }}
+                      style={{ width: "3cqw", height: "3cqw" }}
                     >
                       <ChevronRight
                         className="text-foreground rotate-180"
-                        style={{ width: "1.5cqw", height: "1.5cqw" }}
+                        style={{ width: "1.1cqw", height: "1.1cqw" }}
                       />
                     </div>
                     <span className="uppercase tracking-wider">{currentQuestion > 0 ? "Back" : "Cancel"}</span>
@@ -300,7 +300,7 @@ export default function FunnelDiagnostic() {
                   animate={{ opacity: imageLoaded ? 1 : 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="absolute inset-0 w-full h-full object-contain p-4"
+                  className="absolute inset-0 w-full h-full object-contain p-12"
                 />
               </AnimatePresence>
             </div>
