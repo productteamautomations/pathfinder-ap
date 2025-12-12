@@ -132,7 +132,7 @@ export default function AboutAddPeopleLeadGen() {
                     five-star reviews on Trustpilot, with an 'Excellent' average rating.
                   </p>
                 </div>
-                <div className="flex items-center gap-0.5">
+                <div className="flex items-center gap-0.5 mr-2">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-6 h-6 fill-amber-400 text-amber-400" />
                   ))}
