@@ -39,15 +39,19 @@ export default function PricingLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 flex items-center justify-center px-6 relative z-10" style={{ paddingTop: "73px" }}>
+      <div className="flex-1 flex items-center justify-center p-6 relative z-10" style={{ paddingTop: "73px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-6xl bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
-          style={{ height: "calc((100vh - 73px) * 0.88)" }}
+          className="w-full bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
+          style={{
+            maxWidth: "1200px",
+            aspectRatio: "16/9",
+            maxHeight: "calc(100vh - 73px - 3rem)",
+          }}
         >
-          <div className="grid lg:grid-cols-2 h-full">
+          <div className="grid lg:grid-cols-2 h-full w-full">
             {/* Left Side - Plan Info */}
             <div className="bg-[#f7f5f2] p-10 lg:p-14 flex flex-col justify-center h-full">
               <motion.div
@@ -146,9 +150,7 @@ export default function PricingLeadGen() {
                       <p className="text-base text-muted-foreground mb-1">First month total</p>
                       <p className="text-4xl font-bold text-foreground">£{totalFirstMonth.toFixed(2)}</p>
                     </div>
-                    <p className="text-base text-muted-foreground text-right">
-                      then £{monthlyAfterVAT.toFixed(2)}/mo
-                    </p>
+                    <p className="text-base text-muted-foreground text-right">then £{monthlyAfterVAT.toFixed(2)}/mo</p>
                   </div>
                 </div>
 
