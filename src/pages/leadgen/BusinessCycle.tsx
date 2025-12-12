@@ -29,6 +29,7 @@ import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 import YourSetupIcon from "@/assets/your-setup-icon.svg";
 import OngoingServiceIcon from "@/assets/ongoing-service-icon.svg";
 import OngoingServiceMainImage from "@/assets/ongoing-service-main.svg";
+
 const slides = [
   {
     title: "Visibility",
@@ -159,15 +160,20 @@ export default function BusinessCycleLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.69))",
             aspectRatio: "1.69",
+            containerType: "size",
+            borderRadius: "2.5cqw",
           }}
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left side - logo, title, image */}
-            <div className="p-10 md:p-12 lg:p-14 flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-full">
+            <div
+              className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 overflow-hidden h-full"
+              style={{ padding: "3cqw" }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -178,51 +184,55 @@ export default function BusinessCycleLeadGen() {
                   className="flex flex-col items-start h-full"
                 >
                   {/* Logo and Title */}
-                  <div className="flex items-center gap-5 mb-4">
+                  <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1.2cqw" }}>
                     <motion.img
                       src={LogoGraphic}
                       alt="Add People"
-                      className="w-16 h-16"
+                      style={{ width: "4.5cqw", height: "4.5cqw" }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: iconLoaded ? 1 : 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                       onLoad={() => setIconLoaded(true)}
                     />
                     <h2
-                      className={`font-display font-bold text-title leading-tight tracking-tight ${
-                        slide.title === "Lead Management" || slide.title === "Ongoing Service"
-                          ? "text-4xl md:text-5xl"
-                          : "text-7xl md:text-7xl"
-                      }`}
+                      className="font-display font-bold text-title leading-tight tracking-tight"
+                      style={{
+                        fontSize:
+                          slide.title === "Lead Management" || slide.title === "Ongoing Service" ? "4cqw" : "5.5cqw",
+                      }}
                     >
                       {slide.title}
                     </h2>
                   </div>
-                  <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
+                  <p className="text-primary leading-relaxed" style={{ fontSize: "1.4cqw", marginTop: "0.6cqw" }}>
+                    {slide.subtitle}
+                  </p>
 
                   {/* Orange accent dots */}
-                  <div className="flex items-center gap-2 mt-4">
-                    <div className="flex items-center gap-1.5">
+                  <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1.2cqw" }}>
+                    <div className="flex items-center" style={{ gap: "0.4cqw" }}>
                       {[...Array(4)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="w-2 h-2 rounded-full bg-primary"
+                          className="rounded-full bg-primary"
+                          style={{ width: "0.5cqw", height: "0.5cqw" }}
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 - i * 0.25 }}
                           transition={{ delay: i * 0.1, duration: 0.3 }}
                         />
                       ))}
                       <motion.div
-                        className="relative h-0.5 w-16 overflow-hidden"
+                        className="relative overflow-hidden"
+                        style={{ height: "0.15cqw", width: "4.5cqw" }}
                         initial={{ scaleX: 0, opacity: 0 }}
                         animate={{ scaleX: 1, opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.4 }}
-                        style={{ transformOrigin: "left" }}
                       >
                         <div
                           className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
                           style={{
                             clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
+                            transformOrigin: "left",
                           }}
                         />
                       </motion.div>
@@ -238,19 +248,30 @@ export default function BusinessCycleLeadGen() {
                     <motion.img
                       src={slide.mainImage || VisibilityMainImage}
                       alt={`${slide.title} - ${slide.subtitle}`}
-                      className={`h-auto object-contain ${
-                        slide.title === "Lead Management"
-                          ? "w-full max-h-[85vh] mb-[-60px]"
-                          : slide.title === "Visibility"
-                            ? "w-[108%] max-h-[70vh]"
+                      className="h-auto object-contain"
+                      style={{
+                        width:
+                          slide.title === "Lead Management"
+                            ? "100%"
+                            : slide.title === "Visibility"
+                              ? "108%"
+                              : slide.title === "Engagement"
+                                ? "120%"
+                                : slide.title === "Your Setup"
+                                  ? "115%"
+                                  : slide.title === "Ongoing Service"
+                                    ? "110%"
+                                    : "100%",
+                        maxHeight: "70vh",
+                        marginBottom:
+                          slide.title === "Lead Management"
+                            ? "-6cqw"
                             : slide.title === "Engagement"
-                              ? "w-[120%] max-h-[80vh] mb-[-30px]"
-                              : slide.title === "Your Setup"
-                                ? "w-[115%] max-h-[80vh] mb-[-14px]"
-                                : slide.title === "Ongoing Service"
-                                  ? "w-[110%] max-h-[70vh]"
-                                  : "w-full max-h-[75vh] mb-[-14px]"
-                      }`}
+                              ? "-3cqw"
+                              : slide.title === "Your Setup" || slide.title === "Conversions"
+                                ? "-1.5cqw"
+                                : "0",
+                      }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: imageLoaded ? 1 : 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
@@ -262,7 +283,10 @@ export default function BusinessCycleLeadGen() {
             </div>
 
             {/* Right side - content list */}
-            <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden">
+            <div
+              className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
+              style={{ padding: "3cqw", paddingBottom: "7cqw" }}
+            >
               <div className="overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -273,12 +297,23 @@ export default function BusinessCycleLeadGen() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <div className="mb-8">
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-xl">—</span>
-                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
+                    <div style={{ marginBottom: "2.5cqw" }}>
+                      <div className="flex items-center" style={{ gap: "1.2cqw" }}>
+                        <span
+                          className="font-semibold text-primary uppercase tracking-wider"
+                          style={{ fontSize: "1.2cqw" }}
+                        >
+                          Slide
+                        </span>
+                        <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
+                          {currentSlide + 1}
+                        </span>
+                        <span className="text-muted-foreground" style={{ fontSize: "1.6cqw" }}>
+                          —
+                        </span>
+                        <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
+                          {totalSlides}
+                        </span>
                       </div>
                     </div>
 
@@ -287,29 +322,42 @@ export default function BusinessCycleLeadGen() {
                         {/* Vertical connecting line for Your Setup */}
                         {slide.title === "Your Setup" && (
                           <div
-                            className="absolute left-[22px] w-[2px] bg-primary z-10 -translate-x-1/2"
-                            style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
+                            className="absolute bg-primary z-10 -translate-x-1/2"
+                            style={{
+                              left: "1.8cqw",
+                              width: "0.15cqw",
+                              top: "calc(2cqw + 0.7cqw)",
+                              bottom: "calc(2cqw + 0.7cqw)",
+                            }}
                           />
                         )}
-                        <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                        <ul
+                          className="relative"
+                          style={{ display: "flex", flexDirection: "column", gap: "1cqw", zIndex: 1 }}
+                        >
                           {slide.content?.map((item, idx) => (
                             <motion.li
                               key={idx}
                               initial={{ opacity: 0, x: 20 }}
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                              className={`rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                              className={`shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
                                 item.isExample
-                                  ? "bg-accent p-4 text-center"
-                                  : `flex gap-4 bg-white ${item.icon ? "items-center p-3" : "items-start p-4"}`
+                                  ? "bg-accent text-center"
+                                  : `flex bg-white ${item.icon ? "items-center" : "items-start"}`
                               }`}
+                              style={{
+                                borderRadius: "1.2cqw",
+                                padding: item.isExample ? "1.2cqw" : item.icon ? "1cqw" : "1.2cqw",
+                                gap: item.icon ? "1.2cqw" : undefined,
+                              }}
                             >
                               {item.isExample ? (
-                                <div className="space-y-2">
-                                  <p className="text-foreground font-semibold text-base">
+                                <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
+                                  <p className="text-foreground font-semibold" style={{ fontSize: "1.2cqw" }}>
                                     INSTEAD OF: <span className="font-bold">"PROFESSIONAL LOFT CONVERSIONS"</span>
                                   </p>
-                                  <p className="text-white font-semibold text-base">
+                                  <p className="text-white font-semibold" style={{ fontSize: "1.2cqw" }}>
                                     USE:{" "}
                                     <span className="font-bold">
                                       "LOFT CONVERSIONS IN ALTRINCHAM – FREE QUOTE TODAY"
@@ -322,21 +370,41 @@ export default function BusinessCycleLeadGen() {
                                     <img
                                       src={item.icon}
                                       alt=""
-                                      className={`flex-shrink-0 ${
-                                        slide.title === "Your Setup"
-                                          ? "w-[18px] h-[18px]"
-                                          : slide.title === "Ongoing Service" || slide.title === "Engagement"
-                                            ? "w-6 h-6"
-                                            : "w-12 h-12"
-                                      }`}
+                                      className="flex-shrink-0"
+                                      style={{
+                                        width:
+                                          slide.title === "Your Setup"
+                                            ? "1.3cqw"
+                                            : slide.title === "Ongoing Service" || slide.title === "Engagement"
+                                              ? "1.8cqw"
+                                              : "3.5cqw",
+                                        height:
+                                          slide.title === "Your Setup"
+                                            ? "1.3cqw"
+                                            : slide.title === "Ongoing Service" || slide.title === "Engagement"
+                                              ? "1.8cqw"
+                                              : "3.5cqw",
+                                      }}
                                     />
                                   ) : (
-                                    <span className="text-primary font-bold mt-0.5">•</span>
+                                    <span
+                                      className="text-primary font-bold"
+                                      style={{ fontSize: "1.5cqw", marginTop: "0.15cqw" }}
+                                    >
+                                      •
+                                    </span>
                                   )}
                                   <div className="flex-1">
-                                    <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                    <span className="font-semibold text-foreground" style={{ fontSize: "1.4cqw" }}>
+                                      {item.label}
+                                    </span>
                                     {item.description && (
-                                      <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                      <p
+                                        className="text-muted-foreground"
+                                        style={{ fontSize: "1.2cqw", marginTop: "0.3cqw" }}
+                                      >
+                                        {item.description}
+                                      </p>
                                     )}
                                   </div>
                                 </>
@@ -351,32 +419,56 @@ export default function BusinessCycleLeadGen() {
               </div>
 
               {/* Fixed navigation buttons - absolutely positioned */}
-              <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
+              <div
+                className="absolute flex items-center justify-between"
+                style={{ bottom: "3cqw", left: "3cqw", right: "3cqw" }}
+              >
                 <Button
                   onClick={prevSlide}
                   disabled={currentSlide === 0}
                   variant="outline"
-                  className="flex items-center gap-2 min-w-[120px]"
+                  className="flex items-center"
+                  style={{
+                    gap: "0.6cqw",
+                    minWidth: "8cqw",
+                    fontSize: "1.2cqw",
+                    padding: "1cqw 1.5cqw",
+                    borderRadius: "0.8cqw",
+                  }}
                 >
-                  <ChevronLeft className="w-4 h-4" />
+                  <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
                   Previous
                 </Button>
 
                 {/* Dot Progress Indicator */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center" style={{ gap: "0.6cqw" }}>
                   {slides.map((_, index) => (
                     <div
                       key={index}
-                      className={`h-2 rounded-full transition-all duration-300 ${
-                        index === currentSlide ? "w-6 bg-accent" : "w-2 bg-muted-foreground/30"
+                      className={`rounded-full transition-all duration-300 ${
+                        index === currentSlide ? "bg-accent" : "bg-muted-foreground/30"
                       }`}
+                      style={{
+                        height: "0.5cqw",
+                        width: index === currentSlide ? "1.8cqw" : "0.5cqw",
+                      }}
                     />
                   ))}
                 </div>
 
-                <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
+                <Button
+                  onClick={nextSlide}
+                  className="flex items-center justify-center"
+                  style={{
+                    gap: "0.6cqw",
+                    minWidth: "8cqw",
+                    fontSize: "1.2cqw",
+                    padding: "1cqw 1.5cqw",
+                    borderRadius: "0.8cqw",
+                  }}
+                >
                   {isLastSlide ? "About Us" : "Next"}
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight style={{ width: "1.2cqw", height: "1.2cqw" }} />
                 </Button>
               </div>
             </div>
