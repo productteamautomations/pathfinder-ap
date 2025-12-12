@@ -17,7 +17,6 @@ export default function PricingLeadGen() {
     "Google Ads campaign management",
     "Responsive Search Ad creation",
     "Enhanced call tracking",
-    "Say Hello access",
     "Weekly performance updates",
   ];
 
@@ -71,8 +70,8 @@ export default function PricingLeadGen() {
                     marginBottom: "clamp(1rem, 2vw, 1.5rem)",
                   }}
                 >
-                  <Clock style={{ width: "clamp(1rem, 1.25vw, 1.125rem)", height: "clamp(1rem, 1.25vw, 1.125rem)" }} />
-                  6 Week Trial
+                  <Clock style={{ width: "clamp(1rem, 1.25vw, 1.125rem)", height: "clamp(1rem, 1.25vw, 1.125rem)" }} />6
+                  Week Trial
                 </motion.div>
 
                 <h1
@@ -91,7 +90,8 @@ export default function PricingLeadGen() {
                     marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
                   }}
                 >
-                  Try our professional Google Ads management with full campaign setup, call tracking, and hands-on optimisation — risk free.
+                  Try our professional Google Ads management with full campaign setup, call tracking, and hands-on
+                  optimisation — risk free.
                 </p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "clamp(0.75rem, 1.5vw, 1.25rem)" }}>
@@ -147,10 +147,7 @@ export default function PricingLeadGen() {
                   >
                     Trial Investment
                   </p>
-                  <p
-                    className="text-muted-foreground"
-                    style={{ fontSize: "clamp(0.875rem, 1.1vw, 1rem)" }}
-                  >
+                  <p className="text-muted-foreground" style={{ fontSize: "clamp(0.875rem, 1.1vw, 1rem)" }}>
                     One-time payment for 6 weeks of full service
                   </p>
                 </div>
@@ -211,7 +208,9 @@ export default function PricingLeadGen() {
                         fontSize: "clamp(0.75rem, 1vw, 0.875rem)",
                       }}
                     >
-                      No ongoing<br />commitment
+                      No ongoing
+                      <br />
+                      commitment
                     </div>
                   </div>
                 </div>
