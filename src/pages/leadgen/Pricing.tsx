@@ -160,7 +160,7 @@ export default function PricingLeadGen() {
                     navigate("/required-info", { state: { ...location.state, product: "Lead Generation" } })
                   }
                   fullWidth
-                  className="py-6 text-xl mb-2"
+                  className="py-6 text-xl mb-8"
                 >
                   Start My Campaign
                 </Button>
