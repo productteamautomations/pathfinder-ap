@@ -47,7 +47,7 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div className="flex-1 pt-[73px] flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center" style={{ marginTop: "-36.5px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
