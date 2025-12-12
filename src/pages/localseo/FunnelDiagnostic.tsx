@@ -258,7 +258,7 @@ export default function FunnelDiagnosticLocalSEO() {
                     </span>
                     <h2
                       className="font-display font-bold text-title leading-tight tracking-tight"
-                      style={{ fontSize: "3.2cqw" }}
+                      style={{ fontSize: "2.8cqw" }}
                     >
                       {question.question}
                     </h2>
