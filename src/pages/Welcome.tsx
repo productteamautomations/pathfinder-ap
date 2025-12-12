@@ -291,7 +291,7 @@ export default function Welcome() {
         <div className="backdrop-overlay"></div>
         <div
           className="w-full max-w-md relative"
-          style={{ transform: "scale(calc(100vw / 1920))", transformOrigin: "center" }}
+          style={{ transform: "scale(calc(100vw / 1920 * 1.5))", transformOrigin: "center" }}
         >
           <motion.div
             initial={{ opacity: 0, y: -20 }}
