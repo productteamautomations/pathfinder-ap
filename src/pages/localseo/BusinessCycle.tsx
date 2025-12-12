@@ -245,15 +245,20 @@ export default function BusinessCycleLocalSEO() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           style={{
-            width: "min(66.82vw, calc((100vh - 73px) * 0.9 * 1.69))",
+            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.69))",
             aspectRatio: "1.69",
+            containerType: "size",
+            borderRadius: "2.5cqw",
           }}
         >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left side - logo, title, image */}
-            <div className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative p-10 md:p-12 lg:p-14 overflow-hidden">
+            <div
+              className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative overflow-hidden"
+              style={{ padding: "3cqw" }}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -264,44 +269,50 @@ export default function BusinessCycleLocalSEO() {
                   className="flex flex-col items-start h-full"
                 >
                   {/* Logo and Title */}
-                  <div className="flex items-center gap-5 mb-4">
+                  <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
                     <motion.img
                       src={LogoGraphic}
                       alt="Add People"
-                      className="w-16 h-16"
+                      style={{ width: "4cqw", height: "4cqw" }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: iconLoaded ? 1 : 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                       onLoad={() => setIconLoaded(true)}
                     />
                     <h2
-                      className={`font-display font-bold text-title leading-tight tracking-tight ${
-                        slide.title === "Lead Management" ||
-                        slide.title === "Ongoing Service" ||
-                        slide.title === "Product Journey"
-                          ? "text-4xl md:text-5xl"
-                          : "text-7xl md:text-7xl"
-                      }`}
+                      className="font-display font-bold text-title leading-tight tracking-tight"
+                      style={{
+                        fontSize:
+                          slide.title === "Lead Management" ||
+                          slide.title === "Ongoing Service" ||
+                          slide.title === "Product Journey"
+                            ? "4cqw"
+                            : "5.5cqw",
+                      }}
                     >
                       {slide.title}
                     </h2>
                   </div>
-                  <p className="text-lg text-primary mt-2 leading-relaxed">{slide.subtitle}</p>
+                  <p className="text-primary leading-relaxed" style={{ fontSize: "1.5cqw", marginTop: "0.6cqw" }}>
+                    {slide.subtitle}
+                  </p>
 
                   {/* Orange accent dots */}
-                  <div className="flex items-center gap-2 mt-4">
-                    <div className="flex items-center gap-1.5">
+                  <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
+                    <div className="flex items-center" style={{ gap: "0.4cqw" }}>
                       {[...Array(4)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="w-2 h-2 rounded-full bg-primary"
+                          className="rounded-full bg-primary"
+                          style={{ width: "0.5cqw", height: "0.5cqw" }}
                           initial={{ scale: 0, opacity: 0 }}
                           animate={{ scale: 1, opacity: 1 - i * 0.25 }}
                           transition={{ delay: i * 0.1, duration: 0.3 }}
                         />
                       ))}
                       <motion.div
-                        className="relative h-0.5 w-16 overflow-hidden"
+                        className="relative overflow-hidden"
+                        style={{ height: "0.15cqw", width: "4cqw" }}
                         initial={{ scaleX: 0, opacity: 0 }}
                         animate={{ scaleX: 1, opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.4 }}
@@ -357,7 +368,10 @@ export default function BusinessCycleLocalSEO() {
             </div>
 
             {/* Right side - content list */}
-            <div className="relative p-10 md:p-12 lg:p-14 pb-24 bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden">
+            <div
+              className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
+              style={{ padding: "3cqw", paddingBottom: "6cqw" }}
+            >
               <div className="overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -368,12 +382,23 @@ export default function BusinessCycleLocalSEO() {
                     transition={{ duration: 0.3 }}
                     className="w-full"
                   >
-                    <div className="mb-8">
-                      <div className="flex items-center gap-4">
-                        <span className="text-base font-semibold text-primary uppercase tracking-wider">Slide</span>
-                        <span className="text-3xl font-bold text-foreground">{currentSlide + 1}</span>
-                        <span className="text-muted-foreground text-xl">—</span>
-                        <span className="text-3xl font-bold text-muted-foreground">{totalSlides}</span>
+                    <div style={{ marginBottom: "2cqw" }}>
+                      <div className="flex items-center" style={{ gap: "1cqw" }}>
+                        <span
+                          className="font-semibold text-primary uppercase tracking-wider"
+                          style={{ fontSize: "1.2cqw" }}
+                        >
+                          Slide
+                        </span>
+                        <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
+                          {currentSlide + 1}
+                        </span>
+                        <span className="text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
+                          —
+                        </span>
+                        <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
+                          {totalSlides}
+                        </span>
                       </div>
                     </div>
 
@@ -382,33 +407,62 @@ export default function BusinessCycleLocalSEO() {
                         {/* Vertical connecting line for Your Setup */}
                         {slide.title === "Your Setup" && (
                           <div
-                            className="absolute left-[22px] w-[2px] bg-primary z-10 -translate-x-1/2"
-                            style={{ top: "calc(24px + 9px)", bottom: "calc(24px + 9px)" }}
+                            className="absolute bg-primary z-10"
+                            style={{
+                              left: "1.7cqw",
+                              width: "0.15cqw",
+                              top: "calc(1.8cqw + 0.7cqw)",
+                              bottom: "calc(1.8cqw + 0.7cqw)",
+                              transform: "translateX(-50%)",
+                            }}
                           />
                         )}
 
                         {/* Product Journey timeline cards */}
                         {slide.title === "Product Journey" && slide.timeline ? (
-                          <div className="space-y-4">
+                          <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
                             {slide.timeline.map((phase, phaseIdx) => (
                               <motion.div
                                 key={phaseIdx}
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.4 + phaseIdx * 0.15, duration: 0.3, ease: "easeOut" }}
-                                className="bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 p-5"
+                                className="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                                style={{ borderRadius: "1.5cqw", padding: "1.5cqw" }}
                               >
-                                <h3 className="text-primary font-semibold text-lg mb-3">{phase.phase}</h3>
-                                <ul className="space-y-2 relative">
+                                <h3
+                                  className="text-primary font-semibold"
+                                  style={{ fontSize: "1.5cqw", marginBottom: "0.9cqw" }}
+                                >
+                                  {phase.phase}
+                                </h3>
+                                <ul
+                                  className="relative"
+                                  style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}
+                                >
                                   {/* Vertical connecting line */}
                                   <div
-                                    className="absolute left-[3px] w-[2px] bg-primary z-0"
-                                    style={{ top: "calc(8px + 4px)", bottom: "calc(8px + 4px)" }}
+                                    className="absolute bg-primary z-0"
+                                    style={{
+                                      left: "0.25cqw",
+                                      width: "0.15cqw",
+                                      top: "calc(0.6cqw + 0.3cqw)",
+                                      bottom: "calc(0.6cqw + 0.3cqw)",
+                                    }}
                                   />
                                   {phase.points.map((point, pointIdx) => (
-                                    <li key={pointIdx} className="flex items-start gap-3 relative z-10">
-                                      <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                                      <span className="text-foreground">{point}</span>
+                                    <li
+                                      key={pointIdx}
+                                      className="flex items-start relative z-10"
+                                      style={{ gap: "0.9cqw" }}
+                                    >
+                                      <span
+                                        className="rounded-full bg-primary flex-shrink-0"
+                                        style={{ width: "0.5cqw", height: "0.5cqw", marginTop: "0.6cqw" }}
+                                      />
+                                      <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
+                                        {point}
+                                      </span>
                                     </li>
                                   ))}
                                 </ul>
@@ -416,42 +470,73 @@ export default function BusinessCycleLocalSEO() {
                             ))}
                           </div>
                         ) : (
-                          <ul className="space-y-3 relative" style={{ zIndex: 1 }}>
+                          <ul
+                            className="relative"
+                            style={{ display: "flex", flexDirection: "column", gap: "0.9cqw", zIndex: 1 }}
+                          >
                             {slide.content?.map((item, idx) => (
                               <motion.li
                                 key={idx}
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className={`flex gap-4 bg-white rounded-2xl shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.icon ? "items-center p-3" : "items-start p-4"
-                                }`}
+                                className="flex bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                                style={{
+                                  gap: "1.2cqw",
+                                  borderRadius: "1.5cqw",
+                                  padding: item.icon ? "0.9cqw" : "1.2cqw",
+                                  alignItems: item.icon ? "center" : "flex-start",
+                                }}
                               >
                                 {item.icon ? (
                                   <img
                                     src={item.icon}
                                     alt=""
-                                    className={`flex-shrink-0 ${
-                                      slide.title === "Your Setup"
-                                        ? "w-[18px] h-[18px]"
-                                        : slide.title === "Ongoing Service"
-                                          ? "w-6 h-6"
-                                          : slide.title === "Prominence"
-                                            ? "w-8 h-8"
-                                            : "w-12 h-12"
-                                    }`}
+                                    className="flex-shrink-0"
+                                    style={{
+                                      width:
+                                        slide.title === "Your Setup"
+                                          ? "1.4cqw"
+                                          : slide.title === "Ongoing Service"
+                                            ? "1.8cqw"
+                                            : slide.title === "Prominence"
+                                              ? "2.4cqw"
+                                              : "3.5cqw",
+                                      height:
+                                        slide.title === "Your Setup"
+                                          ? "1.4cqw"
+                                          : slide.title === "Ongoing Service"
+                                            ? "1.8cqw"
+                                            : slide.title === "Prominence"
+                                              ? "2.4cqw"
+                                              : "3.5cqw",
+                                    }}
                                   />
                                 ) : (
-                                  <span className="text-primary font-bold mt-0.5">•</span>
+                                  <span className="text-primary font-bold" style={{ marginTop: "0.15cqw" }}>
+                                    •
+                                  </span>
                                 )}
                                 <div className="flex-1">
-                                  <span className="font-semibold text-foreground text-lg">{item.label}</span>
+                                  <span className="font-semibold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                                    {item.label}
+                                  </span>
                                   {item.description && (
-                                    <p className="text-base text-muted-foreground mt-1">{item.description}</p>
+                                    <p
+                                      className="text-muted-foreground"
+                                      style={{ fontSize: "1.2cqw", marginTop: "0.3cqw" }}
+                                    >
+                                      {item.description}
+                                    </p>
                                   )}
                                 </div>
                                 {item.rightIcon && (
-                                  <img src={item.rightIcon} alt="" className="flex-shrink-0 w-32 h-12" />
+                                  <img
+                                    src={item.rightIcon}
+                                    alt=""
+                                    className="flex-shrink-0"
+                                    style={{ width: "9.5cqw", height: "3.5cqw" }}
+                                  />
                                 )}
                               </motion.li>
                             ))}
@@ -459,14 +544,14 @@ export default function BusinessCycleLocalSEO() {
                         )}
 
                         {/* Bottom image for Visibility slide */}
-                        {'bottomImage' in slide && slide.bottomImage && (
+                        {"bottomImage" in slide && slide.bottomImage && (
                           <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.8, duration: 0.4 }}
-                            className="mt-4"
+                            style={{ marginTop: "1.2cqw" }}
                           >
-                            <img src={slide.bottomImage as string} alt="" className="w-[45%]" />
+                            <img src={slide.bottomImage as string} alt="" style={{ width: "45%" }} />
                           </motion.div>
                         )}
                       </div>
@@ -476,31 +561,58 @@ export default function BusinessCycleLocalSEO() {
               </div>
 
               {/* Fixed navigation buttons - absolutely positioned */}
-              <div className="absolute bottom-10 left-10 right-10 md:left-12 md:right-12 lg:left-14 lg:right-14 flex items-center justify-between">
+              <div
+                className="absolute bottom-0 left-0 right-0 flex items-center justify-between"
+                style={{ padding: "3cqw" }}
+              >
                 {currentSlide > 0 ? (
-                  <Button onClick={prevSlide} variant="outline" className="flex items-center gap-2 min-w-[120px]">
-                    <ChevronLeft className="w-4 h-4" />
+                  <Button
+                    onClick={prevSlide}
+                    variant="outline"
+                    className="flex items-center"
+                    style={{
+                      gap: "0.6cqw",
+                      minWidth: "9cqw",
+                      fontSize: "1.2cqw",
+                      padding: "1cqw 2cqw",
+                      borderRadius: "0.8cqw",
+                    }}
+                  >
+                    <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
                     Previous
                   </Button>
                 ) : (
-                  <div className="min-w-[120px]" />
+                  <div style={{ minWidth: "9cqw" }} />
                 )}
 
                 {/* Dot Progress Indicator */}
-                <div className="flex gap-1.5">
+                <div className="flex" style={{ gap: "0.4cqw" }}>
                   {slides.map((_, idx) => (
                     <div
                       key={idx}
-                      className={`h-1.5 rounded-full transition-all ${
-                        idx === currentSlide ? "bg-primary w-6" : "bg-muted w-1.5"
-                      }`}
+                      className="rounded-full transition-all"
+                      style={{
+                        height: "0.4cqw",
+                        width: idx === currentSlide ? "1.8cqw" : "0.4cqw",
+                        backgroundColor: idx === currentSlide ? "var(--primary)" : "var(--muted)",
+                      }}
                     />
                   ))}
                 </div>
 
-                <Button onClick={nextSlide} className="flex items-center gap-2 min-w-[120px] justify-center">
+                <Button
+                  onClick={nextSlide}
+                  className="flex items-center justify-center"
+                  style={{
+                    gap: "0.6cqw",
+                    minWidth: "9cqw",
+                    fontSize: "1.2cqw",
+                    padding: "1cqw 2cqw",
+                    borderRadius: "0.8cqw",
+                  }}
+                >
                   {isLastSlide ? "About Us" : "Next"}
-                  <ChevronRight className="w-4 h-4" />
+                  <ChevronRight style={{ width: "1.2cqw", height: "1.2cqw" }} />
                 </Button>
               </div>
             </div>
