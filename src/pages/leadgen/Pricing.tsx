@@ -47,11 +47,10 @@ export default function PricingLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
+          className="bg-white rounded-[2rem] shadow-[0_30px_100px_rgba(0,0,0,0.12)] overflow-hidden"
           style={{
-            maxWidth: "1200px",
-            aspectRatio: "16/9",
-            maxHeight: "calc(100vh - 73px - 10vh)",
+            width: "1200px",
+            height: "675px",
           }}
         >
           <div className="grid lg:grid-cols-2 h-full w-full">
