@@ -35,7 +35,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
       <div className="flex items-center justify-between mb-3 flex-shrink-0">
         <div className="flex items-center gap-2">
           <img src={AttentionIcon} alt="" className="w-5 h-5" />
-          <h3 className="text-base font-semibold text-accent-orange">Areas requiring immediate attention.</h3>
+          <h3 className="text-lg font-semibold text-accent-orange">Areas requiring immediate attention.</h3>
         </div>
         {areas.length > 1 && (
           <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             >
               <ChevronLeft className="w-4 h-4 text-muted-foreground" />
             </button>
-            <span className="text-sm text-muted-foreground font-medium min-w-[40px] text-center">
+            <span className="text-base text-muted-foreground font-medium min-w-[40px] text-center">
               {currentIndex + 1} / {areas.length}
             </span>
             <button
@@ -72,20 +72,18 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             className="bg-muted/30 rounded-2xl p-5 border border-border/30 h-full flex flex-col"
           >
             <div className="flex items-center justify-between mb-3 flex-shrink-0">
-              <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
+              <span className="px-3 py-1 bg-primary/10 text-primary text-base font-medium rounded-full">
                 {currentArea.title}
               </span>
-              <span className="text-sm font-semibold text-muted-foreground">
-                Score: {currentArea.score}%
-              </span>
+              <span className="text-base font-semibold text-muted-foreground">Score: {currentArea.score}%</span>
             </div>
 
             <div className="flex flex-col flex-1 min-h-0 gap-3">
               <div className="flex-1">
-                <h4 className="text-sm font-semibold text-[#173340] mb-2">Why this needs attention</h4>
+                <h4 className="text-base font-semibold text-[#173340] mb-2">Why this needs attention</h4>
                 <ul className="space-y-1">
                   {currentArea.explanations.map((point, idx) => (
-                    <li key={idx} className="text-sm text-muted-foreground leading-snug">
+                    <li key={idx} className="text-base text-muted-foreground leading-snug">
                       {point}
                     </li>
                   ))}
@@ -93,10 +91,8 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
               </div>
 
               <div className="pt-2 border-t border-border/30 flex-shrink-0">
-                <h4 className="text-sm font-semibold text-[#173340] mb-1">Our Recommendation</h4>
-                <p className="text-sm text-muted-foreground leading-snug">
-                  {currentArea.recommendation}
-                </p>
+                <h4 className="text-base font-semibold text-[#173340] mb-1">Our Recommendation</h4>
+                <p className="text-base text-muted-foreground leading-snug">{currentArea.recommendation}</p>
               </div>
             </div>
           </motion.div>
@@ -110,9 +106,7 @@ export function ImprovementCarousel({ areas }: ImprovementCarouselProps) {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? "bg-primary" : "bg-muted"
-              }`}
+              className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? "bg-primary" : "bg-muted"}`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
