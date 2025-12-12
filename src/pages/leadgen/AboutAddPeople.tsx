@@ -52,22 +52,20 @@ export default function AboutAddPeopleLeadGen() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)]"
           style={{
             width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.5))",
             aspectRatio: "1.5",
             containerType: "size",
-            borderRadius: "2.5cqw",
             padding: "3cqw",
           }}
         >
           <div className="grid lg:grid-cols-[1fr_1fr] h-full" style={{ gap: "2cqw" }}>
             {/* Left - Main Image */}
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-stretch h-full">
               <img
                 src={mainImage}
                 alt="Add People"
-                className="w-full h-full object-contain transition-opacity duration-500 ease-out"
+                className="w-full h-full object-cover transition-opacity duration-500 ease-out"
                 style={{ opacity: mainImageLoaded ? 1 : 0, borderRadius: "1.5cqw" }}
                 onLoad={() => setMainImageLoaded(true)}
               />
