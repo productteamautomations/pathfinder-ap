@@ -15,7 +15,7 @@ export default function PricingLeadGen() {
 
   const features = [
     "Google Ads campaign management",
-    "Responsive Search Ad creation",
+    "Advanced data gathering",
     "Advanced conversion tracking",
     "Weekly performance updates",
   ];
