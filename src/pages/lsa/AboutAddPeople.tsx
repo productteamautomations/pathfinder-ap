@@ -39,9 +39,9 @@ export default function AboutAddPeopleLSA() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/about-product/lsa", { state: location.state })}
-        currentStep={3}
-        totalSteps={4}
+        onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
+        currentStep={2}
+        totalSteps={3}
         showProgress
         productLabel="LSA's"
       />
