@@ -446,7 +446,7 @@ export default function BusinessCycleLocalSEO() {
                                   <div
                                     className="absolute bg-primary z-0"
                                     style={{
-                                      left: "0.25cqw",
+                                      left: "0.24cqw",
                                       width: "0.15cqw",
                                       top: "calc(0.6cqw + 0.3cqw)",
                                       bottom: "calc(0.6cqw + 0.3cqw)",
