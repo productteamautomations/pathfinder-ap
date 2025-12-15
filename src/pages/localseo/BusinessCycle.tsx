@@ -273,7 +273,7 @@ export default function BusinessCycleLocalSEO() {
                     <motion.img
                       src={LogoGraphic}
                       alt="Add People"
-                      style={{ width: "4cqw", height: "4cqw" }}
+                      style={{ width: "3cqw", height: "3cqw" }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: iconLoaded ? 1 : 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
@@ -288,6 +288,7 @@ export default function BusinessCycleLocalSEO() {
                           slide.title === "Product Journey"
                             ? "4cqw"
                             : "5.5cqw",
+                        lineHeight: "1",
                       }}
                     >
                       {slide.title}
