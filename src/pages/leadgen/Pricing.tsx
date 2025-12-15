@@ -84,8 +84,8 @@ export default function PricingLeadGen() {
                     marginBottom: "3cqw",
                   }}
                 >
-                  Try our professional Google Ads management with full campaign setup, call tracking, and hands-on
-                  optimisation — risk free.
+                  Try our professional Google Ads management with full campaign setup, conversion tracking, and
+                  optimisation - risk free.
                 </p>
 
                 <div style={{ display: "flex", flexDirection: "column", gap: "1.5cqw" }}>
