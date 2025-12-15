@@ -39,11 +39,11 @@ export default function AboutAddPeopleLSA() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
-        currentStep={2}
-        totalSteps={3}
+        onBack={() => navigate("/about-product/lsa", { state: location.state })}
+        currentStep={3}
+        totalSteps={4}
         showProgress
-        productLabel="LSA's"
+        productLabel="LSAs"
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
