@@ -188,17 +188,20 @@ export default function BusinessCycleLeadGen() {
                     <motion.img
                       src={LogoGraphic}
                       alt="Add People"
-                      style={{ width: "4.5cqw", height: "4.5cqw" }}
+                      style={{ width: "3cqw", height: "3cqw", flexShrink: 0 }}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: iconLoaded ? 1 : 0 }}
                       transition={{ duration: 0.4, ease: "easeOut" }}
                       onLoad={() => setIconLoaded(true)}
                     />
                     <h2
-                      className="font-display font-bold text-title leading-tight tracking-tight"
+                      className="font-display font-bold text-title tracking-tight"
                       style={{
                         fontSize:
                           slide.title === "Lead Management" || slide.title === "Ongoing Service" ? "4cqw" : "5.5cqw",
+                        lineHeight: "3cqw",
+                        display: "flex",
+                        alignItems: "center",
                       }}
                     >
                       {slide.title}
