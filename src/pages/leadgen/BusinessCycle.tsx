@@ -268,7 +268,7 @@ export default function BusinessCycleLeadGen() {
                         maxHeight: "70vh",
                         marginBottom:
                           slide.title === "Lead Management"
-                            ? "-6cqw"
+                            ? "-3cqw"
                             : slide.title === "Engagement"
                               ? "-3cqw"
                               : slide.title === "Your Setup" || slide.title === "Conversions"
