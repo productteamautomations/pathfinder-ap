@@ -40,139 +40,133 @@ export default function AboutProductLSA() {
           </h1>
         </motion.div>
 
-        {/* Card Section */}
-        <div className="flex-1 flex items-start justify-center overflow-hidden" style={{ padding: "1vh 0 5vh 0" }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="bg-white border border-border/30 shadow-lg overflow-hidden"
-            style={{
-              height: "100%",
-              aspectRatio: "2.18 / 1",
-              maxWidth: "100vw",
-              containerType: "size",
-              borderRadius: "2.5cqh",
-              padding: "3cqh 3cqw",
-            }}
-          >
-            <div className="grid md:grid-cols-3 h-full overflow-hidden" style={{ gap: "3cqw" }}>
-              {/* The Problem */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="flex flex-col h-full"
-              >
-                <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "1.5cqh" }}>
-                  <div
-                    className="bg-red-500/10 flex items-center justify-center flex-shrink-0"
-                    style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
-                  >
-                    <AlertTriangle style={{ width: "2cqw", height: "2cqw" }} className="text-red-500" />
-                  </div>
-                  <h2 className="font-display font-bold text-title" style={{ fontSize: "2cqw" }}>
-                    The Problem
-                  </h2>
-                </div>
-                <p
-                  className="text-muted-foreground leading-relaxed"
-                  style={{ fontSize: "1.4cqw", lineHeight: "1.6" }}
-                >
-                  Most local businesses waste money on ads that don't turn into real jobs. You pay for clicks, enquiries come from the wrong areas, and customers don't always trust who they're calling.
-                </p>
-              </motion.div>
-
-              {/* The Solution */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="flex flex-col h-full"
-              >
-                <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "1.5cqh" }}>
-                  <div
-                    className="bg-blue-500/10 flex items-center justify-center flex-shrink-0"
-                    style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
-                  >
-                    <Lightbulb style={{ width: "2cqw", height: "2cqw" }} className="text-blue-500" />
-                  </div>
-                  <h2 className="font-display font-bold text-title" style={{ fontSize: "2cqw" }}>
-                    The Solution
-                  </h2>
-                </div>
-                <p
-                  className="text-muted-foreground leading-relaxed"
-                  style={{ fontSize: "1.4cqw", lineHeight: "1.6" }}
-                >
-                  Google Local Service Ads put your business right at the top of Google when people in your area are actively looking for your service. You only pay for real phone calls, not clicks — and only if the call lasts 30 seconds or more.
-                </p>
-              </motion.div>
-
-              {/* The Benefit */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                className="flex flex-col h-full"
-              >
-                <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "1.5cqh" }}>
-                  <div
-                    className="bg-green-500/10 flex items-center justify-center flex-shrink-0"
-                    style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
-                  >
-                    <Check style={{ width: "2cqw", height: "2cqw" }} className="text-green-500" />
-                  </div>
-                  <h2 className="font-display font-bold text-title" style={{ fontSize: "2cqw" }}>
-                    The Benefit
-                  </h2>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "1cqh" }}>
-                  {benefits.map((benefit, index) => (
-                    <motion.div
-                      key={benefit.text}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.6 + index * 0.1 }}
-                      className="flex items-center"
-                      style={{ gap: "0.8cqw" }}
-                    >
-                      <div
-                        className="bg-green-500 flex items-center justify-center flex-shrink-0"
-                        style={{ width: "1.8cqw", height: "1.8cqw", borderRadius: "50%" }}
-                      >
-                        <Check
-                          style={{ width: "1cqw", height: "1cqw" }}
-                          className="text-white"
-                          strokeWidth={3}
-                        />
-                      </div>
-                      <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
-                        {benefit.text}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Continue Button */}
+        {/* Cards Section */}
+        <div 
+          className="flex-1 flex items-center justify-center overflow-hidden"
+          style={{ 
+            padding: "1vh 4vw 2vh 4vw",
+            containerType: "size",
+          }}
+        >
+          <div className="grid md:grid-cols-3 h-full w-full" style={{ gap: "2cqw", maxHeight: "100%" }}>
+            {/* The Problem Card */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.4 }}
-              className="flex justify-center"
-              style={{ marginTop: "2cqh" }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="bg-white border border-border/30 shadow-lg flex flex-col"
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqh 2cqw" }}
             >
-              <Button
-                onClick={() => navigate("/about/lsa", { state: location.state })}
-                style={{ fontSize: "1.4cqw", padding: "1.1cqh 3cqw", borderRadius: "0.8cqw" }}
+              <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "2cqh" }}>
+                <div
+                  className="bg-red-500/10 flex items-center justify-center flex-shrink-0"
+                  style={{ width: "4cqw", height: "4cqw", borderRadius: "1cqw" }}
+                >
+                  <AlertTriangle style={{ width: "2.2cqw", height: "2.2cqw" }} className="text-red-500" />
+                </div>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.2cqw" }}>
+                  The Problem
+                </h2>
+              </div>
+              <p
+                className="text-muted-foreground leading-relaxed flex-1"
+                style={{ fontSize: "1.5cqw", lineHeight: "1.7" }}
               >
-                Continue
-              </Button>
+                Most local businesses waste money on ads that don't turn into real jobs. You pay for clicks, enquiries come from the wrong areas, and customers don't always trust who they're calling.
+              </p>
             </motion.div>
-          </motion.div>
+
+            {/* The Solution Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="bg-white border border-border/30 shadow-lg flex flex-col"
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqh 2cqw" }}
+            >
+              <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "2cqh" }}>
+                <div
+                  className="bg-blue-500/10 flex items-center justify-center flex-shrink-0"
+                  style={{ width: "4cqw", height: "4cqw", borderRadius: "1cqw" }}
+                >
+                  <Lightbulb style={{ width: "2.2cqw", height: "2.2cqw" }} className="text-blue-500" />
+                </div>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.2cqw" }}>
+                  The Solution
+                </h2>
+              </div>
+              <p
+                className="text-muted-foreground leading-relaxed flex-1"
+                style={{ fontSize: "1.5cqw", lineHeight: "1.7" }}
+              >
+                Google Local Service Ads put your business right at the top of Google when people in your area are actively looking for your service. You only pay for real phone calls, not clicks — and only if the call lasts 30 seconds or more.
+              </p>
+            </motion.div>
+
+            {/* The Benefit Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="bg-white border border-border/30 shadow-lg flex flex-col"
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqh 2cqw" }}
+            >
+              <div className="flex items-center" style={{ gap: "1cqw", marginBottom: "2cqh" }}>
+                <div
+                  className="bg-green-500/10 flex items-center justify-center flex-shrink-0"
+                  style={{ width: "4cqw", height: "4cqw", borderRadius: "1cqw" }}
+                >
+                  <Check style={{ width: "2.2cqw", height: "2.2cqw" }} className="text-green-500" />
+                </div>
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.2cqw" }}>
+                  The Benefit
+                </h2>
+              </div>
+              <div className="flex-1" style={{ display: "flex", flexDirection: "column", gap: "1.2cqh" }}>
+                {benefits.map((benefit, index) => (
+                  <motion.div
+                    key={benefit.text}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-center"
+                    style={{ gap: "1cqw" }}
+                  >
+                    <div
+                      className="bg-green-500 flex items-center justify-center flex-shrink-0"
+                      style={{ width: "2cqw", height: "2cqw", borderRadius: "50%" }}
+                    >
+                      <Check
+                        style={{ width: "1.2cqw", height: "1.2cqw" }}
+                        className="text-white"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    <span className="text-foreground" style={{ fontSize: "1.4cqw" }}>
+                      {benefit.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Continue Button - Fixed at bottom */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.4 }}
+          className="flex justify-center flex-shrink-0"
+          style={{ padding: "2vh 0 4vh 0" }}
+        >
+          <Button
+            onClick={() => navigate("/about/lsa", { state: location.state })}
+            style={{ fontSize: "1.1rem", padding: "0.8rem 2.5rem" }}
+          >
+            Continue
+          </Button>
+        </motion.div>
       </div>
     </div>
   );
