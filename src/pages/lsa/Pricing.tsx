@@ -33,8 +33,8 @@ export default function PricingLSA() {
       <TopographicBackground />
       <PageHeader
         onBack={() => navigate("/about/lsa", { state: location.state })}
-        currentStep={4}
-        totalSteps={4}
+        currentStep={3}
+        totalSteps={3}
         showProgress
         productLabel="LSAs"
       />
