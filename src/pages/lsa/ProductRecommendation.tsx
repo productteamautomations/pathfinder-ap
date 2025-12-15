@@ -142,7 +142,7 @@ export default function ProductRecommendationLSA() {
       <PageHeader
         onBack={() => navigate("/fact-finder", { state: location.state })}
         currentStep={1}
-        totalSteps={3}
+        totalSteps={4}
         showProgress
         productLabel="LSAs"
       />
@@ -235,7 +235,7 @@ export default function ProductRecommendationLSA() {
                 </div>
 
                 <Button
-                  onClick={() => navigate("/about/lsa", { state: location.state })}
+                  onClick={() => navigate("/about-product/lsa", { state: location.state })}
                   style={{ fontSize: "min(1.4cqw, 3cqh)", padding: "1.1cqh 2.4cqw", borderRadius: "0.8cqw" }}
                 >
                   Continue

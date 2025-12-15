@@ -26,6 +26,7 @@ import PricingLeadGen from "@/pages/leadgen/Pricing";
 
 // LSA pages
 import ProductRecommendationLSA from "@/pages/lsa/ProductRecommendation";
+import AboutProductLSA from "@/pages/lsa/AboutProduct";
 import AboutAddPeopleLSA from "@/pages/lsa/AboutAddPeople";
 import PricingLSA from "@/pages/lsa/Pricing";
 
@@ -62,6 +63,7 @@ export function AnimatedRoutes() {
             
             {/* LSA path */}
             <Route path="/product-recommendation/lsa" element={<PageTransition><ProductRecommendationLSA /></PageTransition>} />
+            <Route path="/about-product/lsa" element={<PageTransition><AboutProductLSA /></PageTransition>} />
             <Route path="/about/lsa" element={<PageTransition><AboutAddPeopleLSA /></PageTransition>} />
             <Route path="/pricing/lsa" element={<PageTransition><PricingLSA /></PageTransition>} />
             
