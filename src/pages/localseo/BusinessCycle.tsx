@@ -310,21 +310,27 @@ export default function BusinessCycleLocalSEO() {
                 <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
                   {/* Left side - logo, title, image */}
                   <div
-                    className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative"
+                    className="flex flex-col h-full relative"
                     style={{
-                      padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "0" : "3cqw",
                       borderTopLeftRadius: "2.5cqw",
                       borderBottomLeftRadius: "2.5cqw",
                       overflow: "hidden",
                     }}
                   >
-                    {/* Background image for Product Journey and Your Setup */}
+                    {/* Background gradient - always present */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-br from-muted/30 to-muted/50"
+                      style={{ zIndex: 0 }}
+                    />
+
+                    {/* Background image for Product Journey and Your Setup - positioned absolutely to fill entire container */}
                     {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
                       <motion.img
                         key={`bg-${currentSlide}`}
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
                         className="absolute inset-0 w-full h-full object-cover object-bottom"
+                        style={{ zIndex: 0 }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -332,130 +338,130 @@ export default function BusinessCycleLocalSEO() {
                       />
                     )}
 
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentSlide}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="flex flex-col items-start h-full"
-                        style={{
-                          padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "3cqw" : "0",
-                          position: "relative",
-                          zIndex: 1,
-                        }}
-                      >
-                        {/* Logo and Title */}
-                        <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
-                          <motion.img
-                            src={LogoGraphic}
-                            alt="Add People"
-                            style={{ width: "3cqw", height: "3cqw", flexShrink: 0 }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: iconLoaded ? 1 : 0 }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
-                            onLoad={() => setIconLoaded(true)}
-                          />
-                          <h2
-                            className="font-display font-bold text-title tracking-tight"
-                            style={{
-                              fontSize:
-                                slide.title === "Lead Management" ||
-                                slide.title === "Ongoing Service" ||
-                                slide.title === "Product Journey"
-                                  ? "4cqw"
-                                  : "5.5cqw",
-                              lineHeight: "3cqw",
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            {slide.title}
-                          </h2>
-                        </div>
-                        <p className="text-primary leading-relaxed" style={{ fontSize: "1.5cqw", marginTop: "0.6cqw" }}>
-                          {slide.subtitle}
-                        </p>
-
-                        {/* Orange accent dots */}
-                        <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
-                          <div className="flex items-center" style={{ gap: "0.4cqw" }}>
-                            {[...Array(4)].map((_, i) => (
-                              <motion.div
-                                key={i}
-                                className="rounded-full bg-primary"
-                                style={{ width: "0.5cqw", height: "0.5cqw" }}
-                                initial={{ scale: 0, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 - i * 0.25 }}
-                                transition={{ delay: i * 0.1, duration: 0.3 }}
-                              />
-                            ))}
-                            <motion.div
-                              className="relative overflow-hidden"
-                              style={{ height: "0.15cqw", width: "4cqw", transformOrigin: "left" }}
-                              initial={{ scaleX: 0, opacity: 0 }}
-                              animate={{ scaleX: 1, opacity: 1 }}
-                              transition={{ delay: 0.4, duration: 0.4 }}
-                            >
-                              <div
-                                className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
-                                style={{
-                                  clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
-                                }}
-                              />
-                            </motion.div>
-                          </div>
-                        </div>
-
-                        {/* Main image - only for non Product Journey/Your Setup slides */}
-                        {slide.title !== "Product Journey" && slide.title !== "Your Setup" && (
-                          <div
-                            className={`flex-1 flex justify-center w-full overflow-visible ${
-                              slide.title === "Visibility" || slide.title === "Ongoing Service"
-                                ? "items-center"
-                                : "items-end"
-                            }`}
-                          >
+                    <div style={{ padding: "3cqw", position: "relative", zIndex: 1, height: "100%" }}>
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentSlide}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="flex flex-col items-start h-full"
+                        >
+                          {/* Logo and Title */}
+                          <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
                             <motion.img
-                              src={slide.mainImage || VisibilityMainImage}
-                              alt={`${slide.title} - ${slide.subtitle}`}
-                              className="h-auto object-contain"
-                              style={{
-                                width:
-                                  slide.title === "Lead Management"
-                                    ? "100%"
-                                    : slide.title === "Visibility"
-                                      ? "108%"
-                                      : slide.title === "Relevance" || slide.title === "Prominence"
-                                        ? "120%"
-                                        : slide.title === "Ongoing Service"
-                                          ? "110%"
-                                          : "100%",
-                                maxHeight: "70vh",
-                                marginBottom:
-                                  slide.title === "Lead Management"
-                                    ? "-3cqw"
-                                    : slide.title === "Relevance" || slide.title === "Prominence"
-                                      ? "-3cqw"
-                                      : slide.title === "Conversions"
-                                        ? "-1.5cqw"
-                                        : "0",
-                              }}
+                              src={LogoGraphic}
+                              alt="Add People"
+                              style={{ width: "3cqw", height: "3cqw", flexShrink: 0 }}
                               initial={{ opacity: 0 }}
-                              animate={{ opacity: imageLoaded ? 1 : 0 }}
+                              animate={{ opacity: iconLoaded ? 1 : 0 }}
                               transition={{ duration: 0.4, ease: "easeOut" }}
-                              onLoad={() => setImageLoaded(true)}
+                              onLoad={() => setIconLoaded(true)}
                             />
+                            <h2
+                              className="font-display font-bold text-title tracking-tight"
+                              style={{
+                                fontSize:
+                                  slide.title === "Lead Management" ||
+                                  slide.title === "Ongoing Service" ||
+                                  slide.title === "Product Journey"
+                                    ? "4cqw"
+                                    : "5.5cqw",
+                                lineHeight: "3cqw",
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              {slide.title}
+                            </h2>
                           </div>
-                        )}
+                          <p
+                            className="text-primary leading-relaxed"
+                            style={{ fontSize: "1.5cqw", marginTop: "0.6cqw" }}
+                          >
+                            {slide.subtitle}
+                          </p>
 
-                        {/* Spacer for Product Journey and Your Setup to push content up */}
-                        {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
-                          <div className="flex-1" />
-                        )}
-                      </motion.div>
-                    </AnimatePresence>
+                          {/* Orange accent dots */}
+                          <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
+                            <div className="flex items-center" style={{ gap: "0.4cqw" }}>
+                              {[...Array(4)].map((_, i) => (
+                                <motion.div
+                                  key={i}
+                                  className="rounded-full bg-primary"
+                                  style={{ width: "0.5cqw", height: "0.5cqw" }}
+                                  initial={{ scale: 0, opacity: 0 }}
+                                  animate={{ scale: 1, opacity: 1 - i * 0.25 }}
+                                  transition={{ delay: i * 0.1, duration: 0.3 }}
+                                />
+                              ))}
+                              <motion.div
+                                className="relative overflow-hidden"
+                                style={{ height: "0.15cqw", width: "4cqw", transformOrigin: "left" }}
+                                initial={{ scaleX: 0, opacity: 0 }}
+                                animate={{ scaleX: 1, opacity: 1 }}
+                                transition={{ delay: 0.4, duration: 0.4 }}
+                              >
+                                <div
+                                  className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
+                                  style={{
+                                    clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
+                                  }}
+                                />
+                              </motion.div>
+                            </div>
+                          </div>
+
+                          {/* Main image - only for non Product Journey/Your Setup slides */}
+                          {slide.title !== "Product Journey" && slide.title !== "Your Setup" && (
+                            <div
+                              className={`flex-1 flex justify-center w-full overflow-visible ${
+                                slide.title === "Visibility" || slide.title === "Ongoing Service"
+                                  ? "items-center"
+                                  : "items-end"
+                              }`}
+                            >
+                              <motion.img
+                                src={slide.mainImage || VisibilityMainImage}
+                                alt={`${slide.title} - ${slide.subtitle}`}
+                                className="h-auto object-contain"
+                                style={{
+                                  width:
+                                    slide.title === "Lead Management"
+                                      ? "100%"
+                                      : slide.title === "Visibility"
+                                        ? "108%"
+                                        : slide.title === "Relevance" || slide.title === "Prominence"
+                                          ? "120%"
+                                          : slide.title === "Ongoing Service"
+                                            ? "110%"
+                                            : "100%",
+                                  maxHeight: "70vh",
+                                  marginBottom:
+                                    slide.title === "Lead Management"
+                                      ? "-3cqw"
+                                      : slide.title === "Relevance" || slide.title === "Prominence"
+                                        ? "-3cqw"
+                                        : slide.title === "Conversions"
+                                          ? "-1.5cqw"
+                                          : "0",
+                                }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: imageLoaded ? 1 : 0 }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                                onLoad={() => setImageLoaded(true)}
+                              />
+                            </div>
+                          )}
+
+                          {/* Spacer for Product Journey and Your Setup to push content up */}
+                          {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
+                            <div className="flex-1" />
+                          )}
+                        </motion.div>
+                      </AnimatePresence>
+                    </div>
                   </div>
 
                   {/* Right side - content list */}
