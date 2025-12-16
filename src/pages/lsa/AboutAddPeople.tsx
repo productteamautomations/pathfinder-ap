@@ -36,7 +36,7 @@ export default function AboutAddPeopleLeadGen() {
   const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ containerType: "size" }}>
+    <div className="h-screen flex flex-col overflow-hidden bg-background relative" style={{ containerType: "size" }}>
       <PageHeader
         onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
         currentStep={6}
@@ -47,16 +47,18 @@ export default function AboutAddPeopleLeadGen() {
 
       <div
         className="flex-1 flex items-center justify-center"
-        style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw" }}
+        style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "2cqw" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="bg-white shadow-lg overflow-hidden"
           style={{
-            width: "min(92cqw, calc((100vh - 10cqh - 2rem) * 1.8))",
-            height: "min(calc(100vh - 10cqh - 2rem), calc(92cqw / 1.8))",
+            width: "min(90cqw, calc((100vh - 10cqh - 4cqw) * 1.8))",
+            aspectRatio: "1.8",
             containerType: "size",
+            borderRadius: "2cqw",
             padding: "2cqw",
           }}
         >
