@@ -48,11 +48,11 @@ export default function AboutProductLSA() {
         {/* Cards Section */}
         <div
           className="flex-1 flex items-center justify-center overflow-hidden"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "1cqw", paddingTop: "0.5cqw" }}
+          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "0.5cqw", paddingTop: "0.5cqw" }}
         >
           <div
             className="flex flex-col md:flex-row w-full"
-            style={{ gap: "1.3cqw", maxWidth: "92cqw", maxHeight: "min(65vh, 70cqw)" }}
+            style={{ gap: "1.3cqw", maxWidth: "92cqw", maxHeight: "min(60vh, 65cqw)" }}
           >
             {/* The Problem Card */}
             <motion.div
@@ -208,7 +208,7 @@ export default function AboutProductLSA() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.4 }}
           className="flex justify-center flex-shrink-0"
-          style={{ paddingTop: "1cqw", paddingBottom: "1.5cqw" }}
+          style={{ paddingTop: "0.8cqw", paddingBottom: "1.2cqw" }}
         >
           <Button
             onClick={() => navigate("/about/lsa", { state: location.state })}
