@@ -51,7 +51,7 @@ export default function AboutProductLSA() {
           style={{ paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "0.5cqw", paddingTop: "0.5cqw" }}
         >
           <div
-            className="flex flex-col md:flex-row w-full h-full"
+            className="flex flex-col md:flex-row w-full h-full justify-center"
             style={{ gap: "1.3cqw", maxWidth: "75cqw", maxHeight: "100%" }}
           >
             {/* The Problem Card */}
