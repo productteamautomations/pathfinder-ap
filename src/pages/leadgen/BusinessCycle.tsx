@@ -355,8 +355,9 @@ export default function BusinessCycleLeadGen() {
                         alt=""
                         className="absolute z-10"
                         style={{
-                          top: "3cqw",
+                          top: "50%",
                           right: "3cqw",
+                          transform: "translateY(-50%)",
                           width: "5cqw",
                           height: "auto",
                         }}
