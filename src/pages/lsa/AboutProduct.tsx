@@ -38,9 +38,9 @@ export default function AboutProductLSA() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center flex-shrink-0"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1.5cqh", paddingBottom: "1.5cqh" }}
+          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1.5cqh", paddingBottom: "1cqh" }}
         >
-          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "5.5cqw" }}>
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4.4cqw" }}>
             How Local Service Ads Work
           </h1>
         </motion.div>
@@ -50,16 +50,19 @@ export default function AboutProductLSA() {
           className="flex-1 flex items-center justify-center overflow-hidden"
           style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "1cqh" }}
         >
-          <div className="flex flex-col md:flex-row w-full max-h-full" style={{ gap: "1.5cqw", maxWidth: "90cqw" }}>
+          <div
+            className="flex flex-col md:flex-row w-full"
+            style={{ gap: "1.5cqw", maxWidth: "90cqw", maxHeight: "75cqh" }}
+          >
             {/* The Problem Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqw" }}
             >
-              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1.2cqw" }}>
                 <div
                   className="bg-red-500/10 flex items-center justify-center flex-shrink-0 rounded-lg"
                   style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
@@ -73,13 +76,13 @@ export default function AboutProductLSA() {
 
               <div
                 className="flex-1 flex items-center justify-center"
-                style={{ marginTop: "0.5cqh", marginBottom: "0.5cqh" }}
+                style={{ marginTop: "1cqh", marginBottom: "1cqh" }}
               >
                 <img
                   src={TheProblemImage}
                   alt="The Problem"
                   className="w-auto object-contain"
-                  style={{ maxHeight: "42cqh" }}
+                  style={{ maxHeight: "48cqh" }}
                 />
               </div>
 
@@ -96,9 +99,9 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqw" }}
             >
-              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1.2cqw" }}>
                 <div
                   className="bg-amber-500/10 flex items-center justify-center flex-shrink-0"
                   style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
@@ -112,13 +115,13 @@ export default function AboutProductLSA() {
 
               <div
                 className="flex-1 flex items-center justify-center"
-                style={{ marginTop: "0.5cqh", marginBottom: "0.5cqh" }}
+                style={{ marginTop: "1cqh", marginBottom: "1cqh" }}
               >
                 <img
                   src={TheSolutionImage}
                   alt="The Solution"
                   className="w-auto object-contain"
-                  style={{ maxHeight: "42cqh" }}
+                  style={{ maxHeight: "48cqh" }}
                 />
               </div>
 
@@ -135,9 +138,9 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
+              style={{ borderRadius: "1.5cqw", padding: "2.5cqw" }}
             >
-              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1.2cqw" }}>
                 <div
                   className="bg-green-500/10 flex items-center justify-center flex-shrink-0"
                   style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
@@ -149,16 +152,16 @@ export default function AboutProductLSA() {
                 </h2>
               </div>
 
-              <div className="flex items-center justify-center" style={{ marginBottom: "1cqw" }}>
+              <div className="flex items-center justify-center" style={{ marginBottom: "1.5cqw" }}>
                 <img
                   src={TheBenefitImage}
                   alt="Google Guaranteed"
                   className="w-auto object-contain"
-                  style={{ height: "7cqh" }}
+                  style={{ height: "8cqh" }}
                 />
               </div>
 
-              <div className="flex-1 flex flex-col" style={{ gap: "1cqw" }}>
+              <div className="flex-1 flex flex-col" style={{ gap: "1.2cqw" }}>
                 {benefits.map((benefit, index) => (
                   <motion.div
                     key={benefit}
