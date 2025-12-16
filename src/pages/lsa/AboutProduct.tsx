@@ -47,16 +47,12 @@ export default function AboutProductLSA() {
 
         {/* Cards Section */}
         <div
-          className="flex-1 flex items-center justify-center overflow-hidden"
+          className="flex-1 flex items-center justify-center overflow-hidden min-h-0"
           style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "0.5cqw", paddingTop: "0.5cqw" }}
         >
           <div
-            className="flex flex-col md:flex-row"
-            style={{
-              gap: "1.3cqw",
-              width: "min(92cqw, calc((60vh - 73px - 10cqw) / 1.1 * 3 + 2.6cqw))",
-              maxHeight: "calc(60vh - 73px - 10cqw)",
-            }}
+            className="flex flex-col md:flex-row w-full h-full"
+            style={{ gap: "1.3cqw", maxWidth: "92cqw", maxHeight: "100%" }}
           >
             {/* The Problem Card */}
             <motion.div
@@ -64,7 +60,7 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", maxHeight: "100%" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -109,7 +105,7 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", maxHeight: "100%" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -154,7 +150,7 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", maxHeight: "100%" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
