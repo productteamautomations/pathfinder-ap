@@ -70,9 +70,13 @@ const slides = [
     content: [
       { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
       { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
-      { label: "Measure ROI", description: "Understand your CPA", icon: MeasureIcon, isInteractive: true },
+      { label: "Measure ROI", description: "Understand your cost per lead", icon: MeasureIcon, isInteractive: true },
       { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: OptimiseIcon },
-      { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: SayHelloIcon },
+      {
+        label: "Say Hello Analytics",
+        description: "Say Hello makes managing customers (and finding new ones) as easy as it should be.",
+        icon: SayHelloIcon,
+      },
     ],
   },
   {
