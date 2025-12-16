@@ -31,6 +31,26 @@ const COLORS = {
   budget30: "#FF9845",
 };
 
+// Move CustomDot outside the component
+const CustomDot = ({ cx, cy, stroke, index, dotSize = 4, strokeWidth = 2 }: any) => {
+  if (!cx || !cy) return null;
+  return (
+    <motion.circle
+      cx={cx}
+      cy={cy}
+      r={dotSize}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+      fill="white"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.34, 1.56, 0.64, 1] }}
+      whileHover={{ scale: 1.5, transition: { duration: 0.2 } }}
+      style={{ cursor: "pointer" }}
+    />
+  );
+};
+
 export function TrafficGraph() {
   const [fontSize, setFontSize] = useState(12);
   const [labelFontSize, setLabelFontSize] = useState(14);
@@ -62,26 +82,6 @@ export function TrafficGraph() {
     observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
-
-  const CustomDot = (props: any) => {
-    const { cx, cy, stroke, index } = props;
-    if (!cx || !cy) return null;
-    return (
-      <motion.circle
-        cx={cx}
-        cy={cy}
-        r={dotSize}
-        stroke={stroke}
-        strokeWidth={strokeWidth}
-        fill="white"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.4, delay: index * 0.05, ease: [0.34, 1.56, 0.64, 1] }}
-        whileHover={{ scale: 1.5, transition: { duration: 0.2 } }}
-        style={{ cursor: "pointer" }}
-      />
-    );
-  };
 
   return (
     <motion.div
@@ -175,7 +175,9 @@ export function TrafficGraph() {
               stroke={COLORS.budget10}
               fill="url(#colorBudget10)"
               strokeWidth={strokeWidth}
-              dot={<CustomDot stroke={COLORS.budget10} />}
+              dot={(props) => (
+                <CustomDot {...props} stroke={COLORS.budget10} dotSize={dotSize} strokeWidth={strokeWidth} />
+              )}
               activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget10 }}
               animationBegin={0}
               animationDuration={1500}
@@ -190,7 +192,9 @@ export function TrafficGraph() {
               stroke={COLORS.budget20}
               fill="url(#colorBudget20)"
               strokeWidth={strokeWidth}
-              dot={<CustomDot stroke={COLORS.budget20} />}
+              dot={(props) => (
+                <CustomDot {...props} stroke={COLORS.budget20} dotSize={dotSize} strokeWidth={strokeWidth} />
+              )}
               activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget20 }}
               animationBegin={500}
               animationDuration={1500}
@@ -205,7 +209,9 @@ export function TrafficGraph() {
               stroke={COLORS.budget30}
               fill="url(#colorBudget30)"
               strokeWidth={strokeWidth}
-              dot={<CustomDot stroke={COLORS.budget30} />}
+              dot={(props) => (
+                <CustomDot {...props} stroke={COLORS.budget30} dotSize={dotSize} strokeWidth={strokeWidth} />
+              )}
               activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget30 }}
               animationBegin={1000}
               animationDuration={1500}
