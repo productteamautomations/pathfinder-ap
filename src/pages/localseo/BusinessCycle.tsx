@@ -52,12 +52,16 @@ import AdvancedAIIcon from "@/assets/advanced-ai.svg";
 import InDepthOnboardingIcon from "@/assets/in-depth-onboarding.svg";
 import FullSEOServiceIcon from "@/assets/full-seo-service.svg";
 import YourSetupNewMainImage from "@/assets/your-setup-main-new.svg";
+import LeadgenTrafficCorner from "@/assets/leadgen-traffic-corner.svg";
+import LeadgenConversionsCorner from "@/assets/leadgen-conversions-corner.svg";
+import LeadgenLeadManagementCorner from "@/assets/leadgen-leadmanagement-corner.svg";
 
 const slides = [
   {
     title: "Visibility",
     subtitle: "Get found by local customers",
     mainImage: VisibilityMainImage,
+    cornerImage: LeadgenTrafficCorner,
     content: [
       { label: "Relevance", description: "How well your business matches search intent", icon: RelevanceIcon },
       { label: "Proximity", description: "How close you are to the searcher", icon: ProximityIcon },
@@ -102,6 +106,7 @@ const slides = [
     title: "Conversions",
     subtitle: "Turn visitors into customers",
     mainImage: ConversionsMainImage,
+    cornerImage: LeadgenConversionsCorner,
     content: [
       { label: "Track what happens after someone clicks", description: "", icon: SeeExactlyIcon },
       { label: "Measure ROI", description: "Understand cost per acquisition", icon: MeasureIcon, isInteractive: true },
@@ -113,6 +118,7 @@ const slides = [
     title: "Lead Management",
     subtitle: "Respond fast, win more",
     mainImage: SalesMainImage,
+    cornerImage: LeadgenLeadManagementCorner,
     content: [
       { label: "Respond within 5 minutes", description: "21× more likely to qualify", icon: SalesRespondIcon },
       { label: "Waiting >5 minutes", description: "Reduces success by 80%+", icon: SalesWaitingIcon },
@@ -420,6 +426,24 @@ export default function BusinessCycleLocalSEO() {
               className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
               style={{ padding: "3cqw", paddingBottom: "6cqw" }}
             >
+              {/* Corner image */}
+              {slide.cornerImage && (
+                <motion.img
+                  key={`corner-${currentSlide}`}
+                  src={slide.cornerImage}
+                  alt=""
+                  className="absolute z-10"
+                  style={{
+                    top: "2.5cqw",
+                    right: "3cqw",
+                    width: "5cqw",
+                    height: "auto",
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+                />
+              )}
               <div className="overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
