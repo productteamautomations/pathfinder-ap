@@ -13,140 +13,168 @@ const benefits = [
   "Zero wasted spend on irrelevant clicks",
   "Jobs only from your chosen service areas",
   "The Google Guaranteed badge builds instant trust",
-  "Higher-quality leads and more booked work"
+  "Higher-quality leads and more booked work",
 ];
 
 export default function AboutProductLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background relative">
       <TopographicBackground />
-      <PageHeader 
-        onBack={() => navigate("/product-recommendation/lsa", { state: location.state })} 
-        currentStep={2} 
-        totalSteps={4} 
-        showProgress 
-        productLabel="LSAs" 
+      <PageHeader
+        onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
+        currentStep={2}
+        totalSteps={4}
+        showProgress
+        productLabel="LSAs"
       />
 
-      <div 
-        className="flex-1 flex flex-col relative z-10" 
-        style={{ paddingTop: "73px" }}
-      >
+      <div className="flex-1 flex flex-col relative z-10" style={{ paddingTop: "73px", containerType: "size" }}>
         {/* Title Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ duration: 0.5 }} 
-          className="text-center flex-shrink-0 px-8 py-4"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center flex-shrink-0"
+          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1.5cqh", paddingBottom: "1.5cqh" }}
         >
-          <h1 className="font-display font-bold text-title tracking-tight text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "5.5cqw" }}>
             How Local Service Ads Work
           </h1>
         </motion.div>
 
         {/* Cards Section */}
-        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-2 overflow-hidden">
-          <div className="flex flex-col md:flex-row gap-4 lg:gap-5 w-full max-w-7xl max-h-full">
+        <div
+          className="flex-1 flex items-center justify-center overflow-hidden"
+          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "1cqh" }}
+        >
+          <div className="flex flex-col md:flex-row w-full max-h-full" style={{ gap: "1.5cqw", maxWidth: "90cqw" }}>
             {/* The Problem Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.2, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="bg-red-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
-                  <AlertTriangle className="w-5 h-5 text-red-500" />
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+                <div
+                  className="bg-red-500/10 flex items-center justify-center flex-shrink-0 rounded-lg"
+                  style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
+                >
+                  <AlertTriangle className="text-red-500" style={{ width: "2cqw", height: "2cqw" }} />
                 </div>
-                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
                   The Problem
                 </h2>
               </div>
-              
-              <div className="flex-1 flex items-center justify-center my-1">
-                <img 
-                  src={TheProblemImage} 
-                  alt="The Problem" 
-                  className="max-h-[42vh] w-auto object-contain"
+
+              <div
+                className="flex-1 flex items-center justify-center"
+                style={{ marginTop: "0.5cqh", marginBottom: "0.5cqh" }}
+              >
+                <img
+                  src={TheProblemImage}
+                  alt="The Problem"
+                  className="w-auto object-contain"
+                  style={{ maxHeight: "42cqh" }}
                 />
               </div>
-              
-              <p className="text-foreground text-center text-base md:text-lg font-medium">
-                Wasted budget on clicks, not jobs.<br />
+
+              <p className="text-foreground text-center font-medium" style={{ fontSize: "1.7cqw", lineHeight: "1.4" }}>
+                Wasted budget on clicks, not jobs.
+                <br />
                 Wrong areas & lack of trust.
               </p>
             </motion.div>
 
             {/* The Solution Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.3, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="bg-amber-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
-                  <Lightbulb className="w-5 h-5 text-amber-500" />
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+                <div
+                  className="bg-amber-500/10 flex items-center justify-center flex-shrink-0"
+                  style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
+                >
+                  <Lightbulb className="text-amber-500" style={{ width: "2cqw", height: "2cqw" }} />
                 </div>
-                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
                   The Solution
                 </h2>
               </div>
-              
-              <div className="flex-1 flex items-center justify-center my-1">
-                <img 
-                  src={TheSolutionImage} 
-                  alt="The Solution" 
-                  className="max-h-[42vh] w-auto object-contain"
+
+              <div
+                className="flex-1 flex items-center justify-center"
+                style={{ marginTop: "0.5cqh", marginBottom: "0.5cqh" }}
+              >
+                <img
+                  src={TheSolutionImage}
+                  alt="The Solution"
+                  className="w-auto object-contain"
+                  style={{ maxHeight: "42cqh" }}
                 />
               </div>
-              
-              <p className="text-foreground text-center text-base md:text-lg font-medium">
-                Top placement on Google.<br />
+
+              <p className="text-foreground text-center font-medium" style={{ fontSize: "1.7cqw", lineHeight: "1.4" }}>
+                Top placement on Google.
+                <br />
                 Pay only for qualified calls (30+ sec).
               </p>
             </motion.div>
 
             {/* The Benefit Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              transition={{ delay: 0.4, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.5cqw", padding: "2cqw" }}
             >
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <div className="bg-green-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
-                  <Check className="w-5 h-5 text-green-500" />
+              <div className="flex items-center justify-center" style={{ gap: "0.8cqw", marginBottom: "1cqw" }}>
+                <div
+                  className="bg-green-500/10 flex items-center justify-center flex-shrink-0"
+                  style={{ width: "3.5cqw", height: "3.5cqw", borderRadius: "0.8cqw" }}
+                >
+                  <Check className="text-green-500" style={{ width: "2cqw", height: "2cqw" }} />
                 </div>
-                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
+                <h2 className="font-display font-bold text-title" style={{ fontSize: "2.5cqw" }}>
                   The Benefit
                 </h2>
               </div>
-              
-              <div className="flex items-center justify-center mb-2">
-                <img 
-                  src={TheBenefitImage} 
-                  alt="Google Guaranteed" 
-                  className="h-20 md:h-24 w-auto object-contain"
+
+              <div className="flex items-center justify-center" style={{ marginBottom: "1cqw" }}>
+                <img
+                  src={TheBenefitImage}
+                  alt="Google Guaranteed"
+                  className="w-auto object-contain"
+                  style={{ height: "7cqh" }}
                 />
               </div>
-              
-              <div className="flex-1 flex flex-col gap-2">
+
+              <div className="flex-1 flex flex-col" style={{ gap: "1cqw" }}>
                 {benefits.map((benefit, index) => (
-                  <motion.div 
-                    key={benefit} 
-                    initial={{ opacity: 0, x: -10 }} 
-                    animate={{ opacity: 1, x: 0 }} 
-                    transition={{ delay: 0.5 + index * 0.1 }} 
-                    className="flex items-start gap-2"
+                  <motion.div
+                    key={benefit}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className="flex items-start"
+                    style={{ gap: "0.8cqw" }}
                   >
-                    <div className="bg-green-500 flex items-center justify-center flex-shrink-0 w-6 h-6 rounded-full mt-0.5">
-                      <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                    <div
+                      className="bg-green-500 flex items-center justify-center flex-shrink-0 rounded-full"
+                      style={{ width: "2cqw", height: "2cqw", marginTop: "0.2cqw" }}
+                    >
+                      <Check className="text-white" strokeWidth={3} style={{ width: "1.3cqw", height: "1.3cqw" }} />
                     </div>
-                    <span className="text-foreground text-base md:text-lg leading-tight">
+                    <span className="text-foreground leading-tight" style={{ fontSize: "1.7cqw" }}>
                       {benefit}
                     </span>
                   </motion.div>
@@ -157,15 +185,22 @@ export default function AboutProductLSA() {
         </div>
 
         {/* Continue Button */}
-        <motion.div 
-          initial={{ opacity: 0, y: 10 }} 
-          animate={{ opacity: 1, y: 0 }} 
-          transition={{ delay: 0.8, duration: 0.4 }} 
-          className="flex justify-center flex-shrink-0 py-4 md:py-6"
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.4 }}
+          className="flex justify-center flex-shrink-0"
+          style={{ paddingTop: "1.5cqh", paddingBottom: "2cqh" }}
         >
-          <Button 
-            onClick={() => navigate("/about/lsa", { state: location.state })} 
-            className="text-lg md:text-xl px-10 py-4"
+          <Button
+            onClick={() => navigate("/about/lsa", { state: location.state })}
+            style={{
+              fontSize: "1.8cqw",
+              paddingLeft: "4cqw",
+              paddingRight: "4cqw",
+              paddingTop: "1.5cqh",
+              paddingBottom: "1.5cqh",
+            }}
           >
             Continue
           </Button>
