@@ -161,10 +161,10 @@ export default function PricingLocalSEO() {
                 </div>
 
                 {/* Price Breakdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.3cqw", marginBottom: "2.5cqw" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.2cqw", marginBottom: "1.5cqw" }}>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.5cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
                     <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       Setup Fee
@@ -175,7 +175,7 @@ export default function PricingLocalSEO() {
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.5cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
                     <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       Monthly Fee
@@ -186,7 +186,7 @@ export default function PricingLocalSEO() {
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.5cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
                     <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       VAT (20%)
@@ -200,14 +200,14 @@ export default function PricingLocalSEO() {
                 {/* Total */}
                 <div
                   className="bg-muted/30"
-                  style={{ borderRadius: "1.5cqw", padding: "2.5cqw", marginBottom: "2.5cqw" }}
+                  style={{ borderRadius: "1.5cqw", padding: "1.5cqw", marginBottom: "1.5cqw" }}
                 >
                   <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
-                      <p className="text-muted-foreground" style={{ fontSize: "1.1cqw", marginBottom: "0.5cqw" }}>
+                      <p className="text-muted-foreground" style={{ fontSize: "1.1cqw", marginBottom: "0.3cqw" }}>
                         First month total
                       </p>
-                      <p className="font-bold text-foreground" style={{ fontSize: "4cqw" }}>
+                      <p className="font-bold text-foreground" style={{ fontSize: "3.5cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
                       </p>
                     </div>
