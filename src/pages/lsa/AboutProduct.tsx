@@ -289,7 +289,7 @@ export default function FunnelDiagnosticLocalSEO() {
                     </p>
                   </div>
 
-                  {/* Options */}
+                  {/* Options - Text scaled by 20% (1.5cqw → 1.8cqw) */}
                   <div className="flex-1" style={{ display: "flex", flexDirection: "column", gap: "1cqw" }}>
                     {question.options.map((option, index) => {
                       const isSelected = question.multiSelect
@@ -308,7 +308,7 @@ export default function FunnelDiagnosticLocalSEO() {
                               ? "border-primary bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
                               : "border-border/30 bg-white text-foreground hover:border-primary/40 hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)]"
                           }`}
-                          style={{ fontSize: "1.5cqw", padding: "1.2cqw", borderRadius: "1.2cqw" }}
+                          style={{ fontSize: "1.8cqw", padding: "1.2cqw", borderRadius: "1.2cqw" }}
                         >
                           <span>{option}</span>
                           {question.multiSelect ? (
@@ -317,24 +317,25 @@ export default function FunnelDiagnosticLocalSEO() {
                                 isSelected ? "bg-white border-white" : "border-muted-foreground/30"
                               }`}
                               style={{
-                                width: "1.5cqw",
-                                height: "1.5cqw",
-                                borderRadius: "0.3cqw",
-                                borderWidth: "0.15cqw",
+                                width: "1.8cqw",
+                                height: "1.8cqw",
+                                borderRadius: "0.36cqw",
+                                borderWidth: "0.18cqw",
+                                flexShrink: 0,
                               }}
                             >
                               {isSelected && (
                                 <Check
                                   className="text-primary"
                                   strokeWidth={3}
-                                  style={{ width: "1cqw", height: "1cqw" }}
+                                  style={{ width: "1.2cqw", height: "1.2cqw" }}
                                 />
                               )}
                             </div>
                           ) : (
                             <ChevronRight
                               className="transition-transform"
-                              style={{ width: "1.5cqw", height: "1.5cqw" }}
+                              style={{ width: "1.8cqw", height: "1.8cqw", flexShrink: 0 }}
                             />
                           )}
                         </motion.button>
@@ -352,7 +353,7 @@ export default function FunnelDiagnosticLocalSEO() {
                           ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
                           : "bg-muted text-muted-foreground cursor-not-allowed"
                       }`}
-                      style={{ marginTop: "1cqw", padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.5cqw" }}
+                      style={{ marginTop: "1cqw", padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.8cqw" }}
                     >
                       Continue
                     </motion.button>
