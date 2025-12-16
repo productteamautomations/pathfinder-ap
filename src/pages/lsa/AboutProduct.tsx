@@ -13,6 +13,7 @@ const benefits = [
   "Zero wasted spend on irrelevant clicks",
   "Jobs only from your chosen service areas",
   "The Google Guaranteed badge builds instant trust",
+  "Higher-quality leads and more booked work",
 ];
 
 export default function AboutProductLSA() {
@@ -20,7 +21,7 @@ export default function AboutProductLSA() {
   const location = useLocation();
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background relative">
+    <div className="h-screen flex flex-col overflow-hidden bg-background relative" style={{ containerType: "size" }}>
       <TopographicBackground />
       <PageHeader
         onBack={() => navigate("/product-recommendation/lsa", { state: location.state })}
