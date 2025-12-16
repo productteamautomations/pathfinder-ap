@@ -12,7 +12,7 @@ const leadgenReviews = [
   {
     name: "Christian Woods",
     review:
-      "The support and communication have been consistently strong, and we've seen steady improvements in both traffic and lead quality. I highly recommend Add People to any business looking to boost their online presence",
+      "The support and communication have been consistently strong, and we’ve seen steady improvements in both traffic and lead quality. I highly recommend Add People to any business looking to boost their online presence",
     rating: 5,
   },
   {
@@ -45,10 +45,7 @@ export default function AboutAddPeopleLeadGen() {
         productLabel="Lead Generation"
       />
 
-      <div
-        className="flex-1 flex items-center justify-center"
-        style={{ paddingTop: "5cqw", paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "2cqw" }}
-      >
+      <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
