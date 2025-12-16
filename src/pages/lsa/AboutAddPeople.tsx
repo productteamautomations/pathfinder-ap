@@ -188,6 +188,7 @@ export default function AboutAddPeopleLSA() {
                 </Button>
               </motion.div>
             </div>
+          </div>
           </motion.div>
         </div>
       </div>
