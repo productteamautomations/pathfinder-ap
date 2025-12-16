@@ -58,6 +58,7 @@ export function TrafficGraph() {
   const [dotSize, setDotSize] = useState(4);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [margins, setMargins] = useState({ top: 20, right: 30, left: 20, bottom: 40 });
+  const [animationKey, setAnimationKey] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,6 +84,11 @@ export function TrafficGraph() {
     return () => observer.disconnect();
   }, []);
 
+  // Trigger animation on mount
+  useEffect(() => {
+    setAnimationKey((prev) => prev + 1);
+  }, []);
+
   return (
     <motion.div
       ref={containerRef}
@@ -99,7 +105,7 @@ export function TrafficGraph() {
 
       <div className="flex-1 w-full" style={{ minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={processedData} margin={margins}>
+          <AreaChart data={processedData} margin={margins} key={animationKey}>
             <defs>
               <linearGradient id="colorBudget10" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={COLORS.budget10} stopOpacity={0.2} />
