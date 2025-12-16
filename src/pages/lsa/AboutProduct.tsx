@@ -31,16 +31,16 @@ export default function AboutProductLSA() {
         productLabel="LSAs"
       />
 
-      <div className="flex-1 flex flex-col relative z-10" style={{ paddingTop: "73px", containerType: "size" }}>
+      <div className="flex-1 flex flex-col relative z-10" style={{ paddingTop: "73px" }}>
         {/* Title Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center flex-shrink-0"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1.5cqw", paddingBottom: "1cqw" }}
+          style={{ paddingLeft: "2vw", paddingRight: "2vw", paddingTop: "1.5vw", paddingBottom: "1vw" }}
         >
-          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5cqw" }}>
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5vw" }}>
             How Local Service Ads Work
           </h1>
         </motion.div>
@@ -50,14 +50,14 @@ export default function AboutProductLSA() {
           className="flex-1 flex items-center justify-center overflow-hidden"
           style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "1.5cqw" }}
         >
-          <div className="flex flex-col md:flex-row w-full h-full" style={{ gap: "1.3cqw", maxWidth: "92cqw" }}>
+          <div className="flex flex-col md:flex-row w-full" style={{ gap: "1.3cqw", maxWidth: "92cqw" }}>
             {/* The Problem Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white h-full"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -101,8 +101,8 @@ export default function AboutProductLSA() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white h-full"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -146,8 +146,8 @@ export default function AboutProductLSA() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white h-full"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
