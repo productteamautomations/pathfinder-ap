@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check } from "lucide-react";
+import PaymentProviders from "@/assets/payment-providers.svg";
 
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
@@ -215,6 +216,13 @@ export default function PricingLocalSEO() {
                     </p>
                   </div>
                 </div>
+
+                {/* Payment Providers */}
+                <img
+                  src={PaymentProviders}
+                  alt="Payment providers"
+                  style={{ width: "100%", marginBottom: "1.5cqw" }}
+                />
 
                 {/* CTA Button */}
                 <Button
