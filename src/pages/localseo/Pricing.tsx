@@ -13,7 +13,7 @@ export default function PricingLocalSEO() {
 
   const setupFee = 349.0;
   const monthlyFee6 = 279.0;
-  const monthlyFee12 = 229.0;
+  const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const vat = (setupFee + monthlyFee) * 0.2;
   const totalFirstMonth = setupFee + monthlyFee + vat;
