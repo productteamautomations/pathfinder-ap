@@ -312,15 +312,28 @@ export default function BusinessCycleLocalSEO() {
                   <div
                     className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative overflow-hidden"
                     style={{
-                      padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "0" : "3cqw",
+                      padding: "3cqw",
+                      borderTopLeftRadius: "2.5cqw",
+                      borderBottomLeftRadius: "2.5cqw",
                     }}
                   >
                     {/* Background image for Product Journey and Your Setup */}
                     {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
                       <motion.img
+                        key={`bg-${currentSlide}`}
                         src={slide.mainImage || VisibilityMainImage}
                         alt={`${slide.title} - ${slide.subtitle}`}
-                        className="absolute inset-0 w-full h-full object-cover object-bottom"
+                        className="absolute w-full h-full object-cover object-bottom"
+                        style={{
+                          top: "-3cqw",
+                          left: "-3cqw",
+                          right: "-3cqw",
+                          bottom: "-3cqw",
+                          width: "calc(100% + 6cqw)",
+                          height: "calc(100% + 6cqw)",
+                          borderTopLeftRadius: "2.5cqw",
+                          borderBottomLeftRadius: "2.5cqw",
+                        }}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: imageLoaded ? 1 : 0 }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -337,7 +350,6 @@ export default function BusinessCycleLocalSEO() {
                         transition={{ duration: 0.3 }}
                         className="flex flex-col items-start h-full"
                         style={{
-                          padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "3cqw" : "0",
                           position: "relative",
                           zIndex: 1,
                         }}
