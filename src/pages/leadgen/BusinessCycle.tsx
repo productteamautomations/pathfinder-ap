@@ -70,7 +70,7 @@ const slides = [
     content: [
       { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
       { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
-      { label: "Measure ROI", description: "Understand your cost per lead", icon: MeasureIcon, isInteractive: true },
+      { label: "Measure ROI", description: "Understand your CPA", icon: MeasureIcon, isInteractive: true },
       { label: "Optimise Campaigns", description: "Use real data, not guesswork", icon: OptimiseIcon },
       { label: "Say Hello", description: "Keep leads warm when a call is missed", icon: SayHelloIcon },
     ],
@@ -419,7 +419,14 @@ export default function BusinessCycleLeadGen() {
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                    onClick={item.isInteractive ? () => { setGraphKey(k => k + 1); setShowROIGraph(true); } : undefined}
+                                    onClick={
+                                      item.isInteractive
+                                        ? () => {
+                                            setGraphKey((k) => k + 1);
+                                            setShowROIGraph(true);
+                                          }
+                                        : undefined
+                                    }
                                     className={`shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
                                       item.isExample
                                         ? "bg-accent text-center"
