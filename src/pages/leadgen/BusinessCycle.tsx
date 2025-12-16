@@ -122,6 +122,7 @@ export default function BusinessCycleLeadGen() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [iconLoaded, setIconLoaded] = useState(false);
   const [showROIGraph, setShowROIGraph] = useState(false);
+  const [graphKey, setGraphKey] = useState(0);
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -201,7 +202,7 @@ export default function BusinessCycleLeadGen() {
 
                 {/* Graph takes remaining space */}
                 <div className="flex-1 min-h-0">
-                  <TrafficGraph />
+                  <TrafficGraph key={graphKey} />
                 </div>
               </motion.div>
             ) : (
@@ -393,7 +394,7 @@ export default function BusinessCycleLeadGen() {
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                    onClick={item.isInteractive ? () => setShowROIGraph(true) : undefined}
+                                    onClick={item.isInteractive ? () => { setGraphKey(k => k + 1); setShowROIGraph(true); } : undefined}
                                     className={`shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
                                       item.isExample
                                         ? "bg-accent text-center"
