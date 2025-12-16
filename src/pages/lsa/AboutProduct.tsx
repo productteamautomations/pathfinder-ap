@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Check, AlertTriangle, Lightbulb } from "lucide-react";
+import { TopographicBackground } from "@/components/TopographicBackground";
 import TheProblemImage from "@/assets/lsa-the-problem.svg";
 import TheSolutionImage from "@/assets/lsa-the-solution.svg";
 import TheBenefitImage from "@/assets/lsa-the-benefit.svg";
@@ -20,7 +21,8 @@ export default function AboutProductLSA() {
   const location = useLocation();
   
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background">
+    <div className="h-screen flex flex-col overflow-hidden bg-background relative">
+      <TopographicBackground />
       <PageHeader 
         onBack={() => navigate("/product-recommendation/lsa", { state: location.state })} 
         currentStep={2} 
@@ -30,7 +32,7 @@ export default function AboutProductLSA() {
       />
 
       <div 
-        className="flex-1 flex flex-col" 
+        className="flex-1 flex flex-col relative z-10" 
         style={{ paddingTop: "73px" }}
       >
         {/* Title Section */}
@@ -40,23 +42,22 @@ export default function AboutProductLSA() {
           transition={{ duration: 0.5 }} 
           className="text-center flex-shrink-0 px-8 py-4"
         >
-          <h1 className="font-display font-bold text-title tracking-tight text-3xl md:text-4xl lg:text-5xl">
+          <h1 className="font-display font-bold text-title tracking-tight text-4xl md:text-5xl lg:text-6xl">
             How Local Service Ads Work
           </h1>
         </motion.div>
 
         {/* Cards Section */}
-        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-4">
-          <div className="flex flex-col md:flex-row gap-4 lg:gap-6 w-full max-w-7xl h-full max-h-[65vh]">
+        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-2">
+          <div className="flex flex-col md:flex-row gap-4 lg:gap-5 w-full max-w-7xl" style={{ maxHeight: "58vh" }}>
             {/* The Problem Card */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.2, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-6"
-              style={{ backgroundColor: "white" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex flex-col items-center gap-1 mb-2">
                 <div className="bg-red-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <AlertTriangle className="w-5 h-5 text-red-500" />
                 </div>
@@ -65,15 +66,15 @@ export default function AboutProductLSA() {
                 </h2>
               </div>
               
-              <div className="flex-1 flex items-center justify-center my-2">
+              <div className="flex-1 flex items-center justify-center my-1">
                 <img 
                   src={TheProblemImage} 
                   alt="The Problem" 
-                  className="max-h-[40vh] md:max-h-[35vh] w-auto object-contain"
+                  className="max-h-[28vh] w-auto object-contain"
                 />
               </div>
               
-              <p className="text-muted-foreground text-center text-sm md:text-base">
+              <p className="text-foreground text-center text-sm md:text-base font-medium">
                 Wasted budget on clicks, not jobs.<br />
                 Wrong areas & lack of trust.
               </p>
@@ -84,10 +85,9 @@ export default function AboutProductLSA() {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.3, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-6"
-              style={{ backgroundColor: "white" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex flex-col items-center gap-1 mb-2">
                 <div className="bg-amber-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-amber-500" />
                 </div>
@@ -96,15 +96,15 @@ export default function AboutProductLSA() {
                 </h2>
               </div>
               
-              <div className="flex-1 flex items-center justify-center my-2">
+              <div className="flex-1 flex items-center justify-center my-1">
                 <img 
                   src={TheSolutionImage} 
                   alt="The Solution" 
-                  className="max-h-[40vh] md:max-h-[35vh] w-auto object-contain"
+                  className="max-h-[28vh] w-auto object-contain"
                 />
               </div>
               
-              <p className="text-muted-foreground text-center text-sm md:text-base">
+              <p className="text-foreground text-center text-sm md:text-base font-medium">
                 Top placement on Google.<br />
                 Pay only for qualified calls (30+ sec).
               </p>
@@ -115,10 +115,9 @@ export default function AboutProductLSA() {
               initial={{ opacity: 0, y: 20 }} 
               animate={{ opacity: 1, y: 0 }} 
               transition={{ delay: 0.4, duration: 0.5 }} 
-              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-6"
-              style={{ backgroundColor: "white" }}
+              className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex flex-col items-center gap-1 mb-2">
                 <div className="bg-green-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Check className="w-5 h-5 text-green-500" />
                 </div>
@@ -127,15 +126,15 @@ export default function AboutProductLSA() {
                 </h2>
               </div>
               
-              <div className="flex items-center justify-center mb-3">
+              <div className="flex items-center justify-center mb-2">
                 <img 
                   src={TheBenefitImage} 
                   alt="Google Guaranteed" 
-                  className="h-16 md:h-20 w-auto object-contain"
+                  className="h-14 md:h-16 w-auto object-contain"
                 />
               </div>
               
-              <div className="flex-1 flex flex-col gap-2 md:gap-3">
+              <div className="flex-1 flex flex-col gap-2">
                 {benefits.map((benefit, index) => (
                   <motion.div 
                     key={benefit} 
@@ -166,7 +165,7 @@ export default function AboutProductLSA() {
         >
           <Button 
             onClick={() => navigate("/about/lsa", { state: location.state })} 
-            className="text-base md:text-lg px-8 py-3"
+            className="text-lg md:text-xl px-10 py-4"
           >
             Continue
           </Button>
