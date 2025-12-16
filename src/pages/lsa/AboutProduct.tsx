@@ -13,7 +13,6 @@ const benefits = [
   "Zero wasted spend on irrelevant clicks",
   "Jobs only from your chosen service areas",
   "The Google Guaranteed badge builds instant trust",
-  "Higher-quality leads and more booked work",
 ];
 
 export default function AboutProductLSA() {
