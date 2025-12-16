@@ -13,7 +13,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
   return (
     <div
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
-      style={{ height: "73px" }}
+      style={{ height: "5cqh" }}
     >
       <div className="h-full w-full" style={{ paddingLeft: "2cqw", paddingRight: "2cqw" }}>
         <div className="flex items-center justify-between h-full w-full">
