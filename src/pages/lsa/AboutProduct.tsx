@@ -48,8 +48,8 @@ export default function AboutProductLSA() {
         </motion.div>
 
         {/* Cards Section */}
-        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-2">
-          <div className="flex flex-col md:flex-row gap-4 lg:gap-5 w-full max-w-7xl" style={{ maxHeight: "58vh" }}>
+        <div className="flex-1 flex items-center justify-center px-4 md:px-8 pb-2 overflow-hidden">
+          <div className="flex flex-col md:flex-row gap-4 lg:gap-5 w-full max-w-7xl max-h-full">
             {/* The Problem Card */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
@@ -57,7 +57,7 @@ export default function AboutProductLSA() {
               transition={{ delay: 0.2, duration: 0.5 }} 
               className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex flex-col items-center gap-1 mb-2">
+              <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="bg-red-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <AlertTriangle className="w-5 h-5 text-red-500" />
                 </div>
@@ -87,7 +87,7 @@ export default function AboutProductLSA() {
               transition={{ delay: 0.3, duration: 0.5 }} 
               className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex flex-col items-center gap-1 mb-2">
+              <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="bg-amber-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-amber-500" />
                 </div>
@@ -117,7 +117,7 @@ export default function AboutProductLSA() {
               transition={{ delay: 0.4, duration: 0.5 }} 
               className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-5 bg-white"
             >
-              <div className="flex flex-col items-center gap-1 mb-2">
+              <div className="flex items-center justify-center gap-2 mb-2">
                 <div className="bg-green-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Check className="w-5 h-5 text-green-500" />
                 </div>
