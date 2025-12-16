@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TrafficGraph } from "@/components/TrafficGraph";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 // Using existing images as placeholders - replace with SEO-specific images when available
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
@@ -103,7 +104,7 @@ const slides = [
     mainImage: ConversionsMainImage,
     content: [
       { label: "Track what happens after someone clicks", description: "", icon: SeeExactlyIcon },
-      { label: "Measure ROI", description: "Understand cost per acquisition", icon: MeasureIcon },
+      { label: "Measure ROI", description: "Understand cost per acquisition", icon: MeasureIcon, isInteractive: true },
       { label: "Optimise using real user behaviour", description: "", icon: OptimiseIcon },
       { label: "Google Search Console", description: "Helps maintain search performance", icon: TrackConversionsIcon },
     ],
@@ -205,6 +206,8 @@ export default function BusinessCycleLocalSEO() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [iconLoaded, setIconLoaded] = useState(false);
+  const [showROIGraph, setShowROIGraph] = useState(false);
+  const [graphKey, setGraphKey] = useState(0);
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -228,6 +231,7 @@ export default function BusinessCycleLocalSEO() {
   useEffect(() => {
     setImageLoaded(false);
     setIconLoaded(false);
+    setShowROIGraph(false);
   }, [currentSlide]);
 
   return (
@@ -253,6 +257,48 @@ export default function BusinessCycleLocalSEO() {
             borderRadius: "2.5cqw",
           }}
         >
+          <AnimatePresence mode="wait">
+            {showROIGraph ? (
+              <motion.div
+                key="roi-graph"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="h-full flex flex-col"
+                style={{ padding: "3cqw" }}
+              >
+                {/* Back button */}
+                <Button
+                  onClick={() => setShowROIGraph(false)}
+                  variant="outline"
+                  className="flex items-center self-start"
+                  style={{
+                    gap: "0.6cqw",
+                    fontSize: "1.2cqw",
+                    padding: "0.8cqw 1.2cqw",
+                    borderRadius: "0.8cqw",
+                    marginBottom: "2cqw",
+                  }}
+                >
+                  <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                  Back to Conversions
+                </Button>
+
+                {/* Graph takes remaining space */}
+                <div className="flex-1 min-h-0">
+                  <TrafficGraph key={graphKey} />
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="slides"
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 50 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="h-full"
+              >
           <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
             {/* Left side - logo, title, image */}
             <div
@@ -482,7 +528,12 @@ export default function BusinessCycleLocalSEO() {
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                className="flex bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                                onClick={item.isInteractive ? () => { setGraphKey(k => k + 1); setShowROIGraph(true); } : undefined}
+                                className={`flex bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                  item.isInteractive
+                                    ? "cursor-pointer hover:scale-[1.02] hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-all duration-200"
+                                    : ""
+                                }`}
                                 style={{
                                   gap: "1.2cqw",
                                   borderRadius: "1.5cqw",
@@ -532,6 +583,12 @@ export default function BusinessCycleLocalSEO() {
                                     </p>
                                   )}
                                 </div>
+                                {item.isInteractive && (
+                                  <ChevronRight 
+                                    className="flex-shrink-0 text-primary"
+                                    style={{ width: "1.8cqw", height: "1.8cqw" }}
+                                  />
+                                )}
                                 {item.rightIcon && (
                                   <img
                                     src={item.rightIcon}
@@ -619,6 +676,9 @@ export default function BusinessCycleLocalSEO() {
               </div>
             </div>
           </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </div>
