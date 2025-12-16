@@ -42,7 +42,7 @@ export default function AboutProductLSA() {
           transition={{ duration: 0.5 }} 
           className="text-center flex-shrink-0 px-8 py-4"
         >
-          <h1 className="font-display font-bold text-title tracking-tight text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="font-display font-bold text-title tracking-tight text-5xl md:text-6xl lg:text-7xl">
             How Local Service Ads Work
           </h1>
         </motion.div>
@@ -61,7 +61,7 @@ export default function AboutProductLSA() {
                 <div className="bg-red-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <AlertTriangle className="w-5 h-5 text-red-500" />
                 </div>
-                <h2 className="font-display font-bold text-title text-xl md:text-2xl">
+                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
                   The Problem
                 </h2>
               </div>
@@ -70,11 +70,11 @@ export default function AboutProductLSA() {
                 <img 
                   src={TheProblemImage} 
                   alt="The Problem" 
-                  className="max-h-[28vh] w-auto object-contain"
+                  className="max-h-[42vh] w-auto object-contain"
                 />
               </div>
               
-              <p className="text-foreground text-center text-sm md:text-base font-medium">
+              <p className="text-foreground text-center text-base md:text-lg font-medium">
                 Wasted budget on clicks, not jobs.<br />
                 Wrong areas & lack of trust.
               </p>
@@ -91,7 +91,7 @@ export default function AboutProductLSA() {
                 <div className="bg-amber-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Lightbulb className="w-5 h-5 text-amber-500" />
                 </div>
-                <h2 className="font-display font-bold text-title text-xl md:text-2xl">
+                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
                   The Solution
                 </h2>
               </div>
@@ -100,11 +100,11 @@ export default function AboutProductLSA() {
                 <img 
                   src={TheSolutionImage} 
                   alt="The Solution" 
-                  className="max-h-[28vh] w-auto object-contain"
+                  className="max-h-[42vh] w-auto object-contain"
                 />
               </div>
               
-              <p className="text-foreground text-center text-sm md:text-base font-medium">
+              <p className="text-foreground text-center text-base md:text-lg font-medium">
                 Top placement on Google.<br />
                 Pay only for qualified calls (30+ sec).
               </p>
@@ -121,7 +121,7 @@ export default function AboutProductLSA() {
                 <div className="bg-green-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
                   <Check className="w-5 h-5 text-green-500" />
                 </div>
-                <h2 className="font-display font-bold text-title text-xl md:text-2xl">
+                <h2 className="font-display font-bold text-title text-2xl md:text-3xl">
                   The Benefit
                 </h2>
               </div>
@@ -130,7 +130,7 @@ export default function AboutProductLSA() {
                 <img 
                   src={TheBenefitImage} 
                   alt="Google Guaranteed" 
-                  className="h-14 md:h-16 w-auto object-contain"
+                  className="h-20 md:h-24 w-auto object-contain"
                 />
               </div>
               
@@ -143,10 +143,10 @@ export default function AboutProductLSA() {
                     transition={{ delay: 0.5 + index * 0.1 }} 
                     className="flex items-start gap-2"
                   >
-                    <div className="bg-green-500 flex items-center justify-center flex-shrink-0 w-5 h-5 rounded-full mt-0.5">
-                      <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                    <div className="bg-green-500 flex items-center justify-center flex-shrink-0 w-6 h-6 rounded-full mt-0.5">
+                      <Check className="w-4 h-4 text-white" strokeWidth={3} />
                     </div>
-                    <span className="text-foreground text-sm md:text-base leading-tight">
+                    <span className="text-foreground text-base md:text-lg leading-tight">
                       {benefit}
                     </span>
                   </motion.div>
