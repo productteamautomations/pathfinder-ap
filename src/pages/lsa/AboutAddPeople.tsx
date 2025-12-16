@@ -37,7 +37,7 @@ export default function AboutAddPeopleLSA() {
   const [map2Loaded, setMap2Loaded] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ containerType: "size" }}>
+    <div className="h-screen flex flex-col overflow-hidden bg-background relative" style={{ containerType: "size" }}>
       <PageHeader
         onBack={() => navigate("/about-product/lsa", { state: location.state })}
         currentStep={3}
@@ -46,7 +46,7 @@ export default function AboutAddPeopleLSA() {
         productLabel="LSAs"
       />
 
-      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw" }}>
+      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "2cqw" }}>
         <div
           style={{
             width: "100%",
@@ -188,7 +188,6 @@ export default function AboutAddPeopleLSA() {
                 </Button>
               </motion.div>
             </div>
-          </div>
           </motion.div>
         </div>
       </div>
