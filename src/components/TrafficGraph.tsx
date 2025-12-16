@@ -17,14 +17,6 @@ const originalData = [
   { week: 11, budget10: 261.84, budget20: 641.94, budget30: 1717.93 },
 ];
 
-const processedData = originalData.map((item) => ({
-  week: item.week,
-  layer1: item.budget10,
-  layer2: item.budget20 - item.budget10,
-  layer3: item.budget30 - item.budget20,
-  original: item,
-}));
-
 const COLORS = {
   budget10: "#5B8FF9",
   budget20: "#5AD8A6",
@@ -58,7 +50,7 @@ export function TrafficGraph() {
   const [dotSize, setDotSize] = useState(4);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [margins, setMargins] = useState({ top: 20, right: 30, left: 20, bottom: 40 });
-  const [animationKey, setAnimationKey] = useState(0);
+  const [data, setData] = useState<any[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -84,9 +76,21 @@ export function TrafficGraph() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger animation on mount
+  // Load data on mount to trigger animation
   useEffect(() => {
-    setAnimationKey((prev) => prev + 1);
+    // Small delay to ensure animation plays
+    const timer = setTimeout(() => {
+      setData(
+        originalData.map((item) => ({
+          week: item.week,
+          layer1: item.budget10,
+          layer2: item.budget20 - item.budget10,
+          layer3: item.budget30 - item.budget20,
+          original: item,
+        })),
+      );
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -105,7 +109,7 @@ export function TrafficGraph() {
 
       <div className="flex-1 w-full" style={{ minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={processedData} margin={margins} key={animationKey}>
+          <AreaChart data={data} margin={margins}>
             <defs>
               <linearGradient id="colorBudget10" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={COLORS.budget10} stopOpacity={0.2} />
