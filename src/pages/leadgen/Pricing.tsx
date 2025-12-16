@@ -150,7 +150,7 @@ export default function PricingLeadGen() {
                     style={{ padding: "1.5cqw 0" }}
                   >
                     <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
-                      6 Week Trial
+                      6-Week Trial
                     </span>
                     <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{trialFee.toFixed(2)}
