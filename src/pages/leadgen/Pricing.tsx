@@ -139,7 +139,7 @@ export default function PricingLeadGen() {
                     Trial Investment
                   </p>
                   <p className="text-muted-foreground" style={{ fontSize: "1.1cqw" }}>
-                    One-time payment for 6 weeks of full service
+                    One-time payment for 6-weeks of full service
                   </p>
                 </div>
 
