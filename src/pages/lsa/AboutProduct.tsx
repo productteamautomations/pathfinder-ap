@@ -172,7 +172,7 @@ export default function AboutProductLSA() {
                   src={TheBenefitImage}
                   alt="Google Guaranteed"
                   className="w-auto object-contain"
-                  style={{ height: "5.5cqw" }}
+                  style={{ height: "4.125cqw" }}
                 />
               </div>
 
