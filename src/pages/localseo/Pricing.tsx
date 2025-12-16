@@ -12,7 +12,7 @@ export default function PricingLocalSEO() {
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
 
   const setupFee = 349.0;
-  const monthlyFee6 = 279.0;
+  const monthlyFee6 = 299.0;
   const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const vat = (setupFee + monthlyFee) * 0.2;
