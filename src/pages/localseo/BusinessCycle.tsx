@@ -324,19 +324,22 @@ export default function BusinessCycleLocalSEO() {
                     />
 
                     {/* Background image for Product Journey and Your Setup - positioned absolutely to fill entire container */}
-                    {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
-                      <motion.img
-                        key={`bg-${currentSlide}`}
-                        src={slide.mainImage || VisibilityMainImage}
-                        alt={`${slide.title} - ${slide.subtitle}`}
-                        className="absolute inset-0 w-full h-full object-cover object-bottom"
-                        style={{ zIndex: 0 }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: imageLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setImageLoaded(true)}
-                      />
-                    )}
+                    <AnimatePresence>
+                      {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
+                        <motion.img
+                          key={`bg-${slide.title}`}
+                          src={slide.mainImage || VisibilityMainImage}
+                          alt={`${slide.title} - ${slide.subtitle}`}
+                          className="absolute inset-0 w-full h-full object-cover object-bottom"
+                          style={{ zIndex: 0 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          onLoad={() => setImageLoaded(true)}
+                        />
+                      )}
+                    </AnimatePresence>
 
                     <div style={{ padding: "3cqw", position: "relative", zIndex: 1, height: "100%" }}>
                       <AnimatePresence mode="wait">
