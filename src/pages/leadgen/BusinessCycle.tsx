@@ -394,7 +394,7 @@ export default function BusinessCycleLeadGen() {
                                       item.isExample
                                         ? "bg-accent text-center"
                                         : item.isInteractive
-                                          ? "flex bg-white items-center cursor-pointer hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-all duration-200"
+                                          ? "flex bg-white items-center cursor-pointer hover:scale-[1.02] hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-all duration-200"
                                           : `flex bg-white ${item.icon ? "items-center" : "items-start"}`
                                     }`}
                                     style={{
