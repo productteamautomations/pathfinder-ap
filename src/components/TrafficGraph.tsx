@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const originalData = [
   { week: 0, budget10: 100.0, budget20: 200.0, budget30: 300.0 },
@@ -16,6 +16,14 @@ const originalData = [
   { week: 10, budget10: 244.07, budget20: 586.86, budget30: 1497.28 },
   { week: 11, budget10: 261.84, budget20: 641.94, budget30: 1717.93 },
 ];
+
+const processedData = originalData.map((item) => ({
+  week: item.week,
+  layer1: item.budget10,
+  layer2: item.budget20 - item.budget10,
+  layer3: item.budget30 - item.budget20,
+  original: item,
+}));
 
 const COLORS = {
   budget10: "#5B8FF9",
@@ -50,7 +58,7 @@ export function TrafficGraph() {
   const [dotSize, setDotSize] = useState(4);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [margins, setMargins] = useState({ top: 20, right: 30, left: 20, bottom: 40 });
-  const [data, setData] = useState<any[]>([]);
+  const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -76,22 +84,31 @@ export function TrafficGraph() {
     return () => observer.disconnect();
   }, []);
 
-  // Load data on mount to trigger animation
+  // Trigger mounted state to force animation
   useEffect(() => {
-    // Small delay to ensure animation plays
-    const timer = setTimeout(() => {
-      setData(
-        originalData.map((item) => ({
-          week: item.week,
-          layer1: item.budget10,
-          layer2: item.budget20 - item.budget10,
-          layer3: item.budget30 - item.budget20,
-          original: item,
-        })),
-      );
-    }, 50);
+    setMounted(false);
+    const timer = setTimeout(() => setMounted(true), 10);
     return () => clearTimeout(timer);
   }, []);
+
+  if (!mounted) {
+    return (
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full h-full flex flex-col"
+      >
+        <div className="text-center" style={{ marginBottom: "2cqh" }}>
+          <h2 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4cqw" }}>
+            Weekly Traffic by Daily Budget
+          </h2>
+        </div>
+        <div className="flex-1 w-full" style={{ minHeight: 0 }} />
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -109,7 +126,7 @@ export function TrafficGraph() {
 
       <div className="flex-1 w-full" style={{ minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={margins}>
+          <AreaChart data={processedData} margin={margins}>
             <defs>
               <linearGradient id="colorBudget10" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={COLORS.budget10} stopOpacity={0.2} />
