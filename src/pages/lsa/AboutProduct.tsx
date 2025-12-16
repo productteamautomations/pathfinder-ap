@@ -38,9 +38,9 @@ export default function AboutProductLSA() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center flex-shrink-0"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1.5cqh", paddingBottom: "1cqh" }}
+          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1cqh", paddingBottom: "0.5cqh" }}
         >
-          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4.4cqw" }}>
+          <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5cqw" }}>
             How Local Service Ads Work
           </h1>
         </motion.div>
