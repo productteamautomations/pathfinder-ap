@@ -46,12 +46,13 @@ export default function AboutAddPeopleLSA() {
         productLabel="LSAs"
       />
 
-      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "2cqw" }}>
+      <div className="flex-1 flex items-center justify-center overflow-hidden min-h-0" style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "2cqw" }}>
         <div
           style={{
             width: "100%",
             maxWidth: "92cqw",
             height: "100%",
+            maxHeight: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -65,6 +66,7 @@ export default function AboutAddPeopleLSA() {
               width: "100%",
               aspectRatio: "1.8",
               maxHeight: "100%",
+              maxWidth: "calc(100% * 1.8)",
               padding: "2cqw",
               containerType: "size",
             }}
@@ -188,7 +190,6 @@ export default function AboutAddPeopleLSA() {
                 </Button>
               </motion.div>
             </div>
-          </div>
           </motion.div>
         </div>
       </div>
