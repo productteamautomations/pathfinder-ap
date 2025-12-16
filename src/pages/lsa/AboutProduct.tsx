@@ -118,7 +118,16 @@ export default function AboutProductLSA() {
               className="flex-1 border border-border/30 shadow-lg flex flex-col rounded-2xl p-4 md:p-6"
               style={{ backgroundColor: "white" }}
             >
-              <div className="flex items-center justify-center mb-4">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="bg-green-500/10 flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-lg">
+                  <Check className="w-5 h-5 text-green-500" />
+                </div>
+                <h2 className="font-display font-bold text-title text-xl md:text-2xl">
+                  The Benefit
+                </h2>
+              </div>
+              
+              <div className="flex items-center justify-center mb-3">
                 <img 
                   src={TheBenefitImage} 
                   alt="Google Guaranteed" 
