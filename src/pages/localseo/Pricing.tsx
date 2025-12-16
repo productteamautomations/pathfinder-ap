@@ -212,17 +212,13 @@ export default function PricingLocalSEO() {
                       </p>
                     </div>
                     <p className="text-muted-foreground text-right" style={{ fontSize: "1.1cqw" }}>
-                      then £{monthlyAfterVAT.toFixed(2)}/mo
+                      then £{monthlyAfterVAT.toFixed(2)}/mo inc. VAT
                     </p>
                   </div>
                 </div>
 
                 {/* Payment Providers */}
-                <img
-                  src={PaymentProviders}
-                  alt="Payment providers"
-                  style={{ width: "100%", marginBottom: "1.5cqw" }}
-                />
+                <img src={PaymentProviders} alt="Payment providers" style={{ width: "100%", marginBottom: "1.5cqw" }} />
 
                 {/* CTA Button */}
                 <Button
