@@ -198,7 +198,7 @@ export default function BusinessCycleLeadGen() {
                   <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
                   Back to Conversions
                 </Button>
-                
+
                 {/* Graph takes remaining space */}
                 <div className="flex-1 min-h-0">
                   <TrafficGraph />
@@ -243,7 +243,9 @@ export default function BusinessCycleLeadGen() {
                             className="font-display font-bold text-title tracking-tight"
                             style={{
                               fontSize:
-                                slide.title === "Lead Management" || slide.title === "Ongoing Service" ? "4cqw" : "5.5cqw",
+                                slide.title === "Lead Management" || slide.title === "Ongoing Service"
+                                  ? "4cqw"
+                                  : "5.5cqw",
                               lineHeight: "3cqw",
                               display: "flex",
                               alignItems: "center",
@@ -290,7 +292,9 @@ export default function BusinessCycleLeadGen() {
                         {/* Main image */}
                         <div
                           className={`flex-1 flex justify-center w-full overflow-visible ${
-                            slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"
+                            slide.title === "Visibility" || slide.title === "Ongoing Service"
+                              ? "items-center"
+                              : "items-end"
                           }`}
                         >
                           <motion.img
@@ -446,7 +450,10 @@ export default function BusinessCycleLeadGen() {
                                           </span>
                                         )}
                                         <div className="flex-1">
-                                          <span className="font-semibold text-foreground" style={{ fontSize: "1.4cqw" }}>
+                                          <span
+                                            className="font-semibold text-foreground"
+                                            style={{ fontSize: "1.4cqw" }}
+                                          >
                                             {item.label}
                                           </span>
                                           {item.description && (
@@ -459,9 +466,9 @@ export default function BusinessCycleLeadGen() {
                                           )}
                                         </div>
                                         {item.isInteractive && (
-                                          <ChevronRight 
+                                          <ChevronRight
                                             className="text-accent flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1"
-                                            style={{ width: "2cqw", height: "2cqw" }} 
+                                            style={{ width: "2cqw", height: "2cqw" }}
                                           />
                                         )}
                                       </>

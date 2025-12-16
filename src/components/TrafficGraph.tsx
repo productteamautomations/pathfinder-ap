@@ -1,15 +1,6 @@
-import React from 'react';
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  ResponsiveContainer,
-  Legend,
-  Tooltip,
-} from 'recharts';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from "react";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend, Tooltip } from "recharts";
+import { motion } from "framer-motion";
 
 const originalData = [
   { week: 0, budget10: 100.0, budget20: 200.0, budget30: 300.0 },
@@ -35,9 +26,9 @@ const processedData = originalData.map((item) => ({
 }));
 
 const COLORS = {
-  budget10: '#5B8FF9',
-  budget20: '#5AD8A6',
-  budget30: '#FF9845',
+  budget10: "#5B8FF9",
+  budget20: "#5AD8A6",
+  budget30: "#FF9845",
 };
 
 const CustomDot = (props: any) => {
@@ -55,34 +46,47 @@ const CustomDot = (props: any) => {
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.34, 1.56, 0.64, 1] }}
       whileHover={{ scale: 1.5, transition: { duration: 0.2 } }}
-      style={{ cursor: 'pointer' }}
+      style={{ cursor: "pointer" }}
     />
   );
 };
 
 export function TrafficGraph() {
+  const [fontSize, setFontSize] = useState(12);
+  const [labelFontSize, setLabelFontSize] = useState(14);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const containerWidth = entries[0].contentRect.width;
+      // Calculate font sizes as cqw equivalent
+      setFontSize(containerWidth * 0.012); // 1.2cqw for ticks
+      setLabelFontSize(containerWidth * 0.014); // 1.4cqw for labels
+    });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div
+      ref={containerRef}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
       className="w-full h-full flex flex-col"
     >
-      <div className="text-center" style={{ marginBottom: '2cqh' }}>
-        <h2
-          className="font-display font-bold text-title tracking-tight"
-          style={{ fontSize: '4cqw' }}
-        >
+      <div className="text-center" style={{ marginBottom: "2cqh" }}>
+        <h2 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4cqw" }}>
           Weekly Traffic by Daily Budget
         </h2>
       </div>
 
       <div className="flex-1 w-full" style={{ minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={processedData}
-            margin={{ top: 20, right: 30, left: 20, bottom: 40 }}
-          >
+          <AreaChart data={processedData} margin={{ top: 20, right: 30, left: 20, bottom: 40 }}>
             <defs>
               <linearGradient id="colorBudget10" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={COLORS.budget10} stopOpacity={0.2} />
@@ -98,26 +102,20 @@ export function TrafficGraph() {
               </linearGradient>
             </defs>
 
-            <CartesianGrid
-              strokeDasharray="3 3"
-              vertical={true}
-              horizontal={true}
-              stroke="#E5E7EB"
-              opacity={0.5}
-            />
+            <CartesianGrid strokeDasharray="3 3" vertical={true} horizontal={true} stroke="#E5E7EB" opacity={0.5} />
 
             <XAxis
               dataKey="week"
               tickLine={false}
-              axisLine={{ stroke: '#E5E7EB' }}
-              tick={{ fill: '#6B7280', fontSize: 12 }}
+              axisLine={{ stroke: "#E5E7EB" }}
+              tick={{ fill: "#6B7280", fontSize: fontSize }}
               dy={10}
               label={{
-                value: 'Time (Weeks)',
-                position: 'insideBottom',
+                value: "Time (Weeks)",
+                position: "insideBottom",
                 offset: -20,
-                fill: '#374151',
-                fontSize: 14,
+                fill: "#374151",
+                fontSize: labelFontSize,
                 fontWeight: 600,
                 dy: 10,
               }}
@@ -125,21 +123,21 @@ export function TrafficGraph() {
 
             <YAxis
               tick={false}
-              axisLine={{ stroke: '#E5E7EB' }}
+              axisLine={{ stroke: "#E5E7EB" }}
               width={60}
               label={{
-                value: 'Traffic (Visitors)',
+                value: "Traffic (Visitors)",
                 angle: -90,
-                position: 'insideLeft',
-                fill: '#374151',
-                fontSize: 14,
+                position: "insideLeft",
+                fill: "#374151",
+                fontSize: labelFontSize,
                 fontWeight: 600,
-                style: { textAnchor: 'middle' },
+                style: { textAnchor: "middle" },
                 dx: -15,
               }}
             />
 
-            <Tooltip content={() => null} cursor={{ stroke: '#D1D5DB', strokeWidth: 1 }} />
+            <Tooltip content={() => null} cursor={{ stroke: "#D1D5DB", strokeWidth: 1 }} />
 
             <Legend
               verticalAlign="top"
@@ -147,15 +145,11 @@ export function TrafficGraph() {
               iconType="circle"
               formatter={(value) => {
                 const map: Record<string, string> = {
-                  layer1: '£10/day',
-                  layer2: '£20/day',
-                  layer3: '£30/day',
+                  layer1: "£10/day",
+                  layer2: "£20/day",
+                  layer3: "£30/day",
                 };
-                return (
-                  <span className="text-muted-foreground font-medium ml-1">
-                    {map[value]}
-                  </span>
-                );
+                return <span className="text-muted-foreground font-medium ml-1">{map[value]}</span>;
               }}
             />
 
