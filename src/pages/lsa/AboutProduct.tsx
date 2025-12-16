@@ -50,14 +50,17 @@ export default function AboutProductLSA() {
           className="flex-1 flex items-center justify-center overflow-hidden"
           style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "1.5cqw" }}
         >
-          <div className="flex flex-col md:flex-row w-full" style={{ gap: "1.3cqw", maxWidth: "92cqw" }}>
+          <div
+            className="flex flex-col md:flex-row w-full"
+            style={{ gap: "1.3cqw", maxWidth: "92cqw", maxHeight: "calc(100vh - 73px - 8cqw)" }}
+          >
             {/* The Problem Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", minHeight: 0 }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -102,7 +105,7 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", minHeight: 0 }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
@@ -147,7 +150,7 @@ export default function AboutProductLSA() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.5 }}
               className="flex-1 border border-border/30 shadow-lg flex flex-col bg-white"
-              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1" }}
+              style={{ borderRadius: "1.2cqw", padding: "1.8cqw", aspectRatio: "1 / 1.1", minHeight: 0 }}
             >
               <div
                 className="flex items-center justify-center flex-shrink-0"
