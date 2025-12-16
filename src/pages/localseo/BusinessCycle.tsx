@@ -399,7 +399,7 @@ export default function BusinessCycleLocalSEO() {
                       alt={`${slide.title} - ${slide.subtitle}`}
                       className={`object-contain ${
                         slide.title === "Lead Management"
-                          ? "w-full max-h-[85vh] mb-[-60px]"
+                          ? "w-full max-h-[85vh] mb-[-60px] mt-[-40px]"
                           : slide.title === "Visibility"
                             ? "w-[108%] max-h-[70vh]"
                             : slide.title === "Relevance" || slide.title === "Prominence"
