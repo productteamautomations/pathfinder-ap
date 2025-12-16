@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check, Clock } from "lucide-react";
-
+import PaymentProviders from "@/assets/payment-providers.svg";
 export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -224,6 +224,17 @@ export default function PricingLeadGen() {
                 >
                   Start My Trial
                 </Button>
+
+                {/* Payment Providers */}
+                <img
+                  src={PaymentProviders}
+                  alt="Accepted payment methods"
+                  style={{
+                    width: "100%",
+                    marginTop: "2cqw",
+                    opacity: 0.7,
+                  }}
+                />
               </motion.div>
             </div>
           </div>
