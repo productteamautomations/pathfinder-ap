@@ -208,6 +208,17 @@ export default function PricingLeadGen() {
                   </div>
                 </div>
 
+                {/* Payment Providers */}
+                <img
+                  src={PaymentProviders}
+                  alt="Accepted payment methods"
+                  style={{
+                    width: "100%",
+                    marginBottom: "1.5cqw",
+                    opacity: 0.7,
+                  }}
+                />
+
                 {/* CTA Button */}
                 <Button
                   onClick={() =>
@@ -224,17 +235,6 @@ export default function PricingLeadGen() {
                 >
                   Start My Trial
                 </Button>
-
-                {/* Payment Providers */}
-                <img
-                  src={PaymentProviders}
-                  alt="Accepted payment methods"
-                  style={{
-                    width: "100%",
-                    marginTop: "2cqw",
-                    opacity: 0.7,
-                  }}
-                />
               </motion.div>
             </div>
           </div>
