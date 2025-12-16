@@ -30,11 +30,15 @@ import SalesMissedIcon from "@/assets/sales-missed-icon.svg";
 import YourSetupIcon from "@/assets/your-setup-icon.svg";
 import OngoingServiceIcon from "@/assets/ongoing-service-icon.svg";
 import OngoingServiceMainImage from "@/assets/ongoing-service-main.svg";
+import TrafficCornerImage from "@/assets/leadgen-traffic-corner.svg";
+import ConversionsCornerImage from "@/assets/leadgen-conversions-corner.svg";
+import LeadManagementCornerImage from "@/assets/leadgen-leadmanagement-corner.svg";
 
 const slides = [
   {
     title: "Visibility",
     subtitle: "Get found by the right customers",
+    cornerImage: TrafficCornerImage,
     content: [
       { label: "Keywords They Search", description: "Target the exact terms your customers use", icon: KeywordsIcon },
       { label: "Their Location", description: "Show ads only in your service area", icon: LocationIcon },
@@ -47,6 +51,7 @@ const slides = [
     title: "Engagement",
     subtitle: "Make your ads impossible to ignore",
     mainImage: EngagementMainImage,
+    cornerImage: TrafficCornerImage,
     content: [
       { label: "Be Relevant", description: "Match your ad to search intent", icon: EngagementIcon },
       { label: "Be Clear", description: "Communicate your value instantly", icon: EngagementIcon },
@@ -61,6 +66,7 @@ const slides = [
     title: "Conversions",
     subtitle: "Track what happens after someone clicks",
     mainImage: ConversionsMainImage,
+    cornerImage: ConversionsCornerImage,
     content: [
       { label: "See Exactly What Happens", description: "Full visibility after each click", icon: SeeExactlyIcon },
       { label: "Track Conversions", description: "Know which ads generate enquiries", icon: TrackConversionsIcon },
@@ -73,6 +79,7 @@ const slides = [
     title: "Lead Management",
     subtitle: "Speed wins deals",
     mainImage: SalesMainImage,
+    cornerImage: LeadManagementCornerImage,
     content: [
       { label: "Respond Within 5 minutes", description: "21× more likely to qualify the lead", icon: SalesRespondIcon },
       { label: "Waiting >5 Minutes", description: "Reduces your chance by 80%+", icon: SalesWaitingIcon },
@@ -340,6 +347,24 @@ export default function BusinessCycleLeadGen() {
                     className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
                     style={{ padding: "3cqw", paddingBottom: "7cqw" }}
                   >
+                    {/* Corner image */}
+                    {slide.cornerImage && (
+                      <motion.img
+                        key={`corner-${currentSlide}`}
+                        src={slide.cornerImage}
+                        alt=""
+                        className="absolute z-10"
+                        style={{
+                          top: "0",
+                          right: "0",
+                          width: "12cqw",
+                          height: "auto",
+                        }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+                      />
+                    )}
                     <div className="overflow-hidden">
                       <AnimatePresence mode="wait">
                         <motion.div
