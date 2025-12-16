@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend, Tooltip } from "recharts";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const originalData = [
   { week: 0, budget10: 100.0, budget20: 200.0, budget30: 300.0 },
@@ -16,14 +16,6 @@ const originalData = [
   { week: 10, budget10: 244.07, budget20: 586.86, budget30: 1497.28 },
   { week: 11, budget10: 261.84, budget20: 641.94, budget30: 1717.93 },
 ];
-
-const processedData = originalData.map((item) => ({
-  week: item.week,
-  layer1: item.budget10,
-  layer2: item.budget20 - item.budget10,
-  layer3: item.budget30 - item.budget20,
-  original: item,
-}));
 
 const COLORS = {
   budget10: "#5B8FF9",
@@ -58,7 +50,7 @@ export function TrafficGraph() {
   const [dotSize, setDotSize] = useState(4);
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [margins, setMargins] = useState({ top: 20, right: 30, left: 20, bottom: 40 });
-  const [mounted, setMounted] = useState(false);
+  const [data, setData] = useState<any[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -84,31 +76,25 @@ export function TrafficGraph() {
     return () => observer.disconnect();
   }, []);
 
-  // Trigger mounted state to force animation
+  // Load data with delay to trigger animation
   useEffect(() => {
-    setMounted(false);
-    const timer = setTimeout(() => setMounted(true), 10);
+    // Start with empty data
+    setData([]);
+
+    // Load full data after a short delay
+    const timer = setTimeout(() => {
+      const processedData = originalData.map((item) => ({
+        week: item.week,
+        layer1: item.budget10,
+        layer2: item.budget20 - item.budget10,
+        layer3: item.budget30 - item.budget20,
+        original: item,
+      }));
+      setData(processedData);
+    }, 100);
+
     return () => clearTimeout(timer);
   }, []);
-
-  if (!mounted) {
-    return (
-      <motion.div
-        ref={containerRef}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full h-full flex flex-col"
-      >
-        <div className="text-center" style={{ marginBottom: "2cqh" }}>
-          <h2 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "4cqw" }}>
-            Weekly Traffic by Daily Budget
-          </h2>
-        </div>
-        <div className="flex-1 w-full" style={{ minHeight: 0 }} />
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
@@ -126,7 +112,7 @@ export function TrafficGraph() {
 
       <div className="flex-1 w-full" style={{ minHeight: 0 }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={processedData} margin={margins}>
+          <AreaChart data={data} margin={margins}>
             <defs>
               <linearGradient id="colorBudget10" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={COLORS.budget10} stopOpacity={0.2} />
@@ -194,56 +180,60 @@ export function TrafficGraph() {
               }}
             />
 
-            <Area
-              type="monotone"
-              dataKey="layer1"
-              name="layer1"
-              stackId="1"
-              stroke={COLORS.budget10}
-              fill="url(#colorBudget10)"
-              strokeWidth={strokeWidth}
-              dot={(props) => (
-                <CustomDot {...props} stroke={COLORS.budget10} dotSize={dotSize} strokeWidth={strokeWidth} />
-              )}
-              activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget10 }}
-              animationBegin={0}
-              animationDuration={1500}
-              animationEasing="ease-out"
-            />
+            {data.length > 0 && (
+              <>
+                <Area
+                  type="monotone"
+                  dataKey="layer1"
+                  name="layer1"
+                  stackId="1"
+                  stroke={COLORS.budget10}
+                  fill="url(#colorBudget10)"
+                  strokeWidth={strokeWidth}
+                  dot={(props) => (
+                    <CustomDot {...props} stroke={COLORS.budget10} dotSize={dotSize} strokeWidth={strokeWidth} />
+                  )}
+                  activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget10 }}
+                  animationBegin={0}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                />
 
-            <Area
-              type="monotone"
-              dataKey="layer2"
-              name="layer2"
-              stackId="1"
-              stroke={COLORS.budget20}
-              fill="url(#colorBudget20)"
-              strokeWidth={strokeWidth}
-              dot={(props) => (
-                <CustomDot {...props} stroke={COLORS.budget20} dotSize={dotSize} strokeWidth={strokeWidth} />
-              )}
-              activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget20 }}
-              animationBegin={500}
-              animationDuration={1500}
-              animationEasing="ease-out"
-            />
+                <Area
+                  type="monotone"
+                  dataKey="layer2"
+                  name="layer2"
+                  stackId="1"
+                  stroke={COLORS.budget20}
+                  fill="url(#colorBudget20)"
+                  strokeWidth={strokeWidth}
+                  dot={(props) => (
+                    <CustomDot {...props} stroke={COLORS.budget20} dotSize={dotSize} strokeWidth={strokeWidth} />
+                  )}
+                  activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget20 }}
+                  animationBegin={500}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                />
 
-            <Area
-              type="monotone"
-              dataKey="layer3"
-              name="layer3"
-              stackId="1"
-              stroke={COLORS.budget30}
-              fill="url(#colorBudget30)"
-              strokeWidth={strokeWidth}
-              dot={(props) => (
-                <CustomDot {...props} stroke={COLORS.budget30} dotSize={dotSize} strokeWidth={strokeWidth} />
-              )}
-              activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget30 }}
-              animationBegin={1000}
-              animationDuration={1500}
-              animationEasing="ease-out"
-            />
+                <Area
+                  type="monotone"
+                  dataKey="layer3"
+                  name="layer3"
+                  stackId="1"
+                  stroke={COLORS.budget30}
+                  fill="url(#colorBudget30)"
+                  strokeWidth={strokeWidth}
+                  dot={(props) => (
+                    <CustomDot {...props} stroke={COLORS.budget30} dotSize={dotSize} strokeWidth={strokeWidth} />
+                  )}
+                  activeDot={{ r: dotSize * 1.5, strokeWidth: 0, fill: COLORS.budget30 }}
+                  animationBegin={1000}
+                  animationDuration={1500}
+                  animationEasing="ease-out"
+                />
+              </>
+            )}
           </AreaChart>
         </ResponsiveContainer>
       </div>
