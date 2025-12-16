@@ -72,6 +72,7 @@ const slides = [
     title: "Relevance",
     subtitle: "Match what customers are searching for",
     mainImage: RelevanceMainImage,
+    cornerImage: LeadgenTrafficCorner,
     content: [
       { label: "Content", description: "Quality, relevant content targeting local keywords", icon: ContentIcon },
       { label: "Keywords", description: "Strategic use of location-based search terms", icon: KeywordsRelevanceIcon },
@@ -84,6 +85,7 @@ const slides = [
     title: "Prominence",
     subtitle: "Build your reputation online",
     mainImage: ProminenceMainImage,
+    cornerImage: LeadgenTrafficCorner,
     content: [
       { label: "Being well-known improves rankings", description: "", icon: BeingWellKnownIcon },
       {
