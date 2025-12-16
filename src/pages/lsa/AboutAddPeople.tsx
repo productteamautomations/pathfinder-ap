@@ -46,21 +46,29 @@ export default function AboutAddPeopleLSA() {
         productLabel="LSAs"
       />
 
-      <div
-        className="flex-1 flex items-center justify-center"
-        style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw" }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+      <div className="flex-1 flex items-center justify-center" style={{ paddingTop: "10cqh", paddingLeft: "4cqw", paddingRight: "4cqw" }}>
+        <div
           style={{
-            width: "min(92cqw, calc((100vh - 10cqh - 2rem) * 1.8))",
-            height: "min(calc(100vh - 10cqh - 2rem), calc(92cqw / 1.8))",
-            containerType: "size",
-            padding: "2cqw",
+            width: "100%",
+            maxWidth: "92cqw",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              width: "100%",
+              aspectRatio: "1.8",
+              maxHeight: "100%",
+              padding: "2cqw",
+              containerType: "size",
+            }}
+          >
           <div className="grid h-full" style={{ gridTemplateColumns: "1.3fr 1fr", gap: "2cqw" }}>
             {/* Left - Main Image */}
             <div className="flex items-stretch h-full">
@@ -180,8 +188,8 @@ export default function AboutAddPeopleLSA() {
                 </Button>
               </motion.div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );
