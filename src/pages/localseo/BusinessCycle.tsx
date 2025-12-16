@@ -311,8 +311,23 @@ export default function BusinessCycleLocalSEO() {
                   {/* Left side - logo, title, image */}
                   <div
                     className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative overflow-hidden"
-                    style={{ padding: "3cqw" }}
+                    style={{
+                      padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "0" : "3cqw",
+                    }}
                   >
+                    {/* Background image for Product Journey and Your Setup */}
+                    {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
+                      <motion.img
+                        src={slide.mainImage || VisibilityMainImage}
+                        alt={`${slide.title} - ${slide.subtitle}`}
+                        className="absolute inset-0 w-full h-full object-cover object-bottom"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        onLoad={() => setImageLoaded(true)}
+                      />
+                    )}
+
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentSlide}
@@ -321,6 +336,11 @@ export default function BusinessCycleLocalSEO() {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                         className="flex flex-col items-start h-full"
+                        style={{
+                          padding: slide.title === "Product Journey" || slide.title === "Your Setup" ? "3cqw" : "0",
+                          position: "relative",
+                          zIndex: 1,
+                        }}
                       >
                         {/* Logo and Title */}
                         <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
@@ -384,23 +404,22 @@ export default function BusinessCycleLocalSEO() {
                           </div>
                         </div>
 
-                        {/* Main image */}
-                        <div
-                          className={`flex-1 flex justify-center w-full overflow-visible ${
-                            slide.title === "Visibility" || slide.title === "Ongoing Service"
-                              ? "items-center"
-                              : "items-end"
-                          }`}
-                        >
-                          <motion.img
-                            src={slide.mainImage || VisibilityMainImage}
-                            alt={`${slide.title} - ${slide.subtitle}`}
-                            className="h-auto"
-                            style={{
-                              width:
-                                slide.title === "Product Journey" || slide.title === "Your Setup"
-                                  ? "100%"
-                                  : slide.title === "Lead Management"
+                        {/* Main image - only for non Product Journey/Your Setup slides */}
+                        {slide.title !== "Product Journey" && slide.title !== "Your Setup" && (
+                          <div
+                            className={`flex-1 flex justify-center w-full overflow-visible ${
+                              slide.title === "Visibility" || slide.title === "Ongoing Service"
+                                ? "items-center"
+                                : "items-end"
+                            }`}
+                          >
+                            <motion.img
+                              src={slide.mainImage || VisibilityMainImage}
+                              alt={`${slide.title} - ${slide.subtitle}`}
+                              className="h-auto object-contain"
+                              style={{
+                                width:
+                                  slide.title === "Lead Management"
                                     ? "100%"
                                     : slide.title === "Visibility"
                                       ? "108%"
@@ -409,31 +428,28 @@ export default function BusinessCycleLocalSEO() {
                                         : slide.title === "Ongoing Service"
                                           ? "110%"
                                           : "100%",
-                              height:
-                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "100%" : "auto",
-                              objectFit:
-                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "cover" : "contain",
-                              objectPosition:
-                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "bottom" : "center",
-                              maxHeight:
-                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "none" : "70vh",
-                              marginBottom:
-                                slide.title === "Product Journey" || slide.title === "Your Setup"
-                                  ? "0"
-                                  : slide.title === "Lead Management"
+                                maxHeight: "70vh",
+                                marginBottom:
+                                  slide.title === "Lead Management"
                                     ? "-3cqw"
                                     : slide.title === "Relevance" || slide.title === "Prominence"
                                       ? "-3cqw"
                                       : slide.title === "Conversions"
                                         ? "-1.5cqw"
                                         : "0",
-                            }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: imageLoaded ? 1 : 0 }}
-                            transition={{ duration: 0.4, ease: "easeOut" }}
-                            onLoad={() => setImageLoaded(true)}
-                          />
-                        </div>
+                              }}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: imageLoaded ? 1 : 0 }}
+                              transition={{ duration: 0.4, ease: "easeOut" }}
+                              onLoad={() => setImageLoaded(true)}
+                            />
+                          </div>
+                        )}
+
+                        {/* Spacer for Product Journey and Your Setup to push content up */}
+                        {(slide.title === "Product Journey" || slide.title === "Your Setup") && (
+                          <div className="flex-1" />
+                        )}
                       </motion.div>
                     </AnimatePresence>
                   </div>
