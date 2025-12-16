@@ -38,7 +38,7 @@ export default function AboutProductLSA() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="text-center flex-shrink-0"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingTop: "1cqw", paddingBottom: "0.5cqw" }}
+          style={{ paddingLeft: "4cqw", paddingRight: "4cqw", paddingTop: "1cqw", paddingBottom: "0.5cqw" }}
         >
           <h1 className="font-display font-bold text-title tracking-tight" style={{ fontSize: "3.5cqw" }}>
             How Local Service Ads Work
@@ -48,11 +48,11 @@ export default function AboutProductLSA() {
         {/* Cards Section */}
         <div
           className="flex-1 flex items-center justify-center overflow-hidden min-h-0"
-          style={{ paddingLeft: "2cqw", paddingRight: "2cqw", paddingBottom: "0.5cqw", paddingTop: "0.5cqw" }}
+          style={{ paddingLeft: "4cqw", paddingRight: "4cqw", paddingBottom: "0.5cqw", paddingTop: "0.5cqw" }}
         >
           <div
             className="flex flex-col md:flex-row w-full h-full"
-            style={{ gap: "1.3cqw", maxWidth: "92cqw", maxHeight: "100%" }}
+            style={{ gap: "1.3cqw", maxWidth: "75cqw", maxHeight: "100%" }}
           >
             {/* The Problem Card */}
             <motion.div
@@ -208,7 +208,7 @@ export default function AboutProductLSA() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.4 }}
           className="flex justify-center flex-shrink-0"
-          style={{ paddingTop: "0.8cqw", paddingBottom: "1.2cqw" }}
+          style={{ paddingTop: "0.8cqw", paddingBottom: "1.2cqw", paddingLeft: "4cqw", paddingRight: "4cqw" }}
         >
           <Button
             onClick={() => navigate("/about/lsa", { state: location.state })}
