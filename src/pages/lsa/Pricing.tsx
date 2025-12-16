@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check } from "lucide-react";
+import PaymentProviders from "@/assets/payment-providers.svg";
 
 export default function PricingLSA() {
   const navigate = useNavigate();
@@ -60,21 +61,21 @@ export default function PricingLSA() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
+                <span
+                  className="font-semibold text-primary uppercase tracking-widest block"
+                  style={{ fontSize: "1.1cqw", marginBottom: "2cqw" }}
+                >
+                  Recommended for you
+                </span>
                 <h1
                   className="font-display font-bold text-title leading-tight tracking-tight"
-                  style={{
-                    fontSize: "4.5cqw",
-                    marginBottom: "2cqw",
-                  }}
+                  style={{ fontSize: "4.5cqw", marginBottom: "2cqw" }}
                 >
                   Local Services Ads
                 </h1>
                 <p
                   className="text-muted-foreground leading-relaxed"
-                  style={{
-                    fontSize: "1.25cqw",
-                    marginBottom: "3cqw",
-                  }}
+                  style={{ fontSize: "1.25cqw", marginBottom: "3cqw" }}
                 >
                   Get the Google Guaranteed badge and only pay for valid leads. We handle setup, optimisation, and lead
                   dispute management.
@@ -92,10 +93,7 @@ export default function PricingLSA() {
                     >
                       <div
                         className="rounded-full bg-primary flex items-center justify-center flex-shrink-0"
-                        style={{
-                          width: "2.5cqw",
-                          height: "2.5cqw",
-                        }}
+                        style={{ width: "2.5cqw", height: "2.5cqw" }}
                       >
                         <Check
                           className="text-primary-foreground"
@@ -119,92 +117,82 @@ export default function PricingLSA() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
-                {/* Pricing Header */}
-                <div style={{ marginBottom: "2cqw" }}>
-                  <p
-                    className="font-semibold text-foreground"
-                    style={{
-                      fontSize: "1.5cqw",
-                      marginBottom: "1cqw",
-                    }}
-                  >
-                    Choose Your Plan
-                  </p>
-                </div>
-
                 {/* Plan Toggle */}
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1cqw", marginBottom: "2cqw" }}>
-                  <button
-                    onClick={() => setSelectedPlan("6")}
-                    className={`font-semibold transition-all ${
-                      selectedPlan === "6"
-                        ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
-                        : "bg-white text-foreground border border-border/30 hover:border-primary/40"
-                    }`}
-                    style={{ padding: "1.2cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
-                  >
-                    6 Months
-                  </button>
-                  <button
-                    onClick={() => setSelectedPlan("12")}
-                    className={`font-semibold transition-all ${
-                      selectedPlan === "12"
-                        ? "bg-primary text-primary-foreground shadow-[0_4px_20px_rgba(227,102,79,0.25)]"
-                        : "bg-white text-foreground border border-border/30 hover:border-primary/40"
-                    }`}
-                    style={{ padding: "1.2cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
-                  >
-                    12 Months
-                  </button>
-                </div>
-
-                {/* Savings Banner */}
-                <div
-                  className={`text-center border ${
-                    selectedPlan === "12" ? "bg-green-50 border-green-200" : "bg-transparent border-transparent"
-                  }`}
-                  style={{ padding: "1cqw", borderRadius: "1cqw", marginBottom: "2cqw" }}
-                >
-                  <p
-                    className={`font-semibold ${selectedPlan === "12" ? "text-green-700" : "text-transparent"}`}
-                    style={{ fontSize: "1.1cqw" }}
-                  >
-                    You save £{savings.toFixed(2)} with a 12-month plan!
+                <div style={{ marginBottom: "2.5cqw" }}>
+                  <p className="font-semibold text-foreground" style={{ fontSize: "1.5cqw", marginBottom: "1cqw" }}>
+                    Choose your plan
                   </p>
+                  <div className="grid grid-cols-2" style={{ gap: "1cqw" }}>
+                    <button
+                      onClick={() => setSelectedPlan("6")}
+                      className={`font-bold transition-all ${
+                        selectedPlan === "6"
+                          ? "bg-primary text-primary-foreground shadow-lg"
+                          : "bg-muted/50 text-foreground hover:bg-muted"
+                      }`}
+                      style={{ padding: "1.25cqw", fontSize: "1.1cqw", borderRadius: "1cqw" }}
+                    >
+                      6 Months
+                    </button>
+                    <button
+                      onClick={() => setSelectedPlan("12")}
+                      className={`font-bold transition-all relative ${
+                        selectedPlan === "12"
+                          ? "bg-primary text-primary-foreground shadow-lg"
+                          : "bg-muted/50 text-foreground hover:bg-muted"
+                      }`}
+                      style={{ padding: "1.25cqw", fontSize: "1.1cqw", borderRadius: "1cqw" }}
+                    >
+                      12 Months
+                      {selectedPlan === "12" && (
+                        <span
+                          className="absolute bg-green-500 text-white font-bold rounded-full whitespace-nowrap"
+                          style={{
+                            top: "-0.8cqw",
+                            right: "-0.8cqw",
+                            padding: "0.4cqw 0.8cqw",
+                            fontSize: "0.9cqw",
+                          }}
+                        >
+                          Save £{savings.toFixed(2)}
+                        </span>
+                      )}
+                    </button>
+                  </div>
                 </div>
 
                 {/* Price Breakdown */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.3cqw", marginBottom: "2cqw" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.2cqw", marginBottom: "1.5cqw" }}>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.2cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.25cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       Setup Fee
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{setupFee.toFixed(2)}
                     </span>
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.2cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.25cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       Monthly Fee
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{monthlyFee.toFixed(2)}
                     </span>
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1.2cqw 0" }}
+                    style={{ padding: "1cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.25cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
                       VAT (20%)
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{vat.toFixed(2)}
                     </span>
                   </div>
@@ -213,41 +201,29 @@ export default function PricingLSA() {
                 {/* Total */}
                 <div
                   className="bg-muted/30"
-                  style={{
-                    borderRadius: "1.5cqw",
-                    padding: "2cqw",
-                    marginBottom: "2cqw",
-                  }}
+                  style={{ borderRadius: "1.5cqw", padding: "1.5cqw", marginBottom: "1.5cqw" }}
                 >
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
-                      <p
-                        className="text-muted-foreground"
-                        style={{
-                          fontSize: "1.1cqw",
-                          marginBottom: "0.5cqw",
-                        }}
-                      >
-                        Total First Month (inc. VAT)
+                      <p className="text-muted-foreground" style={{ fontSize: "1.1cqw", marginBottom: "0.3cqw" }}>
+                        First month total
                       </p>
                       <p className="font-bold text-foreground" style={{ fontSize: "3.5cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
                       </p>
                     </div>
-                    <div
-                      className="bg-green-100 text-green-700 font-semibold text-center"
-                      style={{
-                        borderRadius: "1cqw",
-                        padding: "1cqw 1.25cqw",
-                        fontSize: "0.95cqw",
-                      }}
-                    >
-                      then £{monthlyAfterVAT.toFixed(2)}
-                      <br />
-                      /month inc. VAT
-                    </div>
+                    <p className="text-muted-foreground text-right" style={{ fontSize: "1.1cqw" }}>
+                      then £{monthlyAfterVAT.toFixed(2)}/mo
+                    </p>
                   </div>
                 </div>
+
+                {/* Payment Providers */}
+                <img
+                  src={PaymentProviders}
+                  alt="Payment providers"
+                  style={{ width: "100%", marginBottom: "1.5cqw" }}
+                />
 
                 {/* CTA Button */}
                 <Button
@@ -257,11 +233,7 @@ export default function PricingLSA() {
                     })
                   }
                   fullWidth
-                  style={{
-                    padding: "2cqw",
-                    fontSize: "1.5cqw",
-                    borderRadius: "0.8cqw",
-                  }}
+                  style={{ padding: "2cqw", fontSize: "1.5cqw", borderRadius: "0.8cqw" }}
                 >
                   Start My Campaign
                 </Button>
