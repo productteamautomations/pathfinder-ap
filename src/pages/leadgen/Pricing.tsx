@@ -215,7 +215,6 @@ export default function PricingLeadGen() {
                   style={{
                     width: "100%",
                     marginBottom: "1.5cqw",
-                    opacity: 0.7,
                   }}
                 />
 
