@@ -330,13 +330,12 @@ export default function BusinessCycleLocalSEO() {
                           key={`bg-${slide.title}`}
                           src={slide.mainImage || VisibilityMainImage}
                           alt={`${slide.title} - ${slide.subtitle}`}
-                          className="absolute inset-0 object-cover object-bottom"
+                          className="absolute inset-0 object-contain"
                           style={{
                             zIndex: 0,
                             width: "100%",
                             height: "100%",
-                            maxWidth: "100%",
-                            maxHeight: "100%",
+                            objectPosition: "bottom right",
                           }}
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
