@@ -307,407 +307,423 @@ export default function BusinessCycleLocalSEO() {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 className="h-full"
               >
-          <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
-            {/* Left side - logo, title, image */}
-            <div
-              className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative overflow-hidden"
-              style={{ padding: "3cqw" }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentSlide}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="flex flex-col items-start h-full"
-                >
-                  {/* Logo and Title */}
-                  <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
-                    <motion.img
-                      src={LogoGraphic}
-                      alt="Add People"
-                      style={{ width: "3cqw", height: "3cqw", flexShrink: 0 }}
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: iconLoaded ? 1 : 0 }}
-                      transition={{ duration: 0.4, ease: "easeOut" }}
-                      onLoad={() => setIconLoaded(true)}
-                    />
-                    <h2
-                      className="font-display font-bold text-title tracking-tight"
-                      style={{
-                        fontSize:
-                          slide.title === "Lead Management" ||
-                          slide.title === "Ongoing Service" ||
-                          slide.title === "Product Journey"
-                            ? "4cqw"
-                            : "5.5cqw",
-                        lineHeight: "3cqw",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {slide.title}
-                    </h2>
-                  </div>
-                  <p className="text-primary leading-relaxed" style={{ fontSize: "1.5cqw", marginTop: "0.6cqw" }}>
-                    {slide.subtitle}
-                  </p>
-
-                  {/* Orange accent dots */}
-                  <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
-                    <div className="flex items-center" style={{ gap: "0.4cqw" }}>
-                      {[...Array(4)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="rounded-full bg-primary"
-                          style={{ width: "0.5cqw", height: "0.5cqw" }}
-                          initial={{ scale: 0, opacity: 0 }}
-                          animate={{ scale: 1, opacity: 1 - i * 0.25 }}
-                          transition={{ delay: i * 0.1, duration: 0.3 }}
-                        />
-                      ))}
-                      <motion.div
-                        className="relative overflow-hidden"
-                        style={{ height: "0.15cqw", width: "4cqw", transformOrigin: "left" }}
-                        initial={{ scaleX: 0, opacity: 0 }}
-                        animate={{ scaleX: 1, opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.4 }}
-                      >
-                        <div
-                          className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
-                          style={{
-                            clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
-                          }}
-                        />
-                      </motion.div>
-                    </div>
-                  </div>
-
-                    {/* Main image */}
-                    <div
-                      className={`flex-1 flex justify-center w-full overflow-visible ${
-                        slide.title === "Visibility" || slide.title === "Ongoing Service"
-                          ? "items-center"
-                          : "items-end"
-                      }`}
-                    >
-                      <motion.img
-                        src={slide.mainImage || VisibilityMainImage}
-                        alt={`${slide.title} - ${slide.subtitle}`}
-                        className="h-auto object-contain"
-                        style={{
-                          width:
-                            slide.title === "Lead Management"
-                              ? "100%"
-                              : slide.title === "Visibility"
-                                ? "108%"
-                                : slide.title === "Relevance" || slide.title === "Prominence"
-                                  ? "120%"
-                                  : slide.title === "Your Setup"
-                                    ? "115%"
-                                    : slide.title === "Ongoing Service"
-                                      ? "110%"
-                                      : "100%",
-                          maxHeight: "70vh",
-                          marginBottom:
-                            slide.title === "Lead Management"
-                              ? "-3cqw"
-                              : slide.title === "Relevance" || slide.title === "Prominence"
-                                ? "-3cqw"
-                                : slide.title === "Your Setup" || slide.title === "Conversions"
-                                  ? "-1.5cqw"
-                                  : "0",
-                        }}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: imageLoaded ? 1 : 0 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
-                        onLoad={() => setImageLoaded(true)}
-                      />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Right side - content list */}
-            <div
-              className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
-              style={{ padding: "3cqw", paddingBottom: "6cqw" }}
-            >
-              {/* Corner image */}
-              {slide.cornerImage && (
-                <motion.img
-                  key={`corner-${currentSlide}`}
-                  src={slide.cornerImage}
-                  alt=""
-                  className="absolute z-10"
-                  style={{
-                    top: "2.5cqw",
-                    right: "3cqw",
-                    width: "5cqw",
-                    height: "auto",
-                  }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
-                />
-              )}
-              <div className="overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
+                <div className="grid md:grid-cols-2 h-full" style={{ gridTemplateColumns: "1fr 1fr" }}>
+                  {/* Left side - logo, title, image */}
+                  <div
+                    className="flex flex-col bg-gradient-to-br from-muted/30 to-muted/50 h-full relative overflow-hidden"
+                    style={{ padding: "3cqw" }}
                   >
-                    <div style={{ marginBottom: "2cqw" }}>
-                      <div className="flex items-center" style={{ gap: "1cqw" }}>
-                        <span
-                          className="font-semibold text-primary uppercase tracking-wider"
-                          style={{ fontSize: "1.2cqw" }}
-                        >
-                          Slide
-                        </span>
-                        <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
-                          {currentSlide + 1}
-                        </span>
-                        <span className="text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
-                          —
-                        </span>
-                        <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
-                          {totalSlides}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex-1 overflow-hidden">
-                      <div className="relative">
-                        {/* Vertical connecting line for Your Setup */}
-                        {slide.title === "Your Setup" && (
-                          <div
-                            className="absolute bg-primary z-10"
-                            style={{
-                              left: "1.7cqw",
-                              width: "0.15cqw",
-                              top: "calc(1.8cqw + 0.7cqw)",
-                              bottom: "calc(1.8cqw + 0.7cqw)",
-                              transform: "translateX(-50%)",
-                            }}
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={currentSlide}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex flex-col items-start h-full"
+                      >
+                        {/* Logo and Title */}
+                        <div className="flex items-center" style={{ gap: "1.5cqw", marginBottom: "1cqw" }}>
+                          <motion.img
+                            src={LogoGraphic}
+                            alt="Add People"
+                            style={{ width: "3cqw", height: "3cqw", flexShrink: 0 }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: iconLoaded ? 1 : 0 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            onLoad={() => setIconLoaded(true)}
                           />
-                        )}
+                          <h2
+                            className="font-display font-bold text-title tracking-tight"
+                            style={{
+                              fontSize:
+                                slide.title === "Lead Management" ||
+                                slide.title === "Ongoing Service" ||
+                                slide.title === "Product Journey"
+                                  ? "4cqw"
+                                  : "5.5cqw",
+                              lineHeight: "3cqw",
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {slide.title}
+                          </h2>
+                        </div>
+                        <p className="text-primary leading-relaxed" style={{ fontSize: "1.5cqw", marginTop: "0.6cqw" }}>
+                          {slide.subtitle}
+                        </p>
 
-                        {/* Product Journey timeline cards */}
-                        {slide.title === "Product Journey" && slide.timeline ? (
-                          <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
-                            {slide.timeline.map((phase, phaseIdx) => (
+                        {/* Orange accent dots */}
+                        <div className="flex items-center" style={{ gap: "0.6cqw", marginTop: "1cqw" }}>
+                          <div className="flex items-center" style={{ gap: "0.4cqw" }}>
+                            {[...Array(4)].map((_, i) => (
                               <motion.div
-                                key={phaseIdx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + phaseIdx * 0.15, duration: 0.3, ease: "easeOut" }}
-                                className="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
-                                style={{ borderRadius: "1.5cqw", padding: "1.5cqw" }}
+                                key={i}
+                                className="rounded-full bg-primary"
+                                style={{ width: "0.5cqw", height: "0.5cqw" }}
+                                initial={{ scale: 0, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 - i * 0.25 }}
+                                transition={{ delay: i * 0.1, duration: 0.3 }}
+                              />
+                            ))}
+                            <motion.div
+                              className="relative overflow-hidden"
+                              style={{ height: "0.15cqw", width: "4cqw", transformOrigin: "left" }}
+                              initial={{ scaleX: 0, opacity: 0 }}
+                              animate={{ scaleX: 1, opacity: 1 }}
+                              transition={{ delay: 0.4, duration: 0.4 }}
+                            >
+                              <div
+                                className="absolute inset-0 bg-gradient-to-r from-primary/100 via-primary/50 to-primary/0"
+                                style={{
+                                  clipPath: "polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%)",
+                                }}
+                              />
+                            </motion.div>
+                          </div>
+                        </div>
+
+                        {/* Main image */}
+                        <div
+                          className={`flex-1 flex justify-center w-full overflow-visible ${
+                            slide.title === "Visibility" || slide.title === "Ongoing Service"
+                              ? "items-center"
+                              : "items-end"
+                          }`}
+                        >
+                          <motion.img
+                            src={slide.mainImage || VisibilityMainImage}
+                            alt={`${slide.title} - ${slide.subtitle}`}
+                            className="h-auto"
+                            style={{
+                              width:
+                                slide.title === "Product Journey" || slide.title === "Your Setup"
+                                  ? "100%"
+                                  : slide.title === "Lead Management"
+                                    ? "100%"
+                                    : slide.title === "Visibility"
+                                      ? "108%"
+                                      : slide.title === "Relevance" || slide.title === "Prominence"
+                                        ? "120%"
+                                        : slide.title === "Ongoing Service"
+                                          ? "110%"
+                                          : "100%",
+                              height:
+                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "100%" : "auto",
+                              objectFit:
+                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "cover" : "contain",
+                              objectPosition:
+                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "bottom" : "center",
+                              maxHeight:
+                                slide.title === "Product Journey" || slide.title === "Your Setup" ? "none" : "70vh",
+                              marginBottom:
+                                slide.title === "Product Journey" || slide.title === "Your Setup"
+                                  ? "0"
+                                  : slide.title === "Lead Management"
+                                    ? "-3cqw"
+                                    : slide.title === "Relevance" || slide.title === "Prominence"
+                                      ? "-3cqw"
+                                      : slide.title === "Conversions"
+                                        ? "-1.5cqw"
+                                        : "0",
+                            }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: imageLoaded ? 1 : 0 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
+                            onLoad={() => setImageLoaded(true)}
+                          />
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Right side - content list */}
+                  <div
+                    className="relative bg-gradient-to-br from-white to-muted/20 shadow-[-8px_0_20px_-5px_rgba(0,0,0,0.1)] h-full overflow-hidden"
+                    style={{ padding: "3cqw", paddingBottom: "6cqw" }}
+                  >
+                    {/* Corner image */}
+                    {slide.cornerImage && (
+                      <motion.img
+                        key={`corner-${currentSlide}`}
+                        src={slide.cornerImage}
+                        alt=""
+                        className="absolute z-10"
+                        style={{
+                          top: "2.5cqw",
+                          right: "3cqw",
+                          width: "5cqw",
+                          height: "auto",
+                        }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.2, duration: 0.4, ease: "easeOut" }}
+                      />
+                    )}
+                    <div className="overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentSlide}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ duration: 0.3 }}
+                          className="w-full"
+                        >
+                          <div style={{ marginBottom: "2cqw" }}>
+                            <div className="flex items-center" style={{ gap: "1cqw" }}>
+                              <span
+                                className="font-semibold text-primary uppercase tracking-wider"
+                                style={{ fontSize: "1.2cqw" }}
                               >
-                                <h3
-                                  className="text-primary font-semibold"
-                                  style={{ fontSize: "1.5cqw", marginBottom: "0.9cqw" }}
-                                >
-                                  {phase.phase}
-                                </h3>
+                                Slide
+                              </span>
+                              <span className="font-bold text-foreground" style={{ fontSize: "2.5cqw" }}>
+                                {currentSlide + 1}
+                              </span>
+                              <span className="text-muted-foreground" style={{ fontSize: "1.8cqw" }}>
+                                —
+                              </span>
+                              <span className="font-bold text-muted-foreground" style={{ fontSize: "2.5cqw" }}>
+                                {totalSlides}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="flex-1 overflow-hidden">
+                            <div className="relative">
+                              {/* Vertical connecting line for Your Setup */}
+                              {slide.title === "Your Setup" && (
+                                <div
+                                  className="absolute bg-primary z-10"
+                                  style={{
+                                    left: "1.7cqw",
+                                    width: "0.15cqw",
+                                    top: "calc(1.8cqw + 0.7cqw)",
+                                    bottom: "calc(1.8cqw + 0.7cqw)",
+                                    transform: "translateX(-50%)",
+                                  }}
+                                />
+                              )}
+
+                              {/* Product Journey timeline cards */}
+                              {slide.title === "Product Journey" && slide.timeline ? (
+                                <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
+                                  {slide.timeline.map((phase, phaseIdx) => (
+                                    <motion.div
+                                      key={phaseIdx}
+                                      initial={{ opacity: 0, x: 20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 0.4 + phaseIdx * 0.15, duration: 0.3, ease: "easeOut" }}
+                                      className="bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30"
+                                      style={{ borderRadius: "1.5cqw", padding: "1.5cqw" }}
+                                    >
+                                      <h3
+                                        className="text-primary font-semibold"
+                                        style={{ fontSize: "1.5cqw", marginBottom: "0.9cqw" }}
+                                      >
+                                        {phase.phase}
+                                      </h3>
+                                      <ul
+                                        className="relative"
+                                        style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}
+                                      >
+                                        {/* Vertical connecting line */}
+                                        <div
+                                          className="absolute bg-primary z-0"
+                                          style={{
+                                            left: "0.20cqw",
+                                            width: "0.15cqw",
+                                            top: "calc(0.6cqw + 0.3cqw)",
+                                            bottom: "calc(0.6cqw + 0.3cqw)",
+                                          }}
+                                        />
+                                        {phase.points.map((point, pointIdx) => (
+                                          <li
+                                            key={pointIdx}
+                                            className="flex items-start relative z-10"
+                                            style={{ gap: "0.9cqw" }}
+                                          >
+                                            <span
+                                              className="rounded-full bg-primary flex-shrink-0"
+                                              style={{ width: "0.5cqw", height: "0.5cqw", marginTop: "0.6cqw" }}
+                                            />
+                                            <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
+                                              {point}
+                                            </span>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              ) : (
                                 <ul
                                   className="relative"
-                                  style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}
+                                  style={{ display: "flex", flexDirection: "column", gap: "0.9cqw", zIndex: 1 }}
                                 >
-                                  {/* Vertical connecting line */}
-                                  <div
-                                    className="absolute bg-primary z-0"
-                                    style={{
-                                      left: "0.20cqw",
-                                      width: "0.15cqw",
-                                      top: "calc(0.6cqw + 0.3cqw)",
-                                      bottom: "calc(0.6cqw + 0.3cqw)",
-                                    }}
-                                  />
-                                  {phase.points.map((point, pointIdx) => (
-                                    <li
-                                      key={pointIdx}
-                                      className="flex items-start relative z-10"
-                                      style={{ gap: "0.9cqw" }}
+                                  {slide.content?.map((item, idx) => (
+                                    <motion.li
+                                      key={idx}
+                                      initial={{ opacity: 0, x: 20 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
+                                      onClick={
+                                        item.isInteractive
+                                          ? () => {
+                                              setGraphKey((k) => k + 1);
+                                              setShowROIGraph(true);
+                                            }
+                                          : undefined
+                                      }
+                                      className={`flex bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
+                                        item.isInteractive
+                                          ? "cursor-pointer hover:scale-[1.02] hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-all duration-200"
+                                          : ""
+                                      }`}
+                                      style={{
+                                        gap: "1.2cqw",
+                                        borderRadius: "1.5cqw",
+                                        padding: item.icon ? "0.9cqw" : "1.2cqw",
+                                        alignItems: item.icon ? "center" : "flex-start",
+                                      }}
                                     >
-                                      <span
-                                        className="rounded-full bg-primary flex-shrink-0"
-                                        style={{ width: "0.5cqw", height: "0.5cqw", marginTop: "0.6cqw" }}
-                                      />
-                                      <span className="text-foreground" style={{ fontSize: "1.3cqw" }}>
-                                        {point}
-                                      </span>
-                                    </li>
+                                      {item.icon ? (
+                                        <img
+                                          src={item.icon}
+                                          alt=""
+                                          className="flex-shrink-0"
+                                          style={{
+                                            width:
+                                              slide.title === "Your Setup"
+                                                ? "1.4cqw"
+                                                : slide.title === "Ongoing Service"
+                                                  ? "1.8cqw"
+                                                  : slide.title === "Prominence"
+                                                    ? "2.4cqw"
+                                                    : "3.5cqw",
+                                            height:
+                                              slide.title === "Your Setup"
+                                                ? "1.4cqw"
+                                                : slide.title === "Ongoing Service"
+                                                  ? "1.8cqw"
+                                                  : slide.title === "Prominence"
+                                                    ? "2.4cqw"
+                                                    : "3.5cqw",
+                                          }}
+                                        />
+                                      ) : (
+                                        <span className="text-primary font-bold" style={{ marginTop: "0.15cqw" }}>
+                                          •
+                                        </span>
+                                      )}
+                                      <div className="flex-1">
+                                        <span className="font-semibold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                                          {item.label}
+                                        </span>
+                                        {item.description && (
+                                          <p
+                                            className="text-muted-foreground"
+                                            style={{ fontSize: "1.2cqw", marginTop: "0.3cqw" }}
+                                          >
+                                            {item.description}
+                                          </p>
+                                        )}
+                                      </div>
+                                      {item.isInteractive && (
+                                        <ChevronRight
+                                          className="flex-shrink-0 text-primary"
+                                          style={{ width: "1.8cqw", height: "1.8cqw" }}
+                                        />
+                                      )}
+                                      {item.rightIcon && (
+                                        <img
+                                          src={item.rightIcon}
+                                          alt=""
+                                          className="flex-shrink-0"
+                                          style={{ width: "9.5cqw", height: "3.5cqw" }}
+                                        />
+                                      )}
+                                    </motion.li>
                                   ))}
                                 </ul>
-                              </motion.div>
-                            ))}
+                              )}
+
+                              {/* Bottom image for Visibility slide */}
+                              {"bottomImage" in slide && slide.bottomImage && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: 10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  transition={{ delay: 0.8, duration: 0.4 }}
+                                  style={{ marginTop: "1.2cqw" }}
+                                >
+                                  <img src={slide.bottomImage as string} alt="" style={{ width: "45%" }} />
+                                </motion.div>
+                              )}
+                            </div>
                           </div>
-                        ) : (
-                          <ul
-                            className="relative"
-                            style={{ display: "flex", flexDirection: "column", gap: "0.9cqw", zIndex: 1 }}
-                          >
-                            {slide.content?.map((item, idx) => (
-                              <motion.li
-                                key={idx}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.4 + idx * 0.1, duration: 0.3, ease: "easeOut" }}
-                                onClick={item.isInteractive ? () => { setGraphKey(k => k + 1); setShowROIGraph(true); } : undefined}
-                                className={`flex bg-white shadow-[0_2px_10px_rgba(0,0,0,0.04)] border border-border/30 ${
-                                  item.isInteractive
-                                    ? "cursor-pointer hover:scale-[1.02] hover:shadow-[0_4px_15px_rgba(0,0,0,0.08)] transition-all duration-200"
-                                    : ""
-                                }`}
-                                style={{
-                                  gap: "1.2cqw",
-                                  borderRadius: "1.5cqw",
-                                  padding: item.icon ? "0.9cqw" : "1.2cqw",
-                                  alignItems: item.icon ? "center" : "flex-start",
-                                }}
-                              >
-                                {item.icon ? (
-                                  <img
-                                    src={item.icon}
-                                    alt=""
-                                    className="flex-shrink-0"
-                                    style={{
-                                      width:
-                                        slide.title === "Your Setup"
-                                          ? "1.4cqw"
-                                          : slide.title === "Ongoing Service"
-                                            ? "1.8cqw"
-                                            : slide.title === "Prominence"
-                                              ? "2.4cqw"
-                                              : "3.5cqw",
-                                      height:
-                                        slide.title === "Your Setup"
-                                          ? "1.4cqw"
-                                          : slide.title === "Ongoing Service"
-                                            ? "1.8cqw"
-                                            : slide.title === "Prominence"
-                                              ? "2.4cqw"
-                                              : "3.5cqw",
-                                    }}
-                                  />
-                                ) : (
-                                  <span className="text-primary font-bold" style={{ marginTop: "0.15cqw" }}>
-                                    •
-                                  </span>
-                                )}
-                                <div className="flex-1">
-                                  <span className="font-semibold text-foreground" style={{ fontSize: "1.5cqw" }}>
-                                    {item.label}
-                                  </span>
-                                  {item.description && (
-                                    <p
-                                      className="text-muted-foreground"
-                                      style={{ fontSize: "1.2cqw", marginTop: "0.3cqw" }}
-                                    >
-                                      {item.description}
-                                    </p>
-                                  )}
-                                </div>
-                                {item.isInteractive && (
-                                  <ChevronRight 
-                                    className="flex-shrink-0 text-primary"
-                                    style={{ width: "1.8cqw", height: "1.8cqw" }}
-                                  />
-                                )}
-                                {item.rightIcon && (
-                                  <img
-                                    src={item.rightIcon}
-                                    alt=""
-                                    className="flex-shrink-0"
-                                    style={{ width: "9.5cqw", height: "3.5cqw" }}
-                                  />
-                                )}
-                              </motion.li>
-                            ))}
-                          </ul>
-                        )}
-
-                        {/* Bottom image for Visibility slide */}
-                        {"bottomImage" in slide && slide.bottomImage && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.8, duration: 0.4 }}
-                            style={{ marginTop: "1.2cqw" }}
-                          >
-                            <img src={slide.bottomImage as string} alt="" style={{ width: "45%" }} />
-                          </motion.div>
-                        )}
-                      </div>
+                        </motion.div>
+                      </AnimatePresence>
                     </div>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
 
-              {/* Fixed navigation buttons - absolutely positioned */}
-              <div
-                className="absolute bottom-0 left-0 right-0 flex items-center justify-between"
-                style={{ padding: "3cqw" }}
-              >
-                {currentSlide > 0 ? (
-                  <Button
-                    onClick={prevSlide}
-                    variant="outline"
-                    className="flex items-center"
-                    style={{
-                      gap: "0.6cqw",
-                      minWidth: "9cqw",
-                      fontSize: "1.2cqw",
-                      padding: "1cqw 2cqw",
-                      borderRadius: "0.8cqw",
-                    }}
-                  >
-                    <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                    Previous
-                  </Button>
-                ) : (
-                  <div style={{ minWidth: "9cqw" }} />
-                )}
-
-                {/* Dot Progress Indicator */}
-                <div className="flex" style={{ gap: "0.4cqw" }}>
-                  {slides.map((_, idx) => (
+                    {/* Fixed navigation buttons - absolutely positioned */}
                     <div
-                      key={idx}
-                      className="rounded-full transition-all"
-                      style={{
-                        height: "0.4cqw",
-                        width: idx === currentSlide ? "1.8cqw" : "0.4cqw",
-                        backgroundColor: idx === currentSlide ? "var(--primary)" : "var(--muted)",
-                      }}
-                    />
-                  ))}
-                </div>
+                      className="absolute bottom-0 left-0 right-0 flex items-center justify-between"
+                      style={{ padding: "3cqw" }}
+                    >
+                      {currentSlide > 0 ? (
+                        <Button
+                          onClick={prevSlide}
+                          variant="outline"
+                          className="flex items-center"
+                          style={{
+                            gap: "0.6cqw",
+                            minWidth: "9cqw",
+                            fontSize: "1.2cqw",
+                            padding: "1cqw 2cqw",
+                            borderRadius: "0.8cqw",
+                          }}
+                        >
+                          <ChevronLeft style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                          Previous
+                        </Button>
+                      ) : (
+                        <div style={{ minWidth: "9cqw" }} />
+                      )}
 
-                <Button
-                  onClick={nextSlide}
-                  className="flex items-center justify-center"
-                  style={{
-                    gap: "0.6cqw",
-                    minWidth: "9cqw",
-                    fontSize: "1.2cqw",
-                    padding: "1cqw 2cqw",
-                    borderRadius: "0.8cqw",
-                  }}
-                >
-                  {isLastSlide ? "About Us" : "Next"}
-                  <ChevronRight style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                </Button>
-              </div>
-            </div>
-          </div>
+                      {/* Dot Progress Indicator */}
+                      <div className="flex" style={{ gap: "0.4cqw" }}>
+                        {slides.map((_, idx) => (
+                          <div
+                            key={idx}
+                            className="rounded-full transition-all"
+                            style={{
+                              height: "0.4cqw",
+                              width: idx === currentSlide ? "1.8cqw" : "0.4cqw",
+                              backgroundColor: idx === currentSlide ? "var(--primary)" : "var(--muted)",
+                            }}
+                          />
+                        ))}
+                      </div>
+
+                      <Button
+                        onClick={nextSlide}
+                        className="flex items-center justify-center"
+                        style={{
+                          gap: "0.6cqw",
+                          minWidth: "9cqw",
+                          fontSize: "1.2cqw",
+                          padding: "1cqw 2cqw",
+                          borderRadius: "0.8cqw",
+                        }}
+                      >
+                        {isLastSlide ? "About Us" : "Next"}
+                        <ChevronRight style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
