@@ -384,40 +384,46 @@ export default function BusinessCycleLocalSEO() {
                     </div>
                   </div>
 
-                  {/* Main image */}
-                  <div
-                    className={`${
-                      slide.title === "Product Journey" || slide.title === "Your Setup"
-                        ? "absolute bottom-0 left-0 right-0 top-0 flex items-end justify-center pointer-events-none"
-                        : slide.title === "Prominence"
-                          ? "absolute bottom-0 left-0 right-0 flex items-end justify-center pointer-events-none"
-                          : `w-full flex-1 flex justify-center overflow-visible ${slide.title === "Visibility" || slide.title === "Ongoing Service" ? "items-center" : "items-end"}`
-                    }`}
-                  >
-                    <motion.img
-                      src={slide.mainImage || VisibilityMainImage}
-                      alt={`${slide.title} - ${slide.subtitle}`}
-                      className={`object-contain ${
-                        slide.title === "Lead Management"
-                          ? "w-full max-h-[85vh] mb-[-60px] mt-[-40px]"
-                          : slide.title === "Visibility"
-                            ? "w-[108%] max-h-[70vh]"
-                            : slide.title === "Relevance" || slide.title === "Prominence"
-                              ? "w-[120%] max-h-[80vh] mb-[-30px] mt-[-20px]"
-                              : slide.title === "Your Setup"
-                                ? "w-[115%] max-h-[80vh] mb-[-14px]"
-                                : slide.title === "Ongoing Service"
-                                  ? "w-[110%] max-h-[70vh]"
-                                  : slide.title === "Product Journey"
-                                    ? "w-full object-bottom"
-                                    : "w-full max-h-[75vh] mb-[-14px]"
+                    {/* Main image */}
+                    <div
+                      className={`flex-1 flex justify-center w-full overflow-visible ${
+                        slide.title === "Visibility" || slide.title === "Ongoing Service"
+                          ? "items-center"
+                          : "items-end"
                       }`}
-                      style={{
-                        opacity: imageLoaded ? 1 : 0,
-                        transition: "opacity 0.4s ease-out",
-                      }}
-                      onLoad={() => setImageLoaded(true)}
-                    />
+                    >
+                      <motion.img
+                        src={slide.mainImage || VisibilityMainImage}
+                        alt={`${slide.title} - ${slide.subtitle}`}
+                        className="h-auto object-contain"
+                        style={{
+                          width:
+                            slide.title === "Lead Management"
+                              ? "100%"
+                              : slide.title === "Visibility"
+                                ? "108%"
+                                : slide.title === "Relevance" || slide.title === "Prominence"
+                                  ? "120%"
+                                  : slide.title === "Your Setup"
+                                    ? "115%"
+                                    : slide.title === "Ongoing Service"
+                                      ? "110%"
+                                      : "100%",
+                          maxHeight: "70vh",
+                          marginBottom:
+                            slide.title === "Lead Management"
+                              ? "-3cqw"
+                              : slide.title === "Relevance" || slide.title === "Prominence"
+                                ? "-3cqw"
+                                : slide.title === "Your Setup" || slide.title === "Conversions"
+                                  ? "-1.5cqw"
+                                  : "0",
+                        }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: imageLoaded ? 1 : 0 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        onLoad={() => setImageLoaded(true)}
+                      />
                   </div>
                 </motion.div>
               </AnimatePresence>
