@@ -10,6 +10,7 @@ export default function Welcome() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
+  const [isCanvasReady, setIsCanvasReady] = useState(false);
 
   const validateUrl = (value: string): boolean => {
     if (!value.trim()) return false;
@@ -48,6 +49,11 @@ export default function Welcome() {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+
+    // Immediately fill canvas to prevent white flash
+    ctx.fillStyle = "#f7f5f2";
+    ctx.fillRect(0, 0, width, height);
+
     const numLines = 18;
     const lineSpacing = 11.25;
     const waveAmplitude = 35;
@@ -212,11 +218,20 @@ export default function Welcome() {
       timeRef.current += 0.005;
       animationRef.current = requestAnimationFrame(animate);
     }
+
+    // Mark canvas as ready after first frame
+    requestAnimationFrame(() => {
+      setIsCanvasReady(true);
+    });
+
     animate();
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      // Fill immediately on resize too
+      ctx.fillStyle = "#f7f5f2";
+      ctx.fillRect(0, 0, width, height);
       lines.length = 0;
       for (let i = 0; i < numLines; i++) lines.push(new WavyLine(i));
       linesRef.current = lines;
@@ -247,7 +262,7 @@ export default function Welcome() {
     "w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#f7f5f2" }}>
       <style>{`
         @keyframes fadeInSmooth {
           from { opacity: 0; }
@@ -259,6 +274,9 @@ export default function Welcome() {
           background: rgba(255, 255, 255, 0.06);
           pointer-events: none;
           z-index: 5;
+          opacity: 0;
+          animation: fadeInSmooth 0.6s ease-out forwards;
+          animation-delay: 0.1s;
         }
         .glass {
           backdrop-filter: blur(3px) saturate(100%);
@@ -273,10 +291,19 @@ export default function Welcome() {
           content: '';
           position: absolute;
           inset: 0;
-          opacity: 0.4;
+          opacity: 0;
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
           pointer-events: none;
           mix-blend-mode: overlay;
+          animation: fadeInSmooth 0.8s ease-out forwards;
+          animation-delay: 0.3s;
+        }
+        .glass.ready::before {
+          opacity: 0.4;
+        }
+        canvas {
+          opacity: 0;
+          animation: fadeInSmooth 0.4s ease-out forwards;
         }
       `}</style>
 
@@ -289,7 +316,7 @@ export default function Welcome() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center"
             style={{ marginBottom: "3cqw" }}
           >
@@ -304,8 +331,8 @@ export default function Welcome() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className={`glass ${isCanvasReady ? "ready" : ""}`}
             style={{ padding: "5cqw", borderRadius: "3cqw" }}
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "4cqw" }}>
