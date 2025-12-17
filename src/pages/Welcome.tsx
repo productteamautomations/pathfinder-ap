@@ -257,7 +257,7 @@ export default function Welcome() {
     "w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-[#f7f5f2]">
       <style>{`
         @keyframes fadeInSmooth {
           from { opacity: 0; }
