@@ -58,6 +58,10 @@ export default function Welcome() {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+
+    // Immediately fill canvas with background color
+    ctx.fillStyle = "#f7f5f2";
+    ctx.fillRect(0, 0, width, height);
     const numLines = 18;
     const lineSpacing = 11.25;
     const waveAmplitude = 35;
@@ -289,7 +293,11 @@ export default function Welcome() {
         }
       `}</style>
 
-      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 1 }} />
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 w-full h-full"
+        style={{ zIndex: 1, backgroundColor: "#f7f5f2" }}
+      />
 
       <AnimatePresence>
         {isLoading && (
