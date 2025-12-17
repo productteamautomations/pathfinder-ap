@@ -33,42 +33,192 @@ import PricingLSA from "@/pages/lsa/Pricing";
 export function AnimatedRoutes() {
   const location = useLocation();
 
+  // Don't show topographic background on Welcome page
+  const showTopographicBackground = location.pathname !== "/";
+
   return (
     <div className="min-h-screen relative bg-background overflow-hidden">
-      {/* Persistent background across all pages */}
-      <TopographicBackground />
-      
+      {/* Persistent background across all pages except Welcome */}
+      {showTopographicBackground && <TopographicBackground />}
+
       <div className="relative z-10 overflow-hidden">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<PageTransition><Welcome /></PageTransition>} />
-            <Route path="/fact-finder" element={<PageTransition><FactFinder /></PageTransition>} />
-            <Route path="/service-selector" element={<PageTransition><ServiceSelector /></PageTransition>} />
-            
+            <Route
+              path="/"
+              element={
+                <PageTransition>
+                  <Welcome />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/fact-finder"
+              element={
+                <PageTransition>
+                  <FactFinder />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/service-selector"
+              element={
+                <PageTransition>
+                  <ServiceSelector />
+                </PageTransition>
+              }
+            />
+
             {/* Local SEO path */}
-            <Route path="/product-recommendation/localseo" element={<PageTransition><ProductRecommendationLocalSEO /></PageTransition>} />
-            <Route path="/funnel-diagnostic/localseo" element={<PageTransition><FunnelDiagnosticLocalSEO /></PageTransition>} />
-            <Route path="/funnel-health/localseo" element={<PageTransition><FunnelHealthLocalSEO /></PageTransition>} />
-            <Route path="/business-cycle/localseo" element={<PageTransition><BusinessCycleLocalSEO /></PageTransition>} />
-            <Route path="/about/localseo" element={<PageTransition><AboutAddPeopleLocalSEO /></PageTransition>} />
-            <Route path="/pricing/localseo" element={<PageTransition><PricingLocalSEO /></PageTransition>} />
-            
+            <Route
+              path="/product-recommendation/localseo"
+              element={
+                <PageTransition>
+                  <ProductRecommendationLocalSEO />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/funnel-diagnostic/localseo"
+              element={
+                <PageTransition>
+                  <FunnelDiagnosticLocalSEO />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/funnel-health/localseo"
+              element={
+                <PageTransition>
+                  <FunnelHealthLocalSEO />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/business-cycle/localseo"
+              element={
+                <PageTransition>
+                  <BusinessCycleLocalSEO />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/about/localseo"
+              element={
+                <PageTransition>
+                  <AboutAddPeopleLocalSEO />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/pricing/localseo"
+              element={
+                <PageTransition>
+                  <PricingLocalSEO />
+                </PageTransition>
+              }
+            />
+
             {/* Lead Gen path */}
-            <Route path="/product-recommendation/leadgen" element={<PageTransition><ProductRecommendationLeadGen /></PageTransition>} />
-            <Route path="/funnel-diagnostic/leadgen" element={<PageTransition><FunnelDiagnosticLeadGen /></PageTransition>} />
-            <Route path="/funnel-health/leadgen" element={<PageTransition><FunnelHealthLeadGen /></PageTransition>} />
-            <Route path="/business-cycle/leadgen" element={<PageTransition><BusinessCycleLeadGen /></PageTransition>} />
-            <Route path="/about/leadgen" element={<PageTransition><AboutAddPeopleLeadGen /></PageTransition>} />
-            <Route path="/pricing/leadgen" element={<PageTransition><PricingLeadGen /></PageTransition>} />
-            
+            <Route
+              path="/product-recommendation/leadgen"
+              element={
+                <PageTransition>
+                  <ProductRecommendationLeadGen />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/funnel-diagnostic/leadgen"
+              element={
+                <PageTransition>
+                  <FunnelDiagnosticLeadGen />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/funnel-health/leadgen"
+              element={
+                <PageTransition>
+                  <FunnelHealthLeadGen />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/business-cycle/leadgen"
+              element={
+                <PageTransition>
+                  <BusinessCycleLeadGen />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/about/leadgen"
+              element={
+                <PageTransition>
+                  <AboutAddPeopleLeadGen />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/pricing/leadgen"
+              element={
+                <PageTransition>
+                  <PricingLeadGen />
+                </PageTransition>
+              }
+            />
+
             {/* LSA path */}
-            <Route path="/product-recommendation/lsa" element={<PageTransition><ProductRecommendationLSA /></PageTransition>} />
-            <Route path="/about-product/lsa" element={<PageTransition><AboutProductLSA /></PageTransition>} />
-            <Route path="/about/lsa" element={<PageTransition><AboutAddPeopleLSA /></PageTransition>} />
-            <Route path="/pricing/lsa" element={<PageTransition><PricingLSA /></PageTransition>} />
-            
-            <Route path="/required-info" element={<PageTransition><RequiredInfo /></PageTransition>} />
-            <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
+            <Route
+              path="/product-recommendation/lsa"
+              element={
+                <PageTransition>
+                  <ProductRecommendationLSA />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/about-product/lsa"
+              element={
+                <PageTransition>
+                  <AboutProductLSA />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/about/lsa"
+              element={
+                <PageTransition>
+                  <AboutAddPeopleLSA />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/pricing/lsa"
+              element={
+                <PageTransition>
+                  <PricingLSA />
+                </PageTransition>
+              }
+            />
+
+            <Route
+              path="/required-info"
+              element={
+                <PageTransition>
+                  <RequiredInfo />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="*"
+              element={
+                <PageTransition>
+                  <NotFound />
+                </PageTransition>
+              }
+            />
           </Routes>
         </AnimatePresence>
       </div>
