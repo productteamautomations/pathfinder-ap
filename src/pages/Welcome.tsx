@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 import { useRecommendation } from "@/contexts/RecommendationContext";
@@ -10,7 +10,7 @@ export default function Welcome() {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
-  const [isCanvasReady, setIsCanvasReady] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const validateUrl = (value: string): boolean => {
     if (!value.trim()) return false;
@@ -42,6 +42,15 @@ export default function Welcome() {
   const transitionProgressRef = useRef(0);
 
   useEffect(() => {
+    // Simulate initial loading
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -49,11 +58,6 @@ export default function Welcome() {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
-
-    // Immediately fill canvas to prevent white flash
-    ctx.fillStyle = "#f7f5f2";
-    ctx.fillRect(0, 0, width, height);
-
     const numLines = 18;
     const lineSpacing = 11.25;
     const waveAmplitude = 35;
@@ -218,20 +222,11 @@ export default function Welcome() {
       timeRef.current += 0.005;
       animationRef.current = requestAnimationFrame(animate);
     }
-
-    // Mark canvas as ready after first frame
-    requestAnimationFrame(() => {
-      setIsCanvasReady(true);
-    });
-
     animate();
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      // Fill immediately on resize too
-      ctx.fillStyle = "#f7f5f2";
-      ctx.fillRect(0, 0, width, height);
       lines.length = 0;
       for (let i = 0; i < numLines; i++) lines.push(new WavyLine(i));
       linesRef.current = lines;
@@ -262,11 +257,19 @@ export default function Welcome() {
     "w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
 
   return (
-    <div className="min-h-screen relative overflow-hidden" style={{ backgroundColor: "#f7f5f2" }}>
+    <div className="min-h-screen relative overflow-hidden">
       <style>{`
         @keyframes fadeInSmooth {
           from { opacity: 0; }
           to { opacity: 1; }
+        }
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
         }
         .backdrop-overlay {
           position: absolute;
@@ -274,9 +277,6 @@ export default function Welcome() {
           background: rgba(255, 255, 255, 0.06);
           pointer-events: none;
           z-index: 5;
-          opacity: 0;
-          animation: fadeInSmooth 0.6s ease-out forwards;
-          animation-delay: 0.1s;
         }
         .glass {
           backdrop-filter: blur(3px) saturate(100%);
@@ -287,36 +287,54 @@ export default function Welcome() {
           position: relative;
           overflow: hidden;
         }
-        .glass::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          opacity: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-          pointer-events: none;
-          mix-blend-mode: overlay;
-          animation: fadeInSmooth 0.8s ease-out forwards;
-          animation-delay: 0.3s;
-        }
-        .glass.ready::before {
-          opacity: 0.4;
-        }
-        canvas {
-          opacity: 0;
-          animation: fadeInSmooth 0.4s ease-out forwards;
-        }
       `}</style>
 
       <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 1 }} />
 
-      <div className="relative z-20 min-h-screen flex items-center justify-center p-6">
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#f7f5f2]"
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="flex flex-col items-center gap-6"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+                className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full"
+              />
+              <motion.p
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="text-deep-blue/70 font-medium text-lg"
+              >
+                Loading Pathfinder...
+              </motion.p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="relative z-20 min-h-screen flex items-center justify-center p-6"
+      >
         <div className="backdrop-overlay"></div>
 
         <div style={{ width: "min(27.5vw, calc(90vh * 1.1))", aspectRatio: "1.1", containerType: "size" }}>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? -20 : 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="text-center"
             style={{ marginBottom: "3cqw" }}
           >
@@ -330,9 +348,9 @@ export default function Welcome() {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className={`glass ${isCanvasReady ? "ready" : ""}`}
+            animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="glass"
             style={{ padding: "5cqw", borderRadius: "3cqw" }}
           >
             <div style={{ display: "flex", flexDirection: "column", gap: "4cqw" }}>
@@ -394,7 +412,7 @@ export default function Welcome() {
             </div>
           </motion.div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
