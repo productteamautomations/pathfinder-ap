@@ -257,7 +257,14 @@ export default function PricingLocalSEO() {
                 <Button
                   onClick={() =>
                     navigate("/required-info", {
-                      state: { ...location.state, product: "Local SEO", requiresSmartSite },
+                      state: {
+                        ...location.state,
+                        product: "Local SEO",
+                        requiresSmartSite,
+                        initialCost: totalFirstMonth.toFixed(2),
+                        monthlyCost: monthlyAfterVAT.toFixed(2),
+                        contractLength: selectedPlan === "12" ? "12 months" : "6 months",
+                      },
                     })
                   }
                   fullWidth
