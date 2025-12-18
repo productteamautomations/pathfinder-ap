@@ -4,15 +4,18 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check, Plus } from "lucide-react";
+import { Check, Plus, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
+import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
+import { toast } from "sonner";
 
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const requiresSmartSite = recommendation.isBig3 === false;
   const smartSiteFee = 199.0;
@@ -34,6 +37,37 @@ export default function PricingLocalSEO() {
     "Perfectly optimised local content",
     "Best-practice technical SEO",
   ];
+
+  const handleStartCampaign = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const pricingData = {
+      product: "Local SEO",
+      requiresSmartSite,
+      initialCost: totalFirstMonth.toFixed(2),
+      monthlyCost: monthlyAfterVAT.toFixed(2),
+      contractLength: selectedPlan === "12" ? "12 months" : "6 months",
+    };
+
+    const payload = buildWebhookPayload(location.state || {}, pricingData);
+
+    try {
+      await sendPricingWebhook(payload);
+      toast.success("Campaign started successfully!");
+      navigate("/required-info", {
+        state: {
+          ...location.state,
+          ...pricingData,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending webhook:", error);
+      toast.error("Failed to start campaign. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
@@ -255,22 +289,19 @@ export default function PricingLocalSEO() {
 
                 {/* CTA Button */}
                 <Button
-                  onClick={() =>
-                    navigate("/required-info", {
-                      state: {
-                        ...location.state,
-                        product: "Local SEO",
-                        requiresSmartSite,
-                        initialCost: totalFirstMonth.toFixed(2),
-                        monthlyCost: monthlyAfterVAT.toFixed(2),
-                        contractLength: selectedPlan === "12" ? "12 months" : "6 months",
-                      },
-                    })
-                  }
+                  onClick={handleStartCampaign}
+                  disabled={isSubmitting}
                   fullWidth
                   style={{ padding: "1.75cqw", fontSize: "1.4cqw", borderRadius: "0.8cqw" }}
                 >
-                  Start My Campaign
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="animate-spin" style={{ width: "1.4cqw", height: "1.4cqw" }} />
+                      Processing...
+                    </span>
+                  ) : (
+                    "Start My Campaign"
+                  )}
                 </Button>
               </motion.div>
             </div>

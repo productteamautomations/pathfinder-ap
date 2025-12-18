@@ -1,16 +1,20 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check, Clock, Plus } from "lucide-react";
+import { Check, Clock, Plus, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
+import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
+import { toast } from "sonner";
 
 export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const requiresSmartSite = recommendation.isBig3 === false;
   const smartSiteFee = 199.0;
@@ -26,6 +30,37 @@ export default function PricingLeadGen() {
     "Advanced conversion tracking",
     "Weekly performance updates",
   ];
+
+  const handleStartTrial = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const pricingData = {
+      product: "LeadGen Trial",
+      requiresSmartSite,
+      initialCost: totalWithVAT.toFixed(2),
+      monthlyCost: "N/A",
+      contractLength: "6 weeks",
+    };
+
+    const payload = buildWebhookPayload(location.state || {}, pricingData);
+
+    try {
+      await sendPricingWebhook(payload);
+      toast.success("Trial started successfully!");
+      navigate("/required-info", {
+        state: {
+          ...location.state,
+          ...pricingData,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending webhook:", error);
+      toast.error("Failed to start trial. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
@@ -253,18 +288,8 @@ export default function PricingLeadGen() {
 
                 {/* CTA Button */}
                 <Button
-                  onClick={() =>
-                    navigate("/required-info", {
-                      state: {
-                        ...location.state,
-                        product: "LeadGen Trial",
-                        requiresSmartSite,
-                        initialCost: totalWithVAT.toFixed(2),
-                        monthlyCost: "N/A",
-                        contractLength: "6 weeks",
-                      },
-                    })
-                  }
+                  onClick={handleStartTrial}
+                  disabled={isSubmitting}
                   fullWidth
                   style={{
                     padding: "1.75cqw",
@@ -272,7 +297,14 @@ export default function PricingLeadGen() {
                     borderRadius: "0.8cqw",
                   }}
                 >
-                  Start My Trial
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="animate-spin" style={{ width: "1.4cqw", height: "1.4cqw" }} />
+                      Processing...
+                    </span>
+                  ) : (
+                    "Start My Trial"
+                  )}
                 </Button>
               </motion.div>
             </div>

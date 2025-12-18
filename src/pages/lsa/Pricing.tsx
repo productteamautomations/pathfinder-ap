@@ -4,13 +4,16 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
+import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
+import { toast } from "sonner";
 
 export default function PricingLSA() {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const setupFee = 199.0;
   const monthlyFee6 = 199.0;
@@ -28,6 +31,37 @@ export default function PricingLSA() {
     "Lead dispute handling",
     "Monthly performance reporting",
   ];
+
+  const handleStartCampaign = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    const pricingData = {
+      product: "LSA",
+      requiresSmartSite: false,
+      initialCost: totalFirstMonth.toFixed(2),
+      monthlyCost: monthlyAfterVAT.toFixed(2),
+      contractLength: selectedPlan === "12" ? "12 months" : "6 months",
+    };
+
+    const payload = buildWebhookPayload(location.state || {}, pricingData);
+
+    try {
+      await sendPricingWebhook(payload);
+      toast.success("Campaign started successfully!");
+      navigate("/required-info", {
+        state: {
+          ...location.state,
+          ...pricingData,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending webhook:", error);
+      toast.error("Failed to start campaign. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
@@ -223,22 +257,19 @@ export default function PricingLSA() {
 
                 {/* CTA Button */}
                 <Button
-                  onClick={() =>
-                    navigate("/required-info", {
-                      state: {
-                        ...location.state,
-                        product: "LSA",
-                        requiresSmartSite: false,
-                        initialCost: totalFirstMonth.toFixed(2),
-                        monthlyCost: monthlyAfterVAT.toFixed(2),
-                        contractLength: selectedPlan === "12" ? "12 months" : "6 months",
-                      },
-                    })
-                  }
+                  onClick={handleStartCampaign}
+                  disabled={isSubmitting}
                   fullWidth
                   style={{ padding: "2cqw", fontSize: "1.5cqw", borderRadius: "0.8cqw" }}
                 >
-                  Start My Campaign
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader2 className="animate-spin" style={{ width: "1.5cqw", height: "1.5cqw" }} />
+                      Processing...
+                    </span>
+                  ) : (
+                    "Start My Campaign"
+                  )}
                 </Button>
               </motion.div>
             </div>
