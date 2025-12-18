@@ -181,20 +181,22 @@ export function buildWebhookPayload(
 
 // Send the webhook
 export async function sendPricingWebhook(payload: ReturnType<typeof buildWebhookPayload>) {
-  const response = await fetch(
-    "https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  );
-  
-  if (!response.ok) {
-    throw new Error("Webhook request failed");
+  try {
+    await fetch(
+      "https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors", // Required for cross-origin webhook
+        body: JSON.stringify(payload),
+      }
+    );
+    // With no-cors mode, we can't read the response, but the request is sent
+    return true;
+  } catch (error) {
+    console.error("Webhook error:", error);
+    throw error;
   }
-  
-  return response;
 }
