@@ -3,6 +3,7 @@ import { createContext, useContext, useState, ReactNode } from "react";
 interface RecommendationData {
   product: "SEO" | "LeadGen" | "LSA" | null;
   isLoading: boolean;
+  isBig3: boolean | null;
 }
 
 interface RecommendationContextType {
@@ -17,10 +18,11 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
   const [recommendation, setRecommendation] = useState<RecommendationData>({
     product: null,
     isLoading: false,
+    isBig3: null,
   });
 
   const fetchRecommendation = async (name: string, websiteUrl: string) => {
-    setRecommendation({ product: null, isLoading: true });
+    setRecommendation({ product: null, isLoading: true, isBig3: null });
     
     try {
       const response = await fetch(
@@ -40,18 +42,23 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
         const productObj = data.find((item: any) => item.product);
         const product = productObj?.product as "SEO" | "LeadGen" | "LSA" | null;
         
+        // Find the is_big_3 value from the response
+        const big3Obj = data.find((item: any) => item.is_big_3 !== undefined);
+        const isBig3 = big3Obj?.is_big_3 ?? null;
+        
         setRecommendation({
           product: product === "SEO" ? "SEO" : product,
           isLoading: false,
+          isBig3,
         });
-        console.log("Recommendation received:", product);
+        console.log("Recommendation received:", product, "isBig3:", isBig3);
       } else {
         console.error("Webhook request failed:", response.status);
-        setRecommendation({ product: null, isLoading: false });
+        setRecommendation({ product: null, isLoading: false, isBig3: null });
       }
     } catch (error) {
       console.error("Error fetching recommendation:", error);
-      setRecommendation({ product: null, isLoading: false });
+      setRecommendation({ product: null, isLoading: false, isBig3: null });
     }
   };
 

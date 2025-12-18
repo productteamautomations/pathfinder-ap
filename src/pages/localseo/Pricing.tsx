@@ -4,20 +4,27 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { recommendation } = useRecommendation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
+
+  const requiresSmartSite = recommendation.isBig3 === false;
+  const smartSiteFee = 599.0;
 
   const setupFee = 349.0;
   const monthlyFee6 = 299.0;
   const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const vat = (setupFee + monthlyFee) * 0.2;
-  const totalFirstMonth = setupFee + monthlyFee + vat;
+  const baseTotal = setupFee + monthlyFee;
+  const addonTotal = requiresSmartSite ? smartSiteFee : 0;
+  const vat = (baseTotal + addonTotal) * 0.2;
+  const totalFirstMonth = baseTotal + addonTotal + vat;
   const monthlyAfterVAT = monthlyFee * 1.2;
   const savings = (monthlyFee6 - monthlyFee12) * 12;
 
@@ -117,7 +124,7 @@ export default function PricingLocalSEO() {
                 transition={{ duration: 0.4, delay: 0.2 }}
               >
                 {/* Plan Toggle */}
-                <div style={{ marginBottom: "2.5cqw" }}>
+                <div style={{ marginBottom: "2cqw" }}>
                   <p className="font-semibold text-foreground" style={{ fontSize: "1.5cqw", marginBottom: "1cqw" }}>
                     Choose your plan
                   </p>
@@ -164,34 +171,60 @@ export default function PricingLocalSEO() {
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.2cqw", marginBottom: "1.5cqw" }}>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
+                    style={{ padding: "0.8cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.2cqw" }}>
                       Setup Fee
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
                       £{setupFee.toFixed(2)}
                     </span>
                   </div>
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
+                    style={{ padding: "0.8cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.2cqw" }}>
                       Monthly Fee
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
                       £{monthlyFee.toFixed(2)}
                     </span>
                   </div>
+                  
+                  {/* SmartSite Addon */}
+                  {requiresSmartSite && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      className="border-b border-border/40"
+                      style={{ padding: "0.8cqw 0" }}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center" style={{ gap: "0.5cqw" }}>
+                          <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                          <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
+                            SmartSite
+                          </span>
+                        </div>
+                        <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
+                          £{smartSiteFee.toFixed(2)}
+                        </span>
+                      </div>
+                      <p className="text-muted-foreground" style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}>
+                        A conversion-optimised landing page built for accurate tracking
+                      </p>
+                    </motion.div>
+                  )}
+                  
                   <div
                     className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
+                    style={{ padding: "0.8cqw 0" }}
                   >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
+                    <span className="text-muted-foreground" style={{ fontSize: "1.2cqw" }}>
                       VAT (20%)
                     </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
+                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
                       £{vat.toFixed(2)}
                     </span>
                   </div>
@@ -200,35 +233,35 @@ export default function PricingLocalSEO() {
                 {/* Total */}
                 <div
                   className="bg-muted/30"
-                  style={{ borderRadius: "1.5cqw", padding: "1.5cqw", marginBottom: "1.5cqw" }}
+                  style={{ borderRadius: "1.5cqw", padding: "1.25cqw", marginBottom: "1.25cqw" }}
                 >
                   <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
-                      <p className="text-muted-foreground" style={{ fontSize: "1.1cqw", marginBottom: "0.3cqw" }}>
+                      <p className="text-muted-foreground" style={{ fontSize: "1cqw", marginBottom: "0.2cqw" }}>
                         First month total
                       </p>
-                      <p className="font-bold text-foreground" style={{ fontSize: "3.5cqw" }}>
+                      <p className="font-bold text-foreground" style={{ fontSize: "3cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
                       </p>
                     </div>
-                    <p className="text-muted-foreground text-right" style={{ fontSize: "1.1cqw" }}>
+                    <p className="text-muted-foreground text-right" style={{ fontSize: "1cqw" }}>
                       then £{monthlyAfterVAT.toFixed(2)}/mo inc. VAT
                     </p>
                   </div>
                 </div>
 
                 {/* Payment Providers */}
-                <img src={PaymentProviders} alt="Payment providers" style={{ width: "100%", marginBottom: "1.5cqw" }} />
+                <img src={PaymentProviders} alt="Payment providers" style={{ width: "100%", marginBottom: "1.25cqw" }} />
 
                 {/* CTA Button */}
                 <Button
                   onClick={() =>
                     navigate("/required-info", {
-                      state: { ...location.state, product: "Local SEO" },
+                      state: { ...location.state, product: "Local SEO", requiresSmartSite },
                     })
                   }
                   fullWidth
-                  style={{ padding: "2cqw", fontSize: "1.5cqw", borderRadius: "0.8cqw" }}
+                  style={{ padding: "1.75cqw", fontSize: "1.4cqw", borderRadius: "0.8cqw" }}
                 >
                   Start My Campaign
                 </Button>
