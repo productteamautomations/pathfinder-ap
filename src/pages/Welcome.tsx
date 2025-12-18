@@ -6,11 +6,20 @@ import { useRecommendation } from "@/contexts/RecommendationContext";
 
 export default function Welcome() {
   const navigate = useNavigate();
-  const { fetchRecommendation } = useRecommendation();
+  const { fetchRecommendation, setRecommendation } = useRecommendation();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  const handleNoUrl = () => {
+    setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
+    isTransitioningRef.current = true;
+    transitionProgressRef.current = 0;
+    setTimeout(() => {
+      navigate("/product-recommendation/leadgen");
+    }, 2000);
+  };
 
   const validateUrl = (value: string): boolean => {
     if (!value.trim()) return false;
@@ -358,9 +367,16 @@ export default function Welcome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="glass"
+            className="glass relative"
             style={{ padding: "5cqw", borderRadius: "3cqw" }}
           >
+            <button
+              onClick={handleNoUrl}
+              className="absolute text-deep-blue/50 hover:text-primary transition-colors"
+              style={{ top: "2cqw", right: "2cqw", fontSize: "2cqw" }}
+            >
+              No URL
+            </button>
             <div style={{ display: "flex", flexDirection: "column", gap: "4cqw" }}>
               <div style={{ marginBottom: "2cqw" }}>
                 <h2 className="font-display font-bold text-title" style={{ fontSize: "4.5cqw" }}>
