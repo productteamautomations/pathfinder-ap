@@ -32,7 +32,6 @@ export default function PricingLeadGen() {
   ];
 
   const handleStartTrial = async () => {
-    if (isSubmitting) return;
     setIsSubmitting(true);
 
     const pricingData = {
@@ -43,25 +42,16 @@ export default function PricingLeadGen() {
       contractLength: "6 weeks",
     };
 
-    const payload = buildWebhookPayload(location.state || {}, pricingData);
-
     try {
-      await sendPricingWebhook(payload);
-      toast.success("Trial started successfully!");
-      navigate("/required-info", {
-        state: {
-          ...location.state,
-          ...pricingData,
-        },
-      });
+      await sendPricingWebhook(buildWebhookPayload(location.state || {}, pricingData));
+      toast.success("Trial started!");
+      navigate("/required-info", { state: { ...location.state, ...pricingData } });
     } catch (error) {
-      console.error("Error sending webhook:", error);
-      toast.error("Failed to start trial. Please try again.");
+      toast.error("Something went wrong");
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <div className="min-h-screen flex flex-col bg-background relative">
       <TopographicBackground />
@@ -198,7 +188,7 @@ export default function PricingLeadGen() {
                       £{trialFee.toFixed(2)}
                     </span>
                   </div>
-                  
+
                   {/* SmartSite Addon */}
                   {requiresSmartSite && (
                     <motion.div
@@ -218,12 +208,16 @@ export default function PricingLeadGen() {
                           £{smartSiteFee.toFixed(2)}
                         </span>
                       </div>
-                      <p className="text-muted-foreground" style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}>
-                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
+                      <p
+                        className="text-muted-foreground"
+                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                      >
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate
+                        conversion measurement.
                       </p>
                     </motion.div>
                   )}
-                  
+
                   <div
                     className="flex justify-between items-center border-b border-border/40"
                     style={{ padding: "1cqw 0" }}
