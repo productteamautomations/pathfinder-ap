@@ -15,7 +15,7 @@ export default function PricingLocalSEO() {
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
 
   const requiresSmartSite = recommendation.isBig3 === false;
-  const smartSiteFee = 599.0;
+  const smartSiteFee = 199.0;
 
   const setupFee = 349.0;
   const monthlyFee6 = 299.0;
@@ -212,7 +212,7 @@ export default function PricingLocalSEO() {
                         </span>
                       </div>
                       <p className="text-muted-foreground" style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}>
-                        A conversion-optimised landing page built for accurate tracking
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
                       </p>
                     </motion.div>
                   )}

@@ -13,7 +13,7 @@ export default function PricingLeadGen() {
   const { recommendation } = useRecommendation();
 
   const requiresSmartSite = recommendation.isBig3 === false;
-  const smartSiteFee = 599.0;
+  const smartSiteFee = 199.0;
 
   const trialFee = 649.0;
   const addonTotal = requiresSmartSite ? smartSiteFee : 0;
@@ -184,7 +184,7 @@ export default function PricingLeadGen() {
                         </span>
                       </div>
                       <p className="text-muted-foreground" style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}>
-                        A conversion-optimised landing page built for accurate tracking
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
                       </p>
                     </motion.div>
                   )}
