@@ -11,14 +11,14 @@ export default function Welcome() {
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [noUrl, setNoUrl] = useState(false);
 
-  const handleNoUrl = () => {
-    setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
-    isTransitioningRef.current = true;
-    transitionProgressRef.current = 0;
-    setTimeout(() => {
-      navigate("/product-recommendation/leadgen");
-    }, 2000);
+  const handleNoUrlToggle = () => {
+    setNoUrl(!noUrl);
+    if (!noUrl) {
+      setUrl("");
+      setUrlError("");
+    }
   };
 
   const validateUrl = (value: string): boolean => {
@@ -40,7 +40,7 @@ export default function Welcome() {
     }
   };
 
-  const isValid = name.trim() !== "" && validateUrl(url);
+  const isValid = name.trim() !== "" && (noUrl || validateUrl(url));
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>();
@@ -257,13 +257,21 @@ export default function Welcome() {
   }, []);
 
   const handleContinue = () => {
-    fetchRecommendation(name, url);
-
-    isTransitioningRef.current = true;
-    transitionProgressRef.current = 0;
-    setTimeout(() => {
-      navigate("/fact-finder", { state: { name, url } });
-    }, 2000);
+    if (noUrl) {
+      setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
+      isTransitioningRef.current = true;
+      transitionProgressRef.current = 0;
+      setTimeout(() => {
+        navigate("/product-recommendation/leadgen");
+      }, 2000);
+    } else {
+      fetchRecommendation(name, url);
+      isTransitioningRef.current = true;
+      transitionProgressRef.current = 0;
+      setTimeout(() => {
+        navigate("/fact-finder", { state: { name, url } });
+      }, 2000);
+    }
   };
 
   const inputStyles =
@@ -367,16 +375,9 @@ export default function Welcome() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isLoading ? 0 : 1, y: isLoading ? 20 : 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="glass relative"
+            className="glass"
             style={{ padding: "5cqw", borderRadius: "3cqw" }}
           >
-            <button
-              onClick={handleNoUrl}
-              className="absolute text-deep-blue/50 hover:text-primary transition-colors"
-              style={{ top: "2cqw", right: "2cqw", fontSize: "2cqw" }}
-            >
-              No URL
-            </button>
             <div style={{ display: "flex", flexDirection: "column", gap: "4cqw" }}>
               <div style={{ marginBottom: "2cqw" }}>
                 <h2 className="font-display font-bold text-title" style={{ fontSize: "4.5cqw" }}>
@@ -404,18 +405,28 @@ export default function Welcome() {
               </div>
 
               <div>
-                <label
-                  className="block font-semibold text-[#173340]"
-                  style={{ fontSize: "2.8cqw", marginBottom: "1cqw" }}
-                >
-                  Website URL<span className="text-primary">*</span>
-                </label>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1cqw" }}>
+                  <label
+                    className="font-semibold text-[#173340]"
+                    style={{ fontSize: "2.8cqw" }}
+                  >
+                    Website URL{!noUrl && <span className="text-primary">*</span>}
+                  </label>
+                  <button
+                    onClick={handleNoUrlToggle}
+                    className={`font-medium transition-colors ${noUrl ? 'text-primary' : 'text-deep-blue/40 hover:text-deep-blue/60'}`}
+                    style={{ fontSize: "2.2cqw" }}
+                  >
+                    No URL
+                  </button>
+                </div>
                 <input
                   value={url}
                   onChange={(e) => handleUrlChange(e.target.value)}
-                  placeholder="https://yourwebsite.com"
+                  placeholder={noUrl ? "No website required" : "https://yourwebsite.com"}
                   type="url"
-                  className={inputStyles}
+                  disabled={noUrl}
+                  className={`${inputStyles} ${noUrl ? 'opacity-50 cursor-not-allowed bg-muted/50' : ''}`}
                   style={{ padding: "2cqw", borderRadius: "1.5cqw", fontSize: "2.8cqw" }}
                 />
                 {urlError && (
