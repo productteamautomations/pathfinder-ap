@@ -225,7 +225,14 @@ export default function PricingLSA() {
                 <Button
                   onClick={() =>
                     navigate("/required-info", {
-                      state: { ...location.state, product: "LSAs" },
+                      state: {
+                        ...location.state,
+                        product: "LSA",
+                        requiresSmartSite: false,
+                        initialCost: totalFirstMonth.toFixed(2),
+                        monthlyCost: monthlyAfterVAT.toFixed(2),
+                        contractLength: selectedPlan === "12" ? "12 months" : "6 months",
+                      },
                     })
                   }
                   fullWidth

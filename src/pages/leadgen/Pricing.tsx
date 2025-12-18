@@ -255,7 +255,14 @@ export default function PricingLeadGen() {
                 <Button
                   onClick={() =>
                     navigate("/required-info", {
-                      state: { ...location.state, product: "Lead Generation", requiresSmartSite },
+                      state: {
+                        ...location.state,
+                        product: "LeadGen Trial",
+                        requiresSmartSite,
+                        initialCost: totalWithVAT.toFixed(2),
+                        monthlyCost: "N/A",
+                        contractLength: "6 weeks",
+                      },
                     })
                   }
                   fullWidth
