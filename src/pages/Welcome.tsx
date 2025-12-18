@@ -258,20 +258,18 @@ export default function Welcome() {
 
   const handleContinue = () => {
     if (noUrl) {
+      // Set recommendation directly for no URL flow
       setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
-      isTransitioningRef.current = true;
-      transitionProgressRef.current = 0;
-      setTimeout(() => {
-        navigate("/product-recommendation/leadgen");
-      }, 2000);
     } else {
+      // Normal flow - fetch recommendation from webhook
       fetchRecommendation(name, url);
-      isTransitioningRef.current = true;
-      transitionProgressRef.current = 0;
-      setTimeout(() => {
-        navigate("/fact-finder", { state: { name, url } });
-      }, 2000);
     }
+
+    isTransitioningRef.current = true;
+    transitionProgressRef.current = 0;
+    setTimeout(() => {
+      navigate("/fact-finder", { state: { name, url, noUrl } });
+    }, 2000);
   };
 
   const inputStyles =

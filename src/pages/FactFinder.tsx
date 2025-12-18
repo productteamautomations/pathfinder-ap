@@ -78,6 +78,9 @@ export default function FactFinder() {
   const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
   const hasAttemptedRetry = useRef(false);
 
+  // Check if user selected "No URL" on welcome page
+  const isNoUrlFlow = (location.state as any)?.noUrl === true;
+
   const [monthEstablished, setMonthEstablished] = useState("");
   const [yearEstablished, setYearEstablished] = useState("");
   const [businessGeneration, setBusinessGeneration] = useState<string[]>([]);
@@ -100,8 +103,10 @@ export default function FactFinder() {
     }
   }, [recommendation.isLoading, recommendation.product]);
 
-  // Navigate when recommendation arrives after clicking submit
+  // Navigate when recommendation arrives after clicking submit (only for normal URL flow)
   useEffect(() => {
+    if (isNoUrlFlow) return; // Skip for no URL flow
+    
     if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
@@ -122,10 +127,25 @@ export default function FactFinder() {
         navigate(productRoutes[recommendation.product], { state: newState });
       }
     }
-  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading]);
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading, isNoUrlFlow]);
 
   const handleSubmit = () => {
     if (!isFormValid()) return;
+
+    const newState = {
+      ...location.state,
+      monthEstablished,
+      yearEstablished,
+      businessGeneration,
+      monthlyLeads,
+      hasGMB,
+    };
+
+    // No URL flow - skip webhook wait and go straight to LeadGen
+    if (isNoUrlFlow) {
+      navigate("/product-recommendation/leadgen", { state: newState });
+      return;
+    }
 
     // If recommendation is already available, navigate immediately
     if (recommendation.product) {
@@ -133,15 +153,6 @@ export default function FactFinder() {
         SEO: "/product-recommendation/localseo",
         LeadGen: "/product-recommendation/leadgen",
         LSA: "/product-recommendation/lsa",
-      };
-
-      const newState = {
-        ...location.state,
-        monthEstablished,
-        yearEstablished,
-        businessGeneration,
-        monthlyLeads,
-        hasGMB,
       };
 
       if (productRoutes[recommendation.product]) {
