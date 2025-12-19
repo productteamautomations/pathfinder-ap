@@ -2,6 +2,8 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { PageTransition } from "./PageTransition";
 import { TopographicBackground } from "./TopographicBackground";
+import { ProtectedRoute } from "./ProtectedRoute";
+import Login from "@/pages/Login";
 import Welcome from "@/pages/Welcome";
 import FactFinder from "@/pages/FactFinder";
 import ServiceSelector from "@/pages/ServiceSelector";
@@ -33,22 +35,32 @@ import PricingLSA from "@/pages/lsa/Pricing";
 export function AnimatedRoutes() {
   const location = useLocation();
 
-  // Don't show topographic background on Welcome page
-  const showTopographicBackground = location.pathname !== "/";
+  // Don't show topographic background on Welcome or Login page
+  const showTopographicBackground = location.pathname !== "/" && location.pathname !== "/login";
 
   return (
     <div className="min-h-screen relative bg-background overflow-hidden">
-      {/* Persistent background across all pages except Welcome */}
+      {/* Persistent background across all pages except Welcome and Login */}
       {showTopographicBackground && <TopographicBackground />}
 
       <div className="relative z-10 overflow-hidden">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route
+              path="/login"
+              element={
+                <PageTransition>
+                  <Login />
+                </PageTransition>
+              }
+            />
+            <Route
               path="/"
               element={
                 <PageTransition>
-                  <Welcome />
+                  <ProtectedRoute>
+                    <Welcome />
+                  </ProtectedRoute>
                 </PageTransition>
               }
             />
