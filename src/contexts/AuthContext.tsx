@@ -18,6 +18,21 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+function toAuthUser(session: Session | null): AuthUser | null {
+  if (!session?.user) return null;
+  const u = session.user;
+
+  return {
+    id: u.id,
+    email: u.email ?? (u.user_metadata?.email as string | undefined) ?? null,
+    fullName:
+      (u.user_metadata?.full_name as string | undefined) ??
+      (u.user_metadata?.name as string | undefined) ??
+      (u.user_metadata?.fullName as string | undefined) ??
+      null,
+  };
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -26,17 +41,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (_event, session) => {
         setSession(session);
-        if (session?.user) {
-          setUser({
-            id: session.user.id,
-            email: session.user.email ?? null,
-            fullName: session.user.user_metadata?.full_name ?? session.user.user_metadata?.name ?? null,
-          });
-        } else {
-          setUser(null);
-        }
+        setUser(toAuthUser(session));
         setIsLoading(false);
       }
     );
@@ -44,13 +51,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      if (session?.user) {
-        setUser({
-          id: session.user.id,
-          email: session.user.email ?? null,
-          fullName: session.user.user_metadata?.full_name ?? session.user.user_metadata?.name ?? null,
-        });
-      }
+      setUser(toAuthUser(session));
       setIsLoading(false);
     });
 
