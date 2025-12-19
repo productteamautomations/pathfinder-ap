@@ -273,6 +273,8 @@ export default function Welcome() {
   }, []);
 
   const handleContinue = () => {
+    const startTime = new Date().toISOString();
+    
     if (noUrl) {
       // Set recommendation directly for no URL flow
       setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
@@ -284,7 +286,7 @@ export default function Welcome() {
     isTransitioningRef.current = true;
     transitionProgressRef.current = 0;
     setTimeout(() => {
-      navigate("/fact-finder", { state: { name, url, noUrl } });
+      navigate("/fact-finder", { state: { name, url, noUrl, startTime } });
     }, 2000);
   };
 
