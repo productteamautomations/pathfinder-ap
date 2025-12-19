@@ -5,64 +5,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 import logoGraphic from "@/assets/Logo_graphic.svg";
 
-class WavyLine {
-  points: { x: number; y: number; baseY: number; speed: number; amplitude: number; phase: number }[];
-  color: string;
-  lineWidth: number;
-  private segmentCount: number;
-  private width: number;
-
-  constructor(y: number, color: string, width: number, lineWidth: number) {
-    this.color = color;
-    this.lineWidth = lineWidth;
-    this.width = width;
-    this.segmentCount = 80;
-    this.points = [];
-
-    for (let i = 0; i <= this.segmentCount; i++) {
-      this.points.push({
-        x: (i / this.segmentCount) * width,
-        y: y,
-        baseY: y,
-        speed: 0.5 + Math.random() * 1.0,
-        amplitude: 10 + Math.random() * 30,
-        phase: Math.random() * Math.PI * 2,
-      });
-    }
-  }
-
-  update(time: number, mouseX: number, mouseY: number) {
-    this.points.forEach((point, i) => {
-      const waveOffset = Math.sin(time * point.speed + point.phase + (i * 0.1)) * point.amplitude;
-      const dx = point.x - mouseX;
-      const dy = point.baseY - mouseY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      const maxDistance = 200;
-      const mouseInfluence = Math.max(0, 1 - distance / maxDistance);
-      const mouseOffset = mouseInfluence * 60 * (dy > 0 ? 1 : -1);
-      point.y = point.baseY + waveOffset + mouseOffset;
-    });
-  }
-
-  draw(ctx: CanvasRenderingContext2D, transitionProgress: number) {
-    ctx.beginPath();
-    ctx.moveTo(this.points[0].x, this.points[0].y);
-
-    for (let i = 1; i < this.points.length - 2; i++) {
-      const xc = (this.points[i].x + this.points[i + 1].x) / 2;
-      const yc = (this.points[i].y + this.points[i + 1].y) / 2;
-      ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, xc, yc);
-    }
-
-    ctx.strokeStyle = this.color;
-    ctx.lineWidth = this.lineWidth;
-    ctx.lineCap = "round";
-    ctx.globalAlpha = 1 - transitionProgress;
-    ctx.stroke();
-    ctx.globalAlpha = 1;
-  }
-}
-
 export default function Login() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number | null>(null);
@@ -166,11 +108,7 @@ export default function Login() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-cream">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="flex flex-col items-center gap-4"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex flex-col items-center gap-4">
           <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
           <span className="text-muted-foreground">Loading...</span>
         </motion.div>
