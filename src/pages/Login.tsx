@@ -185,6 +185,16 @@ export default function Login() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-col items-center gap-8"
         >
+          {/* Logo */}
+          <motion.img
+            src={logoGraphic}
+            alt="Add People"
+            className="h-16 w-auto"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+          />
+
           {/* Glass card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -224,10 +234,6 @@ export default function Login() {
                   Continue with Google
                 </span>
               </button>
-
-              <p className="text-xs text-muted-foreground text-center">
-                By signing in, you agree to our terms of service
-              </p>
             </div>
           </motion.div>
         </motion.div>
