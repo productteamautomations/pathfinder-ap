@@ -1,5 +1,7 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, User } from "lucide-react";
 import { ProgressBar } from "./ProgressBar";
+import { useAuth } from "@/contexts/AuthContext";
+
 interface PageHeaderProps {
   onBack?: () => void;
   currentStep?: number;
@@ -7,7 +9,11 @@ interface PageHeaderProps {
   showProgress?: boolean;
   productLabel?: string;
 }
+
 export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel }: PageHeaderProps) {
+  const { user } = useAuth();
+  const firstName = user?.fullName?.split(' ')[0] || '';
+
   return (
     <div
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
@@ -32,8 +38,14 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
               <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
             </div>
           )}
-          {productLabel ? (
-            <div className="text-right" style={{ minWidth: "5vw" }}>
+          <div className="flex items-center" style={{ gap: "1vw", minWidth: "5vw" }}>
+            {firstName && (
+              <div className="flex items-center text-foreground/80" style={{ gap: "0.4vw", fontSize: "0.85vw" }}>
+                <User style={{ width: "1vw", height: "1vw", minWidth: "14px", minHeight: "14px" }} />
+                <span className="font-medium">{firstName}</span>
+              </div>
+            )}
+            {productLabel && (
               <span
                 className="font-semibold text-green-600 bg-green-500/10 rounded-full whitespace-nowrap inline-block"
                 style={{
@@ -43,10 +55,8 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
               >
                 Product: {productLabel}
               </span>
-            </div>
-          ) : (
-            <div style={{ width: "5vw" }} />
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>
