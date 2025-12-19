@@ -8,10 +8,12 @@ import { Check, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingLSA() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -44,7 +46,8 @@ export default function PricingLSA() {
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
     };
 
-    const payload = buildWebhookPayload(location.state || {}, pricingData);
+    const authUser = user ? { fullName: user.fullName, email: user.email } : null;
+    const payload = buildWebhookPayload(location.state || {}, pricingData, authUser);
 
     try {
       await sendPricingWebhook(payload);

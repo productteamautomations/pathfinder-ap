@@ -9,11 +9,13 @@ import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
+  const { user } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -50,7 +52,8 @@ export default function PricingLocalSEO() {
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
     };
 
-    const payload = buildWebhookPayload(location.state || {}, pricingData);
+    const authUser = user ? { fullName: user.fullName, email: user.email } : null;
+    const payload = buildWebhookPayload(location.state || {}, pricingData, authUser);
 
     try {
       await sendPricingWebhook(payload);

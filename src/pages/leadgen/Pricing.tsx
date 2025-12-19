@@ -9,11 +9,13 @@ import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
+  const { user } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const requiresSmartSite = recommendation.isBig3 === false;
@@ -43,7 +45,8 @@ export default function PricingLeadGen() {
     };
 
     try {
-      await sendPricingWebhook(buildWebhookPayload(location.state || {}, pricingData));
+      const authUser = user ? { fullName: user.fullName, email: user.email } : null;
+      await sendPricingWebhook(buildWebhookPayload(location.state || {}, pricingData, authUser));
       toast.success("Trial started!");
       navigate("/required-info", { state: { ...location.state, ...pricingData } });
     } catch (error) {
