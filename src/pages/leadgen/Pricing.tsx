@@ -15,7 +15,7 @@ export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
   const { recommendation } = useRecommendation();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const requiresSmartSite = recommendation.isBig3 === false;
@@ -34,6 +34,19 @@ export default function PricingLeadGen() {
   ];
 
   const handleStartTrial = async () => {
+    if (isSubmitting) return;
+
+    if (isLoading) {
+      toast("Loading your profile...");
+      return;
+    }
+
+    if (!user) {
+      toast.error("Please sign in to continue");
+      navigate("/login");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const pricingData = {
@@ -45,7 +58,7 @@ export default function PricingLeadGen() {
     };
 
     try {
-      const authUser = user ? { fullName: user.fullName, email: user.email } : null;
+      const authUser = { fullName: user.fullName, email: user.email };
       await sendPricingWebhook(buildWebhookPayload(location.state || {}, pricingData, authUser));
       toast.success("Trial started!");
       navigate("/required-info", { state: { ...location.state, ...pricingData } });

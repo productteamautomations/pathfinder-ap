@@ -13,7 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 export default function PricingLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { user, isLoading } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,6 +36,18 @@ export default function PricingLSA() {
 
   const handleStartCampaign = async () => {
     if (isSubmitting) return;
+
+    if (isLoading) {
+      toast("Loading your profile...");
+      return;
+    }
+
+    if (!user) {
+      toast.error("Please sign in to continue");
+      navigate("/login");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const pricingData = {
@@ -46,7 +58,7 @@ export default function PricingLSA() {
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
     };
 
-    const authUser = user ? { fullName: user.fullName, email: user.email } : null;
+    const authUser = { fullName: user.fullName, email: user.email };
     const payload = buildWebhookPayload(location.state || {}, pricingData, authUser);
 
     try {
