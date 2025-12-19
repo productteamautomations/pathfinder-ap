@@ -21,15 +21,25 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 function toAuthUser(session: Session | null): AuthUser | null {
   if (!session?.user) return null;
   const u = session.user;
+  const identityData = (u.identities?.[0]?.identity_data ?? {}) as Record<string, unknown>;
+
+  const email =
+    u.email ??
+    (identityData["email"] as string | undefined) ??
+    ((u.user_metadata?.email as string | undefined) ?? null);
+
+  const fullName =
+    ((u.user_metadata?.full_name as string | undefined) ??
+      (u.user_metadata?.name as string | undefined) ??
+      (u.user_metadata?.fullName as string | undefined) ??
+      (identityData["full_name"] as string | undefined) ??
+      (identityData["name"] as string | undefined) ??
+      null);
 
   return {
     id: u.id,
-    email: u.email ?? (u.user_metadata?.email as string | undefined) ?? null,
-    fullName:
-      (u.user_metadata?.full_name as string | undefined) ??
-      (u.user_metadata?.name as string | undefined) ??
-      (u.user_metadata?.fullName as string | undefined) ??
-      null,
+    email,
+    fullName,
   };
 }
 

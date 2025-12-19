@@ -194,11 +194,13 @@ export function buildWebhookPayload(
     funnelScores = calculateSEOScores(diagnosticAnswers);
   }
 
+  const userFullName = authUser?.fullName || state?.name || "";
+  const userEmail = authUser?.email || "";
+
   return {
     // Auth user data
-    userFullName: authUser?.fullName || "",
-    userEmail: authUser?.email || "",
-
+    userFullName,
+    userEmail,
     // Welcome page data
     name: state?.name || "",
     websiteUrl: state?.noUrl ? "N/A" : state?.url || "",
@@ -239,6 +241,13 @@ export function buildWebhookPayload(
 // Send the webhook
 export async function sendPricingWebhook(payload: ReturnType<typeof buildWebhookPayload>) {
   try {
+    if (import.meta.env.DEV) {
+      console.log("Pricing webhook user fields:", {
+        userFullName: payload.userFullName,
+        userEmail: payload.userEmail,
+      });
+    }
+
     const response = await fetch("https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
