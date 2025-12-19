@@ -1,10 +1,74 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
+import logoGraphic from "@/assets/Logo_graphic.svg";
+
+class WavyLine {
+  points: { x: number; y: number; baseY: number; speed: number; amplitude: number; phase: number }[];
+  color: string;
+  lineWidth: number;
+  private segmentCount: number;
+  private width: number;
+
+  constructor(y: number, color: string, width: number, lineWidth: number) {
+    this.color = color;
+    this.lineWidth = lineWidth;
+    this.width = width;
+    this.segmentCount = 80;
+    this.points = [];
+
+    for (let i = 0; i <= this.segmentCount; i++) {
+      this.points.push({
+        x: (i / this.segmentCount) * width,
+        y: y,
+        baseY: y,
+        speed: 0.5 + Math.random() * 1.0,
+        amplitude: 10 + Math.random() * 30,
+        phase: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  update(time: number, mouseX: number, mouseY: number) {
+    this.points.forEach((point, i) => {
+      const waveOffset = Math.sin(time * point.speed + point.phase + i * 0.1) * point.amplitude;
+      const dx = point.x - mouseX;
+      const dy = point.baseY - mouseY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const maxDistance = 200;
+      const mouseInfluence = Math.max(0, 1 - distance / maxDistance);
+      const mouseOffset = mouseInfluence * 60 * (dy > 0 ? 1 : -1);
+      point.y = point.baseY + waveOffset + mouseOffset;
+    });
+  }
+
+  draw(ctx: CanvasRenderingContext2D, transitionProgress: number) {
+    ctx.beginPath();
+    ctx.moveTo(this.points[0].x, this.points[0].y);
+
+    for (let i = 1; i < this.points.length - 2; i++) {
+      const xc = (this.points[i].x + this.points[i + 1].x) / 2;
+      const yc = (this.points[i].y + this.points[i + 1].y) / 2;
+      ctx.quadraticCurveTo(this.points[i].x, this.points[i].y, xc, yc);
+    }
+
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = this.lineWidth;
+    ctx.lineCap = "round";
+    ctx.globalAlpha = 1 - transitionProgress;
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+}
 
 export default function Login() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const animationRef = useRef<number | null>(null);
+  const linesRef = useRef<WavyLine[]>([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const timeRef = useRef(0);
   const navigate = useNavigate();
   const { user, isLoading, signInWithGoogle } = useAuth();
   const { toast } = useToast();
@@ -15,6 +79,77 @@ export default function Login() {
       navigate("/", { replace: true });
     }
   }, [user, isLoading, navigate]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initLines();
+    };
+
+    const initLines = () => {
+      const lineCount = 7;
+      const colors = [
+        "rgba(231, 122, 91, 0.6)",
+        "rgba(231, 122, 91, 0.4)",
+        "rgba(255, 205, 99, 0.5)",
+        "rgba(231, 122, 91, 0.3)",
+        "rgba(255, 205, 99, 0.4)",
+        "rgba(231, 122, 91, 0.5)",
+        "rgba(255, 205, 99, 0.3)",
+      ];
+
+      linesRef.current = [];
+      for (let i = 0; i < lineCount; i++) {
+        const y = (canvas.height / (lineCount + 1)) * (i + 1);
+        const lineWidth = 2 + Math.random() * 2;
+        linesRef.current.push(new WavyLine(y, colors[i % colors.length], canvas.width, lineWidth));
+      }
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+    };
+
+    const animate = () => {
+      if (!canvas || !ctx) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      timeRef.current += 0.016;
+
+      linesRef.current.forEach((line) => {
+        line.update(timeRef.current, mouseRef.current.x, mouseRef.current.y);
+        line.draw(ctx, 0);
+      });
+
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchmove", handleTouchMove);
+    animate();
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    };
+  }, []);
 
   const handleGoogleSignIn = async () => {
     try {
@@ -41,6 +176,8 @@ export default function Login() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-cream">
+      <canvas ref={canvasRef} className="fixed inset-0 w-full h-full" style={{ zIndex: 0 }} />
+
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -48,16 +185,6 @@ export default function Login() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-col items-center gap-8"
         >
-          {/* Logo */}
-          <motion.img
-            src={logoGraphic}
-            alt="Add People"
-            className="h-16 w-auto"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          />
-
           {/* Glass card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
