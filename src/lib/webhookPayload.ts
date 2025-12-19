@@ -234,6 +234,8 @@ export function buildWebhookPayload(
     monthlyCost: pricingData.monthlyCost === "N/A" ? "N/A" : `£${pricingData.monthlyCost}`,
     contractLength: pricingData.contractLength,
 
+    // Timestamps
+    startTime: state?.startTime || null,
     submittedAt: new Date().toISOString(),
   };
 }
