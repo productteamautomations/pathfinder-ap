@@ -172,6 +172,10 @@ export function buildWebhookPayload(
     monthlyCost: string;
     contractLength: string;
   },
+  authUser?: {
+    fullName: string | null;
+    email: string | null;
+  } | null,
 ) {
   const diagnosticAnswers = state?.diagnosticAnswers || {};
   const isLeadGen = pricingData.product === "LeadGen Trial";
@@ -191,6 +195,10 @@ export function buildWebhookPayload(
   }
 
   return {
+    // Auth user data
+    userFullName: authUser?.fullName || "",
+    userEmail: authUser?.email || "",
+
     // Welcome page data
     name: state?.name || "",
     websiteUrl: state?.noUrl ? "N/A" : state?.url || "",
