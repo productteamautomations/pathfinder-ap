@@ -20,7 +20,7 @@ const benefits = [
 export default function AboutProductLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { session, updateMaxStep } = useRecommendation();
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background relative" style={{ containerType: "size" }}>
       <TopographicBackground />
@@ -228,25 +228,28 @@ export default function AboutProductLSA() {
         >
           <Button
             onClick={() => {
-              const { session, updateMaxStep } = useRecommendation();
-              updateMaxStep(4);
-              const state = location.state as any;
-              const payload = buildPageWebhookPayload(
-                {
-                  sessionId: session.sessionId,
-                  googleId: session.googleId,
-                  googleFullName: session.googleFullName,
-                  googleEmail: session.googleEmail,
-                  startTime: session.startTime,
-                },
-                state || {},
-                null,
-                false,
-                false,
-                { step: 4, totalSteps: 5, maxStep: Math.max(session.maxStep, 4) },
-                { product: "LSA", smartSiteIncluded: false }
-              );
-              sendPageWebhook(payload);
+              try {
+                updateMaxStep(4);
+                const state = location.state as any;
+                const payload = buildPageWebhookPayload(
+                  {
+                    sessionId: session?.sessionId,
+                    googleId: session?.googleId,
+                    googleFullName: session?.googleFullName,
+                    googleEmail: session?.googleEmail,
+                    startTime: session?.startTime,
+                  },
+                  state || {},
+                  null,
+                  false,
+                  false,
+                  { step: 4, totalSteps: 5, maxStep: Math.max(session?.maxStep || 0, 4) },
+                  { product: "LSA", smartSiteIncluded: false }
+                );
+                sendPageWebhook(payload);
+              } catch (e) {
+                console.error("Webhook error:", e);
+              }
               navigate("/about/lsa", { state: location.state });
             }}
             style={{

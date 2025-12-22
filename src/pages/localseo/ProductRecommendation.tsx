@@ -138,7 +138,7 @@ function LocalSEOIllustration() {
 export default function ProductRecommendationLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const { session, updateMaxStep } = useRecommendation();
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
@@ -238,25 +238,28 @@ export default function ProductRecommendationLocalSEO() {
 
                 <Button
                   onClick={() => {
-                    const { session, updateMaxStep } = useRecommendation();
-                    updateMaxStep(3);
-                    const state = location.state as any;
-                    const payload = buildPageWebhookPayload(
-                      {
-                        sessionId: session.sessionId,
-                        googleId: session.googleId,
-                        googleFullName: session.googleFullName,
-                        googleEmail: session.googleEmail,
-                        startTime: session.startTime,
-                      },
-                      state || {},
-                      null,
-                      false,
-                      false,
-                      { step: 3, totalSteps: 8, maxStep: Math.max(session.maxStep, 3) },
-                      { product: "Local SEO", smartSiteIncluded: null }
-                    );
-                    sendPageWebhook(payload);
+                    try {
+                      updateMaxStep(3);
+                      const state = location.state as any;
+                      const payload = buildPageWebhookPayload(
+                        {
+                          sessionId: session?.sessionId,
+                          googleId: session?.googleId,
+                          googleFullName: session?.googleFullName,
+                          googleEmail: session?.googleEmail,
+                          startTime: session?.startTime,
+                        },
+                        state || {},
+                        null,
+                        false,
+                        false,
+                        { step: 3, totalSteps: 8, maxStep: Math.max(session?.maxStep || 0, 3) },
+                        { product: "Local SEO", smartSiteIncluded: null }
+                      );
+                      sendPageWebhook(payload);
+                    } catch (e) {
+                      console.error("Webhook error:", e);
+                    }
                     navigate("/funnel-diagnostic/localseo", { state: location.state });
                   }}
                   style={{ fontSize: "min(1.4cqw, 3cqh)", padding: "1.1cqh 2.4cqw", borderRadius: "0.8cqw" }}

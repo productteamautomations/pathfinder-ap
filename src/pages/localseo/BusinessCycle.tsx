@@ -218,30 +218,34 @@ export default function BusinessCycleLocalSEO() {
   const [iconLoaded, setIconLoaded] = useState(false);
   const [showROIGraph, setShowROIGraph] = useState(false);
   const [graphKey, setGraphKey] = useState(0);
+  const { session, updateMaxStep } = useRecommendation();
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
-      const { session, updateMaxStep } = useRecommendation();
-      updateMaxStep(6);
-      const state = location.state as any;
-      const payload = buildPageWebhookPayload(
-        {
-          sessionId: session.sessionId,
-          googleId: session.googleId,
-          googleFullName: session.googleFullName,
-          googleEmail: session.googleEmail,
-          startTime: session.startTime,
-        },
-        state || {},
-        null,
-        false,
-        false,
-        { step: 6, totalSteps: 8, maxStep: Math.max(session.maxStep, 6) },
-        { product: "Local SEO", smartSiteIncluded: null }
-      );
-      sendPageWebhook(payload);
+      try {
+        updateMaxStep(6);
+        const state = location.state as any;
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session?.sessionId,
+            googleId: session?.googleId,
+            googleFullName: session?.googleFullName,
+            googleEmail: session?.googleEmail,
+            startTime: session?.startTime,
+          },
+          state || {},
+          null,
+          false,
+          false,
+          { step: 6, totalSteps: 8, maxStep: Math.max(session?.maxStep || 0, 6) },
+          { product: "Local SEO", smartSiteIncluded: null }
+        );
+        sendPageWebhook(payload);
+      } catch (e) {
+        console.error("Webhook error:", e);
+      }
       navigate("/about/localseo", { state: location.state });
     }
   };
