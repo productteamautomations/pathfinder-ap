@@ -7,14 +7,14 @@ import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check, Plus, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
-import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation } = useRecommendation();
+  const { recommendation, session } = useRecommendation();
   const { user, isLoading } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -58,17 +58,29 @@ export default function PricingLocalSEO() {
 
     const pricingData = {
       product: "Local SEO",
-      requiresSmartSite,
+      smartSiteIncluded: requiresSmartSite,
       initialCost: totalFirstMonth.toFixed(2),
       monthlyCost: monthlyAfterVAT.toFixed(2),
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
     };
 
-    const authUser = { fullName: user.fullName, email: user.email };
-    const payload = buildWebhookPayload(location.state || {}, pricingData, authUser);
+    // Send end page webhook
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId: session.sessionId,
+        googleId: session.googleId,
+        googleFullName: session.googleFullName,
+        googleEmail: session.googleEmail,
+        startTime: session.startTime,
+      },
+      location.state || {},
+      pricingData,
+      false, // isStartPage
+      true // isEndPage
+    );
 
     try {
-      await sendPricingWebhook(payload);
+      await sendPageWebhook(payload);
       toast.success("Campaign started successfully!");
       navigate("/required-info", {
         state: {

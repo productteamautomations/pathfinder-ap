@@ -6,13 +6,28 @@ interface RecommendationData {
   isBig3: boolean | null;
 }
 
+interface SessionData {
+  sessionId: string | null;
+  startTime: string | null;
+  googleId: string | null;
+  googleFullName: string | null;
+  googleEmail: string | null;
+}
+
 interface RecommendationContextType {
   recommendation: RecommendationData;
+  session: SessionData;
   setRecommendation: (data: RecommendationData) => void;
+  startSession: (googleId: string, fullName: string | null, email: string | null) => string;
+  clearSession: () => void;
   fetchRecommendation: (name: string, websiteUrl: string) => void;
 }
 
 const RecommendationContext = createContext<RecommendationContextType | undefined>(undefined);
+
+function generateSessionId(): string {
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
+}
 
 export function RecommendationProvider({ children }: { children: ReactNode }) {
   const [recommendation, setRecommendation] = useState<RecommendationData>({
@@ -20,6 +35,37 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     isLoading: false,
     isBig3: null,
   });
+
+  const [session, setSession] = useState<SessionData>({
+    sessionId: null,
+    startTime: null,
+    googleId: null,
+    googleFullName: null,
+    googleEmail: null,
+  });
+
+  const startSession = (googleId: string, fullName: string | null, email: string | null): string => {
+    const sessionId = generateSessionId();
+    const startTime = new Date().toISOString();
+    setSession({
+      sessionId,
+      startTime,
+      googleId,
+      googleFullName: fullName,
+      googleEmail: email,
+    });
+    return sessionId;
+  };
+
+  const clearSession = () => {
+    setSession({
+      sessionId: null,
+      startTime: null,
+      googleId: null,
+      googleFullName: null,
+      googleEmail: null,
+    });
+  };
 
   const fetchRecommendation = async (name: string, websiteUrl: string) => {
     setRecommendation({ product: null, isLoading: true, isBig3: null });
@@ -63,7 +109,14 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <RecommendationContext.Provider value={{ recommendation, setRecommendation, fetchRecommendation }}>
+    <RecommendationContext.Provider value={{ 
+      recommendation, 
+      session,
+      setRecommendation, 
+      startSession,
+      clearSession,
+      fetchRecommendation 
+    }}>
       {children}
     </RecommendationContext.Provider>
   );
