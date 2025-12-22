@@ -73,7 +73,8 @@ export default function PricingLSA() {
       pricingData,
       false, // isStartPage
       true, // isEndPage
-      { step: 4, totalSteps: 4 }
+      { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
+      { product: "LSA", smartSiteIncluded: false }
     );
 
     try {
