@@ -6,6 +6,7 @@ import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TrafficGraph } from "@/components/TrafficGraph";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 import LogoGraphic from "@/assets/logo_graphic.svg";
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
@@ -140,15 +141,24 @@ export default function BusinessCycleLeadGen() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
+      const { session, updateMaxStep } = useRecommendation();
+      updateMaxStep(6);
       const state = location.state as any;
-      const sessionInfo = {
-        sessionId: state?.sessionId || null,
-        googleId: state?.googleId || null,
-        googleFullName: state?.googleFullName || null,
-        googleEmail: state?.googleEmail || null,
-        startTime: state?.startTime || null,
-      };
-      const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 5, totalSteps: 7 });
+      const payload = buildPageWebhookPayload(
+        {
+          sessionId: session.sessionId,
+          googleId: session.googleId,
+          googleFullName: session.googleFullName,
+          googleEmail: session.googleEmail,
+          startTime: session.startTime,
+        },
+        state || {},
+        null,
+        false,
+        false,
+        { step: 6, totalSteps: 8, maxStep: Math.max(session.maxStep, 6) },
+        { product: "LeadGen Trial", smartSiteIncluded: null }
+      );
       sendPageWebhook(payload);
       navigate("/about/leadgen", { state: location.state });
     }

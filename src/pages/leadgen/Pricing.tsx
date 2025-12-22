@@ -70,7 +70,8 @@ export default function PricingLeadGen() {
       pricingData,
       false, // isStartPage
       true, // isEndPage
-      { step: 7, totalSteps: 7 }
+      { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
+      { product: "LeadGen Trial", smartSiteIncluded: requiresSmartSite }
     );
 
     try {

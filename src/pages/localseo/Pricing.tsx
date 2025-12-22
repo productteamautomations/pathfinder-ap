@@ -77,7 +77,8 @@ export default function PricingLocalSEO() {
       pricingData,
       false, // isStartPage
       true, // isEndPage
-      { step: 7, totalSteps: 7 }
+      { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
+      { product: "Local SEO", smartSiteIncluded: requiresSmartSite }
     );
 
     try {

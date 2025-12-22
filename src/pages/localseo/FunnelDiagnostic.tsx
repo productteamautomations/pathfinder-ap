@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { ChevronRight, Check } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 // Import question images
 import imgTop10 from "@/assets/seo-top10.svg";
@@ -163,14 +164,23 @@ export default function FunnelDiagnosticLocalSEO() {
         setTimeout(() => {
           const state = location.state as any;
           const newState = { ...state, diagnosticAnswers: newAnswers };
-          const sessionInfo = {
-            sessionId: state?.sessionId || null,
-            googleId: state?.googleId || null,
-            googleFullName: state?.googleFullName || null,
-            googleEmail: state?.googleEmail || null,
-            startTime: state?.startTime || null,
-          };
-          const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: 3, totalSteps: 7 });
+          const { session, updateMaxStep } = useRecommendation();
+          updateMaxStep(4);
+          const payload = buildPageWebhookPayload(
+            {
+              sessionId: session.sessionId,
+              googleId: session.googleId,
+              googleFullName: session.googleFullName,
+              googleEmail: session.googleEmail,
+              startTime: session.startTime,
+            },
+            newState,
+            null,
+            false,
+            false,
+            { step: 4, totalSteps: 8, maxStep: Math.max(session.maxStep, 4) },
+            { product: "Local SEO", smartSiteIncluded: null }
+          );
           sendPageWebhook(payload);
           navigate("/funnel-health/localseo", { state: newState });
         }, 300);
@@ -192,14 +202,23 @@ export default function FunnelDiagnosticLocalSEO() {
       setTimeout(() => {
         const state = location.state as any;
         const newState = { ...state, diagnosticAnswers: answers };
-        const sessionInfo = {
-          sessionId: state?.sessionId || null,
-          googleId: state?.googleId || null,
-          googleFullName: state?.googleFullName || null,
-          googleEmail: state?.googleEmail || null,
-          startTime: state?.startTime || null,
-        };
-        const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: 3, totalSteps: 7 });
+        const { session, updateMaxStep } = useRecommendation();
+        updateMaxStep(4);
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session.sessionId,
+            googleId: session.googleId,
+            googleFullName: session.googleFullName,
+            googleEmail: session.googleEmail,
+            startTime: session.startTime,
+          },
+          newState,
+          null,
+          false,
+          false,
+          { step: 4, totalSteps: 8, maxStep: Math.max(session.maxStep, 4) },
+          { product: "Local SEO", smartSiteIncluded: null }
+        );
         sendPageWebhook(payload);
         navigate("/funnel-health/localseo", { state: newState });
       }, 300);

@@ -300,7 +300,8 @@ export default function Welcome() {
       null,
       true, // isStartPage
       false, // isEndPage
-      { step: null, totalSteps: null } // path not decided yet
+      { step: 1, totalSteps: null, maxStep: 1 }, // Welcome is step 1, totalSteps null as path not decided
+      null // no product yet
     );
     sendPageWebhook(payload);
 
