@@ -74,7 +74,7 @@ function FormField({
 export default function FactFinder() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation, fetchRecommendation } = useRecommendation();
+  const { recommendation, fetchRecommendation, session, updateMaxStep } = useRecommendation();
   const [retryError, setRetryError] = useState(false);
   const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
   const hasAttemptedRetry = useRef(false);
@@ -133,6 +133,9 @@ export default function FactFinder() {
   const handleSubmit = () => {
     if (!isFormValid()) return;
 
+    // Update maxStep to 2 (FactFinder page)
+    updateMaxStep(2);
+
     const state = location.state as any;
     const newState = {
       ...state,
@@ -143,15 +146,22 @@ export default function FactFinder() {
       hasGMB,
     };
 
-    // Send webhook
-    const sessionInfo = {
-      sessionId: state?.sessionId || null,
-      googleId: state?.googleId || null,
-      googleFullName: state?.googleFullName || null,
-      googleEmail: state?.googleEmail || null,
-      startTime: state?.startTime || null,
-    };
-    const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: null, totalSteps: null });
+    // Send webhook with session data from context
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId: session.sessionId,
+        googleId: session.googleId,
+        googleFullName: session.googleFullName,
+        googleEmail: session.googleEmail,
+        startTime: session.startTime,
+      },
+      newState,
+      null,
+      false,
+      false,
+      { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) }, // step 2, totalSteps null as path not decided
+      null // no product yet
+    );
     sendPageWebhook(payload);
 
     // No URL flow - skip webhook wait and go straight to LeadGen

@@ -7,6 +7,7 @@ import { ImprovementCarousel } from "@/components/ImprovementCarousel";
 import { ArrowRight } from "lucide-react";
 import AttentionIcon from "@/assets/attention-icon.svg";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -321,15 +322,24 @@ export default function FunnelHealthLocalSEO() {
   const improvementAreas = getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
 
   const handleContinue = () => {
+    const { session, updateMaxStep } = useRecommendation();
+    updateMaxStep(5);
     const state = location.state as any;
-    const sessionInfo = {
-      sessionId: state?.sessionId || null,
-      googleId: state?.googleId || null,
-      googleFullName: state?.googleFullName || null,
-      googleEmail: state?.googleEmail || null,
-      startTime: state?.startTime || null,
-    };
-    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 4, totalSteps: 7 });
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId: session.sessionId,
+        googleId: session.googleId,
+        googleFullName: session.googleFullName,
+        googleEmail: session.googleEmail,
+        startTime: session.startTime,
+      },
+      state || {},
+      null,
+      false,
+      false,
+      { step: 5, totalSteps: 8, maxStep: Math.max(session.maxStep, 5) },
+      { product: "Local SEO", smartSiteIncluded: null }
+    );
     sendPageWebhook(payload);
     navigate("/business-cycle/localseo", { state: location.state });
   };

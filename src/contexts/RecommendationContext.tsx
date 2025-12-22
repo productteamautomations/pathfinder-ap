@@ -12,6 +12,7 @@ interface SessionData {
   googleId: string | null;
   googleFullName: string | null;
   googleEmail: string | null;
+  maxStep: number;
 }
 
 interface RecommendationContextType {
@@ -20,6 +21,7 @@ interface RecommendationContextType {
   setRecommendation: (data: RecommendationData) => void;
   startSession: (googleId: string, fullName: string | null, email: string | null) => string;
   clearSession: () => void;
+  updateMaxStep: (step: number) => void;
   fetchRecommendation: (name: string, websiteUrl: string) => void;
 }
 
@@ -42,6 +44,7 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     googleId: null,
     googleFullName: null,
     googleEmail: null,
+    maxStep: 0,
   });
 
   const startSession = (googleId: string, fullName: string | null, email: string | null): string => {
@@ -53,6 +56,7 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
       googleId,
       googleFullName: fullName,
       googleEmail: email,
+      maxStep: 1, // Welcome is step 1
     });
     return sessionId;
   };
@@ -64,7 +68,15 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
       googleId: null,
       googleFullName: null,
       googleEmail: null,
+      maxStep: 0,
     });
+  };
+
+  const updateMaxStep = (step: number) => {
+    setSession(prev => ({
+      ...prev,
+      maxStep: Math.max(prev.maxStep, step),
+    }));
   };
 
   const fetchRecommendation = async (name: string, websiteUrl: string) => {
@@ -115,6 +127,7 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
       setRecommendation, 
       startSession,
       clearSession,
+      updateMaxStep,
       fetchRecommendation 
     }}>
       {children}

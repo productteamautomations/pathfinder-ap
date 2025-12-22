@@ -195,10 +195,17 @@ interface PricingInfo {
   contractLength?: string;
 }
 
+// Product info (available from step 2 onwards)
+interface ProductInfo {
+  product?: string | null;
+  smartSiteIncluded?: boolean | null;
+}
+
 // Step tracking
 interface StepInfo {
   step: number | null;
   totalSteps: number | null;
+  maxStep?: number;
 }
 
 // Build the per-page webhook payload
@@ -208,8 +215,11 @@ export function buildPageWebhookPayload(
   pricingInfo: PricingInfo | null,
   isStartPage: boolean,
   isEndPage: boolean,
-  stepInfo: StepInfo = { step: null, totalSteps: null },
+  stepInfo: StepInfo = { step: null, totalSteps: null, maxStep: 0 },
+  productInfo: ProductInfo | null = null,
 ) {
+  // Use maxStep if provided and > 0, otherwise use step
+  const effectiveStep = (stepInfo.maxStep && stepInfo.maxStep > 0) ? stepInfo.maxStep : stepInfo.step;
   const diagnosticAnswers = pageState.diagnosticAnswers || {};
   const productType = pricingInfo?.product || null;
   
@@ -248,8 +258,8 @@ export function buildPageWebhookPayload(
     startPage: isStartPage,
     endPage: isEndPage,
     
-    // Step tracking
-    step: stepInfo.step,
+    // Step tracking - use effectiveStep (maxStep if available, else step)
+    step: effectiveStep,
     totalSteps: stepInfo.totalSteps,
     
     // Client info
@@ -302,8 +312,8 @@ export function buildPageWebhookPayload(
     },
     
     // Pricing data
-    product: pricingInfo?.product || null,
-    smartSiteIncluded: pricingInfo?.smartSiteIncluded ?? null,
+    product: pricingInfo?.product || productInfo?.product || null,
+    smartSiteIncluded: pricingInfo?.smartSiteIncluded ?? productInfo?.smartSiteIncluded ?? null,
     initialCost: pricingInfo?.initialCost ? `£${pricingInfo.initialCost}` : null,
     monthlyCost: pricingInfo?.monthlyCost ? (pricingInfo.monthlyCost === "N/A" ? "N/A" : `£${pricingInfo.monthlyCost}`) : null,
     contractLength: pricingInfo?.contractLength || null,

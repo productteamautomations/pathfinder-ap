@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Check, MapPin, TrendingUp, Users, Star } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 const benefits = [
   "Appear in the top 3 Google Map Pack results",
@@ -237,15 +238,24 @@ export default function ProductRecommendationLocalSEO() {
 
                 <Button
                   onClick={() => {
+                    const { session, updateMaxStep } = useRecommendation();
+                    updateMaxStep(3);
                     const state = location.state as any;
-                    const sessionInfo = {
-                      sessionId: state?.sessionId || null,
-                      googleId: state?.googleId || null,
-                      googleFullName: state?.googleFullName || null,
-                      googleEmail: state?.googleEmail || null,
-                      startTime: state?.startTime || null,
-                    };
-                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 2, totalSteps: 7 });
+                    const payload = buildPageWebhookPayload(
+                      {
+                        sessionId: session.sessionId,
+                        googleId: session.googleId,
+                        googleFullName: session.googleFullName,
+                        googleEmail: session.googleEmail,
+                        startTime: session.startTime,
+                      },
+                      state || {},
+                      null,
+                      false,
+                      false,
+                      { step: 3, totalSteps: 8, maxStep: Math.max(session.maxStep, 3) },
+                      { product: "Local SEO", smartSiteIncluded: null }
+                    );
                     sendPageWebhook(payload);
                     navigate("/funnel-diagnostic/localseo", { state: location.state });
                   }}
