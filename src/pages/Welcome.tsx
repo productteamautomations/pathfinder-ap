@@ -13,10 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 export default function Welcome() {
   const navigate = useNavigate();
-  const { fetchRecommendation, setRecommendation } = useRecommendation();
+  const { fetchRecommendation, setRecommendation, startSession } = useRecommendation();
   const { user, signOut } = useAuth();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
@@ -272,8 +273,11 @@ export default function Welcome() {
     };
   }, []);
 
-  const handleContinue = () => {
-    const startTime = new Date().toISOString();
+  const handleContinue = async () => {
+    if (!user) return;
+    
+    // Start session and get sessionId
+    const sessionId = startSession(user.id, user.fullName, user.email);
     
     if (noUrl) {
       // Set recommendation directly for no URL flow
@@ -283,10 +287,26 @@ export default function Welcome() {
       fetchRecommendation(name, url);
     }
 
+    // Send start page webhook
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId,
+        googleId: user.id,
+        googleFullName: user.fullName,
+        googleEmail: user.email,
+        startTime: new Date().toISOString(),
+      },
+      { name, url, noUrl },
+      null,
+      true, // isStartPage
+      false // isEndPage
+    );
+    sendPageWebhook(payload);
+
     isTransitioningRef.current = true;
     transitionProgressRef.current = 0;
     setTimeout(() => {
-      navigate("/fact-finder", { state: { name, url, noUrl, startTime } });
+      navigate("/fact-finder", { state: { name, url, noUrl } });
     }, 2000);
   };
 

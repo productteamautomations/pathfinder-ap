@@ -1,3 +1,5 @@
+const WEBHOOK_URL = "https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d";
+
 // Format LeadGen diagnostic answers in condensed format
 export function formatLeadGenAnswers(answers: Record<string, string>) {
   const condensed: Record<string, string> = {};
@@ -162,95 +164,153 @@ export function calculateSEOScores(answers: Record<string, string | string[]>) {
   return { trafficScore, conversionScore, leadScore, overallScore };
 }
 
-// Build the complete webhook payload
-export function buildWebhookPayload(
-  state: Record<string, any>,
-  pricingData: {
-    product: string;
-    requiresSmartSite: boolean;
-    initialCost: string;
-    monthlyCost: string;
-    contractLength: string;
-  },
-  authUser?: {
-    fullName: string | null;
-    email: string | null;
-  } | null,
+// Session and tracking data
+interface SessionInfo {
+  sessionId: string | null;
+  googleId: string | null;
+  googleFullName: string | null;
+  googleEmail: string | null;
+  startTime: string | null;
+}
+
+// Full state from location.state
+interface PageState {
+  name?: string;
+  url?: string;
+  noUrl?: boolean;
+  monthEstablished?: string;
+  yearEstablished?: string;
+  businessGeneration?: string[];
+  monthlyLeads?: string;
+  hasGMB?: string;
+  diagnosticAnswers?: Record<string, string | string[]>;
+}
+
+// Pricing data (only filled on pricing page)
+interface PricingInfo {
+  product?: string;
+  smartSiteIncluded?: boolean;
+  initialCost?: string;
+  monthlyCost?: string;
+  contractLength?: string;
+}
+
+// Build the per-page webhook payload
+export function buildPageWebhookPayload(
+  sessionInfo: SessionInfo,
+  pageState: PageState,
+  pricingInfo: PricingInfo | null,
+  isStartPage: boolean,
+  isEndPage: boolean,
 ) {
-  const diagnosticAnswers = state?.diagnosticAnswers || {};
-  const isLeadGen = pricingData.product === "LeadGen Trial";
-  const isSEO = pricingData.product === "Local SEO";
-  const isLSA = pricingData.product === "LSA";
-
-  // Format diagnostic answers
-  let condensedAnswers: Record<string, string> = {};
+  const diagnosticAnswers = pageState.diagnosticAnswers || {};
+  const productType = pricingInfo?.product || null;
+  
+  // Format diagnostic answers based on product type
+  let formattedDiagnosticAnswers: Record<string, string> = {};
   let funnelScores = { trafficScore: 0, conversionScore: 0, leadScore: 0, overallScore: 0 };
-
-  if (isLeadGen) {
-    condensedAnswers = formatLeadGenAnswers(diagnosticAnswers);
-    funnelScores = calculateLeadGenScores(diagnosticAnswers);
-  } else if (isSEO) {
-    condensedAnswers = formatSEOAnswers(diagnosticAnswers);
-    funnelScores = calculateSEOScores(diagnosticAnswers);
+  
+  if (Object.keys(diagnosticAnswers).length > 0) {
+    if (productType === "Local SEO" || productType === "LSA") {
+      formattedDiagnosticAnswers = formatSEOAnswers(diagnosticAnswers);
+      funnelScores = calculateSEOScores(diagnosticAnswers);
+    } else if (productType === "LeadGen Trial") {
+      formattedDiagnosticAnswers = formatLeadGenAnswers(diagnosticAnswers as Record<string, string>);
+      funnelScores = calculateLeadGenScores(diagnosticAnswers as Record<string, string>);
+    } else {
+      // Try to detect based on answer keys
+      const hasLeadGenKeys = 'avgCTR' in diagnosticAnswers || 'avgCPC' in diagnosticAnswers;
+      if (hasLeadGenKeys) {
+        formattedDiagnosticAnswers = formatLeadGenAnswers(diagnosticAnswers as Record<string, string>);
+        funnelScores = calculateLeadGenScores(diagnosticAnswers as Record<string, string>);
+      } else {
+        formattedDiagnosticAnswers = formatSEOAnswers(diagnosticAnswers);
+        funnelScores = calculateSEOScores(diagnosticAnswers);
+      }
+    }
   }
 
-  const userFullName = authUser?.fullName || state?.name || "";
-  const userEmail = authUser?.email || "";
-
   return {
-    // Auth user data
-    userFullName,
-    userEmail,
-    // Welcome page data
-    name: state?.name || "",
-    websiteUrl: state?.noUrl ? "N/A" : state?.url || "",
-
-    // FactFinder data
+    // Session identifiers
+    sessionId: sessionInfo.sessionId || null,
+    googleId: sessionInfo.googleId || null,
+    googleFullName: sessionInfo.googleFullName || null,
+    googleEmail: sessionInfo.googleEmail || null,
+    
+    // Page markers
+    startPage: isStartPage,
+    endPage: isEndPage,
+    
+    // Client info
+    clientName: pageState.name || null,
+    websiteUrl: pageState.noUrl ? "N/A" : (pageState.url || null),
+    
+    // Fact finder data
     factFinder: {
-      monthEstablished: state?.monthEstablished || "",
-      yearEstablished: state?.yearEstablished || "",
-      businessGeneration: state?.businessGeneration || [],
-      monthlyLeads: state?.monthlyLeads || "",
-      hasGMB: state?.hasGMB || "",
+      monthEstablished: pageState.monthEstablished || null,
+      yearEstablished: pageState.yearEstablished || null,
+      businessGeneration: pageState.businessGeneration?.length ? pageState.businessGeneration : null,
+      monthlyLeads: pageState.monthlyLeads || null,
+      hasGMB: pageState.hasGMB || null,
     },
-
+    
     // Diagnostic answers (condensed format)
-    diagnosticAnswers: condensedAnswers,
-
+    diagnosticAnswers: Object.keys(formattedDiagnosticAnswers).length > 0 ? {
+      CTR: formattedDiagnosticAnswers["CTR"] || null,
+      Tracking: formattedDiagnosticAnswers["Tracking"] || null,
+      CPC: formattedDiagnosticAnswers["CPC"] || null,
+      CPA: formattedDiagnosticAnswers["CPA"] || null,
+      CR: formattedDiagnosticAnswers["CR"] || null,
+      "CTA Visible without scrolling?": formattedDiagnosticAnswers["CTA Visible without scrolling?"] || null,
+      "Dedicated service pages?": formattedDiagnosticAnswers["Dedicated service pages?"] || null,
+      "Lead management system": formattedDiagnosticAnswers["Lead management system"] || null,
+      "Average response time": formattedDiagnosticAnswers["Average response time"] || null,
+    } : {
+      CTR: null,
+      Tracking: null,
+      CPC: null,
+      CPA: null,
+      CR: null,
+      "CTA Visible without scrolling?": null,
+      "Dedicated service pages?": null,
+      "Lead management system": null,
+      "Average response time": null,
+    },
+    
     // Funnel scores
-    funnelScores: isLSA
-      ? null
-      : {
-          traffic: `${funnelScores.trafficScore}%`,
-          conversions: `${funnelScores.conversionScore}%`,
-          leadManagement: `${funnelScores.leadScore}%`,
-          overall: `${funnelScores.overallScore}%`,
-        },
-
+    funnelScores: Object.keys(diagnosticAnswers).length > 0 ? {
+      traffic: `${funnelScores.trafficScore}%`,
+      conversions: `${funnelScores.conversionScore}%`,
+      leadManagement: `${funnelScores.leadScore}%`,
+      overall: `${funnelScores.overallScore}%`,
+    } : {
+      traffic: null,
+      conversions: null,
+      leadManagement: null,
+      overall: null,
+    },
+    
     // Pricing data
-    product: pricingData.product,
-    smartSiteIncluded: pricingData.requiresSmartSite,
-    initialCost: `£${pricingData.initialCost}`,
-    monthlyCost: pricingData.monthlyCost === "N/A" ? "N/A" : `£${pricingData.monthlyCost}`,
-    contractLength: pricingData.contractLength,
-
+    product: pricingInfo?.product || null,
+    smartSiteIncluded: pricingInfo?.smartSiteIncluded ?? null,
+    initialCost: pricingInfo?.initialCost ? `£${pricingInfo.initialCost}` : null,
+    monthlyCost: pricingInfo?.monthlyCost ? (pricingInfo.monthlyCost === "N/A" ? "N/A" : `£${pricingInfo.monthlyCost}`) : null,
+    contractLength: pricingInfo?.contractLength || null,
+    
     // Timestamps
-    startTime: state?.startTime || null,
-    submittedAt: new Date().toISOString(),
+    startTime: sessionInfo.startTime || null,
+    timestamp: new Date().toISOString(),
   };
 }
 
-// Send the webhook
-export async function sendPricingWebhook(payload: ReturnType<typeof buildWebhookPayload>) {
+// Send the per-page webhook
+export async function sendPageWebhook(payload: ReturnType<typeof buildPageWebhookPayload>) {
   try {
     if (import.meta.env.DEV) {
-      console.log("Pricing webhook user fields:", {
-        userFullName: payload.userFullName,
-        userEmail: payload.userEmail,
-      });
+      console.log("Page webhook payload:", JSON.stringify(payload, null, 2));
     }
 
-    const response = await fetch("https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d", {
+    const response = await fetch(WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -260,6 +320,6 @@ export async function sendPricingWebhook(payload: ReturnType<typeof buildWebhook
     return response;
   } catch (error) {
     console.error("Webhook error:", error);
-    throw error;
+    // Don't throw - we don't want to block navigation if webhook fails
   }
 }

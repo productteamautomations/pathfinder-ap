@@ -7,14 +7,14 @@ import { TopographicBackground } from "@/components/TopographicBackground";
 import { Check, Clock, Plus, Loader2 } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { useRecommendation } from "@/contexts/RecommendationContext";
-import { buildWebhookPayload, sendPricingWebhook } from "@/lib/webhookPayload";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 
 export default function PricingLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation } = useRecommendation();
+  const { recommendation, session } = useRecommendation();
   const { user, isLoading } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,15 +51,29 @@ export default function PricingLeadGen() {
 
     const pricingData = {
       product: "LeadGen Trial",
-      requiresSmartSite,
+      smartSiteIncluded: requiresSmartSite,
       initialCost: totalWithVAT.toFixed(2),
       monthlyCost: "N/A",
       contractLength: "6 weeks",
     };
 
+    // Send end page webhook
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId: session.sessionId,
+        googleId: session.googleId,
+        googleFullName: session.googleFullName,
+        googleEmail: session.googleEmail,
+        startTime: session.startTime,
+      },
+      location.state || {},
+      pricingData,
+      false, // isStartPage
+      true // isEndPage
+    );
+
     try {
-      const authUser = { fullName: user.fullName, email: user.email };
-      await sendPricingWebhook(buildWebhookPayload(location.state || {}, pricingData, authUser));
+      await sendPageWebhook(payload);
       toast.success("Trial started!");
       navigate("/required-info", { state: { ...location.state, ...pricingData } });
     } catch (error) {
