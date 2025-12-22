@@ -80,18 +80,18 @@ export default function PricingLSA() {
     try {
       await sendPageWebhook(payload);
       toast.success("Campaign started successfully!");
-      navigate("/required-info", {
-        state: {
-          ...location.state,
-          ...pricingData,
-        },
-      });
     } catch (error) {
-      console.error("Error sending webhook:", error);
-      toast.error("Failed to start campaign. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+      console.error("Webhook error:", error);
+      // Continue anyway - navigation is more important than tracking
     }
+    
+    navigate("/required-info", {
+      state: {
+        ...location.state,
+        ...pricingData,
+      },
+    });
+    setIsSubmitting(false);
   };
 
   return (

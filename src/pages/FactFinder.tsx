@@ -146,23 +146,27 @@ export default function FactFinder() {
       hasGMB,
     };
 
-    // Send webhook with session data from context
-    const payload = buildPageWebhookPayload(
-      {
-        sessionId: session.sessionId,
-        googleId: session.googleId,
-        googleFullName: session.googleFullName,
-        googleEmail: session.googleEmail,
-        startTime: session.startTime,
-      },
-      newState,
-      null,
-      false,
-      false,
-      { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) }, // step 2, totalSteps null as path not decided
-      null // no product yet
-    );
-    sendPageWebhook(payload);
+    // Send webhook with session data from context - wrapped in try-catch so navigation always works
+    try {
+      const payload = buildPageWebhookPayload(
+        {
+          sessionId: session.sessionId,
+          googleId: session.googleId,
+          googleFullName: session.googleFullName,
+          googleEmail: session.googleEmail,
+          startTime: session.startTime,
+        },
+        newState,
+        null,
+        false,
+        false,
+        { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
+        null
+      );
+      sendPageWebhook(payload);
+    } catch (e) {
+      console.error("Webhook error:", e);
+    }
 
     // No URL flow - skip webhook wait and go straight to LeadGen
     if (isNoUrlFlow) {

@@ -50,14 +50,17 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
   const startSession = (googleId: string, fullName: string | null, email: string | null): string => {
     const sessionId = generateSessionId();
     const startTime = new Date().toISOString();
-    setSession({
+    const newSession = {
       sessionId,
       startTime,
       googleId,
       googleFullName: fullName,
       googleEmail: email,
       maxStep: 1, // Welcome is step 1
-    });
+    };
+    setSession(newSession);
+    // Log session creation for debugging
+    console.log("Session started:", newSession);
     return sessionId;
   };
 
