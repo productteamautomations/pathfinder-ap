@@ -169,24 +169,28 @@ export default function AboutAddPeopleLeadGen() {
                 </div>
                 <Button
                   onClick={() => {
-                    updateMaxStep(5);
-                    const state = location.state as any;
-                    const payload = buildPageWebhookPayload(
-                      {
-                        sessionId: session.sessionId,
-                        googleId: session.googleId,
-                        googleFullName: session.googleFullName,
-                        googleEmail: session.googleEmail,
-                        startTime: session.startTime,
-                      },
-                      state || {},
-                      null,
-                      false,
-                      false,
-                      { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
-                      { product: "LSA", smartSiteIncluded: false }
-                    );
-                    sendPageWebhook(payload);
+                    try {
+                      updateMaxStep(5);
+                      const state = location.state as any;
+                      const payload = buildPageWebhookPayload(
+                        {
+                          sessionId: session.sessionId,
+                          googleId: session.googleId,
+                          googleFullName: session.googleFullName,
+                          googleEmail: session.googleEmail,
+                          startTime: session.startTime,
+                        },
+                        state || {},
+                        null,
+                        false,
+                        false,
+                        { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
+                        { product: "LSA", smartSiteIncluded: false }
+                      );
+                      sendPageWebhook(payload);
+                    } catch (e) {
+                      console.error("Webhook error:", e);
+                    }
                     navigate("/pricing/lsa", { state: location.state });
                   }}
                   className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center font-semibold whitespace-nowrap"

@@ -276,8 +276,9 @@ export default function Welcome() {
   const handleContinue = async () => {
     if (!user) return;
     
-    // Start session and get sessionId
+    // Start session and get sessionId - this also sets startTime in context
     const sessionId = startSession(user.id, user.fullName, user.email);
+    const startTime = new Date().toISOString();
     
     if (noUrl) {
       // Set recommendation directly for no URL flow
@@ -287,23 +288,27 @@ export default function Welcome() {
       fetchRecommendation(name, url);
     }
 
-    // Send start page webhook
-    const payload = buildPageWebhookPayload(
-      {
-        sessionId,
-        googleId: user.id,
-        googleFullName: user.fullName,
-        googleEmail: user.email,
-        startTime: new Date().toISOString(),
-      },
-      { name, url, noUrl },
-      null,
-      true, // isStartPage
-      false, // isEndPage
-      { step: 1, totalSteps: null, maxStep: 1 }, // Welcome is step 1, totalSteps null as path not decided
-      null // no product yet
-    );
-    sendPageWebhook(payload);
+    // Send start page webhook with session data
+    try {
+      const payload = buildPageWebhookPayload(
+        {
+          sessionId,
+          googleId: user.id,
+          googleFullName: user.fullName,
+          googleEmail: user.email,
+          startTime,
+        },
+        { name, url, noUrl },
+        null,
+        true, // isStartPage
+        false, // isEndPage
+        { step: 1, totalSteps: null, maxStep: 1 },
+        null
+      );
+      sendPageWebhook(payload);
+    } catch (e) {
+      console.error("Webhook error:", e);
+    }
 
     isTransitioningRef.current = true;
     transitionProgressRef.current = 0;

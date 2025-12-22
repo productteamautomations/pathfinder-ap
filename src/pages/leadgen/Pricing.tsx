@@ -77,12 +77,13 @@ export default function PricingLeadGen() {
     try {
       await sendPageWebhook(payload);
       toast.success("Trial started!");
-      navigate("/required-info", { state: { ...location.state, ...pricingData } });
     } catch (error) {
-      toast.error("Something went wrong");
-    } finally {
-      setIsSubmitting(false);
+      console.error("Webhook error:", error);
+      // Continue anyway - navigation is more important than tracking
     }
+    
+    navigate("/required-info", { state: { ...location.state, ...pricingData } });
+    setIsSubmitting(false);
   };
   return (
     <div className="min-h-screen flex flex-col bg-background relative">

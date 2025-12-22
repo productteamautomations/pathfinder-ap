@@ -169,24 +169,28 @@ export default function AboutAddPeopleLocalSEO() {
                 </div>
                 <Button
                   onClick={() => {
-                    updateMaxStep(7);
-                    const state = location.state as any;
-                    const payload = buildPageWebhookPayload(
-                      {
-                        sessionId: session.sessionId,
-                        googleId: session.googleId,
-                        googleFullName: session.googleFullName,
-                        googleEmail: session.googleEmail,
-                        startTime: session.startTime,
-                      },
-                      state || {},
-                      null,
-                      false,
-                      false,
-                      { step: 7, totalSteps: 8, maxStep: Math.max(session.maxStep, 7) },
-                      { product: "Local SEO", smartSiteIncluded: null }
-                    );
-                    sendPageWebhook(payload);
+                    try {
+                      updateMaxStep(7);
+                      const state = location.state as any;
+                      const payload = buildPageWebhookPayload(
+                        {
+                          sessionId: session.sessionId,
+                          googleId: session.googleId,
+                          googleFullName: session.googleFullName,
+                          googleEmail: session.googleEmail,
+                          startTime: session.startTime,
+                        },
+                        state || {},
+                        null,
+                        false,
+                        false,
+                        { step: 7, totalSteps: 8, maxStep: Math.max(session.maxStep, 7) },
+                        { product: "Local SEO", smartSiteIncluded: null }
+                      );
+                      sendPageWebhook(payload);
+                    } catch (e) {
+                      console.error("Webhook error:", e);
+                    }
                     navigate("/pricing/localseo", { state: location.state });
                   }}
                   className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center font-semibold whitespace-nowrap"
