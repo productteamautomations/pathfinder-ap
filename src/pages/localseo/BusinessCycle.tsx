@@ -6,6 +6,7 @@ import { Button } from "@/components/Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { TrafficGraph } from "@/components/TrafficGraph";
 import LogoGraphic from "@/assets/logo_graphic.svg";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 // Using existing images as placeholders - replace with SEO-specific images when available
 import VisibilityMainImage from "@/assets/visibility-main-image.svg";
 import EngagementMainImage from "@/assets/engagement-main.svg";
@@ -221,6 +222,16 @@ export default function BusinessCycleLocalSEO() {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
     } else {
+      const state = location.state as any;
+      const sessionInfo = {
+        sessionId: state?.sessionId || null,
+        googleId: state?.googleId || null,
+        googleFullName: state?.googleFullName || null,
+        googleEmail: state?.googleEmail || null,
+        startTime: state?.startTime || null,
+      };
+      const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+      sendPageWebhook(payload);
       navigate("/about/localseo", { state: location.state });
     }
   };

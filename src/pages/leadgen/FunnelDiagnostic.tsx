@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { ChevronRight } from "lucide-react";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 // Import question images
 import imgCTR from "@/assets/leadgen-ctr.svg";
@@ -146,12 +147,18 @@ export default function FunnelDiagnostic() {
 
     if (isLastQuestion) {
       setTimeout(() => {
-        navigate("/funnel-health/leadgen", {
-          state: {
-            ...location.state,
-            diagnosticAnswers: newAnswers,
-          },
-        });
+        const state = location.state as any;
+        const newState = { ...state, diagnosticAnswers: newAnswers };
+        const sessionInfo = {
+          sessionId: state?.sessionId || null,
+          googleId: state?.googleId || null,
+          googleFullName: state?.googleFullName || null,
+          googleEmail: state?.googleEmail || null,
+          startTime: state?.startTime || null,
+        };
+        const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false);
+        sendPageWebhook(payload);
+        navigate("/funnel-health/leadgen", { state: newState });
       }, 300);
     } else {
       setTimeout(() => {

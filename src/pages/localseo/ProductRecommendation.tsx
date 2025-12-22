@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Check, MapPin, TrendingUp, Users, Star } from "lucide-react";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const benefits = [
   "Appear in the top 3 Google Map Pack results",
@@ -235,7 +236,19 @@ export default function ProductRecommendationLocalSEO() {
                 </div>
 
                 <Button
-                  onClick={() => navigate("/funnel-diagnostic/localseo", { state: location.state })}
+                  onClick={() => {
+                    const state = location.state as any;
+                    const sessionInfo = {
+                      sessionId: state?.sessionId || null,
+                      googleId: state?.googleId || null,
+                      googleFullName: state?.googleFullName || null,
+                      googleEmail: state?.googleEmail || null,
+                      startTime: state?.startTime || null,
+                    };
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    sendPageWebhook(payload);
+                    navigate("/funnel-diagnostic/localseo", { state: location.state });
+                  }}
                   style={{ fontSize: "min(1.4cqw, 3cqh)", padding: "1.1cqh 2.4cqw", borderRadius: "0.8cqw" }}
                 >
                   Start Your Assessment

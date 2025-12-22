@@ -6,6 +6,7 @@ import { FunnelVisualization } from "@/components/FunnelVisualization";
 import { ImprovementCarousel } from "@/components/ImprovementCarousel";
 import { ArrowRight } from "lucide-react";
 import AttentionIcon from "@/assets/attention-icon.svg";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 // Orange accent motif component
 function OrangeAccent() {
@@ -320,6 +321,16 @@ export default function FunnelHealthLocalSEO() {
   const improvementAreas = getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
 
   const handleContinue = () => {
+    const state = location.state as any;
+    const sessionInfo = {
+      sessionId: state?.sessionId || null,
+      googleId: state?.googleId || null,
+      googleFullName: state?.googleFullName || null,
+      googleEmail: state?.googleEmail || null,
+      startTime: state?.startTime || null,
+    };
+    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+    sendPageWebhook(payload);
     navigate("/business-cycle/localseo", { state: location.state });
   };
 

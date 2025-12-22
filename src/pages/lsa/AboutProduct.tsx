@@ -7,6 +7,7 @@ import { TopographicBackground } from "@/components/TopographicBackground";
 import TheProblemImage from "@/assets/lsa-the-problem.svg";
 import TheSolutionImage from "@/assets/lsa-the-solution.svg";
 import TheBenefitImage from "@/assets/lsa-the-benefit.svg";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const benefits = [
   "More ready-to-book customers",
@@ -225,7 +226,19 @@ export default function AboutProductLSA() {
           }}
         >
           <Button
-            onClick={() => navigate("/about/lsa", { state: location.state })}
+            onClick={() => {
+              const state = location.state as any;
+              const sessionInfo = {
+                sessionId: state?.sessionId || null,
+                googleId: state?.googleId || null,
+                googleFullName: state?.googleFullName || null,
+                googleEmail: state?.googleEmail || null,
+                startTime: state?.startTime || null,
+              };
+              const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+              sendPageWebhook(payload);
+              navigate("/about/lsa", { state: location.state });
+            }}
             style={{
               fontSize: "1.5cqw",
               paddingLeft: "3.5cqw",

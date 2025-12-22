@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { Check, BadgeCheck, Shield, Star, Phone } from "lucide-react";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const benefits = [
   "Google Guaranteed badge builds instant trust",
@@ -235,7 +236,19 @@ export default function ProductRecommendationLSA() {
                 </div>
 
                 <Button
-                  onClick={() => navigate("/about-product/lsa", { state: location.state })}
+                  onClick={() => {
+                    const state = location.state as any;
+                    const sessionInfo = {
+                      sessionId: state?.sessionId || null,
+                      googleId: state?.googleId || null,
+                      googleFullName: state?.googleFullName || null,
+                      googleEmail: state?.googleEmail || null,
+                      startTime: state?.startTime || null,
+                    };
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    sendPageWebhook(payload);
+                    navigate("/about-product/lsa", { state: location.state });
+                  }}
                   style={{ fontSize: "min(1.4cqw, 3cqh)", padding: "1.1cqh 2.4cqw", borderRadius: "0.8cqw" }}
                 >
                   Continue

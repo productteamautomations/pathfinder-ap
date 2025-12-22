@@ -7,6 +7,7 @@ import { Star } from "lucide-react";
 import mainImage from "@/assets/Main-image-about-us.svg";
 import altrinchamMap from "@/assets/altrinham-map.svg";
 import austinMap from "@/assets/austin-map.svg";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const seoReviews = [
   {
@@ -165,7 +166,19 @@ export default function AboutAddPeopleLocalSEO() {
                   </div>
                 </div>
                 <Button
-                  onClick={() => navigate("/pricing/localseo", { state: location.state })}
+                  onClick={() => {
+                    const state = location.state as any;
+                    const sessionInfo = {
+                      sessionId: state?.sessionId || null,
+                      googleId: state?.googleId || null,
+                      googleFullName: state?.googleFullName || null,
+                      googleEmail: state?.googleEmail || null,
+                      startTime: state?.startTime || null,
+                    };
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    sendPageWebhook(payload);
+                    navigate("/pricing/localseo", { state: location.state });
+                  }}
                   className="bg-[#173340] text-white hover:bg-[#173340]/90 flex items-center font-semibold whitespace-nowrap"
                   style={{ gap: "0.5cqw", fontSize: "1.1cqw", padding: "1cqw 2cqw", borderRadius: "0.7cqw" }}
                 >
