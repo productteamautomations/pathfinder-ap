@@ -8,6 +8,7 @@ import TheProblemImage from "@/assets/lsa-the-problem.svg";
 import TheSolutionImage from "@/assets/lsa-the-solution.svg";
 import TheBenefitImage from "@/assets/lsa-the-benefit.svg";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 
 const benefits = [
   "More ready-to-book customers",
@@ -227,15 +228,24 @@ export default function AboutProductLSA() {
         >
           <Button
             onClick={() => {
+              const { session, updateMaxStep } = useRecommendation();
+              updateMaxStep(4);
               const state = location.state as any;
-              const sessionInfo = {
-                sessionId: state?.sessionId || null,
-                googleId: state?.googleId || null,
-                googleFullName: state?.googleFullName || null,
-                googleEmail: state?.googleEmail || null,
-                startTime: state?.startTime || null,
-              };
-              const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 2, totalSteps: 4 });
+              const payload = buildPageWebhookPayload(
+                {
+                  sessionId: session.sessionId,
+                  googleId: session.googleId,
+                  googleFullName: session.googleFullName,
+                  googleEmail: session.googleEmail,
+                  startTime: session.startTime,
+                },
+                state || {},
+                null,
+                false,
+                false,
+                { step: 4, totalSteps: 5, maxStep: Math.max(session.maxStep, 4) },
+                { product: "LSA", smartSiteIncluded: false }
+              );
               sendPageWebhook(payload);
               navigate("/about/lsa", { state: location.state });
             }}
