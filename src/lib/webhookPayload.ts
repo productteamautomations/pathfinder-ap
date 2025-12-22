@@ -195,6 +195,12 @@ interface PricingInfo {
   contractLength?: string;
 }
 
+// Step tracking
+interface StepInfo {
+  step: number | null;
+  totalSteps: number | null;
+}
+
 // Build the per-page webhook payload
 export function buildPageWebhookPayload(
   sessionInfo: SessionInfo,
@@ -202,6 +208,7 @@ export function buildPageWebhookPayload(
   pricingInfo: PricingInfo | null,
   isStartPage: boolean,
   isEndPage: boolean,
+  stepInfo: StepInfo = { step: null, totalSteps: null },
 ) {
   const diagnosticAnswers = pageState.diagnosticAnswers || {};
   const productType = pricingInfo?.product || null;
@@ -240,6 +247,10 @@ export function buildPageWebhookPayload(
     // Page markers
     startPage: isStartPage,
     endPage: isEndPage,
+    
+    // Step tracking
+    step: stepInfo.step,
+    totalSteps: stepInfo.totalSteps,
     
     // Client info
     clientName: pageState.name || null,

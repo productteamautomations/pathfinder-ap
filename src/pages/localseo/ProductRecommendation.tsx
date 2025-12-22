@@ -245,7 +245,7 @@ export default function ProductRecommendationLocalSEO() {
                       googleEmail: state?.googleEmail || null,
                       startTime: state?.startTime || null,
                     };
-                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 2, totalSteps: 7 });
                     sendPageWebhook(payload);
                     navigate("/funnel-diagnostic/localseo", { state: location.state });
                   }}

@@ -151,7 +151,7 @@ export default function FactFinder() {
       googleEmail: state?.googleEmail || null,
       startTime: state?.startTime || null,
     };
-    const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false);
+    const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: null, totalSteps: null });
     sendPageWebhook(payload);
 
     // No URL flow - skip webhook wait and go straight to LeadGen

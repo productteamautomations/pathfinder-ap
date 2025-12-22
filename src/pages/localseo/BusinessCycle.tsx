@@ -230,7 +230,7 @@ export default function BusinessCycleLocalSEO() {
         googleEmail: state?.googleEmail || null,
         startTime: state?.startTime || null,
       };
-      const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+      const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 5, totalSteps: 7 });
       sendPageWebhook(payload);
       navigate("/about/localseo", { state: location.state });
     }
