@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 import { Loader2, AlertCircle } from "lucide-react";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const generationOptions = [
   "None",
@@ -132,14 +133,26 @@ export default function FactFinder() {
   const handleSubmit = () => {
     if (!isFormValid()) return;
 
+    const state = location.state as any;
     const newState = {
-      ...location.state,
+      ...state,
       monthEstablished,
       yearEstablished,
       businessGeneration,
       monthlyLeads,
       hasGMB,
     };
+
+    // Send webhook
+    const sessionInfo = {
+      sessionId: state?.sessionId || null,
+      googleId: state?.googleId || null,
+      googleFullName: state?.googleFullName || null,
+      googleEmail: state?.googleEmail || null,
+      startTime: state?.startTime || null,
+    };
+    const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false);
+    sendPageWebhook(payload);
 
     // No URL flow - skip webhook wait and go straight to LeadGen
     if (isNoUrlFlow) {
@@ -168,7 +181,6 @@ export default function FactFinder() {
     }
 
     // No recommendation available - retry the webhook
-    const state = location.state as any;
     const name = state?.name || "";
     const websiteUrl = state?.url || "";
 
