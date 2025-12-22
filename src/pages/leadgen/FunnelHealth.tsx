@@ -294,6 +294,7 @@ function getImprovementAreas(
 export default function FunnelHealthLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { session, updateMaxStep } = useRecommendation();
 
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
@@ -302,25 +303,28 @@ export default function FunnelHealthLeadGen() {
   const improvementAreas = getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
 
   const handleContinue = () => {
-    const { session, updateMaxStep } = useRecommendation();
-    updateMaxStep(5);
-    const state = location.state as any;
-    const payload = buildPageWebhookPayload(
-      {
-        sessionId: session.sessionId,
-        googleId: session.googleId,
-        googleFullName: session.googleFullName,
-        googleEmail: session.googleEmail,
-        startTime: session.startTime,
-      },
-      state || {},
-      null,
-      false,
-      false,
-      { step: 5, totalSteps: 8, maxStep: Math.max(session.maxStep, 5) },
-      { product: "LeadGen Trial", smartSiteIncluded: null }
-    );
-    sendPageWebhook(payload);
+    try {
+      updateMaxStep(5);
+      const state = location.state as any;
+      const payload = buildPageWebhookPayload(
+        {
+          sessionId: session?.sessionId,
+          googleId: session?.googleId,
+          googleFullName: session?.googleFullName,
+          googleEmail: session?.googleEmail,
+          startTime: session?.startTime,
+        },
+        state || {},
+        null,
+        false,
+        false,
+        { step: 5, totalSteps: 8, maxStep: Math.max(session?.maxStep || 0, 5) },
+        { product: "LeadGen Trial", smartSiteIncluded: null }
+      );
+      sendPageWebhook(payload);
+    } catch (e) {
+      console.error("Webhook error:", e);
+    }
     navigate("/business-cycle/leadgen", { state: location.state });
   };
 

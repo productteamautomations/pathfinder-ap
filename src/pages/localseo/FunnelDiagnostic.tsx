@@ -126,6 +126,7 @@ const questions: Question[] = [
 export default function FunnelDiagnosticLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { session, updateMaxStep } = useRecommendation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -162,27 +163,33 @@ export default function FunnelDiagnosticLocalSEO() {
 
       if (isLastQuestion) {
         setTimeout(() => {
-          const state = location.state as any;
-          const newState = { ...state, diagnosticAnswers: newAnswers };
-          const { session, updateMaxStep } = useRecommendation();
-          updateMaxStep(4);
-          const payload = buildPageWebhookPayload(
-            {
-              sessionId: session.sessionId,
-              googleId: session.googleId,
-              googleFullName: session.googleFullName,
-              googleEmail: session.googleEmail,
-              startTime: session.startTime,
-            },
-            newState,
-            null,
-            false,
-            false,
-            { step: 4, totalSteps: 8, maxStep: Math.max(session.maxStep, 4) },
-            { product: "Local SEO", smartSiteIncluded: null }
-          );
-          sendPageWebhook(payload);
-          navigate("/funnel-health/localseo", { state: newState });
+          try {
+            const state = location.state as any;
+            const newState = { ...state, diagnosticAnswers: newAnswers };
+            updateMaxStep(4);
+            const payload = buildPageWebhookPayload(
+              {
+                sessionId: session?.sessionId,
+                googleId: session?.googleId,
+                googleFullName: session?.googleFullName,
+                googleEmail: session?.googleEmail,
+                startTime: session?.startTime,
+              },
+              newState,
+              null,
+              false,
+              false,
+              { step: 4, totalSteps: 8, maxStep: Math.max(session?.maxStep || 0, 4) },
+              { product: "Local SEO", smartSiteIncluded: null }
+            );
+            sendPageWebhook(payload);
+            navigate("/funnel-health/localseo", { state: newState });
+          } catch (e) {
+            console.error("Webhook error:", e);
+            const state = location.state as any;
+            const newState = { ...state, diagnosticAnswers: newAnswers };
+            navigate("/funnel-health/localseo", { state: newState });
+          }
         }, 300);
       } else {
         setTimeout(() => {
