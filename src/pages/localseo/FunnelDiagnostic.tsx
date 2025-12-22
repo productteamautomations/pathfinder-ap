@@ -170,7 +170,7 @@ export default function FunnelDiagnosticLocalSEO() {
             googleEmail: state?.googleEmail || null,
             startTime: state?.startTime || null,
           };
-          const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false);
+          const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: 3, totalSteps: 7 });
           sendPageWebhook(payload);
           navigate("/funnel-health/localseo", { state: newState });
         }, 300);
@@ -199,7 +199,7 @@ export default function FunnelDiagnosticLocalSEO() {
           googleEmail: state?.googleEmail || null,
           startTime: state?.startTime || null,
         };
-        const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false);
+        const payload = buildPageWebhookPayload(sessionInfo, newState, null, false, false, { step: 3, totalSteps: 7 });
         sendPageWebhook(payload);
         navigate("/funnel-health/localseo", { state: newState });
       }, 300);

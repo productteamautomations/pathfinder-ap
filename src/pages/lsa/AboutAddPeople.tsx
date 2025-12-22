@@ -175,7 +175,7 @@ export default function AboutAddPeopleLeadGen() {
                       googleEmail: state?.googleEmail || null,
                       startTime: state?.startTime || null,
                     };
-                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 3, totalSteps: 4 });
                     sendPageWebhook(payload);
                     navigate("/pricing/lsa", { state: location.state });
                   }}

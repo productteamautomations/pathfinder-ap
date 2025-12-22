@@ -175,7 +175,7 @@ export default function AboutAddPeopleLocalSEO() {
                       googleEmail: state?.googleEmail || null,
                       startTime: state?.startTime || null,
                     };
-                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 6, totalSteps: 7 });
                     sendPageWebhook(payload);
                     navigate("/pricing/localseo", { state: location.state });
                   }}

@@ -72,7 +72,8 @@ export default function PricingLSA() {
       location.state || {},
       pricingData,
       false, // isStartPage
-      true // isEndPage
+      true, // isEndPage
+      { step: 4, totalSteps: 4 }
     );
 
     try {

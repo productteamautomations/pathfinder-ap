@@ -299,7 +299,8 @@ export default function Welcome() {
       { name, url, noUrl },
       null,
       true, // isStartPage
-      false // isEndPage
+      false, // isEndPage
+      { step: null, totalSteps: null } // path not decided yet
     );
     sendPageWebhook(payload);
 

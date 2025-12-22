@@ -245,7 +245,7 @@ export default function ProductRecommendationLSA() {
                       googleEmail: state?.googleEmail || null,
                       startTime: state?.startTime || null,
                     };
-                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false);
+                    const payload = buildPageWebhookPayload(sessionInfo, state || {}, null, false, false, { step: 1, totalSteps: 4 });
                     sendPageWebhook(payload);
                     navigate("/about-product/lsa", { state: location.state });
                   }}

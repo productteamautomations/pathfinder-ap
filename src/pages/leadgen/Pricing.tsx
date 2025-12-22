@@ -69,7 +69,8 @@ export default function PricingLeadGen() {
       location.state || {},
       pricingData,
       false, // isStartPage
-      true // isEndPage
+      true, // isEndPage
+      { step: 7, totalSteps: 7 }
     );
 
     try {
