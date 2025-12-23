@@ -29,7 +29,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
   };
 
   const handleGoHome = () => {
-    navigate("/welcome");
+    navigate("/");
   };
 
   return (
@@ -37,25 +37,34 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       style={{ height: "7.3vh" }}
     >
-      <div className="max-w-7xl mx-auto h-full" style={{ padding: "0 2vw" }}>
+      <div className="max-w-7xl mx-auto h-full relative" style={{ padding: "0 2vw" }}>
         <div className="flex items-center justify-between h-full">
-          {onBack ? (
-            <button
-              onClick={onBack}
-              className="text-foreground/70 hover:text-foreground transition-colors flex items-center font-medium"
-              style={{ gap: "0.5vw", fontSize: "1vw", minWidth: "5vw" }}
-            >
-              <ArrowLeft style={{ width: "1.25vw", height: "1.25vw", minWidth: "16px", minHeight: "16px" }} />
-              Back
-            </button>
-          ) : (
-            <div style={{ width: "5vw" }} />
-          )}
-          {showProgress && currentStep && totalSteps && (
-            <div className="flex-1 flex justify-center" style={{ maxWidth: "28vw", margin: "0 auto" }}>
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-            </div>
-          )}
+          {/* Left: Back button */}
+          <div style={{ minWidth: "5vw" }}>
+            {onBack ? (
+              <button
+                onClick={onBack}
+                className="text-foreground/70 hover:text-foreground transition-colors flex items-center font-medium"
+                style={{ gap: "0.5vw", fontSize: "1vw" }}
+              >
+                <ArrowLeft style={{ width: "1.25vw", height: "1.25vw", minWidth: "16px", minHeight: "16px" }} />
+                Back
+              </button>
+            ) : (
+              <div style={{ width: "5vw" }} />
+            )}
+          </div>
+
+          {/* Center: Progress bar (absolutely positioned for true centering) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            {showProgress && currentStep && totalSteps && (
+              <div style={{ width: "28vw" }}>
+                <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+              </div>
+            )}
+          </div>
+
+          {/* Right: Product label + Profile */}
           <div className="flex items-center" style={{ gap: "1vw", minWidth: "5vw" }}>
             {productLabel && (
               <span
