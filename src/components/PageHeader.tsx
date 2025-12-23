@@ -1,5 +1,15 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, User, LogOut, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "./ProgressBar";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface PageHeaderProps {
   onBack?: () => void;
@@ -10,6 +20,17 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel }: PageHeaderProps) {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/login");
+  };
+
+  const handleGoHome = () => {
+    navigate("/welcome");
+  };
 
   return (
     <div
@@ -35,8 +56,8 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
               <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
             </div>
           )}
-          {productLabel ? (
-            <div className="text-right" style={{ minWidth: "5vw" }}>
+          <div className="flex items-center" style={{ gap: "1vw", minWidth: "5vw" }}>
+            {productLabel && (
               <span
                 className="font-semibold text-green-600 bg-green-500/10 rounded-full whitespace-nowrap inline-block"
                 style={{
@@ -46,10 +67,34 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
               >
                 Product: {productLabel}
               </span>
-            </div>
-          ) : (
-            <div style={{ width: "5vw" }} />
-          )}
+            )}
+            {user && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="w-8 h-8 rounded-full bg-background/80 backdrop-blur-sm border border-border/30 flex items-center justify-center hover:bg-background hover:shadow-md transition-all duration-200">
+                    <User className="w-4 h-4 text-foreground/70" />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 z-50 bg-background">
+                  <DropdownMenuLabel className="font-normal">
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user.fullName || 'User'}</p>
+                      <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleGoHome} className="cursor-pointer">
+                    <Home className="mr-2 h-4 w-4" />
+                    Home
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+          </div>
         </div>
       </div>
     </div>

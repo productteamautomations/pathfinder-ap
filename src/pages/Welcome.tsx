@@ -4,31 +4,17 @@ import { Button } from "@/components/Button";
 import { useNavigate } from "react-router-dom";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { User, LogOut } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 export default function Welcome() {
   const navigate = useNavigate();
   const { fetchRecommendation, setRecommendation, startSession } = useRecommendation();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [urlError, setUrlError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [noUrl, setNoUrl] = useState(false);
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/login");
-  };
 
   const handleNoUrlToggle = () => {
     setNoUrl(!noUrl);
@@ -359,31 +345,6 @@ export default function Welcome() {
         style={{ zIndex: 1, backgroundColor: "#f7f5f2" }}
       />
 
-      {/* Profile dropdown - top right */}
-      {!isLoading && user && (
-        <div className="fixed top-4 right-4 z-30">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-sm border border-border/30 flex items-center justify-center hover:bg-white hover:shadow-md transition-all duration-200">
-                <User className="w-5 h-5 text-foreground/70" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{user.fullName || 'User'}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
-                <LogOut className="mr-2 h-4 w-4" />
-                Sign out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
 
       <AnimatePresence>
         {isLoading && (
