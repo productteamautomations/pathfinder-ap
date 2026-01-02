@@ -67,12 +67,12 @@ export default function RequiredInfo() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="w-full"
+                  className="w-full h-full"
                 >
                   <h3 className="text-2xl font-display font-bold text-title mb-8">Website Login Details</h3>
 
                   {/* Submit Button */}
-                  <Button onClick={handleSubmit} disabled={!isFormValid} fullWidth>
+                  <Button onClick={handleSubmit} fullWidth>
                     Complete Setup
                   </Button>
 
