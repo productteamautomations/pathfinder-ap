@@ -125,7 +125,7 @@ export default function RequiredInfo() {
                   {/* Back Button */}
                   <button
                     onClick={() => navigate(-1)}
-                    className="mt-8 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
+                    className="mt-4 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-3 group"
                   >
                     <div className="w-10 h-10 rounded-full bg-white border border-border/50 flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:border-primary/30 transition-all">
                       <ChevronRight className="w-4 h-4 text-foreground rotate-180" />
