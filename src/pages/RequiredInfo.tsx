@@ -50,25 +50,15 @@ export default function RequiredInfo() {
             >
               <div className="grid md:grid-cols-2 min-h-[70vh]">
                 {/* Left Side - Monday.com Form */}
-                <div className="p-8 md:p-12 flex flex-col justify-center bg-gradient-to-br from-white to-muted/20">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="w-full"
-                  >
-                    <iframe 
-                      src="https://forms.monday.com/forms/embed/84d8599d1fcda18d4201ff15669c2435?r=euc1" 
-                      width="100%" 
-                      height="500" 
-                      style={{ 
-                        border: 0, 
-                        boxShadow: "5px 5px 56px 0px rgba(0,0,0,0.25)",
-                        borderRadius: "1rem"
-                      }}
-                      title="Client Details Form"
-                    />
-                  </motion.div>
+                <div className="flex flex-col bg-gradient-to-br from-white to-muted/20">
+                  <iframe 
+                    src="https://forms.monday.com/forms/embed/84d8599d1fcda18d4201ff15669c2435?r=euc1" 
+                    width="100%" 
+                    height="100%"
+                    className="min-h-[70vh]"
+                    style={{ border: 0 }}
+                    title="Client Details Form"
+                  />
                 </div>
 
                 {/* Right Side - Login Details */}
