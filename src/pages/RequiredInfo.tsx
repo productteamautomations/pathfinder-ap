@@ -48,7 +48,7 @@ export default function RequiredInfo() {
             transition={{ duration: 0.5 }}
             className="bg-white rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.1),0_8px_25px_rgba(0,0,0,0.06)] overflow-hidden"
           >
-            <div className="grid md:grid-cols-2 min-h-[60vh]">
+            <div className="grid md:grid-cols-2 min-h-[70vh]">
               {/* Left Side - Monday.com Form */}
               <div className="flex flex-col bg-gradient-to-br from-white to-muted/20">
                 <iframe
@@ -62,7 +62,7 @@ export default function RequiredInfo() {
               </div>
 
               {/* Right Side - Login Details */}
-              <div className="p-12 md:p-16 lg:p-20 flex flex-col justify-center bg-muted/30 border-l border-border/20">
+              <div className="px-12 py-8 md:px-16 md:py-10 lg:px-20 lg:py-12 flex flex-col justify-center bg-muted/30 border-l border-border/20">
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
