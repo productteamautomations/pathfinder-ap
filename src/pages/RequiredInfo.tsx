@@ -4,12 +4,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
-import { Eye, EyeOff, ChevronRight } from "lucide-react";
+import { Eye, EyeOff, ChevronRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useRecommendation } from "@/contexts/RecommendationContext";
+import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 export default function RequiredInfo() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { session } = useRecommendation();
   const state = location.state as Record<string, any> | null;
 
   const product = state?.product || "Unknown";
@@ -20,12 +23,53 @@ export default function RequiredInfo() {
   const [password, setPassword] = useState("");
   const [loginUrl, setLoginUrl] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isFormValid = username && password && loginUrl;
 
-  const handleSubmit = () => {
-    toast.success("Campaign setup complete! Thank you for your information.");
-    navigate("/");
+  const handleSubmit = async () => {
+    if (isSubmitting || !isFormValid) return;
+
+    setIsSubmitting(true);
+
+    // Build webhook payload with login details
+    const payload = buildPageWebhookPayload(
+      {
+        sessionId: session.sessionId,
+        googleId: session.googleId,
+        googleFullName: session.googleFullName,
+        googleEmail: session.googleEmail,
+        startTime: session.startTime,
+      },
+      state || {},
+      null,
+      false, // isStartPage
+      true, // isEndPage
+      { step: totalSteps, totalSteps: totalSteps, maxStep: Math.max(session.maxStep, totalSteps) },
+      { product: product, smartSiteIncluded: state?.smartSiteIncluded ?? null }
+    );
+
+    // Add the login details directly to the payload
+    const payloadWithLogin = {
+      ...payload,
+      websiteLoginDetails: {
+        username,
+        password,
+        loginUrl,
+      },
+    };
+
+    try {
+      await sendPageWebhook(payloadWithLogin as any);
+      toast.success("Campaign setup complete! Thank you for your information.");
+      navigate("/");
+    } catch (error) {
+      console.error("Webhook error:", error);
+      toast.success("Campaign setup complete! Thank you for your information.");
+      navigate("/");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -114,8 +158,15 @@ export default function RequiredInfo() {
                   </div>
 
                   {/* Submit Button */}
-                  <Button onClick={handleSubmit} disabled={!isFormValid} fullWidth>
-                    Complete Setup
+                  <Button onClick={handleSubmit} disabled={!isFormValid || isSubmitting} fullWidth>
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Processing...
+                      </span>
+                    ) : (
+                      "Complete Setup"
+                    )}
                   </Button>
 
                   <p className="text-xs text-muted-foreground text-center mt-4">
