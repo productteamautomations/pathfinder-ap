@@ -161,7 +161,7 @@ export default function FactFinder() {
         false,
         false,
         { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-        null
+        recommendation.product ? { product: recommendation.product, smartSiteIncluded: null } : null
       );
       sendPageWebhook(payload);
     } catch (e) {
