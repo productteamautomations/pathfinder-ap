@@ -78,6 +78,7 @@ export default function FactFinder() {
   const [retryError, setRetryError] = useState(false);
   const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
   const hasAttemptedRetry = useRef(false);
+  const hasSetProductWebhook = useRef(false);
 
   // Check if user selected "No URL" on welcome page
   const isNoUrlFlow = (location.state as any)?.noUrl === true;
@@ -104,10 +105,48 @@ export default function FactFinder() {
     }
   }, [recommendation.isLoading, recommendation.product]);
 
+  // Send webhook when product becomes available after button click
+  useEffect(() => {
+    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading && !hasSetProductWebhook.current) {
+      hasSetProductWebhook.current = true;
+
+      const newState = {
+        ...location.state,
+        monthEstablished,
+        yearEstablished,
+        businessGeneration,
+        monthlyLeads,
+        hasGMB,
+      };
+
+      // Send webhook with product information
+      try {
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session.sessionId,
+            googleId: session.googleId,
+            googleFullName: session.googleFullName,
+            googleEmail: session.googleEmail,
+            startTime: session.startTime,
+          },
+          newState,
+          null,
+          false,
+          false,
+          { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
+          { product: recommendation.product, smartSiteIncluded: null },
+        );
+        sendPageWebhook(payload);
+      } catch (e) {
+        console.error("Webhook error:", e);
+      }
+    }
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading]);
+
   // Navigate when recommendation arrives after clicking submit (only for normal URL flow)
   useEffect(() => {
     if (isNoUrlFlow) return; // Skip for no URL flow
-    
+
     if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
@@ -161,7 +200,7 @@ export default function FactFinder() {
         false,
         false,
         { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-        recommendation.product ? { product: recommendation.product, smartSiteIncluded: null } : null
+        recommendation.product ? { product: recommendation.product, smartSiteIncluded: null } : null,
       );
       sendPageWebhook(payload);
     } catch (e) {
