@@ -88,13 +88,22 @@ export default function FactFinder() {
   const [businessGeneration, setBusinessGeneration] = useState<string[]>([]);
   const [monthlyLeads, setMonthlyLeads] = useState("");
   const [hasGMB, setHasGMB] = useState<string>("");
+  const [isVatRegistered, setIsVatRegistered] = useState<string>("");
 
   const toggleGeneration = (option: string) => {
     setBusinessGeneration((prev) => (prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]));
   };
 
   const isFormValid = () => {
-    return monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB;
+    return monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB && isVatRegistered;
+  };
+
+  // Determine the effective product based on VAT registration
+  const getEffectiveProduct = (product: string | null) => {
+    if (product === "LSA" && isVatRegistered === "No") {
+      return "SEO";
+    }
+    return product;
   };
 
   // Watch for when loading finishes after a retry attempt
@@ -117,7 +126,10 @@ export default function FactFinder() {
         businessGeneration,
         monthlyLeads,
         hasGMB,
+        isVatRegistered,
       };
+
+      const effectiveProduct = getEffectiveProduct(recommendation.product);
 
       // Send webhook with product information
       try {
@@ -134,7 +146,7 @@ export default function FactFinder() {
           false,
           false,
           { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-          { product: recommendation.product, smartSiteIncluded: null },
+          { product: effectiveProduct, smartSiteIncluded: null },
         );
         sendPageWebhook(payload);
       } catch (e) {
@@ -148,6 +160,8 @@ export default function FactFinder() {
     if (isNoUrlFlow) return; // Skip for no URL flow
 
     if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
+      const effectiveProduct = getEffectiveProduct(recommendation.product);
+      
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
         LeadGen: "/product-recommendation/leadgen",
@@ -161,13 +175,14 @@ export default function FactFinder() {
         businessGeneration,
         monthlyLeads,
         hasGMB,
+        isVatRegistered,
       };
 
-      if (productRoutes[recommendation.product]) {
-        navigate(productRoutes[recommendation.product], { state: newState });
+      if (effectiveProduct && productRoutes[effectiveProduct]) {
+        navigate(productRoutes[effectiveProduct], { state: newState });
       }
     }
-  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading, isNoUrlFlow]);
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading, isNoUrlFlow, isVatRegistered]);
 
   const handleSubmit = () => {
     if (!isFormValid()) return;
@@ -183,7 +198,10 @@ export default function FactFinder() {
       businessGeneration,
       monthlyLeads,
       hasGMB,
+      isVatRegistered,
     };
+
+    const effectiveProduct = getEffectiveProduct(recommendation.product);
 
     // Send webhook with session data from context - wrapped in try-catch so navigation always works
     try {
@@ -200,7 +218,7 @@ export default function FactFinder() {
         false,
         false,
         { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-        recommendation.product ? { product: recommendation.product, smartSiteIncluded: null } : null,
+        effectiveProduct ? { product: effectiveProduct, smartSiteIncluded: null } : null,
       );
       sendPageWebhook(payload);
     } catch (e) {
@@ -221,8 +239,8 @@ export default function FactFinder() {
         LSA: "/product-recommendation/lsa",
       };
 
-      if (productRoutes[recommendation.product]) {
-        navigate(productRoutes[recommendation.product], { state: newState });
+      if (effectiveProduct && productRoutes[effectiveProduct]) {
+        navigate(productRoutes[effectiveProduct], { state: newState });
       }
       return;
     }
@@ -371,6 +389,26 @@ export default function FactFinder() {
                         onClick={() => setHasGMB(option)}
                         className={`flex-1 border-2 font-medium transition-all duration-200 ${
                           hasGMB === option
+                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                        }`}
+                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </FormField>
+
+                <FormField label="Are you VAT registered?" required>
+                  <div className="flex" style={{ gap: "0.8cqw" }}>
+                    {["Yes", "No"].map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setIsVatRegistered(option)}
+                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
+                          isVatRegistered === option
                             ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                             : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                         }`}
