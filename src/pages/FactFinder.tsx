@@ -444,12 +444,18 @@ export default function FactFinder() {
 
             {/* Submit Row with VAT toggle */}
             <div className="flex items-center justify-between border-t border-border/20" style={{ paddingTop: "2cqw" }}>
-              {/* VAT Toggle - small inline */}
-              <div className="flex items-center" style={{ gap: "1cqw" }}>
-                <span className="font-medium text-foreground" style={{ fontSize: "1.2cqw" }}>
+              {/* VAT Toggle - matching section style */}
+              <div className="flex items-center" style={{ gap: "0.8cqw" }}>
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "2cqw", height: "2cqw", fontSize: "1cqw" }}
+                >
+                  4
+                </span>
+                <span className="font-semibold tracking-wider text-muted-foreground uppercase" style={{ fontSize: "1.1cqw" }}>
                   Are you VAT registered? <span className="text-primary">*</span>
                 </span>
-                <div className="flex" style={{ gap: "0.5cqw" }}>
+                <div className="flex" style={{ gap: "0.5cqw", marginLeft: "0.5cqw" }}>
                   {["Yes", "No"].map((option) => (
                     <button
                       key={option}
