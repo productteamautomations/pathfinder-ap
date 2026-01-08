@@ -400,25 +400,6 @@ export default function FactFinder() {
                   </div>
                 </FormField>
 
-                <FormField label="Are you VAT registered?" required>
-                  <div className="flex" style={{ gap: "0.8cqw" }}>
-                    {["Yes", "No"].map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setIsVatRegistered(option)}
-                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
-                          isVatRegistered === option
-                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                        }`}
-                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </FormField>
               </div>
             </div>
 
@@ -461,36 +442,63 @@ export default function FactFinder() {
               </div>
             </div>
 
-            {/* Submit Button */}
-            <div className="flex flex-col items-end border-t border-border/20" style={{ paddingTop: "2cqw" }}>
-              <Button
-                onClick={handleSubmit}
-                disabled={!isFormValid() || isWaitingForRecommendation}
-                style={{ fontSize: "1.4cqw", padding: "1.3cqw 3.5cqw", borderRadius: "0.8cqw" }}
-              >
-                <span className="flex items-center" style={{ gap: "0.8cqw" }}>
-                  {isWaitingForRecommendation ? (
-                    <>
-                      <Loader2 style={{ width: "1.4cqw", height: "1.4cqw" }} className="animate-spin" />
-                      Analyzing...
-                    </>
-                  ) : (
-                    "Continue"
-                  )}
+            {/* Submit Row with VAT toggle */}
+            <div className="flex items-center justify-between border-t border-border/20" style={{ paddingTop: "2cqw" }}>
+              {/* VAT Toggle - small inline */}
+              <div className="flex items-center" style={{ gap: "1cqw" }}>
+                <span className="font-medium text-foreground" style={{ fontSize: "1.2cqw" }}>
+                  Are you VAT registered? <span className="text-primary">*</span>
                 </span>
-              </Button>
+                <div className="flex" style={{ gap: "0.5cqw" }}>
+                  {["Yes", "No"].map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => setIsVatRegistered(option)}
+                      className={`border-2 font-medium transition-all duration-200 ${
+                        isVatRegistered === option
+                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                      }`}
+                      style={{ padding: "0.6cqw 1.2cqw", borderRadius: "0.8cqw", fontSize: "1.2cqw" }}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-              {showError && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center text-destructive"
-                  style={{ gap: "0.8cqw", fontSize: "1.3cqw", marginTop: "1.2cqw" }}
+              {/* Continue Button */}
+              <div className="flex flex-col items-end">
+                <Button
+                  onClick={handleSubmit}
+                  disabled={!isFormValid() || isWaitingForRecommendation}
+                  style={{ fontSize: "1.4cqw", padding: "1.3cqw 3.5cqw", borderRadius: "0.8cqw" }}
                 >
-                  <AlertCircle style={{ width: "1.4cqw", height: "1.4cqw" }} />
-                  <span>Unable to get recommendation. Please try again.</span>
-                </motion.div>
-              )}
+                  <span className="flex items-center" style={{ gap: "0.8cqw" }}>
+                    {isWaitingForRecommendation ? (
+                      <>
+                        <Loader2 style={{ width: "1.4cqw", height: "1.4cqw" }} className="animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      "Continue"
+                    )}
+                  </span>
+                </Button>
+
+                {showError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center text-destructive"
+                    style={{ gap: "0.8cqw", fontSize: "1.3cqw", marginTop: "1.2cqw" }}
+                  >
+                    <AlertCircle style={{ width: "1.4cqw", height: "1.4cqw" }} />
+                    <span>Unable to get recommendation. Please try again.</span>
+                  </motion.div>
+                )}
+              </div>
             </div>
           </div>
         </motion.div>
