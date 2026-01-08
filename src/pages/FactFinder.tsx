@@ -95,7 +95,9 @@ export default function FactFinder() {
   };
 
   const isFormValid = () => {
-    return monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB && isVatRegistered;
+    return (
+      monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB && isVatRegistered
+    );
   };
 
   // Determine the effective product based on VAT registration
@@ -161,7 +163,7 @@ export default function FactFinder() {
 
     if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
       const effectiveProduct = getEffectiveProduct(recommendation.product);
-      
+
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
         LeadGen: "/product-recommendation/leadgen",
@@ -399,7 +401,6 @@ export default function FactFinder() {
                     ))}
                   </div>
                 </FormField>
-
               </div>
             </div>
 
@@ -452,8 +453,11 @@ export default function FactFinder() {
                 >
                   4
                 </span>
-                <span className="font-semibold tracking-wider text-muted-foreground uppercase" style={{ fontSize: "1.1cqw" }}>
-                  Are you VAT registered? <span className="text-primary">*</span>
+                <span
+                  className="font-semibold tracking-wider text-muted-foreground uppercase"
+                  style={{ fontSize: "1.1cqw" }}
+                >
+                  Are you VAT-registered or a limited company? <span className="text-primary">*</span>
                 </span>
                 <div className="flex" style={{ gap: "0.5cqw", marginLeft: "0.5cqw" }}>
                   {["Yes", "No"].map((option) => (
