@@ -328,84 +328,104 @@ export default function FactFinder() {
           </div>
 
           {/* Form Grid */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2.5cqw" }}>
-            {/* Section 1: Timeline */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
-              <h3
-                className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
-                style={{ fontSize: "1.1cqw", gap: "0.8cqw" }}
-              >
-                <span
-                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "2cqw", height: "2cqw", fontSize: "1cqw" }}
+          <div style={{ display: "flex", flexDirection: "column", gap: "1.8cqw" }}>
+            {/* Row 1: Timeline + Service Area */}
+            <div className="grid md:grid-cols-2" style={{ gap: "2cqw" }}>
+              {/* Section 1: Timeline */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
+                <h3
+                  className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                  style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
                 >
-                  1
-                </span>
-                Timeline
-              </h3>
-              <div className="grid md:grid-cols-2" style={{ gap: "1.8cqw", paddingLeft: "2.8cqw" }}>
-                <FormField label="Business trading date" required>
-                  <div className="grid grid-cols-2" style={{ gap: "1.2cqw" }}>
-                    <input
-                      type="number"
-                      min="1"
-                      max="12"
-                      placeholder="Month"
-                      value={monthEstablished}
-                      onChange={(e) => setMonthEstablished(e.target.value)}
-                      className={inputStyles}
-                      style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
-                    />
-                    <input
-                      type="number"
-                      min="1900"
-                      max={new Date().getFullYear()}
-                      placeholder="Year"
-                      value={yearEstablished}
-                      onChange={(e) => setYearEstablished(e.target.value)}
-                      className={inputStyles}
-                      style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
-                    />
-                  </div>
-                </FormField>
+                  <span
+                    className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                    style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
+                  >
+                    1
+                  </span>
+                  Timeline
+                </h3>
+                <div style={{ paddingLeft: "2.2cqw" }}>
+                  <FormField label="Business trading date" required>
+                    <div className="grid grid-cols-2" style={{ gap: "0.8cqw" }}>
+                      <input
+                        type="number"
+                        min="1"
+                        max="12"
+                        placeholder="Month"
+                        value={monthEstablished}
+                        onChange={(e) => setMonthEstablished(e.target.value)}
+                        className={inputStyles}
+                        style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
+                      />
+                      <input
+                        type="number"
+                        min="1900"
+                        max={new Date().getFullYear()}
+                        placeholder="Year"
+                        value={yearEstablished}
+                        onChange={(e) => setYearEstablished(e.target.value)}
+                        className={inputStyles}
+                        style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
+                      />
+                    </div>
+                  </FormField>
+                </div>
+              </div>
 
-                <FormField label="What radius do you cover?" required>
-                  <div className="flex" style={{ gap: "0.8cqw" }}>
-                    {radiusOptions.map((option) => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setRadiusCovered(option)}
-                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
-                          radiusCovered === option
-                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                        }`}
-                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </FormField>
+              {/* Section 2: Service Area */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
+                <h3
+                  className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                  style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
+                >
+                  <span
+                    className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                    style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
+                  >
+                    2
+                  </span>
+                  Service Area
+                </h3>
+                <div style={{ paddingLeft: "2.2cqw" }}>
+                  <FormField label="What radius do you cover?" required>
+                    <div className="flex" style={{ gap: "0.6cqw" }}>
+                      {radiusOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => setRadiusCovered(option)}
+                          className={`flex-1 border-2 font-medium transition-all duration-200 ${
+                            radiusCovered === option
+                              ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                              : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                          }`}
+                          style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </FormField>
+                </div>
               </div>
             </div>
 
-            {/* Section 2: Lead Generation */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
+            {/* Row 2: Lead Generation */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
               <h3
                 className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
-                style={{ fontSize: "1.1cqw", gap: "0.8cqw" }}
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
               >
                 <span
                   className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "2cqw", height: "2cqw", fontSize: "1cqw" }}
+                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
                 >
-                  2
+                  3
                 </span>
                 Lead Generation
               </h3>
-              <div className="grid md:grid-cols-2" style={{ gap: "1.8cqw", paddingLeft: "2.8cqw" }}>
+              <div className="grid md:grid-cols-3" style={{ gap: "1.5cqw", paddingLeft: "2.2cqw" }}>
                 <FormField label="Monthly leads" required>
                   <input
                     type="number"
@@ -414,12 +434,12 @@ export default function FactFinder() {
                     value={monthlyLeads}
                     onChange={(e) => setMonthlyLeads(e.target.value)}
                     className={inputStyles}
-                    style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                    style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
                   />
                 </FormField>
 
                 <FormField label="Do you have a GMB account?" required>
-                  <div className="flex" style={{ gap: "0.8cqw" }}>
+                  <div className="flex" style={{ gap: "0.6cqw" }}>
                     {["Yes", "No"].map((option) => (
                       <button
                         key={option}
@@ -430,7 +450,7 @@ export default function FactFinder() {
                             ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                             : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                         }`}
-                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                        style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
                       >
                         {option}
                       </button>
@@ -439,7 +459,7 @@ export default function FactFinder() {
                 </FormField>
 
                 <FormField label="Do you currently run PPC campaigns?" required>
-                  <div className="flex" style={{ gap: "0.8cqw" }}>
+                  <div className="flex" style={{ gap: "0.6cqw" }}>
                     {["Yes", "No"].map((option) => (
                       <button
                         key={option}
@@ -450,79 +470,33 @@ export default function FactFinder() {
                             ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                             : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                         }`}
-                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                        style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
                       >
                         {option}
                       </button>
                     ))}
                   </div>
                 </FormField>
-
-                <FormField label="When do you need to start seeing results?" required>
-                  <div className="relative">
-                    <button
-                      type="button"
-                      onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
-                      className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
-                        resultTimeline
-                          ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
-                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                      }`}
-                      style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
-                    >
-                      <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
-                        {resultTimeline || "Select timeline"}
-                      </span>
-                      <ChevronDown 
-                        style={{ width: "1.4cqw", height: "1.4cqw" }} 
-                        className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-                    {timelineDropdownOpen && (
-                      <div 
-                        className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
-                        style={{ borderRadius: "1.2cqw", marginTop: "0.4cqw", overflow: "hidden" }}
-                      >
-                        {timelineOptions.map((option) => (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => {
-                              setResultTimeline(option);
-                              setTimelineDropdownOpen(false);
-                            }}
-                            className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
-                              resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
-                            }`}
-                            style={{ padding: "1.2cqw", fontSize: "1.4cqw" }}
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </FormField>
               </div>
             </div>
 
-            {/* Section 3: Business Channels */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "1.2cqw" }}>
+            {/* Row 3: Business Channels */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
               <h3
                 className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
-                style={{ fontSize: "1.1cqw", gap: "0.8cqw" }}
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
               >
                 <span
                   className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "2cqw", height: "2cqw", fontSize: "1cqw" }}
+                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
                 >
-                  3
+                  4
                 </span>
                 Business Channels
               </h3>
-              <div style={{ paddingLeft: "2.8cqw" }}>
+              <div style={{ paddingLeft: "2.2cqw" }}>
                 <FormField label="How do you generate business?" required className="">
-                  <div className="flex flex-wrap" style={{ gap: "0.8cqw" }}>
+                  <div className="flex flex-wrap" style={{ gap: "0.6cqw" }}>
                     {generationOptions.map((option) => (
                       <motion.button
                         key={option}
@@ -535,7 +509,7 @@ export default function FactFinder() {
                             ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                             : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                         }`}
-                        style={{ padding: "0.8cqw 1.3cqw", fontSize: "1.3cqw" }}
+                        style={{ padding: "0.6cqw 1cqw", fontSize: "1.1cqw" }}
                       >
                         {option}
                       </motion.button>
@@ -545,23 +519,23 @@ export default function FactFinder() {
               </div>
             </div>
 
-            {/* Submit Row with VAT toggle */}
-            <div className="flex items-center justify-between border-t border-border/20" style={{ paddingTop: "2cqw" }}>
-              {/* VAT Toggle - matching section style */}
-              <div className="flex items-center" style={{ gap: "0.8cqw" }}>
+            {/* Submit Row with VAT toggle and Timeline dropdown */}
+            <div className="flex items-center justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "1.5cqw" }}>
+              {/* VAT Toggle */}
+              <div className="flex items-center" style={{ gap: "0.6cqw" }}>
                 <span
                   className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "2cqw", height: "2cqw", fontSize: "1cqw" }}
+                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
                 >
-                  4
+                  5
                 </span>
                 <span
                   className="font-semibold tracking-wider text-muted-foreground uppercase"
-                  style={{ fontSize: "1.1cqw" }}
+                  style={{ fontSize: "0.9cqw" }}
                 >
                   Are you VAT-registered or a limited company? <span className="text-primary">*</span>
                 </span>
-                <div className="flex" style={{ gap: "0.5cqw", marginLeft: "0.5cqw" }}>
+                <div className="flex" style={{ gap: "0.4cqw", marginLeft: "0.4cqw" }}>
                   {["Yes", "No"].map((option) => (
                     <button
                       key={option}
@@ -572,11 +546,70 @@ export default function FactFinder() {
                           ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                           : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                       }`}
-                      style={{ padding: "0.6cqw 1.2cqw", borderRadius: "0.8cqw", fontSize: "1.2cqw" }}
+                      style={{ padding: "0.5cqw 1cqw", borderRadius: "0.6cqw", fontSize: "1cqw" }}
                     >
                       {option}
                     </button>
                   ))}
+                </div>
+              </div>
+
+              {/* Timeline Dropdown */}
+              <div className="flex items-center" style={{ gap: "0.6cqw" }}>
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
+                >
+                  6
+                </span>
+                <span
+                  className="font-semibold tracking-wider text-muted-foreground uppercase"
+                  style={{ fontSize: "0.9cqw" }}
+                >
+                  When do you need to start seeing results? <span className="text-primary">*</span>
+                </span>
+                <div className="relative" style={{ marginLeft: "0.4cqw" }}>
+                  <button
+                    type="button"
+                    onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
+                    className={`border-2 font-medium transition-all duration-200 flex items-center ${
+                      resultTimeline
+                        ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                        : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                    }`}
+                    style={{ padding: "0.5cqw 1cqw", borderRadius: "0.6cqw", fontSize: "1cqw", gap: "0.4cqw" }}
+                  >
+                    <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
+                      {resultTimeline || "Select"}
+                    </span>
+                    <ChevronDown 
+                      style={{ width: "1cqw", height: "1cqw" }} 
+                      className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {timelineDropdownOpen && (
+                    <div 
+                      className="absolute z-50 bg-white border-2 border-border/30 shadow-lg right-0"
+                      style={{ borderRadius: "0.8cqw", marginTop: "0.3cqw", overflow: "hidden", minWidth: "12cqw" }}
+                    >
+                      {timelineOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            setResultTimeline(option);
+                            setTimelineDropdownOpen(false);
+                          }}
+                          className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
+                            resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
+                          }`}
+                          style={{ padding: "0.8cqw 1cqw", fontSize: "1cqw" }}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
 
