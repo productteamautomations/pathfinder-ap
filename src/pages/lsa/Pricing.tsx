@@ -249,6 +249,7 @@ export default function PricingLSA() {
                     <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{monthlyFee.toFixed(2)}
                     </span>
+                  </div>
                 </div>
 
                 {/* Total */}
