@@ -301,8 +301,8 @@ export default function FactFinder() {
           transition={{ duration: 0.5 }}
           className="bg-white/95 backdrop-blur-sm shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20"
           style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.9 * 1.5))",
-            aspectRatio: "1.5",
+            width: "min(90vw, calc((100vh - 73px) * 0.95 * 1.4))",
+            aspectRatio: "1.4",
             containerType: "size",
             borderRadius: "2.5cqw",
             padding: "3cqw",
@@ -519,23 +519,14 @@ export default function FactFinder() {
               </div>
             </div>
 
-            {/* Submit Row with VAT toggle and Timeline dropdown */}
-            <div className="flex items-center justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "1.5cqw" }}>
+            {/* Bottom Row: VAT + Timeline + Continue */}
+            <div className="flex items-end justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "2cqw" }}>
               {/* VAT Toggle */}
-              <div className="flex items-center" style={{ gap: "0.6cqw" }}>
-                <span
-                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
-                >
-                  5
-                </span>
-                <span
-                  className="font-semibold tracking-wider text-muted-foreground uppercase"
-                  style={{ fontSize: "0.9cqw" }}
-                >
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
+                <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
                   Are you VAT-registered or a limited company? <span className="text-primary">*</span>
-                </span>
-                <div className="flex" style={{ gap: "0.4cqw", marginLeft: "0.4cqw" }}>
+                </label>
+                <div className="flex" style={{ gap: "0.5cqw" }}>
                   {["Yes", "No"].map((option) => (
                     <button
                       key={option}
@@ -546,7 +537,7 @@ export default function FactFinder() {
                           ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                           : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                       }`}
-                      style={{ padding: "0.5cqw 1cqw", borderRadius: "0.6cqw", fontSize: "1cqw" }}
+                      style={{ padding: "0.8cqw 1.5cqw", borderRadius: "0.8cqw", fontSize: "1.1cqw" }}
                     >
                       {option}
                     </button>
@@ -555,42 +546,33 @@ export default function FactFinder() {
               </div>
 
               {/* Timeline Dropdown */}
-              <div className="flex items-center" style={{ gap: "0.6cqw" }}>
-                <span
-                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
-                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
-                >
-                  6
-                </span>
-                <span
-                  className="font-semibold tracking-wider text-muted-foreground uppercase"
-                  style={{ fontSize: "0.9cqw" }}
-                >
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
+                <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
                   When do you need to start seeing results? <span className="text-primary">*</span>
-                </span>
-                <div className="relative" style={{ marginLeft: "0.4cqw" }}>
+                </label>
+                <div className="relative">
                   <button
                     type="button"
                     onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
-                    className={`border-2 font-medium transition-all duration-200 flex items-center ${
+                    className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
                       resultTimeline
                         ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
                         : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                     }`}
-                    style={{ padding: "0.5cqw 1cqw", borderRadius: "0.6cqw", fontSize: "1cqw", gap: "0.4cqw" }}
+                    style={{ padding: "0.8cqw 1.2cqw", borderRadius: "0.8cqw", fontSize: "1.1cqw", gap: "0.6cqw", minWidth: "14cqw" }}
                   >
                     <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
-                      {resultTimeline || "Select"}
+                      {resultTimeline || "Select timeline"}
                     </span>
                     <ChevronDown 
-                      style={{ width: "1cqw", height: "1cqw" }} 
+                      style={{ width: "1.2cqw", height: "1.2cqw" }} 
                       className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
                     />
                   </button>
                   {timelineDropdownOpen && (
                     <div 
-                      className="absolute z-50 bg-white border-2 border-border/30 shadow-lg right-0"
-                      style={{ borderRadius: "0.8cqw", marginTop: "0.3cqw", overflow: "hidden", minWidth: "12cqw" }}
+                      className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
+                      style={{ borderRadius: "0.8cqw", marginTop: "0.3cqw", overflow: "hidden" }}
                     >
                       {timelineOptions.map((option) => (
                         <button
@@ -603,7 +585,7 @@ export default function FactFinder() {
                           className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
                             resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
                           }`}
-                          style={{ padding: "0.8cqw 1cqw", fontSize: "1cqw" }}
+                          style={{ padding: "0.8cqw 1.2cqw", fontSize: "1.1cqw" }}
                         >
                           {option}
                         </button>
