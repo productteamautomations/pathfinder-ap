@@ -20,7 +20,7 @@ const benefits = [
 export default function AboutProductLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   return (
     <div className="h-screen flex flex-col overflow-hidden bg-background relative" style={{ containerType: "size" }}>
       <TopographicBackground />
@@ -30,6 +30,7 @@ export default function AboutProductLSA() {
         totalSteps={4}
         showProgress
         productLabel="LSAs"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 flex flex-col relative z-10" style={{ paddingTop: "10cqh" }}>

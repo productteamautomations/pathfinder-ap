@@ -126,7 +126,7 @@ const questions: Question[] = [
 export default function FunnelDiagnosticLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -260,7 +260,7 @@ export default function FunnelDiagnosticLocalSEO() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Local SEO" />
+      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Local SEO" showSmartSite={recommendation.isBig3 === false} />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] flex items-center justify-center">

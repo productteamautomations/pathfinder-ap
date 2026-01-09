@@ -1,4 +1,4 @@
-import { ArrowLeft, User, LogOut, Home } from "lucide-react";
+import { ArrowLeft, User, LogOut, Home, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "./ProgressBar";
 import { useAuth } from "@/contexts/AuthContext";
@@ -17,9 +17,10 @@ interface PageHeaderProps {
   totalSteps?: number;
   showProgress?: boolean;
   productLabel?: string;
+  showSmartSite?: boolean;
 }
 
-export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel }: PageHeaderProps) {
+export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel, showSmartSite = false }: PageHeaderProps) {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
@@ -67,15 +68,30 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
           {/* Right: Product label + Profile - fixed percentage width */}
           <div className="flex items-center justify-end" style={{ width: "15%", flexShrink: 0, gap: "1vw" }}>
             {productLabel && (
-              <span
-                className="font-semibold text-green-600 bg-green-500/10 rounded-full whitespace-nowrap inline-block"
-                style={{
-                  fontSize: "clamp(10px, 0.8vw, 14px)",
-                  padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
-                }}
-              >
-                Product: {productLabel}
-              </span>
+              <div className="flex flex-col items-end" style={{ gap: "0.3vw" }}>
+                <span
+                  className="font-semibold text-green-600 bg-green-500/10 rounded-full whitespace-nowrap inline-block"
+                  style={{
+                    fontSize: "clamp(10px, 0.8vw, 14px)",
+                    padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
+                  }}
+                >
+                  Product: {productLabel}
+                </span>
+                {showSmartSite && (
+                  <span
+                    className="font-medium text-primary bg-primary/10 rounded-full whitespace-nowrap inline-flex items-center"
+                    style={{
+                      fontSize: "clamp(9px, 0.7vw, 12px)",
+                      padding: "clamp(2px, 0.2vw, 4px) clamp(6px, 0.6vw, 10px)",
+                      gap: "0.2vw",
+                    }}
+                  >
+                    <Plus style={{ width: "0.8em", height: "0.8em" }} />
+                    SmartSite
+                  </span>
+                )}
+              </div>
             )}
             {user && (
               <DropdownMenu>

@@ -33,7 +33,7 @@ const leadgenReviews = [
 export default function AboutAddPeopleLeadGen() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [map1Loaded, setMap1Loaded] = useState(false);
   const [map2Loaded, setMap2Loaded] = useState(false);
@@ -46,6 +46,7 @@ export default function AboutAddPeopleLeadGen() {
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">

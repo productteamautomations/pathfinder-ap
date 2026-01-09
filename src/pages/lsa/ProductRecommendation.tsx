@@ -138,7 +138,7 @@ function LSAIllustration() {
 export default function ProductRecommendationLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
@@ -148,6 +148,7 @@ export default function ProductRecommendationLSA() {
         totalSteps={4}
         showProgress
         productLabel="LSAs"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>

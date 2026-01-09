@@ -218,7 +218,7 @@ export default function BusinessCycleLocalSEO() {
   const [iconLoaded, setIconLoaded] = useState(false);
   const [showROIGraph, setShowROIGraph] = useState(false);
   const [graphKey, setGraphKey] = useState(0);
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
 
   const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
@@ -275,6 +275,7 @@ export default function BusinessCycleLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center">

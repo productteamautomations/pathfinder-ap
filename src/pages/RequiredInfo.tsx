@@ -12,12 +12,13 @@ import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 export default function RequiredInfo() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session } = useRecommendation();
+  const { session, recommendation } = useRecommendation();
   const state = location.state as Record<string, any> | null;
 
   const product = state?.product || "Unknown";
   const totalSteps = product === "LSA" ? 4 : 7;
   const productLabel = product === "LeadGen Trial" ? "Lead Generation" : product === "LSA" ? "LSAs" : product;
+  const showSmartSite = state?.smartSiteIncluded === true;
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -80,6 +81,7 @@ export default function RequiredInfo() {
         totalSteps={totalSteps}
         showProgress
         productLabel={productLabel}
+        showSmartSite={showSmartSite}
       />
 
       {/* Content Area - Split Layout */}
