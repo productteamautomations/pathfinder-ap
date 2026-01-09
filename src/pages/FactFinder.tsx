@@ -8,10 +8,9 @@ import { Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const radiusOptions = [
-  { label: "Hyper-local", subtitle: "0-5 miles" },
-  { label: "Local", subtitle: "6-50 miles" },
-  { label: "Regional", subtitle: "50+ miles" },
-  { label: "National", subtitle: "National" },
+  { label: "Local", subtitle: "0-5 miles" },
+  { label: "Regional", subtitle: "6-50 miles" },
+  { label: "National", subtitle: "50+ miles" },
 ];
 const capacityOptions = ["Empty diary", "Jobs in pipeline", "Growth mode"];
 
