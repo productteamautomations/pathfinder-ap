@@ -299,36 +299,38 @@ export default function FactFinder() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-white/95 backdrop-blur-sm shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20"
+          className="bg-white/95 backdrop-blur-sm shadow-[0_25px_80px_rgba(0,0,0,0.08),0_10px_30px_rgba(0,0,0,0.04)] border border-border/20 flex flex-col"
           style={{
-            width: "min(90vw, calc((100vh - 73px) * 0.95 * 1.4))",
-            aspectRatio: "1.4",
+            width: "min(90vw, calc((100vh - 73px) * 0.92 * 1.5))",
+            height: "calc((100vh - 73px) * 0.92)",
             containerType: "size",
             borderRadius: "2.5cqw",
             padding: "3cqw",
           }}
         >
           {/* Header */}
-          <div style={{ marginBottom: "2.5cqw" }}>
+          <div style={{ marginBottom: "2cqw" }}>
             <motion.span
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               className="inline-block font-semibold tracking-widest text-primary uppercase"
-              style={{ fontSize: "1.1cqw", marginBottom: "0.8cqw" }}
+              style={{ fontSize: "1.1cqw", marginBottom: "0.6cqw" }}
             >
               Step 1 of 7
             </motion.span>
-            <h2 className="font-display font-bold text-title" style={{ fontSize: "3.2cqw" }}>
+            <h2 className="font-display font-bold text-title" style={{ fontSize: "3cqw" }}>
               Business Information
             </h2>
-            <p className="text-muted-foreground" style={{ marginTop: "0.5cqw", fontSize: "1.5cqw" }}>
+            <p className="text-muted-foreground" style={{ marginTop: "0.4cqw", fontSize: "1.4cqw" }}>
               Help us understand your business better
             </p>
             <OrangeAccent />
           </div>
 
-          {/* Form Grid */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.8cqw" }}>
+          {/* Form Grid - flex-1 to take remaining space */}
+          <div className="flex-1 flex flex-col" style={{ gap: "1.5cqw" }}>
+            {/* Main form sections */}
+            <div className="flex-1 flex flex-col" style={{ gap: "1.8cqw" }}>
             {/* Row 1: Timeline + Service Area */}
             <div className="grid md:grid-cols-2" style={{ gap: "2cqw" }}>
               {/* Section 1: Timeline */}
@@ -517,6 +519,7 @@ export default function FactFinder() {
                   </div>
                 </FormField>
               </div>
+            </div>
             </div>
 
             {/* Bottom Row: VAT + Timeline + Continue */}
