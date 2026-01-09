@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { useRecommendation } from "@/contexts/RecommendationContext";
-import { ChevronDown } from "lucide-react";
+import { Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
 const radiusOptions = [
@@ -81,7 +81,14 @@ function FormField({
 export default function FactFinder() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { recommendation, fetchRecommendation, session, updateMaxStep } = useRecommendation();
+  const [retryError, setRetryError] = useState(false);
+  const [hasClickedSubmit, setHasClickedSubmit] = useState(false);
+  const hasAttemptedRetry = useRef(false);
+  const hasSetProductWebhook = useRef(false);
+
+  // Check if user selected "No URL" on welcome page
+  const isNoUrlFlow = (location.state as any)?.noUrl === true;
 
   const [monthEstablished, setMonthEstablished] = useState("");
   const [yearEstablished, setYearEstablished] = useState("");
@@ -104,14 +111,97 @@ export default function FactFinder() {
     );
   };
 
-  // Determine product based on service area and capacity
-  const determineProduct = () => {
-    if (radiusCovered === "Local" && (resultTimeline === "Empty diary" || resultTimeline === "Jobs in pipeline")) {
+  // Determine the effective product based on VAT registration
+  const getEffectiveProduct = (product: string | null) => {
+    if (product === "LSA" && isVatRegistered === "No") {
       return "SEO";
     }
-    return "LeadGen";
+    return product;
   };
 
+  // Watch for when loading finishes after a retry attempt
+  useEffect(() => {
+    if (hasAttemptedRetry.current && !recommendation.isLoading && !recommendation.product) {
+      setRetryError(true);
+      hasAttemptedRetry.current = false;
+    }
+  }, [recommendation.isLoading, recommendation.product]);
+
+  // Send webhook when product becomes available after button click
+  useEffect(() => {
+    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading && !hasSetProductWebhook.current) {
+      hasSetProductWebhook.current = true;
+
+      const newState = {
+        ...location.state,
+        monthEstablished,
+        yearEstablished,
+        businessGeneration,
+        monthlyLeads,
+        hasGMB,
+        isVatRegistered,
+        radiusCovered,
+        resultTimeline,
+        runsPPC,
+      };
+
+      const effectiveProduct = getEffectiveProduct(recommendation.product);
+
+      // Send webhook with product information
+      try {
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session.sessionId,
+            googleId: session.googleId,
+            googleFullName: session.googleFullName,
+            googleEmail: session.googleEmail,
+            startTime: session.startTime,
+          },
+          newState,
+          null,
+          false,
+          false,
+          { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
+          { product: effectiveProduct, smartSiteIncluded: null },
+        );
+        sendPageWebhook(payload);
+      } catch (e) {
+        console.error("Webhook error:", e);
+      }
+    }
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading]);
+
+  // Navigate when recommendation arrives after clicking submit (only for normal URL flow)
+  useEffect(() => {
+    if (isNoUrlFlow) return; // Skip for no URL flow
+
+    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
+      const effectiveProduct = getEffectiveProduct(recommendation.product);
+
+      const productRoutes: Record<string, string> = {
+        SEO: "/product-recommendation/localseo",
+        LeadGen: "/product-recommendation/leadgen",
+        LSA: "/product-recommendation/lsa",
+      };
+
+      const newState = {
+        ...location.state,
+        monthEstablished,
+        yearEstablished,
+        businessGeneration,
+        monthlyLeads,
+        hasGMB,
+        isVatRegistered,
+        radiusCovered,
+        resultTimeline,
+        runsPPC,
+      };
+
+      if (effectiveProduct && productRoutes[effectiveProduct]) {
+        navigate(productRoutes[effectiveProduct], { state: newState });
+      }
+    }
+  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading, isNoUrlFlow, isVatRegistered]);
 
   const handleSubmit = () => {
     if (!isFormValid()) return;
@@ -133,9 +223,9 @@ export default function FactFinder() {
       runsPPC,
     };
 
-    const product = determineProduct();
+    const effectiveProduct = getEffectiveProduct(recommendation.product);
 
-    // Send webhook with session data from context
+    // Send webhook with session data from context - wrapped in try-catch so navigation always works
     try {
       const payload = buildPageWebhookPayload(
         {
@@ -150,22 +240,55 @@ export default function FactFinder() {
         false,
         false,
         { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-        { product, smartSiteIncluded: null },
+        effectiveProduct ? { product: effectiveProduct, smartSiteIncluded: null } : null,
       );
       sendPageWebhook(payload);
     } catch (e) {
       console.error("Webhook error:", e);
     }
 
-    // Navigate based on determined product
-    const productRoutes: Record<string, string> = {
-      SEO: "/product-recommendation/localseo",
-      LeadGen: "/product-recommendation/leadgen",
-    };
+    // No URL flow - skip webhook wait and go straight to LeadGen
+    if (isNoUrlFlow) {
+      navigate("/product-recommendation/leadgen", { state: newState });
+      return;
+    }
 
-    navigate(productRoutes[product], { state: newState });
+    // If recommendation is already available, navigate immediately
+    if (recommendation.product) {
+      const productRoutes: Record<string, string> = {
+        SEO: "/product-recommendation/localseo",
+        LeadGen: "/product-recommendation/leadgen",
+        LSA: "/product-recommendation/lsa",
+      };
+
+      if (effectiveProduct && productRoutes[effectiveProduct]) {
+        navigate(productRoutes[effectiveProduct], { state: newState });
+      }
+      return;
+    }
+
+    // If still loading, mark that we clicked and wait
+    if (recommendation.isLoading) {
+      setHasClickedSubmit(true);
+      return;
+    }
+
+    // No recommendation available - retry the webhook
+    const name = state?.name || "";
+    const websiteUrl = state?.url || "";
+
+    if (name && websiteUrl) {
+      setRetryError(false);
+      setHasClickedSubmit(true);
+      hasAttemptedRetry.current = true;
+      fetchRecommendation(name, websiteUrl);
+    } else {
+      setRetryError(true);
+    }
   };
 
+  const isWaitingForRecommendation = hasClickedSubmit && recommendation.isLoading;
+  const showError = retryError;
 
   const inputStyles =
     "w-full border-2 border-border/30 bg-white/80 text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:bg-white focus:shadow-lg focus:shadow-primary/5 transition-all duration-200";
@@ -500,11 +623,32 @@ export default function FactFinder() {
               <div className="flex flex-col items-end">
                 <Button
                   onClick={handleSubmit}
-                  disabled={!isFormValid()}
+                  disabled={!isFormValid() || isWaitingForRecommendation}
                   style={{ fontSize: "1.4cqw", padding: "1.3cqw 3.5cqw", borderRadius: "0.8cqw" }}
                 >
-                  Continue
+                  <span className="flex items-center" style={{ gap: "0.8cqw" }}>
+                    {isWaitingForRecommendation ? (
+                      <>
+                        <Loader2 style={{ width: "1.4cqw", height: "1.4cqw" }} className="animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      "Continue"
+                    )}
+                  </span>
                 </Button>
+
+                {showError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex items-center text-destructive"
+                    style={{ gap: "0.8cqw", fontSize: "1.3cqw", marginTop: "1.2cqw" }}
+                  >
+                    <AlertCircle style={{ width: "1.4cqw", height: "1.4cqw" }} />
+                    <span>Unable to get recommendation. Please try again.</span>
+                  </motion.div>
+                )}
               </div>
             </div>
           </div>
