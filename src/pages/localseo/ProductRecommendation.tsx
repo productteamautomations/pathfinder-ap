@@ -138,7 +138,7 @@ function LocalSEOIllustration() {
 export default function ProductRecommendationLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   return (
     <div className="h-screen flex flex-col overflow-hidden">
       <PageHeader
@@ -147,6 +147,7 @@ export default function ProductRecommendationLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>

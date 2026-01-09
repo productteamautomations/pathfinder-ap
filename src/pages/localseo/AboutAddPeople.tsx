@@ -33,7 +33,7 @@ const seoReviews = [
 export default function AboutAddPeopleLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [map1Loaded, setMap1Loaded] = useState(false);
   const [map2Loaded, setMap2Loaded] = useState(false);
@@ -46,6 +46,7 @@ export default function AboutAddPeopleLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
+        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">

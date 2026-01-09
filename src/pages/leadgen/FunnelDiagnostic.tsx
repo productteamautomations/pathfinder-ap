@@ -119,7 +119,7 @@ const questions: Question[] = [
 export default function FunnelDiagnostic() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep } = useRecommendation();
+  const { session, updateMaxStep, recommendation } = useRecommendation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -201,7 +201,7 @@ export default function FunnelDiagnostic() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Lead Generation" />
+      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Lead Generation" showSmartSite={recommendation.isBig3 === false} />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] flex items-center justify-center">
