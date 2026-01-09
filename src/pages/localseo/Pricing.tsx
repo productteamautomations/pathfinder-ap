@@ -283,18 +283,6 @@ export default function PricingLocalSEO() {
                       </p>
                     </motion.div>
                   )}
-
-                  <div
-                    className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "0.8cqw 0" }}
-                  >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.2cqw" }}>
-                      VAT (20%)
-                    </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
-                      £{vat.toFixed(2)}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Total */}
@@ -305,7 +293,7 @@ export default function PricingLocalSEO() {
                   <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
                       <p className="text-muted-foreground" style={{ fontSize: "1cqw", marginBottom: "0.2cqw" }}>
-                        First payment
+                        First payment total inc. VAT
                       </p>
                       <p className="font-bold text-foreground" style={{ fontSize: "3cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
