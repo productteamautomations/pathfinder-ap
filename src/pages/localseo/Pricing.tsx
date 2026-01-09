@@ -26,7 +26,7 @@ export default function PricingLocalSEO() {
   const monthlyFee6 = 299.0;
   const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const baseTotal = setupFee + monthlyFee;
+  const baseTotal = setupFee;
   const addonTotal = requiresSmartSite ? smartSiteFee : 0;
   const vat = (baseTotal + addonTotal) * 0.2;
   const totalFirstMonth = baseTotal + addonTotal + vat;
@@ -78,7 +78,7 @@ export default function PricingLocalSEO() {
       false, // isStartPage
       true, // isEndPage
       { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
-      { product: "Local SEO", smartSiteIncluded: requiresSmartSite }
+      { product: "Local SEO", smartSiteIncluded: requiresSmartSite },
     );
 
     try {
@@ -88,7 +88,7 @@ export default function PricingLocalSEO() {
       console.error("Webhook error:", error);
       // Continue anyway - navigation is more important than tracking
     }
-    
+
     navigate("/required-info", {
       state: {
         ...location.state,
@@ -254,7 +254,7 @@ export default function PricingLocalSEO() {
                       £{monthlyFee.toFixed(2)}
                     </span>
                   </div>
-                  
+
                   {/* SmartSite Addon */}
                   {requiresSmartSite && (
                     <motion.div
@@ -274,12 +274,16 @@ export default function PricingLocalSEO() {
                           £{smartSiteFee.toFixed(2)}
                         </span>
                       </div>
-                      <p className="text-muted-foreground" style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}>
-                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
+                      <p
+                        className="text-muted-foreground"
+                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                      >
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate
+                        conversion measurement.
                       </p>
                     </motion.div>
                   )}
-                  
+
                   <div
                     className="flex justify-between items-center border-b border-border/40"
                     style={{ padding: "0.8cqw 0" }}
@@ -314,7 +318,11 @@ export default function PricingLocalSEO() {
                 </div>
 
                 {/* Payment Providers */}
-                <img src={PaymentProviders} alt="Payment providers" style={{ width: "100%", marginBottom: "1.25cqw" }} />
+                <img
+                  src={PaymentProviders}
+                  alt="Payment providers"
+                  style={{ width: "100%", marginBottom: "1.25cqw" }}
+                />
 
                 {/* CTA Button */}
                 <Button
