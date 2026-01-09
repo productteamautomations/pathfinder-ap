@@ -77,7 +77,7 @@ export function PageHeader({
             {productLabel && (
               <div className="flex flex-col items-end" style={{ gap: "0.3vw" }}>
                 <span
-                  className="font-semibold text-green-600 bg-green-500/10 rounded-full whitespace-nowrap inline-block"
+                  className="font-semibold text-green-600 whitespace-nowrap inline-block"
                   style={{
                     fontSize: "clamp(10px, 0.8vw, 14px)",
                     padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
