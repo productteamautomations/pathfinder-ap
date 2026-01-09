@@ -111,25 +111,35 @@ export default function FactFinder() {
     );
   };
 
-  // Determine the effective product based on VAT registration
-  const getEffectiveProduct = (product: string | null) => {
-    if (product === "LSA" && isVatRegistered === "No") {
-      return "SEO";
+  // Calculate product based on local logic
+  const calculateProduct = (serviceArea: string, capacity: string, isVat: string, isLsa: boolean | null): "SEO" | "LeadGen" | "LSA" => {
+    // Step 1: Determine base product
+    // If service area = Local AND capacity = "Empty diary" or "Jobs in pipeline" → SEO, else → LeadGen
+    const isLocal = serviceArea === "Local";
+    const isLowCapacity = capacity === "Empty diary" || capacity === "Jobs in pipeline";
+    
+    let baseProduct: "SEO" | "LeadGen" = (isLocal && isLowCapacity) ? "SEO" : "LeadGen";
+    
+    // Step 2: If base product is SEO, check for LSA upgrade
+    // If product = SEO AND webhook has lsa: true AND VAT registered = "Yes" → LSA
+    if (baseProduct === "SEO" && isLsa === true && isVat === "Yes") {
+      return "LSA";
     }
-    return product;
+    
+    return baseProduct;
   };
 
   // Watch for when loading finishes after a retry attempt
   useEffect(() => {
-    if (hasAttemptedRetry.current && !recommendation.isLoading && !recommendation.product) {
-      setRetryError(true);
+    if (hasAttemptedRetry.current && !recommendation.isLoading) {
+      // Webhook finished (success or fail) - we can now calculate product locally
       hasAttemptedRetry.current = false;
     }
-  }, [recommendation.isLoading, recommendation.product]);
+  }, [recommendation.isLoading]);
 
-  // Send webhook when product becomes available after button click
+  // Send webhook and navigate when webhook data is ready after button click
   useEffect(() => {
-    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading && !hasSetProductWebhook.current) {
+    if (hasClickedSubmit && !recommendation.isLoading && !hasSetProductWebhook.current) {
       hasSetProductWebhook.current = true;
 
       const newState = {
@@ -145,7 +155,8 @@ export default function FactFinder() {
         runsPPC,
       };
 
-      const effectiveProduct = getEffectiveProduct(recommendation.product);
+      // Calculate product locally
+      const effectiveProduct = calculateProduct(radiusCovered, resultTimeline, isVatRegistered, recommendation.isLsa);
 
       // Send webhook with product information
       try {
@@ -162,46 +173,25 @@ export default function FactFinder() {
           false,
           false,
           { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-          { product: effectiveProduct, smartSiteIncluded: null },
+          { product: effectiveProduct, smartSiteIncluded: recommendation.smartSite },
         );
         sendPageWebhook(payload);
       } catch (e) {
         console.error("Webhook error:", e);
       }
-    }
-  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading]);
 
-  // Navigate when recommendation arrives after clicking submit (only for normal URL flow)
-  useEffect(() => {
-    if (isNoUrlFlow) return; // Skip for no URL flow
-
-    if (hasClickedSubmit && recommendation.product && !recommendation.isLoading) {
-      const effectiveProduct = getEffectiveProduct(recommendation.product);
-
+      // Navigate to the appropriate product page
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
         LeadGen: "/product-recommendation/leadgen",
         LSA: "/product-recommendation/lsa",
       };
 
-      const newState = {
-        ...location.state,
-        monthEstablished,
-        yearEstablished,
-        businessGeneration,
-        monthlyLeads,
-        hasGMB,
-        isVatRegistered,
-        radiusCovered,
-        resultTimeline,
-        runsPPC,
-      };
-
-      if (effectiveProduct && productRoutes[effectiveProduct]) {
+      if (productRoutes[effectiveProduct]) {
         navigate(productRoutes[effectiveProduct], { state: newState });
       }
     }
-  }, [hasClickedSubmit, recommendation.product, recommendation.isLoading, isNoUrlFlow, isVatRegistered]);
+  }, [hasClickedSubmit, recommendation.isLoading, radiusCovered, resultTimeline, isVatRegistered, recommendation.isLsa]);
 
   const handleSubmit = () => {
     if (!isFormValid()) return;
@@ -223,68 +213,71 @@ export default function FactFinder() {
       runsPPC,
     };
 
-    const effectiveProduct = getEffectiveProduct(recommendation.product);
-
-    // Send webhook with session data from context - wrapped in try-catch so navigation always works
-    try {
-      const payload = buildPageWebhookPayload(
-        {
-          sessionId: session.sessionId,
-          googleId: session.googleId,
-          googleFullName: session.googleFullName,
-          googleEmail: session.googleEmail,
-          startTime: session.startTime,
-        },
-        newState,
-        null,
-        false,
-        false,
-        { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
-        effectiveProduct ? { product: effectiveProduct, smartSiteIncluded: null } : null,
-      );
-      sendPageWebhook(payload);
-    } catch (e) {
-      console.error("Webhook error:", e);
-    }
-
     // No URL flow - skip webhook wait and go straight to LeadGen
     if (isNoUrlFlow) {
+      // Send webhook first
+      try {
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session.sessionId,
+            googleId: session.googleId,
+            googleFullName: session.googleFullName,
+            googleEmail: session.googleEmail,
+            startTime: session.startTime,
+          },
+          newState,
+          null,
+          false,
+          false,
+          { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
+          { product: "LeadGen", smartSiteIncluded: null },
+        );
+        sendPageWebhook(payload);
+      } catch (e) {
+        console.error("Webhook error:", e);
+      }
       navigate("/product-recommendation/leadgen", { state: newState });
       return;
     }
 
-    // If recommendation is already available, navigate immediately
-    if (recommendation.product) {
+    // If webhook data is already available (not loading), navigate immediately
+    if (!recommendation.isLoading) {
+      const effectiveProduct = calculateProduct(radiusCovered, resultTimeline, isVatRegistered, recommendation.isLsa);
+
+      // Send webhook
+      try {
+        const payload = buildPageWebhookPayload(
+          {
+            sessionId: session.sessionId,
+            googleId: session.googleId,
+            googleFullName: session.googleFullName,
+            googleEmail: session.googleEmail,
+            startTime: session.startTime,
+          },
+          newState,
+          null,
+          false,
+          false,
+          { step: 2, totalSteps: null, maxStep: Math.max(session.maxStep, 2) },
+          { product: effectiveProduct, smartSiteIncluded: recommendation.smartSite },
+        );
+        sendPageWebhook(payload);
+      } catch (e) {
+        console.error("Webhook error:", e);
+      }
+
       const productRoutes: Record<string, string> = {
         SEO: "/product-recommendation/localseo",
         LeadGen: "/product-recommendation/leadgen",
         LSA: "/product-recommendation/lsa",
       };
 
-      if (effectiveProduct && productRoutes[effectiveProduct]) {
-        navigate(productRoutes[effectiveProduct], { state: newState });
-      }
+      navigate(productRoutes[effectiveProduct], { state: newState });
       return;
     }
 
-    // If still loading, mark that we clicked and wait
-    if (recommendation.isLoading) {
-      setHasClickedSubmit(true);
-      return;
-    }
-
-    // No recommendation available - retry the webhook
-    const name = state?.name || "";
-    const websiteUrl = state?.url || "";
-
-    if (name && websiteUrl) {
-      setRetryError(false);
-      setHasClickedSubmit(true);
-      hasAttemptedRetry.current = true;
-      fetchRecommendation(name, websiteUrl);
-    } else {
-      setRetryError(true);
-    }
+    // Still loading - mark that we clicked and wait for useEffect to handle navigation
+    setHasClickedSubmit(true);
   };
 
   const isWaitingForRecommendation = hasClickedSubmit && recommendation.isLoading;
