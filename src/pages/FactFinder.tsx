@@ -4,8 +4,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { useRecommendation } from "@/contexts/RecommendationContext";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
+
+const radiusOptions = ["0-5 miles", "0-50 miles", "50+ miles"];
+const timelineOptions = ["ASAP", "Time to let it build up"];
 
 const generationOptions = [
   "None",
@@ -89,6 +92,10 @@ export default function FactFinder() {
   const [monthlyLeads, setMonthlyLeads] = useState("");
   const [hasGMB, setHasGMB] = useState<string>("");
   const [isVatRegistered, setIsVatRegistered] = useState<string>("");
+  const [radiusCovered, setRadiusCovered] = useState<string>("");
+  const [resultTimeline, setResultTimeline] = useState<string>("");
+  const [runsPPC, setRunsPPC] = useState<string>("");
+  const [timelineDropdownOpen, setTimelineDropdownOpen] = useState(false);
 
   const toggleGeneration = (option: string) => {
     setBusinessGeneration((prev) => (prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]));
@@ -96,7 +103,7 @@ export default function FactFinder() {
 
   const isFormValid = () => {
     return (
-      monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB && isVatRegistered
+      monthEstablished && yearEstablished && businessGeneration.length > 0 && monthlyLeads && hasGMB && isVatRegistered && radiusCovered && resultTimeline && runsPPC
     );
   };
 
@@ -129,6 +136,9 @@ export default function FactFinder() {
         monthlyLeads,
         hasGMB,
         isVatRegistered,
+        radiusCovered,
+        resultTimeline,
+        runsPPC,
       };
 
       const effectiveProduct = getEffectiveProduct(recommendation.product);
@@ -178,6 +188,9 @@ export default function FactFinder() {
         monthlyLeads,
         hasGMB,
         isVatRegistered,
+        radiusCovered,
+        resultTimeline,
+        runsPPC,
       };
 
       if (effectiveProduct && productRoutes[effectiveProduct]) {
@@ -201,6 +214,9 @@ export default function FactFinder() {
       monthlyLeads,
       hasGMB,
       isVatRegistered,
+      radiusCovered,
+      resultTimeline,
+      runsPPC,
     };
 
     const effectiveProduct = getEffectiveProduct(recommendation.product);
@@ -327,9 +343,9 @@ export default function FactFinder() {
                 </span>
                 Timeline
               </h3>
-              <div style={{ paddingLeft: "2.8cqw" }}>
+              <div className="grid md:grid-cols-2" style={{ gap: "1.8cqw", paddingLeft: "2.8cqw" }}>
                 <FormField label="Business trading date" required>
-                  <div className="grid grid-cols-2" style={{ gap: "1.2cqw", maxWidth: "35cqw" }}>
+                  <div className="grid grid-cols-2" style={{ gap: "1.2cqw" }}>
                     <input
                       type="number"
                       min="1"
@@ -350,6 +366,26 @@ export default function FactFinder() {
                       className={inputStyles}
                       style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
                     />
+                  </div>
+                </FormField>
+
+                <FormField label="What radius do you cover?" required>
+                  <div className="flex" style={{ gap: "0.8cqw" }}>
+                    {radiusOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setRadiusCovered(option)}
+                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
+                          radiusCovered === option
+                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                        }`}
+                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                      >
+                        {option}
+                      </button>
+                    ))}
                   </div>
                 </FormField>
               </div>
@@ -399,6 +435,72 @@ export default function FactFinder() {
                         {option}
                       </button>
                     ))}
+                  </div>
+                </FormField>
+
+                <FormField label="Do you currently run PPC campaigns?" required>
+                  <div className="flex" style={{ gap: "0.8cqw" }}>
+                    {["Yes", "No"].map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setRunsPPC(option)}
+                        className={`flex-1 border-2 font-medium transition-all duration-200 ${
+                          runsPPC === option
+                            ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                            : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                        }`}
+                        style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </FormField>
+
+                <FormField label="When do you need to start seeing results?" required>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
+                      className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
+                        resultTimeline
+                          ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                      }`}
+                      style={{ padding: "1.2cqw", borderRadius: "1.2cqw", fontSize: "1.4cqw" }}
+                    >
+                      <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
+                        {resultTimeline || "Select timeline"}
+                      </span>
+                      <ChevronDown 
+                        style={{ width: "1.4cqw", height: "1.4cqw" }} 
+                        className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {timelineDropdownOpen && (
+                      <div 
+                        className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
+                        style={{ borderRadius: "1.2cqw", marginTop: "0.4cqw", overflow: "hidden" }}
+                      >
+                        {timelineOptions.map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => {
+                              setResultTimeline(option);
+                              setTimelineDropdownOpen(false);
+                            }}
+                            className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
+                              resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
+                            }`}
+                            style={{ padding: "1.2cqw", fontSize: "1.4cqw" }}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </FormField>
               </div>
