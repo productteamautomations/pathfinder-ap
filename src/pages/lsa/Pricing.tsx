@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Button } from "@/components/Button";
 import { TopographicBackground } from "@/components/TopographicBackground";
-import { Check, Loader2 } from "lucide-react";
+import { Check, Loader2, Plus } from "lucide-react";
 import PaymentProviders from "@/assets/payment-providers.svg";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 import { toast } from "sonner";
@@ -15,16 +15,23 @@ export default function PricingLSA() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isLoading } = useAuth();
-  const { session } = useRecommendation();
+  
+  const { session, recommendation } = useRecommendation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // SmartSite toggle - auto-enabled if isBig3 is false, but can be manually toggled
+  const smartSiteRequired = recommendation.isBig3 === false;
+  const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
+  const smartSiteFee = 199.0;
 
   const setupFee = 199.0;
   const monthlyFee6 = 199.0;
   const monthlyFee12 = 149.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const vat = (setupFee) * 0.2;
-  const totalFirstMonth = setupFee + vat;
+  const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
+  const vat = (setupFee + addonTotal) * 0.2;
+  const totalFirstMonth = setupFee + addonTotal + vat;
   const monthlyAfterVAT = monthlyFee * 1.2;
   const savings = (monthlyFee6 - monthlyFee12) * 12;
 
@@ -54,7 +61,7 @@ export default function PricingLSA() {
 
     const pricingData = {
       product: "LSA",
-      smartSiteIncluded: false,
+      smartSiteIncluded: smartSiteEnabled,
       initialCost: totalFirstMonth.toFixed(2),
       monthlyCost: monthlyAfterVAT.toFixed(2),
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
@@ -74,7 +81,7 @@ export default function PricingLSA() {
       false, // isStartPage
       true, // isEndPage
       { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
-      { product: "LSA", smartSiteIncluded: false }
+      { product: "LSA", smartSiteIncluded: smartSiteEnabled }
     );
 
     try {
@@ -249,6 +256,68 @@ export default function PricingLSA() {
                     <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{monthlyFee.toFixed(2)}
                     </span>
+                  </div>
+
+                  {/* SmartSite Toggle */}
+                  <div
+                    className="border-b border-border/40"
+                    style={{ padding: "1cqw 0" }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center" style={{ gap: "0.5cqw" }}>
+                        <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                        <span className="text-primary font-medium" style={{ fontSize: "1.35cqw" }}>
+                          SmartSite
+                        </span>
+                        {smartSiteRequired && (
+                          <span 
+                            className="bg-primary/10 text-primary font-medium rounded-full"
+                            style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
+                          >
+                            Recommended
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center" style={{ gap: "1cqw" }}>
+                        <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
+                          £{smartSiteFee.toFixed(2)}
+                        </span>
+                        <button
+                          onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                          className={`relative transition-all ${
+                            smartSiteEnabled ? "bg-primary" : "bg-muted"
+                          }`}
+                          style={{
+                            width: "3.5cqw",
+                            height: "2cqw",
+                            borderRadius: "1cqw",
+                          }}
+                        >
+                          <span
+                            className={`absolute bg-white rounded-full shadow-sm transition-all ${
+                              smartSiteEnabled ? "translate-x-[1.5cqw]" : "translate-x-0"
+                            }`}
+                            style={{
+                              width: "1.6cqw",
+                              height: "1.6cqw",
+                              top: "0.2cqw",
+                              left: "0.2cqw",
+                            }}
+                          />
+                        </button>
+                      </div>
+                    </div>
+                    {smartSiteEnabled && (
+                      <p
+                        className="text-muted-foreground"
+                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                      >
+                        {smartSiteRequired 
+                          ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
+                          : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
+                        }
+                      </p>
+                    )}
                   </div>
                 </div>
 

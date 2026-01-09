@@ -19,7 +19,9 @@ export default function PricingLocalSEO() {
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const requiresSmartSite = recommendation.isBig3 === false;
+  // SmartSite toggle - auto-enabled if isBig3 is false, but can be manually toggled
+  const smartSiteRequired = recommendation.isBig3 === false;
+  const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
   const smartSiteFee = 199.0;
 
   const setupFee = 349.0;
@@ -27,7 +29,7 @@ export default function PricingLocalSEO() {
   const monthlyFee12 = 249.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const baseTotal = setupFee;
-  const addonTotal = requiresSmartSite ? smartSiteFee : 0;
+  const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
   const vat = (baseTotal + addonTotal) * 0.2;
   const totalFirstMonth = baseTotal + addonTotal + vat;
   const monthlyAfterVAT = monthlyFee * 1.2;
@@ -58,7 +60,7 @@ export default function PricingLocalSEO() {
 
     const pricingData = {
       product: "Local SEO",
-      smartSiteIncluded: requiresSmartSite,
+      smartSiteIncluded: smartSiteEnabled,
       initialCost: totalFirstMonth.toFixed(2),
       monthlyCost: monthlyAfterVAT.toFixed(2),
       contractLength: selectedPlan === "12" ? "12 months" : "6 months",
@@ -78,7 +80,7 @@ export default function PricingLocalSEO() {
       false, // isStartPage
       true, // isEndPage
       { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
-      { product: "Local SEO", smartSiteIncluded: requiresSmartSite },
+      { product: "Local SEO", smartSiteIncluded: smartSiteEnabled },
     );
 
     try {
@@ -255,34 +257,67 @@ export default function PricingLocalSEO() {
                     </span>
                   </div>
 
-                  {/* SmartSite Addon */}
-                  {requiresSmartSite && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="border-b border-border/40"
-                      style={{ padding: "0.8cqw 0" }}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center" style={{ gap: "0.5cqw" }}>
-                          <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                          <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
-                            SmartSite
+                  {/* SmartSite Toggle */}
+                  <div
+                    className="border-b border-border/40"
+                    style={{ padding: "0.8cqw 0" }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center" style={{ gap: "0.5cqw" }}>
+                        <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                        <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
+                          SmartSite
+                        </span>
+                        {smartSiteRequired && (
+                          <span 
+                            className="bg-primary/10 text-primary font-medium rounded-full"
+                            style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
+                          >
+                            Recommended
                           </span>
-                        </div>
+                        )}
+                      </div>
+                      <div className="flex items-center" style={{ gap: "1cqw" }}>
                         <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
                           £{smartSiteFee.toFixed(2)}
                         </span>
+                        <button
+                          onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                          className={`relative transition-all ${
+                            smartSiteEnabled ? "bg-primary" : "bg-muted"
+                          }`}
+                          style={{
+                            width: "3.5cqw",
+                            height: "2cqw",
+                            borderRadius: "1cqw",
+                          }}
+                        >
+                          <span
+                            className={`absolute bg-white rounded-full shadow-sm transition-all ${
+                              smartSiteEnabled ? "translate-x-[1.5cqw]" : "translate-x-0"
+                            }`}
+                            style={{
+                              width: "1.6cqw",
+                              height: "1.6cqw",
+                              top: "0.2cqw",
+                              left: "0.2cqw",
+                            }}
+                          />
+                        </button>
                       </div>
+                    </div>
+                    {smartSiteEnabled && (
                       <p
                         className="text-muted-foreground"
                         style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
                       >
-                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate
-                        conversion measurement.
+                        {smartSiteRequired 
+                          ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
+                          : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
+                        }
                       </p>
-                    </motion.div>
-                  )}
+                    )}
+                  </div>
                 </div>
 
                 {/* Total */}

@@ -18,11 +18,13 @@ export default function PricingLeadGen() {
   const { user, isLoading } = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const requiresSmartSite = recommendation.isBig3 === false;
+  // SmartSite toggle - auto-enabled if isBig3 is false, but can be manually toggled
+  const smartSiteRequired = recommendation.isBig3 === false;
+  const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
   const smartSiteFee = 199.0;
 
   const trialFee = 649.0;
-  const addonTotal = requiresSmartSite ? smartSiteFee : 0;
+  const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
   const vat = (trialFee + addonTotal) * 0.2;
   const totalWithVAT = trialFee + addonTotal + vat;
 
@@ -51,7 +53,7 @@ export default function PricingLeadGen() {
 
     const pricingData = {
       product: "LeadGen Trial",
-      smartSiteIncluded: requiresSmartSite,
+      smartSiteIncluded: smartSiteEnabled,
       initialCost: totalWithVAT.toFixed(2),
       monthlyCost: "N/A",
       contractLength: "6 weeks",
@@ -71,7 +73,7 @@ export default function PricingLeadGen() {
       false, // isStartPage
       true, // isEndPage
       { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
-      { product: "LeadGen Trial", smartSiteIncluded: requiresSmartSite }
+      { product: "LeadGen Trial", smartSiteIncluded: smartSiteEnabled }
     );
 
     try {
@@ -222,34 +224,67 @@ export default function PricingLeadGen() {
                     </span>
                   </div>
 
-                  {/* SmartSite Addon */}
-                  {requiresSmartSite && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      className="border-b border-border/40"
-                      style={{ padding: "1cqw 0" }}
-                    >
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center" style={{ gap: "0.5cqw" }}>
-                          <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                          <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
-                            SmartSite
+                  {/* SmartSite Toggle */}
+                  <div
+                    className="border-b border-border/40"
+                    style={{ padding: "1cqw 0" }}
+                  >
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center" style={{ gap: "0.5cqw" }}>
+                        <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                        <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
+                          SmartSite
+                        </span>
+                        {smartSiteRequired && (
+                          <span 
+                            className="bg-primary/10 text-primary font-medium rounded-full"
+                            style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
+                          >
+                            Recommended
                           </span>
-                        </div>
+                        )}
+                      </div>
+                      <div className="flex items-center" style={{ gap: "1cqw" }}>
                         <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
                           £{smartSiteFee.toFixed(2)}
                         </span>
+                        <button
+                          onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                          className={`relative transition-all ${
+                            smartSiteEnabled ? "bg-primary" : "bg-muted"
+                          }`}
+                          style={{
+                            width: "3.5cqw",
+                            height: "2cqw",
+                            borderRadius: "1cqw",
+                          }}
+                        >
+                          <span
+                            className={`absolute bg-white rounded-full shadow-sm transition-all ${
+                              smartSiteEnabled ? "translate-x-[1.5cqw]" : "translate-x-0"
+                            }`}
+                            style={{
+                              width: "1.6cqw",
+                              height: "1.6cqw",
+                              top: "0.2cqw",
+                              left: "0.2cqw",
+                            }}
+                          />
+                        </button>
                       </div>
+                    </div>
+                    {smartSiteEnabled && (
                       <p
                         className="text-muted-foreground"
                         style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
                       >
-                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate
-                        conversion measurement.
+                        {smartSiteRequired 
+                          ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
+                          : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
+                        }
                       </p>
-                    </motion.div>
-                  )}
+                    )}
+                  </div>
 
                   <div
                     className="flex justify-between items-center border-b border-border/40"
