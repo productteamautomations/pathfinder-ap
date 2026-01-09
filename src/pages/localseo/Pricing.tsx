@@ -306,17 +306,15 @@ export default function PricingLocalSEO() {
                         </button>
                       </div>
                     </div>
-                    {smartSiteEnabled && (
-                      <p
-                        className="text-muted-foreground"
-                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
-                      >
-                        {smartSiteRequired 
-                          ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
-                          : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
-                        }
-                      </p>
-                    )}
+                    <p
+                      className="text-muted-foreground"
+                      style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                    >
+                      {smartSiteRequired 
+                        ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
+                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
+                      }
+                    </p>
                   </div>
                 </div>
 
