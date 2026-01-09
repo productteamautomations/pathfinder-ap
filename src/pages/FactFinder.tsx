@@ -328,9 +328,9 @@ export default function FactFinder() {
           </div>
 
           {/* Form Grid - flex-1 to take remaining space */}
-          <div className="flex-1 flex flex-col" style={{ gap: "1.5cqw" }}>
+          <div className="flex-1 flex flex-col justify-between">
             {/* Main form sections */}
-            <div className="flex-1 flex flex-col" style={{ gap: "1.8cqw" }}>
+            <div className="flex flex-col" style={{ gap: "1.8cqw" }}>
             {/* Row 1: Timeline + Service Area */}
             <div className="grid md:grid-cols-2" style={{ gap: "2cqw" }}>
               {/* Section 1: Timeline */}
