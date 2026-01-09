@@ -4,6 +4,8 @@ interface RecommendationData {
   product: "SEO" | "LeadGen" | "LSA" | null;
   isLoading: boolean;
   isBig3: boolean | null;
+  isLsa: boolean | null;
+  smartSite: boolean | null;
 }
 
 interface SessionData {
@@ -36,6 +38,8 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     product: null,
     isLoading: false,
     isBig3: null,
+    isLsa: null,
+    smartSite: null,
   });
 
   const [session, setSession] = useState<SessionData>({
@@ -83,7 +87,7 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
   };
 
   const fetchRecommendation = async (name: string, websiteUrl: string) => {
-    setRecommendation({ product: null, isLoading: true, isBig3: null });
+    setRecommendation({ product: null, isLoading: true, isBig3: null, isLsa: null, smartSite: null });
     
     try {
       const response = await fetch(
@@ -99,27 +103,34 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
 
       if (response.ok) {
         const data = await response.json();
-        // Response is an array, find the object with "product" key
-        const productObj = data.find((item: any) => item.product);
-        const product = productObj?.product as "SEO" | "LeadGen" | "LSA" | null;
+        
+        // Find smartsite value from the response
+        const smartSiteObj = data.find((item: any) => item.smartsite !== undefined);
+        const smartSite = smartSiteObj?.smartsite ?? null;
+        
+        // Find lsa value from the response
+        const lsaObj = data.find((item: any) => item.lsa !== undefined);
+        const isLsa = lsaObj?.lsa ?? null;
         
         // Find the is_big_3 value from the response
         const big3Obj = data.find((item: any) => item.is_big_3 !== undefined);
         const isBig3 = big3Obj?.is_big_3 ?? null;
         
         setRecommendation({
-          product: product === "SEO" ? "SEO" : product,
+          product: null, // Product is now determined locally in FactFinder
           isLoading: false,
           isBig3,
+          isLsa,
+          smartSite,
         });
-        console.log("Recommendation received:", product, "isBig3:", isBig3);
+        console.log("Webhook data received - isLsa:", isLsa, "smartSite:", smartSite, "isBig3:", isBig3);
       } else {
         console.error("Webhook request failed:", response.status);
-        setRecommendation({ product: null, isLoading: false, isBig3: null });
+        setRecommendation({ product: null, isLoading: false, isBig3: null, isLsa: null, smartSite: null });
       }
     } catch (error) {
       console.error("Error fetching recommendation:", error);
-      setRecommendation({ product: null, isLoading: false, isBig3: null });
+      setRecommendation({ product: null, isLoading: false, isBig3: null, isLsa: null, smartSite: null });
     }
   };
 

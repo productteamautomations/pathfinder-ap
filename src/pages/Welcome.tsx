@@ -286,7 +286,7 @@ export default function Welcome() {
     
     if (noUrl) {
       // Set recommendation directly for no URL flow
-      setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false });
+      setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false, isLsa: false, smartSite: false });
     } else {
       // Normal flow - fetch recommendation from webhook
       fetchRecommendation(name, url);
