@@ -108,9 +108,10 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
         const smartSiteObj = data.find((item: any) => item.smartsite !== undefined);
         const smartSite = smartSiteObj?.smartsite ?? null;
         
-        // Find lsa value from the response
+        // Find lsa value from the response (may be string "true" or boolean true)
         const lsaObj = data.find((item: any) => item.lsa !== undefined);
-        const isLsa = lsaObj?.lsa ?? null;
+        const lsaValue = lsaObj?.lsa;
+        const isLsa = lsaValue === true || lsaValue === "true" ? true : lsaValue === false || lsaValue === "false" ? false : null;
         
         // Find the is_big_3 value from the response
         const big3Obj = data.find((item: any) => item.is_big_3 !== undefined);
