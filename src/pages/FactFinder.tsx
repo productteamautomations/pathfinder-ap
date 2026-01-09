@@ -520,59 +520,73 @@ export default function FactFinder() {
                 </FormField>
               </div>
             </div>
+
+            {/* Section 5: Results Timeline */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
+              <h3
+                className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
+                style={{ fontSize: "0.9cqw", gap: "0.6cqw" }}
+              >
+                <span
+                  className="rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold"
+                  style={{ width: "1.6cqw", height: "1.6cqw", fontSize: "0.8cqw" }}
+                >
+                  5
+                </span>
+                Results Timeline
+              </h3>
+              <div style={{ paddingLeft: "2.2cqw" }}>
+                <FormField label="When do you need to start seeing results?" required>
+                  <div className="relative" style={{ maxWidth: "20cqw" }}>
+                    <button
+                      type="button"
+                      onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
+                      className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
+                        resultTimeline
+                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                      }`}
+                      style={{ padding: "0.9cqw 1.2cqw", borderRadius: "1cqw", fontSize: "1.2cqw", gap: "0.6cqw" }}
+                    >
+                      <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
+                        {resultTimeline || "Select timeline"}
+                      </span>
+                      <ChevronDown 
+                        style={{ width: "1.2cqw", height: "1.2cqw" }} 
+                        className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {timelineDropdownOpen && (
+                      <div 
+                        className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
+                        style={{ borderRadius: "1cqw", marginTop: "0.3cqw", overflow: "hidden" }}
+                      >
+                        {timelineOptions.map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => {
+                              setResultTimeline(option);
+                              setTimelineDropdownOpen(false);
+                            }}
+                            className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
+                              resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
+                            }`}
+                            style={{ padding: "0.9cqw 1.2cqw", fontSize: "1.2cqw" }}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </FormField>
+              </div>
+            </div>
             </div>
 
-            {/* Bottom Row: Timeline + VAT + Continue */}
+            {/* Bottom Row: VAT + Continue */}
             <div className="flex items-end justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "2cqw" }}>
-              {/* Timeline Dropdown */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
-                <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
-                  When do you need to start seeing results? <span className="text-primary">*</span>
-                </label>
-                <div className="relative">
-                  <button
-                    type="button"
-                    onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
-                    className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
-                      resultTimeline
-                        ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                        : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                    }`}
-                    style={{ padding: "0.8cqw 1.2cqw", borderRadius: "0.8cqw", fontSize: "1.1cqw", gap: "0.6cqw", minWidth: "14cqw" }}
-                  >
-                    <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
-                      {resultTimeline || "Select timeline"}
-                    </span>
-                    <ChevronDown 
-                      style={{ width: "1.2cqw", height: "1.2cqw" }} 
-                      className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {timelineDropdownOpen && (
-                    <div 
-                      className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
-                      style={{ borderRadius: "0.8cqw", marginTop: "0.3cqw", overflow: "hidden" }}
-                    >
-                      {timelineOptions.map((option) => (
-                        <button
-                          key={option}
-                          type="button"
-                          onClick={() => {
-                            setResultTimeline(option);
-                            setTimelineDropdownOpen(false);
-                          }}
-                          className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
-                            resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
-                          }`}
-                          style={{ padding: "0.8cqw 1.2cqw", fontSize: "1.1cqw" }}
-                        >
-                          {option}
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
 
               {/* VAT Toggle */}
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
