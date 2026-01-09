@@ -305,7 +305,7 @@ export default function PricingLocalSEO() {
                   <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
                       <p className="text-muted-foreground" style={{ fontSize: "1cqw", marginBottom: "0.2cqw" }}>
-                        First month total
+                        First payment
                       </p>
                       <p className="font-bold text-foreground" style={{ fontSize: "3cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
