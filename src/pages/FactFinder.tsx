@@ -394,26 +394,27 @@ export default function FactFinder() {
                   Service Area
                 </h3>
                 <div style={{ paddingLeft: "2.2cqw" }}>
-                <FormField label="What radius do you cover?" required>
-                    <div className="flex" style={{ gap: "0.6cqw" }}>
-                      {radiusOptions.map((option) => (
+                  <div className="flex" style={{ gap: "0.6cqw" }}>
+                    {radiusOptions.map((option) => (
+                      <div key={option.label} className="flex-1 flex flex-col items-center" style={{ gap: "0.4cqw" }}>
+                        <span className="font-semibold text-[#173340]" style={{ fontSize: "1.1cqw" }}>
+                          {option.label}
+                        </span>
                         <button
-                          key={option.label}
                           type="button"
                           onClick={() => setRadiusCovered(option.label)}
-                          className={`flex-1 border-2 font-medium transition-all duration-200 flex flex-col items-center ${
+                          className={`w-full border-2 font-medium transition-all duration-200 ${
                             radiusCovered === option.label
                               ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                               : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                           }`}
-                          style={{ padding: "0.7cqw 0.5cqw", borderRadius: "1cqw" }}
+                          style={{ padding: "0.9cqw 0.5cqw", borderRadius: "1cqw", fontSize: "1cqw" }}
                         >
-                          <span style={{ fontSize: "1.1cqw", fontWeight: 600 }}>{option.label}</span>
-                          <span style={{ fontSize: "0.9cqw", opacity: 0.8 }}>{option.subtitle}</span>
+                          {option.subtitle}
                         </button>
-                      ))}
-                    </div>
-                  </FormField>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
