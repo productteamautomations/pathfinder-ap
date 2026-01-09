@@ -522,32 +522,8 @@ export default function FactFinder() {
             </div>
             </div>
 
-            {/* Bottom Row: VAT + Timeline + Continue */}
+            {/* Bottom Row: Timeline + VAT + Continue */}
             <div className="flex items-end justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "2cqw" }}>
-              {/* VAT Toggle */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
-                <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
-                  Are you VAT-registered or a limited company? <span className="text-primary">*</span>
-                </label>
-                <div className="flex" style={{ gap: "0.5cqw" }}>
-                  {["Yes", "No"].map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setIsVatRegistered(option)}
-                      className={`border-2 font-medium transition-all duration-200 ${
-                        isVatRegistered === option
-                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                      }`}
-                      style={{ padding: "0.8cqw 1.5cqw", borderRadius: "0.8cqw", fontSize: "1.1cqw" }}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
               {/* Timeline Dropdown */}
               <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
                 <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
@@ -595,6 +571,30 @@ export default function FactFinder() {
                       ))}
                     </div>
                   )}
+                </div>
+              </div>
+
+              {/* VAT Toggle */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
+                <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
+                  Are you VAT-registered or a limited company? <span className="text-primary">*</span>
+                </label>
+                <div className="flex" style={{ gap: "0.5cqw" }}>
+                  {["Yes", "No"].map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => setIsVatRegistered(option)}
+                      className={`border-2 font-medium transition-all duration-200 ${
+                        isVatRegistered === option
+                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                      }`}
+                      style={{ padding: "0.8cqw 1.5cqw", borderRadius: "0.8cqw", fontSize: "1.1cqw" }}
+                    >
+                      {option}
+                    </button>
+                  ))}
                 </div>
               </div>
 
