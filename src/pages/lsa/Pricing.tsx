@@ -23,8 +23,8 @@ export default function PricingLSA() {
   const monthlyFee6 = 199.0;
   const monthlyFee12 = 149.0;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const vat = (setupFee + monthlyFee) * 0.2;
-  const totalFirstMonth = setupFee + monthlyFee + vat;
+  const vat = (setupFee) * 0.2;
+  const totalFirstMonth = setupFee + vat;
   const monthlyAfterVAT = monthlyFee * 1.2;
   const savings = (monthlyFee6 - monthlyFee12) * 12;
 
@@ -249,18 +249,6 @@ export default function PricingLSA() {
                     <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
                       £{monthlyFee.toFixed(2)}
                     </span>
-                  </div>
-                  <div
-                    className="flex justify-between items-center border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
-                  >
-                    <span className="text-muted-foreground" style={{ fontSize: "1.35cqw" }}>
-                      VAT (20%)
-                    </span>
-                    <span className="font-bold text-foreground" style={{ fontSize: "1.75cqw" }}>
-                      £{vat.toFixed(2)}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Total */}
@@ -271,7 +259,7 @@ export default function PricingLSA() {
                   <div className="flex justify-between items-end" style={{ gap: "1cqw" }}>
                     <div>
                       <p className="text-muted-foreground" style={{ fontSize: "1.1cqw", marginBottom: "0.3cqw" }}>
-                        First month total
+                        First payment total inc. VAT
                       </p>
                       <p className="font-bold text-foreground" style={{ fontSize: "3.5cqw" }}>
                         £{totalFirstMonth.toFixed(2)}
