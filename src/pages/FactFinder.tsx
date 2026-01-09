@@ -10,7 +10,8 @@ import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 const radiusOptions = [
   { label: "Hyper-local", subtitle: "0-5 miles" },
   { label: "Local", subtitle: "6-50 miles" },
-  { label: "Regional", subtitle: "50+ miles | National" },
+  { label: "Regional", subtitle: "50+ miles" },
+  { label: "National", subtitle: "National" },
 ];
 const capacityOptions = ["Empty diary", "Jobs in pipeline", "Growth mode"];
 
