@@ -263,27 +263,10 @@ export default function PricingLocalSEO() {
                     style={{ padding: "0.8cqw 0" }}
                   >
                     <div className="flex justify-between items-center">
-                      <div className="flex items-center" style={{ gap: "0.5cqw" }}>
-                        <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                        <span className="text-primary font-medium" style={{ fontSize: "1.2cqw" }}>
-                          SmartSite
-                        </span>
-                        {smartSiteRequired && (
-                          <span 
-                            className="bg-primary/10 text-primary font-medium rounded-full"
-                            style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
-                          >
-                            Recommended
-                          </span>
-                        )}
-                      </div>
-                      <div className="flex items-center" style={{ gap: "1cqw" }}>
-                        <span className="font-bold text-foreground" style={{ fontSize: "1.5cqw" }}>
-                          £{smartSiteFee.toFixed(2)}
-                        </span>
+                      <div className="flex items-center" style={{ gap: "0.75cqw" }}>
                         <button
                           onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
-                          className={`relative transition-all ${
+                          className={`relative transition-all flex-shrink-0 ${
                             smartSiteEnabled ? "bg-primary" : "bg-muted"
                           }`}
                           style={{
@@ -304,7 +287,22 @@ export default function PricingLocalSEO() {
                             }}
                           />
                         </button>
+                        <Plus className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                        <span className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ fontSize: "1.2cqw" }}>
+                          SmartSite
+                        </span>
+                        {smartSiteRequired && (
+                          <span 
+                            className="bg-primary/10 text-primary font-medium rounded-full"
+                            style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
+                          >
+                            Recommended
+                          </span>
+                        )}
                       </div>
+                      <span className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`} style={{ fontSize: "1.5cqw" }}>
+                        £{smartSiteFee.toFixed(2)}
+                      </span>
                     </div>
                     <p
                       className="text-muted-foreground"
