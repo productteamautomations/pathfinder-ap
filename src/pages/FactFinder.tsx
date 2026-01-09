@@ -7,8 +7,12 @@ import { useRecommendation } from "@/contexts/RecommendationContext";
 import { Loader2, AlertCircle, ChevronDown } from "lucide-react";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
 
-const radiusOptions = ["0-5 miles", "0-50 miles", "50+ miles"];
-const timelineOptions = ["ASAP", "Time to let it build up"];
+const radiusOptions = [
+  { label: "Hyper-local", subtitle: "0-5 miles" },
+  { label: "Local", subtitle: "6-50 miles" },
+  { label: "Regional", subtitle: "50+ miles | National" },
+];
+const capacityOptions = ["Empty diary", "Jobs in pipeline", "Growth mode"];
 
 const generationOptions = [
   "None",
@@ -390,21 +394,22 @@ export default function FactFinder() {
                   Service Area
                 </h3>
                 <div style={{ paddingLeft: "2.2cqw" }}>
-                  <FormField label="What radius do you cover?" required>
+                <FormField label="What radius do you cover?" required>
                     <div className="flex" style={{ gap: "0.6cqw" }}>
                       {radiusOptions.map((option) => (
                         <button
-                          key={option}
+                          key={option.label}
                           type="button"
-                          onClick={() => setRadiusCovered(option)}
-                          className={`flex-1 border-2 font-medium transition-all duration-200 ${
-                            radiusCovered === option
+                          onClick={() => setRadiusCovered(option.label)}
+                          className={`flex-1 border-2 font-medium transition-all duration-200 flex flex-col items-center ${
+                            radiusCovered === option.label
                               ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
                               : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
                           }`}
-                          style={{ padding: "0.9cqw", borderRadius: "1cqw", fontSize: "1.2cqw" }}
+                          style={{ padding: "0.7cqw 0.5cqw", borderRadius: "1cqw" }}
                         >
-                          {option}
+                          <span style={{ fontSize: "1.1cqw", fontWeight: 600 }}>{option.label}</span>
+                          <span style={{ fontSize: "0.9cqw", opacity: 0.8 }}>{option.subtitle}</span>
                         </button>
                       ))}
                     </div>
@@ -521,7 +526,7 @@ export default function FactFinder() {
               </div>
             </div>
 
-            {/* Section 5: Results Timeline */}
+            {/* Section 5: Capacity */}
             <div style={{ display: "flex", flexDirection: "column", gap: "0.8cqw" }}>
               <h3
                 className="font-semibold tracking-wider text-muted-foreground uppercase flex items-center"
@@ -533,54 +538,52 @@ export default function FactFinder() {
                 >
                   5
                 </span>
-                Results Timeline
+                Capacity
               </h3>
               <div style={{ paddingLeft: "2.2cqw" }}>
-                <FormField label="When do you need to start seeing results?" required>
-                  <div className="relative" style={{ maxWidth: "20cqw" }}>
-                    <button
-                      type="button"
-                      onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
-                      className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
-                        resultTimeline
-                          ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                          : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
-                      }`}
-                      style={{ padding: "0.9cqw 1.2cqw", borderRadius: "1cqw", fontSize: "1.2cqw", gap: "0.6cqw" }}
+                <div className="relative" style={{ maxWidth: "20cqw" }}>
+                  <button
+                    type="button"
+                    onClick={() => setTimelineDropdownOpen(!timelineDropdownOpen)}
+                    className={`w-full border-2 font-medium transition-all duration-200 flex items-center justify-between ${
+                      resultTimeline
+                        ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/20"
+                        : "border-border/30 bg-white/80 text-foreground hover:border-primary/50 hover:bg-white"
+                    }`}
+                    style={{ padding: "0.9cqw 1.2cqw", borderRadius: "1cqw", fontSize: "1.2cqw", gap: "0.6cqw" }}
+                  >
+                    <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
+                      {resultTimeline || "Select capacity"}
+                    </span>
+                    <ChevronDown 
+                      style={{ width: "1.2cqw", height: "1.2cqw" }} 
+                      className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {timelineDropdownOpen && (
+                    <div 
+                      className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
+                      style={{ borderRadius: "1cqw", marginTop: "0.3cqw", overflow: "hidden" }}
                     >
-                      <span className={resultTimeline ? "" : "text-muted-foreground/50"}>
-                        {resultTimeline || "Select timeline"}
-                      </span>
-                      <ChevronDown 
-                        style={{ width: "1.2cqw", height: "1.2cqw" }} 
-                        className={`transition-transform duration-200 ${timelineDropdownOpen ? "rotate-180" : ""}`}
-                      />
-                    </button>
-                    {timelineDropdownOpen && (
-                      <div 
-                        className="absolute z-50 w-full bg-white border-2 border-border/30 shadow-lg"
-                        style={{ borderRadius: "1cqw", marginTop: "0.3cqw", overflow: "hidden" }}
-                      >
-                        {timelineOptions.map((option) => (
-                          <button
-                            key={option}
-                            type="button"
-                            onClick={() => {
-                              setResultTimeline(option);
-                              setTimelineDropdownOpen(false);
-                            }}
-                            className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
-                              resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
-                            }`}
-                            style={{ padding: "0.9cqw 1.2cqw", fontSize: "1.2cqw" }}
-                          >
-                            {option}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </FormField>
+                      {capacityOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => {
+                            setResultTimeline(option);
+                            setTimelineDropdownOpen(false);
+                          }}
+                          className={`w-full text-left font-medium transition-all duration-200 hover:bg-primary/10 ${
+                            resultTimeline === option ? "bg-primary/10 text-primary" : "text-foreground"
+                          }`}
+                          style={{ padding: "0.9cqw 1.2cqw", fontSize: "1.2cqw" }}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
             </div>
@@ -588,8 +591,8 @@ export default function FactFinder() {
             {/* Bottom Row: VAT + Continue */}
             <div className="flex items-end justify-between border-t border-border/20" style={{ paddingTop: "1.5cqw", gap: "2cqw" }}>
 
-              {/* VAT Toggle */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw" }}>
+              {/* VAT Toggle - aligned with section content */}
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.6cqw", paddingLeft: "2.2cqw" }}>
                 <label className="font-semibold text-[#173340]" style={{ fontSize: "1.2cqw" }}>
                   Are you VAT-registered or a limited company? <span className="text-primary">*</span>
                 </label>
