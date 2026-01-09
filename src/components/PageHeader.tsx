@@ -75,30 +75,22 @@ export function PageHeader({
           {/* Right: Product label + Profile - fixed percentage width */}
           <div className="flex items-center justify-end" style={{ width: "15%", flexShrink: 0, gap: "1vw" }}>
             {productLabel && (
-              <div className="flex flex-col items-end" style={{ gap: "0.3vw" }}>
-                <span
-                  className="font-semibold text-green-600 whitespace-nowrap inline-block"
-                  style={{
-                    fontSize: "clamp(10px, 0.8vw, 14px)",
-                    padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
-                  }}
-                >
-                  Product: {productLabel}
-                </span>
+              <span
+                className="font-semibold text-green-600 whitespace-nowrap inline-flex items-center"
+                style={{
+                  fontSize: "clamp(10px, 0.8vw, 14px)",
+                  padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
+                  gap: "0.3em",
+                }}
+              >
+                Product: {productLabel}
                 {showSmartSite && (
-                  <span
-                    className="font-medium text-primary whitespace-nowrap inline-flex items-center"
-                    style={{
-                      fontSize: "clamp(9px, 0.7vw, 12px)",
-                      padding: "clamp(2px, 0.2vw, 4px) clamp(6px, 0.6vw, 10px)",
-                      gap: "0.2vw",
-                    }}
-                  >
+                  <span className="inline-flex items-center text-primary font-medium" style={{ gap: "0.15em" }}>
                     <Plus style={{ width: "0.8em", height: "0.8em" }} />
                     SmartSite
                   </span>
                 )}
-              </div>
+              </span>
             )}
             {user && (
               <DropdownMenu>
