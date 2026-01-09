@@ -20,7 +20,14 @@ interface PageHeaderProps {
   showSmartSite?: boolean;
 }
 
-export function PageHeader({ onBack, currentStep, totalSteps, showProgress = false, productLabel, showSmartSite = false }: PageHeaderProps) {
+export function PageHeader({
+  onBack,
+  currentStep,
+  totalSteps,
+  showProgress = false,
+  productLabel,
+  showSmartSite = false,
+}: PageHeaderProps) {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 
@@ -80,7 +87,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
                 </span>
                 {showSmartSite && (
                   <span
-                    className="font-medium text-primary bg-primary/10 rounded-full whitespace-nowrap inline-flex items-center"
+                    className="font-medium text-primary whitespace-nowrap inline-flex items-center"
                     style={{
                       fontSize: "clamp(9px, 0.7vw, 12px)",
                       padding: "clamp(2px, 0.2vw, 4px) clamp(6px, 0.6vw, 10px)",
@@ -103,7 +110,7 @@ export function PageHeader({ onBack, currentStep, totalSteps, showProgress = fal
                 <DropdownMenuContent align="end" className="w-56 z-50 bg-background">
                   <DropdownMenuLabel className="font-normal">
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{user.fullName || 'User'}</p>
+                      <p className="text-sm font-medium leading-none">{user.fullName || "User"}</p>
                       <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
                     </div>
                   </DropdownMenuLabel>
