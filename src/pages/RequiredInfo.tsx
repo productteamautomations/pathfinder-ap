@@ -40,6 +40,15 @@ export default function RequiredInfo() {
       websiteLoginUrl: loginUrl,
     };
 
+    // Extract pricing info from state (passed from Pricing pages)
+    const pricingInfo = {
+      product: state?.product || null,
+      smartSiteIncluded: state?.smartSiteIncluded ?? null,
+      initialCost: state?.initialCost || null,
+      monthlyCost: state?.monthlyCost || null,
+      contractLength: state?.contractLength || null,
+    };
+
     const payload = buildPageWebhookPayload(
       {
         sessionId: session.sessionId,
@@ -49,7 +58,7 @@ export default function RequiredInfo() {
         startTime: session.startTime,
       },
       pageStateWithLogin,
-      null,
+      pricingInfo,
       false, // isStartPage
       true, // isEndPage
       { step: totalSteps, totalSteps: totalSteps, maxStep: Math.max(session.maxStep, totalSteps) },
