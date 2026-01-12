@@ -125,9 +125,15 @@ export default function FunnelDiagnostic() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const question = questions[currentQuestion];
-  const isLastQuestion = currentQuestion === questions.length - 1;
-  const totalSteps = questions.length;
+  // Check if user runs PPC - if not, skip first 3 PPC-related questions
+  const runsPPC = (location.state as any)?.runsPPC;
+  const filteredQuestions = runsPPC === "No" 
+    ? questions.filter(q => !["avgCTR", "trackingConversions", "avgCPC"].includes(q.id))
+    : questions;
+
+  const question = filteredQuestions[currentQuestion];
+  const isLastQuestion = currentQuestion === filteredQuestions.length - 1;
+  const totalSteps = filteredQuestions.length;
 
   // Guard against undefined question
   if (!question) {
@@ -151,7 +157,7 @@ export default function FunnelDiagnostic() {
       setTimeout(() => {
         try {
           const state = location.state as any;
-          const newState = { ...state, diagnosticAnswers: newAnswers };
+          const newState = { ...state, diagnosticAnswers: newAnswers, runsPPC };
           updateMaxStep(4);
           const payload = buildPageWebhookPayload(
             {
@@ -173,7 +179,7 @@ export default function FunnelDiagnostic() {
         } catch (e) {
           console.error("Webhook error:", e);
           const state = location.state as any;
-          const newState = { ...state, diagnosticAnswers: newAnswers };
+          const newState = { ...state, diagnosticAnswers: newAnswers, runsPPC };
           navigate("/funnel-health/leadgen", { state: newState });
         }
       }, 300);
