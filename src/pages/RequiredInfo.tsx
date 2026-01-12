@@ -33,7 +33,14 @@ export default function RequiredInfo() {
 
     setIsSubmitting(true);
 
-    // Build webhook payload with login details
+    // Build webhook payload with login details included in pageState
+    const pageStateWithLogin = {
+      ...(state || {}),
+      websiteLoginUsername: username,
+      websiteLoginPassword: password,
+      websiteLoginUrl: loginUrl,
+    };
+
     const payload = buildPageWebhookPayload(
       {
         sessionId: session.sessionId,
@@ -42,7 +49,7 @@ export default function RequiredInfo() {
         googleEmail: session.googleEmail,
         startTime: session.startTime,
       },
-      state || {},
+      pageStateWithLogin,
       null,
       false, // isStartPage
       true, // isEndPage
@@ -50,18 +57,8 @@ export default function RequiredInfo() {
       { product: product, smartSiteIncluded: state?.smartSiteIncluded ?? null }
     );
 
-    // Add the login details directly to the payload
-    const payloadWithLogin = {
-      ...payload,
-      websiteLoginDetails: {
-        username,
-        password,
-        loginUrl,
-      },
-    };
-
     try {
-      await sendPageWebhook(payloadWithLogin as any);
+      await sendPageWebhook(payload);
       toast.success("Campaign setup complete! Thank you for your information.");
       navigate("/");
     } catch (error) {
