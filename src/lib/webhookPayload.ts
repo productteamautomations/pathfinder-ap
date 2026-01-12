@@ -183,6 +183,10 @@ interface PageState {
   businessGeneration?: string[];
   monthlyLeads?: string;
   hasGMB?: string;
+  isVatRegistered?: string;
+  radiusCovered?: string;
+  resultTimeline?: string;
+  runsPPC?: string;
   diagnosticAnswers?: Record<string, string | string[]>;
 }
 
@@ -273,6 +277,10 @@ export function buildPageWebhookPayload(
       businessGeneration: pageState.businessGeneration?.length ? pageState.businessGeneration : null,
       monthlyLeads: pageState.monthlyLeads || null,
       hasGMB: pageState.hasGMB || null,
+      isVatRegistered: pageState.isVatRegistered || null,
+      radiusCovered: pageState.radiusCovered || null,
+      resultTimeline: pageState.resultTimeline || null,
+      runsPPC: pageState.runsPPC || null,
     },
     
     // Diagnostic answers (condensed format)
