@@ -43,10 +43,10 @@ function getTrafficOpportunityArea() {
     score: 0,
     explanations: [
       "Without paid advertising, you're missing out on potential customers who are actively searching for your services right now.",
-      "Organic traffic alone limits your reach – competitors running ads are capturing leads that could be yours.",
+      "Organic traffic alone limits your reach, competitors running ads are capturing leads that could be yours.",
     ],
     recommendation:
-      "Google Ads can help you reach high-intent customers actively searching for your services. With targeted campaigns, you'll attract qualified visitors ready to enquire – turning your website into a consistent source of quality leads.",
+      "Google Ads can help you reach high-intent customers actively searching for your services. With targeted campaigns, you'll attract qualified visitors ready to enquire, turning your website into a consistent source of quality leads.",
   };
 }
 
@@ -313,22 +313,22 @@ export default function FunnelHealthLeadGen() {
   const diagnosticAnswers = (location.state as any)?.diagnosticAnswers || {};
   const runsPPC = (location.state as any)?.runsPPC;
   const isNonPPC = runsPPC === "No";
-  
+
   const { trafficScore, conversionScore, leadScore } = calculateScores(diagnosticAnswers);
   // For non-PPC users, use conversion and lead scores only for overall
-  const overallScore = isNonPPC 
+  const overallScore = isNonPPC
     ? Math.round((conversionScore + leadScore) / 2)
     : Math.round((trafficScore + conversionScore + leadScore) / 3);
 
   // For non-PPC users, add traffic opportunity as first improvement area
-  const baseImprovementAreas = isNonPPC 
-    ? getImprovementAreas(diagnosticAnswers, 100, conversionScore, leadScore).filter(a => a.title !== "Traffic Generation")
+  const baseImprovementAreas = isNonPPC
+    ? getImprovementAreas(diagnosticAnswers, 100, conversionScore, leadScore).filter(
+        (a) => a.title !== "Traffic Generation",
+      )
     : getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
-  
+
   // Prepend traffic opportunity for non-PPC users
-  const improvementAreas = isNonPPC 
-    ? [getTrafficOpportunityArea(), ...baseImprovementAreas]
-    : baseImprovementAreas;
+  const improvementAreas = isNonPPC ? [getTrafficOpportunityArea(), ...baseImprovementAreas] : baseImprovementAreas;
 
   const handleContinue = () => {
     try {
@@ -347,7 +347,7 @@ export default function FunnelHealthLeadGen() {
         false,
         false,
         { step: 5, totalSteps: 8, maxStep: Math.max(session?.maxStep || 0, 5) },
-        { product: "LeadGen Trial", smartSiteIncluded: null }
+        { product: "LeadGen Trial", smartSiteIncluded: null },
       );
       sendPageWebhook(payload);
     } catch (e) {
