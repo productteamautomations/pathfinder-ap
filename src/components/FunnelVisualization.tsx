@@ -5,9 +5,14 @@ interface FunnelVisualizationProps {
   trafficScore: number;
   conversionScore: number;
   leadScore: number;
+  trafficNotApplicable?: boolean;
+  trafficMessage?: string;
 }
 
-export function FunnelVisualization({ trafficScore, conversionScore, leadScore }: FunnelVisualizationProps) {
+export function FunnelVisualization({ trafficScore, conversionScore, leadScore, trafficNotApplicable = false, trafficMessage }: FunnelVisualizationProps) {
+  // When traffic is N/A, show 100% filled but display "N/A"
+  const displayTrafficScore = trafficNotApplicable ? 100 : trafficScore;
+  
   const legendItems = [
     { color: "#0a24e3", label: "Traffic" },
     { color: "#e3664f", label: "Conversions" },
@@ -65,8 +70,8 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore }
                   height: 0,
                 }}
                 animate={{
-                  y: 60 + (40 * (100 - trafficScore)) / 100,
-                  height: (40 * trafficScore) / 100,
+                  y: 60 + (40 * (100 - displayTrafficScore)) / 100,
+                  height: (40 * displayTrafficScore) / 100,
                 }}
                 transition={{
                   duration: 1.5,
@@ -154,7 +159,7 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore }
           >
             <line x1="185" y1="80" x2="200" y2="80" stroke="#0a24e3" strokeWidth="2" />
             <text x="208" y="84" fill="#0a24e3" fontSize="14" fontWeight="600">
-              {trafficScore}%
+              {trafficNotApplicable ? "N/A" : `${trafficScore}%`}
             </text>
           </motion.g>
 
