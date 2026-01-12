@@ -36,26 +36,18 @@ function OrangeAccent() {
   );
 }
 
-// Traffic info message component for non-PPC users
-function TrafficInfoMessage() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.5, duration: 0.4 }}
-      className="bg-blue-50 border border-blue-200 rounded-lg"
-      style={{ padding: "1.5cqw", marginTop: "1.5cqw" }}
-    >
-      <h4 className="font-semibold text-blue-900" style={{ fontSize: "1.3cqw", marginBottom: "0.8cqw" }}>
-        Generate Quality Traffic
-      </h4>
-      <p className="text-blue-800 leading-relaxed" style={{ fontSize: "1.1cqw" }}>
-        Google Ads can help you reach customers actively searching for your services. With targeted campaigns, 
-        you'll attract high-intent visitors who are ready to enquire – turning your website into a consistent 
-        source of quality leads.
-      </p>
-    </motion.div>
-  );
+// Traffic opportunity message for non-PPC users - added to improvement areas
+function getTrafficOpportunityArea() {
+  return {
+    title: "Traffic Generation",
+    score: 0,
+    explanations: [
+      "Without paid advertising, you're missing out on potential customers who are actively searching for your services right now.",
+      "Organic traffic alone limits your reach – competitors running ads are capturing leads that could be yours.",
+    ],
+    recommendation:
+      "Google Ads can help you reach high-intent customers actively searching for your services. With targeted campaigns, you'll attract qualified visitors ready to enquire – turning your website into a consistent source of quality leads.",
+  };
 }
 
 // Overall score ring component
@@ -328,10 +320,15 @@ export default function FunnelHealthLeadGen() {
     ? Math.round((conversionScore + leadScore) / 2)
     : Math.round((trafficScore + conversionScore + leadScore) / 3);
 
-  // For non-PPC users, filter out traffic-related improvement areas
-  const improvementAreas = isNonPPC 
+  // For non-PPC users, add traffic opportunity as first improvement area
+  const baseImprovementAreas = isNonPPC 
     ? getImprovementAreas(diagnosticAnswers, 100, conversionScore, leadScore).filter(a => a.title !== "Traffic Generation")
     : getImprovementAreas(diagnosticAnswers, trafficScore, conversionScore, leadScore);
+  
+  // Prepend traffic opportunity for non-PPC users
+  const improvementAreas = isNonPPC 
+    ? [getTrafficOpportunityArea(), ...baseImprovementAreas]
+    : baseImprovementAreas;
 
   const handleContinue = () => {
     try {
@@ -407,9 +404,6 @@ export default function FunnelHealthLeadGen() {
                 </h2>
                 <OrangeAccent />
               </motion.div>
-
-              {/* Traffic Info Message for non-PPC users */}
-              {isNonPPC && <TrafficInfoMessage />}
 
               {/* Improvement Carousel fills remaining space */}
               <div className="flex-1 flex flex-col min-h-0" style={{ marginTop: "2cqw" }}>
