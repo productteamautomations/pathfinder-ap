@@ -45,10 +45,10 @@ export function PageHeader({
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       style={{ height: "7.3vh" }}
     >
-      <div className="h-full w-full" style={{ padding: "0 3%" }}>
+      <div className="h-full w-full relative" style={{ padding: "0 3%" }}>
         <div className="flex items-center justify-between h-full w-full">
-          {/* Left: Back button - fixed percentage width */}
-          <div style={{ width: "15%", flexShrink: 0 }}>
+          {/* Left: Back button */}
+          <div className="flex-shrink-0">
             {onBack ? (
               <button
                 onClick={onBack}
@@ -63,17 +63,15 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Center: Progress bar - fixed percentage width, always centered */}
-          <div style={{ width: "40%", flexShrink: 0 }} className="flex justify-center">
-            {showProgress && currentStep && totalSteps && (
-              <div className="w-full">
-                <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-              </div>
-            )}
-          </div>
+          {/* Center: Progress bar - absolutely positioned for true centering */}
+          {showProgress && currentStep && totalSteps && (
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "40%" }}>
+              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+            </div>
+          )}
 
-          {/* Right: Product label + Profile - fixed percentage width */}
-          <div className="flex items-center justify-end" style={{ width: "15%", flexShrink: 0, gap: "1vw" }}>
+          {/* Right: Product label + Profile */}
+          <div className="flex items-center justify-end flex-shrink-0" style={{ gap: "1vw" }}>
             {productLabel && (
               <span
                 className="font-semibold text-green-600 whitespace-nowrap inline-flex items-center"
