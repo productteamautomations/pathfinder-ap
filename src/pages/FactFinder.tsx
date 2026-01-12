@@ -153,6 +153,7 @@ export default function FactFinder() {
         radiusCovered,
         resultTimeline,
         runsPPC,
+        smartSiteIncluded: recommendation.smartSite,
       };
 
       // Calculate product locally
@@ -211,6 +212,7 @@ export default function FactFinder() {
       radiusCovered,
       resultTimeline,
       runsPPC,
+      smartSiteIncluded: recommendation.smartSite,
     };
 
     // No URL flow - skip webhook wait and go straight to LeadGen
