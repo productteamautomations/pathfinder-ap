@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { PageHeader } from "@/components/PageHeader";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
-import { Eye, EyeOff, ChevronRight, Loader2 } from "lucide-react";
+import { ChevronRight, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRecommendation } from "@/contexts/RecommendationContext";
 import { buildPageWebhookPayload, sendPageWebhook } from "@/lib/webhookPayload";
@@ -23,7 +23,6 @@ export default function RequiredInfo() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginUrl, setLoginUrl] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isFormValid = username && password && loginUrl;
@@ -126,23 +125,14 @@ export default function RequiredInfo() {
                       />
                     </div>
                     <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
-                      <label className="block text-sm font-medium text-foreground mb-2">Password</label>
-                      <div className="relative">
-                        <input
-                          type={showPassword ? "text" : "password"}
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter password"
-                          className="w-full pr-12 bg-transparent text-foreground placeholder:text-muted-foreground focus:outline-none"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-0 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                        >
-                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                        </button>
-                      </div>
+                      <Input
+                        label="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter password"
+                        autoComplete="off"
+                        className="border-0 shadow-none focus:ring-0 bg-transparent"
+                      />
                     </div>
                     <div className="bg-white rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-border/30">
                       <Input
