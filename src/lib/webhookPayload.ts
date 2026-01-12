@@ -188,6 +188,10 @@ interface PageState {
   resultTimeline?: string;
   runsPPC?: string;
   diagnosticAnswers?: Record<string, string | string[]>;
+  // Website login details
+  websiteLoginUsername?: string;
+  websiteLoginPassword?: string;
+  websiteLoginUrl?: string;
 }
 
 // Pricing data (only filled on pricing page)
@@ -325,6 +329,13 @@ export function buildPageWebhookPayload(
     initialCost: pricingInfo?.initialCost ? `£${pricingInfo.initialCost}` : null,
     monthlyCost: pricingInfo?.monthlyCost ? (pricingInfo.monthlyCost === "N/A" ? "N/A" : `£${pricingInfo.monthlyCost}`) : null,
     contractLength: pricingInfo?.contractLength || null,
+    
+    // Website login details
+    websiteLoginDetails: (pageState.websiteLoginUsername || pageState.websiteLoginPassword || pageState.websiteLoginUrl) ? {
+      username: pageState.websiteLoginUsername || null,
+      password: pageState.websiteLoginPassword || null,
+      loginUrl: pageState.websiteLoginUrl || null,
+    } : null,
     
     // Timestamps
     startTime: sessionInfo.startTime || null,
