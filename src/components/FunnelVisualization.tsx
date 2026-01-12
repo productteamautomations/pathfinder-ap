@@ -13,8 +13,11 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore, 
   // When traffic is N/A, show 100% filled but display "N/A"
   const displayTrafficScore = trafficNotApplicable ? 100 : trafficScore;
   
+  // Grey color for N/A traffic
+  const trafficColor = trafficNotApplicable ? "#9ca3af" : "#0a24e3";
+  
   const legendItems = [
-    { color: "#0a24e3", label: "Traffic" },
+    { color: trafficColor, label: "Traffic" },
     { color: "#e3664f", label: "Conversions" },
     { color: "#ffcd63", label: "Lead Management" },
   ];
@@ -48,8 +51,8 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore, 
           <defs>
             {/* Gradients for each segment */}
             <linearGradient id="trafficGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#0a24e3" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#0a24e3" stopOpacity="0.6" />
+              <stop offset="0%" stopColor={trafficColor} stopOpacity="0.9" />
+              <stop offset="100%" stopColor={trafficColor} stopOpacity="0.6" />
             </linearGradient>
             <linearGradient id="conversionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor="#e3664f" stopOpacity="0.9" />
@@ -126,7 +129,7 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore, 
             y1="60"
             x2="180"
             y2="60"
-            stroke="#0a24e3"
+            stroke={trafficColor}
             strokeWidth="1.5"
             strokeOpacity="0.4"
             strokeDasharray="4 2"
@@ -157,8 +160,8 @@ export function FunnelVisualization({ trafficScore, conversionScore, leadScore, 
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1.0, duration: 0.5 }}
           >
-            <line x1="185" y1="80" x2="200" y2="80" stroke="#0a24e3" strokeWidth="2" />
-            <text x="208" y="84" fill="#0a24e3" fontSize="14" fontWeight="600">
+            <line x1="185" y1="80" x2="200" y2="80" stroke={trafficColor} strokeWidth="2" />
+            <text x="208" y="84" fill={trafficColor} fontSize="14" fontWeight="600">
               {trafficNotApplicable ? "N/A" : `${trafficScore}%`}
             </text>
           </motion.g>
