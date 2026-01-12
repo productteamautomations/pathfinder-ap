@@ -45,10 +45,18 @@ export function PageHeader({
       className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border/50"
       style={{ height: "7.3vh" }}
     >
-      <div className="h-full w-full relative" style={{ padding: "0 3%" }}>
-        <div className="flex items-center justify-between h-full w-full">
+      <div className="h-full w-full" style={{ padding: "0 3%" }}>
+        <div 
+          className="h-full w-full"
+          style={{ 
+            display: "grid", 
+            gridTemplateColumns: "1fr auto 1fr", 
+            alignItems: "center",
+            gap: "1rem"
+          }}
+        >
           {/* Left: Back button */}
-          <div className="flex-shrink-0">
+          <div className="justify-self-start">
             {onBack ? (
               <button
                 onClick={onBack}
@@ -63,15 +71,17 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Center: Progress bar - absolutely positioned for true centering */}
-          {showProgress && currentStep && totalSteps && (
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "40%" }}>
+          {/* Center: Progress bar - always centered */}
+          <div className="justify-self-center" style={{ width: "clamp(200px, 40vw, 500px)" }}>
+            {showProgress && currentStep && totalSteps ? (
               <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
-            </div>
-          )}
+            ) : (
+              <div />
+            )}
+          </div>
 
           {/* Right: Product label + Profile */}
-          <div className="flex items-center justify-end flex-shrink-0" style={{ gap: "1vw" }}>
+          <div className="flex items-center justify-self-end" style={{ gap: "1vw" }}>
             {productLabel && (
               <span
                 className="font-semibold text-green-600 whitespace-nowrap inline-flex items-center"
