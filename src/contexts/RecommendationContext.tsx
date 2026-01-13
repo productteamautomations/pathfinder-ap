@@ -91,7 +91,7 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     
     try {
       const response = await fetch(
-        "https://lgnengineers.app.n8n.cloud/webhook/6ac34cbd-0bf9-4bca-a3b1-f5be2c59db6c",
+        "https://n8n.addpeople.net/webhook/6ac34cbd-0bf9-4bca-a3b1-f5be2c59db6c",
         {
           method: "POST",
           headers: {
