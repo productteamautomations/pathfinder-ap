@@ -1,4 +1,4 @@
-const WEBHOOK_URL = "https://lgnengineers.app.n8n.cloud/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d";
+const WEBHOOK_URL = "https://n8n.addpeople.net/webhook/7e3c68fb-a6bf-43a8-a339-cc1a34a5153d";
 
 // Format LeadGen diagnostic answers in condensed format
 export function formatLeadGenAnswers(answers: Record<string, string>) {
@@ -227,14 +227,14 @@ export function buildPageWebhookPayload(
   productInfo: ProductInfo | null = null,
 ) {
   // Use maxStep if provided and > 0, otherwise use step
-  const effectiveStep = (stepInfo.maxStep && stepInfo.maxStep > 0) ? stepInfo.maxStep : stepInfo.step;
+  const effectiveStep = stepInfo.maxStep && stepInfo.maxStep > 0 ? stepInfo.maxStep : stepInfo.step;
   const diagnosticAnswers = pageState.diagnosticAnswers || {};
   const productType = pricingInfo?.product || null;
-  
+
   // Format diagnostic answers based on product type
   let formattedDiagnosticAnswers: Record<string, string> = {};
   let funnelScores = { trafficScore: 0, conversionScore: 0, leadScore: 0, overallScore: 0 };
-  
+
   if (Object.keys(diagnosticAnswers).length > 0) {
     if (productType === "Local SEO" || productType === "LSA") {
       formattedDiagnosticAnswers = formatSEOAnswers(diagnosticAnswers);
@@ -244,7 +244,7 @@ export function buildPageWebhookPayload(
       funnelScores = calculateLeadGenScores(diagnosticAnswers as Record<string, string>);
     } else {
       // Try to detect based on answer keys
-      const hasLeadGenKeys = 'avgCTR' in diagnosticAnswers || 'avgCPC' in diagnosticAnswers;
+      const hasLeadGenKeys = "avgCTR" in diagnosticAnswers || "avgCPC" in diagnosticAnswers;
       if (hasLeadGenKeys) {
         formattedDiagnosticAnswers = formatLeadGenAnswers(diagnosticAnswers as Record<string, string>);
         funnelScores = calculateLeadGenScores(diagnosticAnswers as Record<string, string>);
@@ -261,19 +261,19 @@ export function buildPageWebhookPayload(
     googleId: sessionInfo.googleId || null,
     googleFullName: sessionInfo.googleFullName || null,
     googleEmail: sessionInfo.googleEmail || null,
-    
+
     // Page markers
     startPage: isStartPage,
     endPage: isEndPage,
-    
+
     // Step tracking - use effectiveStep (maxStep if available, else step)
     step: effectiveStep,
     totalSteps: stepInfo.totalSteps,
-    
+
     // Client info
     clientName: pageState.name || null,
-    websiteUrl: pageState.noUrl ? "N/A" : (pageState.url || null),
-    
+    websiteUrl: pageState.noUrl ? "N/A" : pageState.url || null,
+
     // Fact finder data
     factFinder: {
       monthEstablished: pageState.monthEstablished || null,
@@ -286,57 +286,70 @@ export function buildPageWebhookPayload(
       resultTimeline: pageState.resultTimeline || null,
       runsPPC: pageState.runsPPC || null,
     },
-    
+
     // Diagnostic answers (condensed format)
-    diagnosticAnswers: Object.keys(formattedDiagnosticAnswers).length > 0 ? {
-      CTR: formattedDiagnosticAnswers["CTR"] || null,
-      Tracking: formattedDiagnosticAnswers["Tracking"] || null,
-      CPC: formattedDiagnosticAnswers["CPC"] || null,
-      CPA: formattedDiagnosticAnswers["CPA"] || null,
-      CR: formattedDiagnosticAnswers["CR"] || null,
-      "CTA Visible without scrolling?": formattedDiagnosticAnswers["CTA Visible without scrolling?"] || null,
-      "Dedicated service pages?": formattedDiagnosticAnswers["Dedicated service pages?"] || null,
-      "Lead management system": formattedDiagnosticAnswers["Lead management system"] || null,
-      "Average response time": formattedDiagnosticAnswers["Average response time"] || null,
-    } : {
-      CTR: null,
-      Tracking: null,
-      CPC: null,
-      CPA: null,
-      CR: null,
-      "CTA Visible without scrolling?": null,
-      "Dedicated service pages?": null,
-      "Lead management system": null,
-      "Average response time": null,
-    },
-    
+    diagnosticAnswers:
+      Object.keys(formattedDiagnosticAnswers).length > 0
+        ? {
+            CTR: formattedDiagnosticAnswers["CTR"] || null,
+            Tracking: formattedDiagnosticAnswers["Tracking"] || null,
+            CPC: formattedDiagnosticAnswers["CPC"] || null,
+            CPA: formattedDiagnosticAnswers["CPA"] || null,
+            CR: formattedDiagnosticAnswers["CR"] || null,
+            "CTA Visible without scrolling?": formattedDiagnosticAnswers["CTA Visible without scrolling?"] || null,
+            "Dedicated service pages?": formattedDiagnosticAnswers["Dedicated service pages?"] || null,
+            "Lead management system": formattedDiagnosticAnswers["Lead management system"] || null,
+            "Average response time": formattedDiagnosticAnswers["Average response time"] || null,
+          }
+        : {
+            CTR: null,
+            Tracking: null,
+            CPC: null,
+            CPA: null,
+            CR: null,
+            "CTA Visible without scrolling?": null,
+            "Dedicated service pages?": null,
+            "Lead management system": null,
+            "Average response time": null,
+          },
+
     // Funnel scores
-    funnelScores: Object.keys(diagnosticAnswers).length > 0 ? {
-      traffic: `${funnelScores.trafficScore}%`,
-      conversions: `${funnelScores.conversionScore}%`,
-      leadManagement: `${funnelScores.leadScore}%`,
-      overall: `${funnelScores.overallScore}%`,
-    } : {
-      traffic: null,
-      conversions: null,
-      leadManagement: null,
-      overall: null,
-    },
-    
+    funnelScores:
+      Object.keys(diagnosticAnswers).length > 0
+        ? {
+            traffic: `${funnelScores.trafficScore}%`,
+            conversions: `${funnelScores.conversionScore}%`,
+            leadManagement: `${funnelScores.leadScore}%`,
+            overall: `${funnelScores.overallScore}%`,
+          }
+        : {
+            traffic: null,
+            conversions: null,
+            leadManagement: null,
+            overall: null,
+          },
+
     // Pricing data
     product: pricingInfo?.product || productInfo?.product || null,
     smartSiteIncluded: pricingInfo?.smartSiteIncluded ?? productInfo?.smartSiteIncluded ?? null,
     initialCost: pricingInfo?.initialCost ? `£${pricingInfo.initialCost}` : null,
-    monthlyCost: pricingInfo?.monthlyCost ? (pricingInfo.monthlyCost === "N/A" ? "N/A" : `£${pricingInfo.monthlyCost}`) : null,
+    monthlyCost: pricingInfo?.monthlyCost
+      ? pricingInfo.monthlyCost === "N/A"
+        ? "N/A"
+        : `£${pricingInfo.monthlyCost}`
+      : null,
     contractLength: pricingInfo?.contractLength || null,
-    
+
     // Website login details
-    websiteLoginDetails: (pageState.websiteLoginUsername || pageState.websiteLoginPassword || pageState.websiteLoginUrl) ? {
-      username: pageState.websiteLoginUsername || null,
-      password: pageState.websiteLoginPassword || null,
-      loginUrl: pageState.websiteLoginUrl || null,
-    } : null,
-    
+    websiteLoginDetails:
+      pageState.websiteLoginUsername || pageState.websiteLoginPassword || pageState.websiteLoginUrl
+        ? {
+            username: pageState.websiteLoginUsername || null,
+            password: pageState.websiteLoginPassword || null,
+            loginUrl: pageState.websiteLoginUrl || null,
+          }
+        : null,
+
     // Timestamps
     startTime: sessionInfo.startTime || null,
     timestamp: new Date().toISOString(),
