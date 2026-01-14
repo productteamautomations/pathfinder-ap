@@ -15,7 +15,7 @@ export default function PricingLSA() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, isLoading } = useAuth();
-  
+
   const { session, recommendation } = useRecommendation();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,8 +26,8 @@ export default function PricingLSA() {
   const smartSiteFee = 199.0;
 
   const setupFee = 199.0;
-  const monthlyFee6 = 199.0;
-  const monthlyFee12 = 149.0;
+  const monthlyFee6 = 274;
+  const monthlyFee12 = 224;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
   const vat = (setupFee + addonTotal) * 0.2;
@@ -81,7 +81,7 @@ export default function PricingLSA() {
       false, // isStartPage
       true, // isEndPage
       { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
-      { product: "LSA", smartSiteIncluded: smartSiteEnabled }
+      { product: "LSA", smartSiteIncluded: smartSiteEnabled },
     );
 
     try {
@@ -91,7 +91,7 @@ export default function PricingLSA() {
       console.error("Webhook error:", error);
       // Continue anyway - navigation is more important than tracking
     }
-    
+
     navigate("/required-info", {
       state: {
         ...location.state,
@@ -260,10 +260,7 @@ export default function PricingLSA() {
                   </div>
 
                   {/* SmartSite Toggle */}
-                  <div
-                    className="border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
-                  >
+                  <div className="border-b border-border/40" style={{ padding: "1cqw 0" }}>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center" style={{ gap: "0.75cqw" }}>
                         <button
@@ -289,12 +286,18 @@ export default function PricingLSA() {
                             }}
                           />
                         </button>
-                        <Plus className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                        <span className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ fontSize: "1.35cqw" }}>
+                        <Plus
+                          className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                          style={{ width: "1.2cqw", height: "1.2cqw" }}
+                        />
+                        <span
+                          className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                          style={{ fontSize: "1.35cqw" }}
+                        >
                           SmartSite
                         </span>
                         {smartSiteRequired && (
-                          <span 
+                          <span
                             className="bg-primary/10 text-primary font-medium rounded-full"
                             style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
                           >
@@ -302,7 +305,10 @@ export default function PricingLSA() {
                           </span>
                         )}
                       </div>
-                      <span className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`} style={{ fontSize: "1.75cqw" }}>
+                      <span
+                        className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
+                        style={{ fontSize: "1.75cqw" }}
+                      >
                         £{smartSiteFee.toFixed(2)}
                       </span>
                     </div>
@@ -310,10 +316,9 @@ export default function PricingLSA() {
                       className="text-muted-foreground"
                       style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
                     >
-                      {smartSiteRequired 
+                      {smartSiteRequired
                         ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
-                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
-                      }
+                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."}
                     </p>
                   </div>
                 </div>
