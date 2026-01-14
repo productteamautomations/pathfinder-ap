@@ -275,6 +275,7 @@ export default function BusinessCycleLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
+        showSmartSiteToggle
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center">

@@ -46,6 +46,7 @@ export default function AboutAddPeopleLSA() {
         totalSteps={4}
         showProgress
         productLabel="LSA's"
+        showSmartSiteToggle
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">

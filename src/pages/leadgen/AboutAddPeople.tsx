@@ -46,6 +46,7 @@ export default function AboutAddPeopleLeadGen() {
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
+        showSmartSiteToggle
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
