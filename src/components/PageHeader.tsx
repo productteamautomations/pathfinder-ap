@@ -55,13 +55,12 @@ export function PageHeader({
           className="h-full w-full"
           style={{ 
             display: "grid", 
-            gridTemplateColumns: "auto 1fr auto 1fr auto", 
+            gridTemplateColumns: "1fr auto 1fr", 
             alignItems: "center",
-            gap: "1rem"
           }}
         >
           {/* Left: Back button */}
-          <div>
+          <div className="justify-self-start">
             {onBack ? (
               <button
                 onClick={onBack}
@@ -76,10 +75,10 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Progress bar */}
-          <div className="justify-self-end">
+          {/* Center: Progress bar - dead center */}
+          <div className="justify-self-center">
             {showProgress && currentStep && totalSteps ? (
-              <div style={{ width: "clamp(150px, 25vw, 350px)" }}>
+              <div style={{ width: "clamp(180px, 30vw, 400px)" }}>
                 <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
               </div>
             ) : (
@@ -87,8 +86,9 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Center: Product label */}
-          <div className="justify-self-center">
+          {/* Right: Product label + SmartSite toggle + Profile */}
+          <div className="justify-self-end flex items-center" style={{ gap: "1.5vw" }}>
+            {/* Product label */}
             {productLabel && (
               <span
                 className="font-semibold text-green-600 whitespace-nowrap"
@@ -99,10 +99,7 @@ export function PageHeader({
                 Product: {productLabel}
               </span>
             )}
-          </div>
 
-          {/* SmartSite toggle */}
-          <div className="justify-self-start">
             {/* SmartSite toggle - only show if showSmartSiteToggle is true AND not required */}
             {showSmartSiteToggle && !smartSiteRequired && (
               <div className="flex items-center" style={{ gap: "0.4vw" }}>
@@ -141,10 +138,8 @@ export function PageHeader({
                 SmartSite
               </span>
             )}
-          </div>
 
-          {/* Right: Profile */}
-          <div className="flex items-center justify-self-end" style={{ gap: "1vw" }}>
+            {/* Profile */}
             {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
