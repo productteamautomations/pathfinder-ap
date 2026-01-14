@@ -207,7 +207,7 @@ export default function FunnelDiagnostic() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Lead Generation" />
+      <PageHeader onBack={handleBack} currentStep={3} totalSteps={7} showProgress productLabel="Lead Generation" showSmartSiteToggle />
 
       {/* Content Area - Split Layout */}
       <div className="flex-1 pt-[73px] flex items-center justify-center">
