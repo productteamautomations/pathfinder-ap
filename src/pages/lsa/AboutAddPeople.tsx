@@ -30,10 +30,10 @@ const leadgenReviews = [
   },
 ];
 
-export default function AboutAddPeopleLeadGen() {
+export default function AboutAddPeopleLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep, recommendation } = useRecommendation();
+  const { session, updateMaxStep } = useRecommendation();
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [map1Loaded, setMap1Loaded] = useState(false);
   const [map2Loaded, setMap2Loaded] = useState(false);
@@ -41,12 +41,11 @@ export default function AboutAddPeopleLeadGen() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
-        currentStep={6}
-        totalSteps={7}
+        onBack={() => navigate("/about/lsa", { state: location.state })}
+        currentStep={4}
+        totalSteps={5}
         showProgress
-        productLabel="Lead Generation"
-        showSmartSite={recommendation.isBig3 === false}
+        productLabel="Local Services Ads"
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
