@@ -113,7 +113,7 @@ export default function PricingLSA() {
         currentStep={4}
         totalSteps={4}
         showProgress
-        productLabel="LSAs"
+        productLabel="LSA's"
         showSmartSiteToggle
       />
 
@@ -355,7 +355,8 @@ export default function PricingLSA() {
                         className="text-muted-foreground"
                         style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
                       >
-                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate
+                        conversion measurement.
                       </p>
                     </div>
                   )}
