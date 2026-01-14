@@ -284,13 +284,9 @@ export default function Welcome() {
     const sessionId = startSession(user.id, user.fullName, user.email);
     const startTime = new Date().toISOString();
     
-    if (noUrl) {
-      // Set recommendation directly for no URL flow
-      setRecommendation({ product: "LeadGen", isLoading: false, isBig3: false, isLsa: false, smartSite: false });
-    } else {
-      // Normal flow - fetch recommendation from webhook
-      fetchRecommendation(name, url);
-    }
+    // Always fetch recommendation - the webhook determines LSA eligibility
+    // even when no URL is provided (uses current URL/empty string)
+    fetchRecommendation(name, noUrl ? "" : url);
 
     // Send start page webhook with session data
     try {
