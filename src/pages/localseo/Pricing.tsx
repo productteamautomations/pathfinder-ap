@@ -14,14 +14,13 @@ import { useAuth } from "@/contexts/AuthContext";
 export default function PricingLocalSEO() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { recommendation, session } = useRecommendation();
+  const { recommendation, session, smartSiteEnabled, setSmartSiteEnabled } = useRecommendation();
   const { user, isLoading } = useAuth();
   const [selectedPlan, setSelectedPlan] = useState<"6" | "12">("12");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // SmartSite toggle - auto-enabled if isBig3 is false, but can be manually toggled
+  // SmartSite required if isBig3 is false
   const smartSiteRequired = recommendation.isBig3 === false;
-  const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
   const smartSiteSetupFee = 199.0;
   const smartSiteMonthlyFee6 = 39.0;
   const smartSiteMonthlyFee12 = 29.0;
@@ -114,7 +113,7 @@ export default function PricingLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
-        showSmartSite={smartSiteEnabled}
+        showSmartSiteToggle
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center relative z-10">
@@ -263,76 +262,102 @@ export default function PricingLocalSEO() {
                     </span>
                   </div>
 
-                  {/* SmartSite Toggle */}
-                  <div className="border-b border-border/40" style={{ padding: "0.8cqw 0" }}>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center" style={{ gap: "0.75cqw" }}>
-                        <button
-                          onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
-                          className={`relative transition-all flex-shrink-0 ${
-                            smartSiteEnabled ? "bg-primary" : "bg-muted"
-                          }`}
-                          style={{
-                            width: "3.5cqw",
-                            height: "2cqw",
-                            borderRadius: "1cqw",
-                          }}
-                        >
-                          <span
-                            className={`absolute bg-white rounded-full shadow-sm transition-all ${
-                              smartSiteEnabled ? "translate-x-[1.5cqw]" : "translate-x-0"
+                  {/* SmartSite Toggle - only show if NOT required */}
+                  {!smartSiteRequired && (
+                    <div className="border-b border-border/40" style={{ padding: "0.8cqw 0" }}>
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center" style={{ gap: "0.75cqw" }}>
+                          <button
+                            onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                            className={`relative transition-all flex-shrink-0 ${
+                              smartSiteEnabled ? "bg-primary" : "bg-muted"
                             }`}
                             style={{
-                              width: "1.6cqw",
-                              height: "1.6cqw",
-                              top: "0.2cqw",
-                              left: "0.2cqw",
+                              width: "3.5cqw",
+                              height: "2cqw",
+                              borderRadius: "1cqw",
                             }}
+                          >
+                            <span
+                              className={`absolute bg-white rounded-full shadow-sm transition-all ${
+                                smartSiteEnabled ? "translate-x-[1.5cqw]" : "translate-x-0"
+                              }`}
+                              style={{
+                                width: "1.6cqw",
+                                height: "1.6cqw",
+                                top: "0.2cqw",
+                                left: "0.2cqw",
+                              }}
+                            />
+                          </button>
+                          <Plus
+                            className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                            style={{ width: "1.2cqw", height: "1.2cqw" }}
                           />
-                        </button>
-                        <Plus
-                          className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
-                          style={{ width: "1.2cqw", height: "1.2cqw" }}
-                        />
-                        <span
-                          className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
-                          style={{ fontSize: "1.2cqw" }}
-                        >
-                          SmartSite
-                        </span>
-                        {smartSiteRequired && (
+                          <span
+                            className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                            style={{ fontSize: "1.2cqw" }}
+                          >
+                            SmartSite
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <span
+                            className={`font-bold transition-all block ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
+                            style={{ fontSize: "1.5cqw" }}
+                          >
+                            £{smartSiteSetupFee.toFixed(2)}
+                          </span>
+                          <span
+                            className={`transition-all ${smartSiteEnabled ? "text-muted-foreground" : "text-muted-foreground/30"}`}
+                            style={{ fontSize: "0.9cqw" }}
+                          >
+                            + £{smartSiteMonthlyFee.toFixed(2)}/mo
+                          </span>
+                        </div>
+                      </div>
+                      <p
+                        className="text-muted-foreground"
+                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                      >
+                        Add SmartSite for enhanced conversion tracking and optimised landing pages.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* SmartSite Required - show as included, no toggle */}
+                  {smartSiteRequired && (
+                    <div className="border-b border-border/40" style={{ padding: "0.8cqw 0" }}>
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center" style={{ gap: "0.75cqw" }}>
+                          <Plus className="text-primary" style={{ width: "1.2cqw", height: "1.2cqw" }} />
+                          <span className="font-medium text-primary" style={{ fontSize: "1.2cqw" }}>
+                            SmartSite
+                          </span>
                           <span
                             className="bg-primary/10 text-primary font-medium rounded-full"
                             style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
                           >
-                            Recommended
+                            Required
                           </span>
-                        )}
+                        </div>
+                        <div className="text-right">
+                          <span className="font-bold text-foreground block" style={{ fontSize: "1.5cqw" }}>
+                            £{smartSiteSetupFee.toFixed(2)}
+                          </span>
+                          <span className="text-muted-foreground" style={{ fontSize: "0.9cqw" }}>
+                            + £{smartSiteMonthlyFee.toFixed(2)}/mo
+                          </span>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <span
-                          className={`font-bold transition-all block ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
-                          style={{ fontSize: "1.5cqw" }}
-                        >
-                          £{smartSiteSetupFee.toFixed(2)}
-                        </span>
-                        <span
-                          className={`transition-all ${smartSiteEnabled ? "text-muted-foreground" : "text-muted-foreground/30"}`}
-                          style={{ fontSize: "0.9cqw" }}
-                        >
-                          + £{smartSiteMonthlyFee.toFixed(2)}/mo
-                        </span>
-                      </div>
+                      <p
+                        className="text-muted-foreground"
+                        style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
+                      >
+                        Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement.
+                      </p>
                     </div>
-                    <p
-                      className="text-muted-foreground"
-                      style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
-                    >
-                      {smartSiteRequired
-                        ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
-                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."}
-                    </p>
-                  </div>
+                  )}
                 </div>
 
                 {/* Total */}

@@ -2,6 +2,7 @@ import { ArrowLeft, User, LogOut, Home, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ProgressBar } from "./ProgressBar";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRecommendation } from "@/contexts/RecommendationContext";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +18,7 @@ interface PageHeaderProps {
   totalSteps?: number;
   showProgress?: boolean;
   productLabel?: string;
-  showSmartSite?: boolean;
+  showSmartSiteToggle?: boolean;
 }
 
 export function PageHeader({
@@ -26,10 +27,14 @@ export function PageHeader({
   totalSteps,
   showProgress = false,
   productLabel,
-  showSmartSite = false,
+  showSmartSiteToggle = false,
 }: PageHeaderProps) {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { recommendation, smartSiteEnabled, setSmartSiteEnabled } = useRecommendation();
+
+  // SmartSite is required when isBig3 is false - hide toggle
+  const smartSiteRequired = recommendation.isBig3 === false;
 
   const handleSignOut = async () => {
     await signOut();
@@ -71,35 +76,71 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Center: Progress bar - always centered */}
-          <div className="justify-self-center" style={{ width: "clamp(200px, 40vw, 500px)" }}>
+          {/* Center: Progress bar + Product label + SmartSite toggle */}
+          <div className="justify-self-center flex items-center" style={{ gap: "1.5vw" }}>
             {showProgress && currentStep && totalSteps ? (
-              <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+              <div style={{ width: "clamp(150px, 25vw, 350px)" }}>
+                <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
+              </div>
             ) : (
               <div />
             )}
-          </div>
-
-          {/* Right: Product label + Profile */}
-          <div className="flex items-center justify-self-end" style={{ gap: "1vw" }}>
+            
             {productLabel && (
-              <span
-                className="font-semibold text-green-600 whitespace-nowrap inline-flex items-center"
-                style={{
-                  fontSize: "clamp(10px, 0.8vw, 14px)",
-                  padding: "clamp(3px, 0.3vw, 6px) clamp(8px, 0.8vw, 14px)",
-                  gap: "0.3em",
-                }}
-              >
-                Product: {productLabel}
-                {showSmartSite && (
-                  <span className="inline-flex items-center text-primary font-medium" style={{ gap: "0.15em" }}>
+              <div className="flex items-center" style={{ gap: "0.75vw" }}>
+                <span
+                  className="font-semibold text-green-600 whitespace-nowrap"
+                  style={{
+                    fontSize: "clamp(10px, 0.8vw, 14px)",
+                  }}
+                >
+                  Product: {productLabel}
+                </span>
+                
+                {/* SmartSite toggle - only show if showSmartSiteToggle is true AND not required */}
+                {showSmartSiteToggle && !smartSiteRequired && (
+                  <div className="flex items-center" style={{ gap: "0.3vw" }}>
+                    <button
+                      onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                      className={`relative transition-all flex-shrink-0 ${
+                        smartSiteEnabled ? "bg-primary" : "bg-muted"
+                      }`}
+                      style={{
+                        width: "clamp(28px, 2.2vw, 36px)",
+                        height: "clamp(16px, 1.25vw, 20px)",
+                        borderRadius: "clamp(8px, 0.625vw, 10px)",
+                      }}
+                    >
+                      <span
+                        className={`absolute bg-white rounded-full shadow-sm transition-all`}
+                        style={{
+                          width: "clamp(12px, 0.95vw, 16px)",
+                          height: "clamp(12px, 0.95vw, 16px)",
+                          top: "clamp(2px, 0.15vw, 2px)",
+                          left: smartSiteEnabled ? "calc(100% - clamp(14px, 1.1vw, 18px))" : "clamp(2px, 0.15vw, 2px)",
+                        }}
+                      />
+                    </button>
+                    <span className={`inline-flex items-center font-medium whitespace-nowrap ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
+                      <Plus style={{ width: "0.8em", height: "0.8em" }} />
+                      SmartSite
+                    </span>
+                  </div>
+                )}
+                
+                {/* Show SmartSite label without toggle when required */}
+                {showSmartSiteToggle && smartSiteRequired && (
+                  <span className="inline-flex items-center text-primary font-medium whitespace-nowrap" style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
                     <Plus style={{ width: "0.8em", height: "0.8em" }} />
                     SmartSite
                   </span>
                 )}
-              </span>
+              </div>
             )}
+          </div>
+
+          {/* Right: Profile */}
+          <div className="flex items-center justify-self-end" style={{ gap: "1vw" }}>
             {user && (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>

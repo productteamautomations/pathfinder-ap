@@ -364,7 +364,6 @@ export default function FunnelHealthLeadGen() {
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
-        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center">

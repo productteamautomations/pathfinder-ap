@@ -20,6 +20,8 @@ interface SessionData {
 interface RecommendationContextType {
   recommendation: RecommendationData;
   session: SessionData;
+  smartSiteEnabled: boolean;
+  setSmartSiteEnabled: (enabled: boolean) => void;
   setRecommendation: (data: RecommendationData) => void;
   startSession: (googleId: string, fullName: string | null, email: string | null) => string;
   clearSession: () => void;
@@ -34,13 +36,15 @@ function generateSessionId(): string {
 }
 
 export function RecommendationProvider({ children }: { children: ReactNode }) {
-  const [recommendation, setRecommendation] = useState<RecommendationData>({
+  const [recommendation, setRecommendationState] = useState<RecommendationData>({
     product: null,
     isLoading: false,
     isBig3: null,
     isLsa: null,
     smartSite: null,
   });
+
+  const [smartSiteEnabled, setSmartSiteEnabled] = useState(false);
 
   const [session, setSession] = useState<SessionData>({
     sessionId: null,
@@ -50,6 +54,15 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     googleEmail: null,
     maxStep: 0,
   });
+
+  // Wrapper to also update smartSiteEnabled when recommendation changes
+  const setRecommendation = (data: RecommendationData) => {
+    setRecommendationState(data);
+    // Auto-enable SmartSite if isBig3 is false (required)
+    if (data.isBig3 === false) {
+      setSmartSiteEnabled(true);
+    }
+  };
 
   const startSession = (googleId: string, fullName: string | null, email: string | null): string => {
     const sessionId = generateSessionId();
@@ -139,6 +152,8 @@ export function RecommendationProvider({ children }: { children: ReactNode }) {
     <RecommendationContext.Provider value={{ 
       recommendation, 
       session,
+      smartSiteEnabled,
+      setSmartSiteEnabled,
       setRecommendation, 
       startSession,
       clearSession,

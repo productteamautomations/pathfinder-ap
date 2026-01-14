@@ -149,7 +149,6 @@ export default function ProductRecommendationLeadGen() {
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
-        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>

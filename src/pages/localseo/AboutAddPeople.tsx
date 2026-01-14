@@ -46,7 +46,6 @@ export default function AboutAddPeopleLocalSEO() {
         totalSteps={7}
         showProgress
         productLabel="Local SEO"
-        showSmartSite={recommendation.isBig3 === false}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">

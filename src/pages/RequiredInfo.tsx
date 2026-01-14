@@ -86,7 +86,6 @@ export default function RequiredInfo() {
         totalSteps={totalSteps}
         showProgress
         productLabel={productLabel}
-        showSmartSite={showSmartSite}
       />
 
       {/* Content Area - Split Layout */}
