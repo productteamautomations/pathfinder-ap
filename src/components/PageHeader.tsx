@@ -87,55 +87,53 @@ export function PageHeader({
             )}
             
             {productLabel && (
-              <div className="flex items-center" style={{ gap: "0.75vw" }}>
-                <span
-                  className="font-semibold text-green-600 whitespace-nowrap"
+              <span
+                className="font-semibold text-green-600 whitespace-nowrap"
+                style={{
+                  fontSize: "clamp(10px, 0.8vw, 14px)",
+                }}
+              >
+                Product: {productLabel}
+              </span>
+            )}
+            
+            {/* SmartSite toggle - only show if showSmartSiteToggle is true AND not required */}
+            {showSmartSiteToggle && !smartSiteRequired && (
+              <div className="flex items-center" style={{ gap: "0.3vw" }}>
+                <button
+                  onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
+                  className={`relative transition-all flex-shrink-0 ${
+                    smartSiteEnabled ? "bg-primary" : "bg-muted"
+                  }`}
                   style={{
-                    fontSize: "clamp(10px, 0.8vw, 14px)",
+                    width: "clamp(28px, 2.2vw, 36px)",
+                    height: "clamp(16px, 1.25vw, 20px)",
+                    borderRadius: "clamp(8px, 0.625vw, 10px)",
                   }}
                 >
-                  Product: {productLabel}
+                  <span
+                    className={`absolute bg-white rounded-full shadow-sm transition-all`}
+                    style={{
+                      width: "clamp(12px, 0.95vw, 16px)",
+                      height: "clamp(12px, 0.95vw, 16px)",
+                      top: "clamp(2px, 0.15vw, 2px)",
+                      left: smartSiteEnabled ? "calc(100% - clamp(14px, 1.1vw, 18px))" : "clamp(2px, 0.15vw, 2px)",
+                    }}
+                  />
+                </button>
+                <span className={`inline-flex items-center font-medium whitespace-nowrap ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
+                  <Plus style={{ width: "0.8em", height: "0.8em" }} />
+                  SmartSite
                 </span>
-                
-                {/* SmartSite toggle - only show if showSmartSiteToggle is true AND not required */}
-                {showSmartSiteToggle && !smartSiteRequired && (
-                  <div className="flex items-center" style={{ gap: "0.3vw" }}>
-                    <button
-                      onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
-                      className={`relative transition-all flex-shrink-0 ${
-                        smartSiteEnabled ? "bg-primary" : "bg-muted"
-                      }`}
-                      style={{
-                        width: "clamp(28px, 2.2vw, 36px)",
-                        height: "clamp(16px, 1.25vw, 20px)",
-                        borderRadius: "clamp(8px, 0.625vw, 10px)",
-                      }}
-                    >
-                      <span
-                        className={`absolute bg-white rounded-full shadow-sm transition-all`}
-                        style={{
-                          width: "clamp(12px, 0.95vw, 16px)",
-                          height: "clamp(12px, 0.95vw, 16px)",
-                          top: "clamp(2px, 0.15vw, 2px)",
-                          left: smartSiteEnabled ? "calc(100% - clamp(14px, 1.1vw, 18px))" : "clamp(2px, 0.15vw, 2px)",
-                        }}
-                      />
-                    </button>
-                    <span className={`inline-flex items-center font-medium whitespace-nowrap ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
-                      <Plus style={{ width: "0.8em", height: "0.8em" }} />
-                      SmartSite
-                    </span>
-                  </div>
-                )}
-                
-                {/* Show SmartSite label without toggle when required */}
-                {showSmartSiteToggle && smartSiteRequired && (
-                  <span className="inline-flex items-center text-primary font-medium whitespace-nowrap" style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
-                    <Plus style={{ width: "0.8em", height: "0.8em" }} />
-                    SmartSite
-                  </span>
-                )}
               </div>
+            )}
+            
+            {/* Show SmartSite label without toggle when required */}
+            {showSmartSiteToggle && smartSiteRequired && (
+              <span className="inline-flex items-center text-primary font-medium whitespace-nowrap" style={{ gap: "0.15em", fontSize: "clamp(10px, 0.8vw, 14px)" }}>
+                <Plus style={{ width: "0.8em", height: "0.8em" }} />
+                SmartSite
+              </span>
             )}
           </div>
 
