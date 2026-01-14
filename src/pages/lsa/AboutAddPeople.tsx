@@ -45,7 +45,7 @@ export default function AboutAddPeopleLSA() {
         currentStep={3}
         totalSteps={4}
         showProgress
-        productLabel="Local Services Ads"
+        productLabel="LSA's"
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
@@ -185,7 +185,7 @@ export default function AboutAddPeopleLSA() {
                         false,
                         false,
                         { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
-                        { product: "LSA", smartSiteIncluded: false }
+                        { product: "LSA", smartSiteIncluded: false },
                       );
                       sendPageWebhook(payload);
                     } catch (e) {
