@@ -55,13 +55,13 @@ export function PageHeader({
           className="h-full w-full"
           style={{ 
             display: "grid", 
-            gridTemplateColumns: "1fr auto 1fr", 
+            gridTemplateColumns: "auto 1fr auto 1fr auto", 
             alignItems: "center",
             gap: "1rem"
           }}
         >
           {/* Left: Back button */}
-          <div className="justify-self-start">
+          <div>
             {onBack ? (
               <button
                 onClick={onBack}
@@ -76,8 +76,8 @@ export function PageHeader({
             )}
           </div>
 
-          {/* Center: Progress bar + Product label + SmartSite toggle */}
-          <div className="justify-self-center flex items-center" style={{ gap: "1.5vw" }}>
+          {/* Progress bar */}
+          <div className="justify-self-end">
             {showProgress && currentStep && totalSteps ? (
               <div style={{ width: "clamp(150px, 25vw, 350px)" }}>
                 <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
@@ -85,21 +85,27 @@ export function PageHeader({
             ) : (
               <div />
             )}
-            
+          </div>
+
+          {/* Center: Product label */}
+          <div className="justify-self-center">
             {productLabel && (
               <span
                 className="font-semibold text-green-600 whitespace-nowrap"
                 style={{
-                  fontSize: "clamp(10px, 0.8vw, 14px)",
+                  fontSize: "clamp(10px, 0.9vw, 14px)",
                 }}
               >
                 Product: {productLabel}
               </span>
             )}
-            
+          </div>
+
+          {/* SmartSite toggle */}
+          <div className="justify-self-start">
             {/* SmartSite toggle - only show if showSmartSiteToggle is true AND not required */}
             {showSmartSiteToggle && !smartSiteRequired && (
-              <div className="flex items-center" style={{ gap: "0.3vw" }}>
+              <div className="flex items-center" style={{ gap: "0.4vw" }}>
                 <button
                   onClick={() => setSmartSiteEnabled(!smartSiteEnabled)}
                   className={`relative transition-all flex-shrink-0 ${
