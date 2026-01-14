@@ -23,7 +23,7 @@ export default function PricingLeadGen() {
   const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
   const smartSiteFee = 199.0;
 
-  const trialFee = 649.0;
+  const trialFee = 699.0;
   const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
   const vat = (trialFee + addonTotal) * 0.2;
   const totalWithVAT = trialFee + addonTotal + vat;
@@ -73,7 +73,7 @@ export default function PricingLeadGen() {
       false, // isStartPage
       true, // isEndPage
       { step: 8, totalSteps: 8, maxStep: Math.max(session.maxStep, 8) },
-      { product: "LeadGen Trial", smartSiteIncluded: smartSiteEnabled }
+      { product: "LeadGen Trial", smartSiteIncluded: smartSiteEnabled },
     );
 
     try {
@@ -83,7 +83,7 @@ export default function PricingLeadGen() {
       console.error("Webhook error:", error);
       // Continue anyway - navigation is more important than tracking
     }
-    
+
     navigate("/required-info", { state: { ...location.state, ...pricingData } });
     setIsSubmitting(false);
   };
@@ -226,10 +226,7 @@ export default function PricingLeadGen() {
                   </div>
 
                   {/* SmartSite Toggle */}
-                  <div
-                    className="border-b border-border/40"
-                    style={{ padding: "1cqw 0" }}
-                  >
+                  <div className="border-b border-border/40" style={{ padding: "1cqw 0" }}>
                     <div className="flex justify-between items-center">
                       <div className="flex items-center" style={{ gap: "0.75cqw" }}>
                         <button
@@ -255,12 +252,18 @@ export default function PricingLeadGen() {
                             }}
                           />
                         </button>
-                        <Plus className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ width: "1.2cqw", height: "1.2cqw" }} />
-                        <span className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`} style={{ fontSize: "1.2cqw" }}>
+                        <Plus
+                          className={`${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                          style={{ width: "1.2cqw", height: "1.2cqw" }}
+                        />
+                        <span
+                          className={`font-medium ${smartSiteEnabled ? "text-primary" : "text-muted-foreground"}`}
+                          style={{ fontSize: "1.2cqw" }}
+                        >
                           SmartSite
                         </span>
                         {smartSiteRequired && (
-                          <span 
+                          <span
                             className="bg-primary/10 text-primary font-medium rounded-full"
                             style={{ fontSize: "0.8cqw", padding: "0.2cqw 0.6cqw" }}
                           >
@@ -268,7 +271,10 @@ export default function PricingLeadGen() {
                           </span>
                         )}
                       </div>
-                      <span className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`} style={{ fontSize: "1.5cqw" }}>
+                      <span
+                        className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
+                        style={{ fontSize: "1.5cqw" }}
+                      >
                         £{smartSiteFee.toFixed(2)}
                       </span>
                     </div>
@@ -276,10 +282,9 @@ export default function PricingLeadGen() {
                       className="text-muted-foreground"
                       style={{ fontSize: "0.9cqw", marginTop: "0.3cqw", paddingLeft: "1.7cqw" }}
                     >
-                      {smartSiteRequired 
+                      {smartSiteRequired
                         ? "Your website's framework isn't compatible with our tracking tools. SmartSite ensures accurate conversion measurement."
-                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."
-                      }
+                        : "Add SmartSite for enhanced conversion tracking and optimised landing pages."}
                     </p>
                   </div>
 

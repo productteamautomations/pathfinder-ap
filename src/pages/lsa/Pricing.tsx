@@ -26,8 +26,8 @@ export default function PricingLSA() {
   const smartSiteFee = 199.0;
 
   const setupFee = 199.0;
-  const monthlyFee6 = 274;
-  const monthlyFee12 = 224;
+  const monthlyFee6 = 174;
+  const monthlyFee12 = 204;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
   const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
   const vat = (setupFee + addonTotal) * 0.2;
