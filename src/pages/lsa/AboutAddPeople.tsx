@@ -30,10 +30,10 @@ const leadgenReviews = [
   },
 ];
 
-export default function AboutAddPeopleLeadGen() {
+export default function AboutAddPeopleLSA() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { session, updateMaxStep, recommendation } = useRecommendation();
+  const { session, updateMaxStep } = useRecommendation();
   const [mainImageLoaded, setMainImageLoaded] = useState(false);
   const [map1Loaded, setMap1Loaded] = useState(false);
   const [map2Loaded, setMap2Loaded] = useState(false);
@@ -41,12 +41,11 @@ export default function AboutAddPeopleLeadGen() {
   return (
     <div className="min-h-screen flex flex-col">
       <PageHeader
-        onBack={() => navigate("/business-cycle/leadgen", { state: location.state })}
-        currentStep={6}
-        totalSteps={7}
+        onBack={() => navigate("/about-product/lsa", { state: location.state })}
+        currentStep={3}
+        totalSteps={4}
         showProgress
-        productLabel="LSA's"
-        showSmartSite={recommendation.isBig3 === false}
+        productLabel="Local Services Ads"
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center px-4">
@@ -186,7 +185,7 @@ export default function AboutAddPeopleLeadGen() {
                         false,
                         false,
                         { step: 5, totalSteps: 5, maxStep: Math.max(session.maxStep, 5) },
-                        { product: "LSA", smartSiteIncluded: false },
+                        { product: "LSA", smartSiteIncluded: false }
                       );
                       sendPageWebhook(payload);
                     } catch (e) {
