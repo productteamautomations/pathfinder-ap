@@ -23,16 +23,21 @@ export default function PricingLSA() {
   // SmartSite toggle - auto-enabled if isBig3 is false, but can be manually toggled
   const smartSiteRequired = recommendation.isBig3 === false;
   const [smartSiteEnabled, setSmartSiteEnabled] = useState(smartSiteRequired);
-  const smartSiteFee = 199.0;
+  const smartSiteSetupFee = 199.0;
+  const smartSiteMonthlyFee6 = 39.0;
+  const smartSiteMonthlyFee12 = 29.0;
+  const smartSiteMonthlyFee = selectedPlan === "12" ? smartSiteMonthlyFee12 : smartSiteMonthlyFee6;
 
   const setupFee = 199.0;
   const monthlyFee6 = 204;
   const monthlyFee12 = 174;
   const monthlyFee = selectedPlan === "12" ? monthlyFee12 : monthlyFee6;
-  const addonTotal = smartSiteEnabled ? smartSiteFee : 0;
-  const vat = (setupFee + addonTotal) * 0.2;
-  const totalFirstMonth = setupFee + addonTotal + vat;
-  const monthlyAfterVAT = monthlyFee * 1.2;
+  const addonSetupTotal = smartSiteEnabled ? smartSiteSetupFee : 0;
+  const addonMonthlyTotal = smartSiteEnabled ? smartSiteMonthlyFee : 0;
+  const vat = (setupFee + addonSetupTotal) * 0.2;
+  const totalFirstMonth = setupFee + addonSetupTotal + vat;
+  const totalMonthlyFee = monthlyFee + addonMonthlyTotal;
+  const monthlyAfterVAT = totalMonthlyFee * 1.2;
   const savings = (monthlyFee6 - monthlyFee12) * 12;
 
   const features = [
@@ -305,12 +310,20 @@ export default function PricingLSA() {
                           </span>
                         )}
                       </div>
-                      <span
-                        className={`font-bold transition-all ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
-                        style={{ fontSize: "1.75cqw" }}
-                      >
-                        £{smartSiteFee.toFixed(2)}
-                      </span>
+                      <div className="text-right">
+                        <span
+                          className={`font-bold transition-all block ${smartSiteEnabled ? "text-foreground" : "text-muted-foreground/50"}`}
+                          style={{ fontSize: "1.75cqw" }}
+                        >
+                          £{smartSiteSetupFee.toFixed(2)}
+                        </span>
+                        <span
+                          className={`transition-all ${smartSiteEnabled ? "text-muted-foreground" : "text-muted-foreground/30"}`}
+                          style={{ fontSize: "0.9cqw" }}
+                        >
+                          + £{smartSiteMonthlyFee.toFixed(2)}/mo
+                        </span>
+                      </div>
                     </div>
                     <p
                       className="text-muted-foreground"
