@@ -30,7 +30,7 @@ export default function AboutProductLSA() {
         totalSteps={4}
         showProgress
         productLabel="LSAs"
-        showSmartSite={recommendation.isBig3 === false}
+        showSmartSiteToggle
       />
 
       <div className="flex-1 flex flex-col relative z-10" style={{ paddingTop: "10cqh" }}>

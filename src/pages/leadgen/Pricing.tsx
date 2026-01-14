@@ -96,7 +96,6 @@ export default function PricingLeadGen() {
         totalSteps={7}
         showProgress
         productLabel="Lead Generation"
-        showSmartSite={smartSiteEnabled}
       />
 
       <div className="flex-1 pt-[73px] flex items-center justify-center relative z-10">

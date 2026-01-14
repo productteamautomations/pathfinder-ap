@@ -148,7 +148,7 @@ export default function ProductRecommendationLSA() {
         totalSteps={4}
         showProgress
         productLabel="LSAs"
-        showSmartSite={recommendation.isBig3 === false}
+        showSmartSiteToggle
       />
 
       <div className="flex-1 flex flex-col overflow-hidden" style={{ paddingTop: "73px" }}>
